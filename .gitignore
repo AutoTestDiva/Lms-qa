@@ -1,0 +1,43 @@
+.gradle
+/build/classes/
+/build/generated/
+/build/reports/
+/build/resources/
+/build/tmp/
+
+
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+# Cache of project
+.gradletasknamecache
+
+# Eclipse Gradle plugin generated files
+# Eclipse Core
+.project
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+
+.idea
+out/
+gradlew
+gradlew/
+*.bat
+settings.gradle
+*.log
+
+
+src/test_logs/
+test_logs
+src/test_logs
+src/screenshots
+
+TasksME.md
