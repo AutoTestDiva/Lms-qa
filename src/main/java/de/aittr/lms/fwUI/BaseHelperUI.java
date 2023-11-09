@@ -27,6 +27,8 @@ public class BaseHelper {
   public BaseHelper(WebDriver driver) {
     this.driver = driver;
   }
+  public BaseHelper() {
+  }
 
   public boolean isElementPresent(By locator){
     try{

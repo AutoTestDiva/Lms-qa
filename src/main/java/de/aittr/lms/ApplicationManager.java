@@ -13,9 +13,14 @@ public class ApplicationManager {
   String browser;
   WebDriver driver;
 
+  UserHelper user;
+
   public ApplicationManager(String browser) {
     this.browser = browser;
   }
+
+//  public ApplicationManager() {
+//  }
 
   public void init () {
 
@@ -24,16 +29,17 @@ public class ApplicationManager {
       driver = new ChromeDriver();
     } else if (browser.equalsIgnoreCase("firefox")) {
       driver = new FirefoxDriver();
-
-//    } else if (browser.equalsIgnoreCase("edge")){
-//      EdgeOptions options = new EdgeOptions();
-//      options.addArguments("remote-allow-origins=*");
-//      driver = (WebDriver) new EdgeDriver();
-//    }
+    } else if (browser.equalsIgnoreCase("edge")){
+      EdgeOptions options = new EdgeOptions();
+      options.addArguments("remote-allow-origins=*");
+      driver = (WebDriver) new EdgeDriver();
+    }
 
     driver.get("http://localhost:4200");
     driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+    user = new UserHelper(driver);
 
   }
 
@@ -41,4 +47,7 @@ public class ApplicationManager {
     driver.quit();
   }
 
+  public UserHelper getUser() {
+    return user;
+  }
 }

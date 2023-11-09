@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.LoginTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-06T13:01:41" hostname="LAPTOP-LILIIA" time="0.469">
+  <properties/>
+  <testcase name="tryToSelectById" classname="de.aittr.lms.restAssuredTests.LoginTests" time="0.469"/>
+  <system-out><![CDATA[15:01:41.300 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test tryToSelectById with parameters []
+Jhon
+15:01:41.777 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: tryToSelectById
+15:01:41.778 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+15:01:41.778 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -12,7 +12,6 @@ repositories {
 dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
     implementation 'org.testng:testng:7.8.0'
-//    implementation 'org.seleniumhq.selenium:selenium-chromium-driver:4.15.0'
 
     implementation 'ch.qos.logback:logback-classic:1.4.8'
     implementation 'org.projectlombok:lombok:1.18.28'
@@ -21,7 +20,6 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
-//    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.15.0'
 
 //    implementation 'user.java.lang:user.java.lang:2020.164.33984'
 //    implementation 'show-reflect:show-reflect:0.1.0-SNAPSHOT'
@@ -29,11 +27,11 @@ dependencies {
 //    implementation 'clojure-interop:java.lang.reflect:1.0.5'
 //    implementation 'org.sonatype.reflect:reflect-class-descriptor:1.0.0'
 
-    //    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//        testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //    implementation 'org.springframework.boot:spring-boot-starter-web'
 //    implementation 'org.springframework.boot:spring-boot-starter-mail'
 //    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 //    implementation 'com.h2database:h2'
     implementation 'mysql:mysql-connector-java:8.0.33'
