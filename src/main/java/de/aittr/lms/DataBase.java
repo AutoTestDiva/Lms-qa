@@ -1,4 +1,4 @@
-package de.aittr.lms.fw;
+package de.aittr.lms;
 
 import java.sql.*;
 

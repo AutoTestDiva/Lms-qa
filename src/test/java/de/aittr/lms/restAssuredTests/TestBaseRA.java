@@ -1,11 +1,14 @@
 package de.aittr.lms.restAssuredTests;
 
-import de.aittr.lms.fw.DataBase;
+import de.aittr.lms.ApplicationManager;
+import de.aittr.lms.DataBase;
+import de.aittr.lms.fwRA.UserHelperRA;
 import io.restassured.RestAssured;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
+import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
@@ -21,6 +24,7 @@ public class TestBaseRA {
 
     final static Logger logger = LoggerFactory.getLogger(TestBaseRA.class);
     protected static DataBase db;
+    protected static UserHelperRA user = new UserHelperRA();
 
     @BeforeMethod
     public void precondition(Method method, Object[] parameters){
@@ -48,13 +52,7 @@ public class TestBaseRA {
         return loginResponse.getDetailedCookie("JSESSIONID");
     }
 
-    public void loginUser(String email, String password){
-        given()
-                .contentType(ContentType.fromContentType("application/x-www-form-urlencoded"))
-                .body("username=" + email + "&password=" + password)
-                .when()
-                .post("/login");
-    }
+
 
 }
 

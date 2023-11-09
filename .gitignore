@@ -35,9 +35,8 @@ settings.gradle
 *.log
 
 
+
 src/test_logs/
 test_logs
 src/test_logs
 src/screenshots
-
-TasksME.md

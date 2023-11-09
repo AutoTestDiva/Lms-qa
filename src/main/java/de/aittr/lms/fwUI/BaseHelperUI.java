@@ -1,4 +1,4 @@
-package de.aittr.lms.fw;
+package de.aittr.lms.fwUI;
 
 import com.google.common.io.Files;
 import java.io.File;
@@ -20,14 +20,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BaseHelper {
+public class BaseHelperUI {
 
   WebDriver driver;
 
-  public BaseHelper(WebDriver driver) {
+  public BaseHelperUI(WebDriver driver) {
     this.driver = driver;
-  }
-  public BaseHelper() {
   }
 
   public boolean isElementPresent(By locator){

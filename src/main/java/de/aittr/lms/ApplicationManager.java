@@ -1,9 +1,11 @@
-package de.aittr.lms.fw;
+package de.aittr.lms;
 
 import java.time.Duration;
+
+import de.aittr.lms.fwRA.UserHelperRA;
+import de.aittr.lms.fwUI.UserHelperUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -13,19 +15,15 @@ public class ApplicationManager {
   String browser;
   WebDriver driver;
 
-  UserHelper user;
+  UserHelperUI userUI;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
   }
 
-//  public ApplicationManager() {
-//  }
-
   public void init () {
 
     if(browser.equalsIgnoreCase("chrome")){
-//      System.setProperty("webdriver.chrome.driver", "C:/Tools/chromedriver.exe");
       driver = new ChromeDriver();
     } else if (browser.equalsIgnoreCase("firefox")) {
       driver = new FirefoxDriver();
@@ -39,7 +37,7 @@ public class ApplicationManager {
     driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-    user = new UserHelper(driver);
+    userUI = new UserHelperUI(driver);
 
   }
 
@@ -47,7 +45,8 @@ public class ApplicationManager {
     driver.quit();
   }
 
-  public UserHelper getUser() {
-    return user;
+  public UserHelperUI getUserUI() {
+    return userUI;
   }
+
 }

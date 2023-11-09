@@ -1,6 +1,6 @@
 package de.aittr.lms.UITests;
 
-import de.aittr.lms.fw.ApplicationManager;
+import de.aittr.lms.ApplicationManager;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import org.openqa.selenium.remote.Browser;
