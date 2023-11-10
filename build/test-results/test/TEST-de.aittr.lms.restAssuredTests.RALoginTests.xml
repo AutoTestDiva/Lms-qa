@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.RALoginTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-10T22:30:11" hostname="LAPTOP-LILIIA" time="1.208">
+  <properties/>
+  <testcase name="loginAsUser" classname="de.aittr.lms.restAssuredTests.RALoginTests" time="1.208"/>
+  <system-out><![CDATA[00:30:11.896 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test loginAsUser with parameters []
+00:30:13.113 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: loginAsUser
+00:30:13.114 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+00:30:13.114 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

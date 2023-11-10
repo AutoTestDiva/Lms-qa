@@ -19,10 +19,11 @@ public class RAUserRegistrationTests extends TestBaseRA{
 
     @Test
     public void registerUserByAdminPositiveTest(){
+        //todo priority register -> setPassword -> logIn -> itsMe -> postCondDelete
 
         NewUserDto user = NewUserDto.builder()
-                .cohort("Cohort 21")
-                .email("lilu@mail.com")
+                .cohort("Cohort21")
+                .email("lilu2@mail.com")
                 .firstName("Lilu")
                 .lastName("Test")
                 .country("Germany")
@@ -37,7 +38,11 @@ public class RAUserRegistrationTests extends TestBaseRA{
                 .post("/users")
                 .then()
                 .assertThat().statusCode(201);
-
     }
+
+    //TODO deleteUser: delete connection cohort, confirmCode, then from account
+
+
+
 
 }
