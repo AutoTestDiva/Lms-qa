@@ -5,6 +5,7 @@ import java.sql.*;
 public abstract class DataBase {
 
     private static Connection connection;
+
     static {
         try{
             connection = DriverManager.getConnection(
@@ -17,7 +18,7 @@ public abstract class DataBase {
         }
     }
 
-    public static ResultSet request(String query) {
+    public static ResultSet requestSelect(String query) {
         try{
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(query);
@@ -34,6 +35,17 @@ public abstract class DataBase {
             return connection.createStatement().execute(query);
         } catch (SQLException e){
             return  false;
+        }
+    }
+
+    public static void requestDelete(String query) {
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+//            preparedStatement.setInt(1, userId);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
         }
     }
 

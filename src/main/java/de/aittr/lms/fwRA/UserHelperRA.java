@@ -40,14 +40,14 @@ public class UserHelperRA extends BaseHelperRA {
         return response.getDetailedCookie("JSESSIONID");
     }
 
-    public static String getUserUuidByEmail(int userId) throws SQLException {
-        String userUuid = db.request("SELECT uuid FROM confirmation_code WHERE user_id = " + userId + ";")
+    public String getUserUuidByEmail(int userId) throws SQLException {
+        String userUuid = db.requestSelect("SELECT uuid FROM confirmation_code WHERE user_id = " + userId + ";")
                 .getString(1);
         return userUuid;
     }
 
-    public static int getUserIdByEmail(String email) throws SQLException {
-        int userId = db.request("SELECT id FROM account WHERE email = \"" + email + "\";")
+    public int getUserIdByEmail(String email) throws SQLException {
+        int userId = db.requestSelect("SELECT id FROM account WHERE email = \"" + email + "\";")
                 .getInt(1);
         return userId;
     }
@@ -72,5 +72,12 @@ public class UserHelperRA extends BaseHelperRA {
                 .post("/users/"  + userId +"/password");
     }
 
+    public void deleteUserById(int userId) throws SQLException {
+
+        db.requestDelete("DELETE FROM confirmation_code WHERE user_id = " + userId + ";");
+        db.requestDelete("DELETE FROM student_cohort WHERE user_id = " + userId + ";");
+        db.requestDelete("DELETE FROM account WHERE id = " + userId + ";");
+
+    }
 
 }
