@@ -11,9 +11,9 @@ public class RALoginTests extends TestBaseRA{
                 .assertThat().statusCode(200);
     }
 
-    @Test
-    public void loginAsUser() {
-        user.loginUserRA("lilu2@mail.com", "Qwerty123!")
+    @Test (groups = {"newUser", "positive"}, dependsOnMethods = {"setUsersPasswordPositiveTest"})
+    public void loginAsUserPositiveTest() {
+        user.loginUserRA("lilu@mail.com", "Qwerty123!")
                 .then()
                 .assertThat().statusCode(200);
     }

@@ -16,7 +16,7 @@ public class GetMyProfileTests extends TestBaseRA{
         cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
     }
 
-    @Test
+    @Test (groups = {"newUser", "positive"}, dependsOnMethods = {"loginAsUserPositiveTest"})
     public void getMyProfilePositiveTest(){
         given().cookie(cookie).when().post("/users/me").then()
                 .assertThat().statusCode(200);

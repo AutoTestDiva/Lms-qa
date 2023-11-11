@@ -21,19 +21,6 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-//    implementation 'user.java.lang:user.java.lang:2020.164.33984'
-//    implementation 'show-reflect:show-reflect:0.1.0-SNAPSHOT'
-//    implementation 'at.yawk.reflect:reflect:1.0'
-//    implementation 'clojure-interop:java.lang.reflect:1.0.5'
-//    implementation 'org.sonatype.reflect:reflect-class-descriptor:1.0.0'
-
-//        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
-//    implementation 'org.springframework.boot:spring-boot-starter-mail'
-//    implementation 'org.springframework.boot:spring-boot-starter'
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-//    implementation 'com.h2database:h2'
     implementation 'mysql:mysql-connector-java:8.0.33'
 
 }

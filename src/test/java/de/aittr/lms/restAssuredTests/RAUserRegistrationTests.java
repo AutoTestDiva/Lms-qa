@@ -3,6 +3,7 @@ package de.aittr.lms.restAssuredTests;
 import de.aittr.lms.dto.NewUserDto;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,7 +20,7 @@ public class RAUserRegistrationTests extends TestBaseRA{
         cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
     }
 
-    @Test
+    @Test (groups = {"newUser", "positive"})
     public void registerUserByAdminPositiveTest(){
         //todo priority register -> setPassword -> logIn -> itsMe -> postCondDelete
 
@@ -63,13 +64,7 @@ public class RAUserRegistrationTests extends TestBaseRA{
                 .assertThat().statusCode(403);
     }
 
-    @Test
-    public void deleteTest() throws SQLException {
-        int userId = user.getUserIdByEmail("lilu@mail.com");
-        System.out.println(userId);
-        user.deleteUserById(userId);
-//        db.requestDelete("DELETE FROM student_cohort WHERE user_id = 6;");
-    }
+
 
     //TODO deleteUser: delete connection cohort, confirmCode, then from account
 

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" tests="2" skipped="0" failures="1" errors="0" timestamp="2023-11-11T15:22:42" hostname="LAPTOP-LILIIA" time="0.257">
+<testsuite name="de.aittr.lms.restAssuredTests.GetMyProfileTests" tests="1" skipped="0" failures="1" errors="0" timestamp="2023-11-11T15:22:43" hostname="LAPTOP-LILIIA" time="0.013">
   <properties/>
-  <testcase name="registerUserByAdminPositiveTest" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.117"/>
-  <testcase name="registerUserWithoutAdminNegativeTest" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.037">
-    <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;403&gt; but was &lt;409&gt;.&#10;" type="java.lang.AssertionError">java.lang.AssertionError: 1 expectation failed.
-Expected status code &lt;403&gt; but was &lt;409&gt;.
+  <testcase name="getMyProfilePositiveTest" classname="de.aittr.lms.restAssuredTests.GetMyProfileTests" time="0.013">
+    <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;200&gt; but was &lt;405&gt;.&#10;" type="java.lang.AssertionError">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;200&gt; but was &lt;405&gt;.
 
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
@@ -13,8 +12,6 @@ Expected status code &lt;403&gt; but was &lt;409&gt;.
 	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
 	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
 	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
-	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:57)
-	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
 	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
 	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
@@ -32,7 +29,7 @@ Expected status code &lt;403&gt; but was &lt;409&gt;.
 	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
 	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
 	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
-	at de.aittr.lms.restAssuredTests.RAUserRegistrationTests.registerUserWithoutAdminNegativeTest(RAUserRegistrationTests.java:64)
+	at de.aittr.lms.restAssuredTests.GetMyProfileTests.getMyProfilePositiveTest(GetMyProfileTests.java:22)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -81,14 +78,11 @@ Expected status code &lt;403&gt; but was &lt;409&gt;.
 	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
 </failure>
   </testcase>
-  <system-out><![CDATA[17:22:42.106 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerUserByAdminPositiveTest with parameters []
-17:22:42.313 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerUserByAdminPositiveTest
-17:22:42.314 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
-17:22:42.314 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
-17:22:42.319 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerUserWithoutAdminNegativeTest with parameters []
-17:22:42.453 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- FAILED: registerUserWithoutAdminNegativeTest
-17:22:42.454 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
-17:22:42.454 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+  <system-out><![CDATA[17:22:42.939 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getMyProfilePositiveTest with parameters []
+17:22:43.040 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- FAILED: getMyProfilePositiveTest
+17:22:43.040 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+17:22:43.040 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+10
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

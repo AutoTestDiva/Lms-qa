@@ -12,10 +12,12 @@ import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
+import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
@@ -43,16 +45,12 @@ public class TestBaseRA {
         logger.info("==============================");
     }
 
-    public static Cookie loginCookie(String email, String password){
-        Response loginResponse = given()
-                .contentType(ContentType.fromContentType("application/x-www-form-urlencoded"))
-                .body("username=" + email + "&password=" + password)
-                .when()
-                .post("/login");
-        return loginResponse.getDetailedCookie("JSESSIONID");
+    @AfterGroups(groups = {"newUser"})
+    public void deleteUser() throws SQLException {
+        int userId = user.getUserIdByEmail("lilu@mail.com");
+        System.out.println(userId);
+        user.deleteUserById(userId);
     }
-
-
 
 }
 
