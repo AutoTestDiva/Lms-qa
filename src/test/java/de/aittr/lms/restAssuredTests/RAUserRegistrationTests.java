@@ -22,7 +22,6 @@ public class RAUserRegistrationTests extends TestBaseRA{
 
     @Test (groups = {"newUser", "positive"})
     public void registerUserByAdminPositiveTest(){
-        //todo priority register -> setPassword -> logIn -> itsMe -> postCondDelete
 
         NewUserDto user = NewUserDto.builder()
                 .cohort("Cohort21")
@@ -64,9 +63,28 @@ public class RAUserRegistrationTests extends TestBaseRA{
                 .assertThat().statusCode(403);
     }
 
+    @Test (groups = {"newUser"}, dependsOnMethods = "registerUserByAdminPositiveTest")
+    public void registerExistedUserNegativeTest(){
+        NewUserDto user = NewUserDto.builder()
+                .cohort("Cohort21")
+                .email("lilu@mail.com")
+                .firstName("Lilu")
+                .lastName("Test")
+                .country("Germany")
+                .phone("+490571234567")
+                .build();
 
+        given()
+                .contentType(ContentType.JSON)
+                .cookie(cookie)
+                .body(user)
+                .when()
+                .post("/users")
+                .then()
+                .assertThat().statusCode(409);
+    }
 
-    //TODO deleteUser: delete connection cohort, confirmCode, then from account
+    //TODO Validation error register
 
 
 

@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Regression" verbose="1" >
+
+    <test name="Regression" >
+        <classes>
+            <class name="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" />
+            <class name="de.aittr.lms.restAssuredTests.RASetUsersPasswordTests" />
+            <class name="de.aittr.lms.restAssuredTests.RALoginTests" />
+            <class name="de.aittr.lms.restAssuredTests.RAGetMyProfileTests" />
+        </classes>
+    </test>
+
+</suite>

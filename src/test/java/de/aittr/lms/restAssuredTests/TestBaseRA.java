@@ -45,7 +45,7 @@ public class TestBaseRA {
         logger.info("==============================");
     }
 
-    @AfterGroups(groups = {"newUser"})
+    @AfterGroups(groups = {"newUser"}, enabled = false)
     public void deleteUser() throws SQLException {
         int userId = user.getUserIdByEmail("lilu@mail.com");
         System.out.println(userId);
