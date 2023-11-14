@@ -1,8 +1,26 @@
 package de.aittr.lms.restAssuredTests;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.sql.SQLException;
+
 public class RALoginTests extends TestBaseRA{
+
+    @BeforeMethod
+    public void precondition() throws SQLException {
+        user.registerUser("Cohort21", "lilu@mail.com", "Lilu", "Test",
+                "Germany", "+490571234567");
+        user.setPasswordByEmail("lilu@mail.com", "Qwerty123!");
+    }
+
+    @AfterMethod
+    public void postCondition() throws SQLException {
+        user.deleteUser("lilu@mail.com");
+    }
+
+
 
     @Test
     public void loginAsAdmin() {
@@ -11,15 +29,17 @@ public class RALoginTests extends TestBaseRA{
                 .assertThat().statusCode(200);
     }
 
-    @Test (groups = {"newUser", "positive"}, dependsOnMethods = {"setUsersPasswordPositiveTest"})
+    @Test ()
     public void loginAsUserPositiveTest() {
+
         user.loginUserRA("lilu@mail.com", "Qwerty123!")
                 .then()
                 .assertThat().statusCode(200);
     }
 
 
-    //TODO not valid data
+    //TODO not valid data 401 Invalid login or password
+
     //TODO not exist user data
 
 }

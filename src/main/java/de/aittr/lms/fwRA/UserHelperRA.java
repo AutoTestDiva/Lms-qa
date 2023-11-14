@@ -1,5 +1,6 @@
 package de.aittr.lms.fwRA;
 
+import de.aittr.lms.dto.NewUserDto;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
@@ -28,6 +29,24 @@ public class UserHelperRA extends BaseHelperRA {
 
         return "username=" + encodedMail + "&password=" + encodedPassword;
 
+    }
+
+    public Response registerUser(String cohort, String email, String firstname, String lastname,
+    String country, String phone){
+        NewUserDto user = NewUserDto.builder()
+                .cohort(cohort)
+                .email(email)
+                .firstName(firstname)
+                .lastName(lastname)
+                .country(country)
+                .phone(phone)
+                .build();
+
+        return given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .when()
+                .post("/users");
     }
 
     public  Cookie getLoginCookie(String email, String password){
@@ -78,6 +97,11 @@ public class UserHelperRA extends BaseHelperRA {
         db.requestDelete("DELETE FROM student_cohort WHERE user_id = " + userId + ";");
         db.requestDelete("DELETE FROM account WHERE id = " + userId + ";");
 
+    }
+
+    public void deleteUser(String email) throws SQLException {
+        int userId = getUserIdByEmail(email);
+        deleteUserById(userId);
     }
 
 }

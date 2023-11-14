@@ -1,6 +1,5 @@
 # Tasks 
 1.  [DONE]. Create new user with ADMIN 
-        (admin@mail.com; %Admin123%) - $2a$10$HnswqD1fcx7gXci3AlkLKuOs8wlRh9zMbtLUCtIjcliK9V6z1Tky2
         (admin@mail.com; Admin123!) - $2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai
 - [DONE] Create new user without ADMIN
 - [DONE] Set password for new user
@@ -15,5 +14,5 @@
 
 ## Questions
 
-- Как мне делать таски в джире и нужно ли, чтоб было видно, что я делаю.
 - How register teacher? 
+- Log in Not Exist User
