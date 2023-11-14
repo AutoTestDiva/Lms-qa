@@ -20,8 +20,6 @@ public class RALoginTests extends TestBaseRA{
         user.deleteUser("lilu@mail.com");
     }
 
-
-
     @Test
     public void loginAsAdmin() {
         user.loginUserRA("admin@mail.com", "Admin123!")
@@ -37,9 +35,20 @@ public class RALoginTests extends TestBaseRA{
                 .assertThat().statusCode(200);
     }
 
+    @Test ()
+    public void loginAsUserWithWrongPasswordNegativeTest() {
 
-    //TODO not valid data 401 Invalid login or password
+        user.loginUserRA("lilu@mail.com", "Qwerty132!")
+                .then()
+                .assertThat().statusCode(401);
+    }
 
-    //TODO not exist user data
+    @Test ()
+    public void loginNotExistedUserNegativeTest() {
+
+        user.loginUserRA("lilu25@mail.com", "Qwerty123!")
+                .then()
+                .assertThat().statusCode(401);
+    }
 
 }

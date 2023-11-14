@@ -8,6 +8,8 @@
             <class name="de.aittr.lms.restAssuredTests.RASetUsersPasswordTests" />
             <class name="de.aittr.lms.restAssuredTests.RALoginTests" />
             <class name="de.aittr.lms.restAssuredTests.RAGetMyProfileTests" />
+            <class name="de.aittr.lms.restAssuredTests.GetAllCohortsTests" />
+            <class name="de.aittr.lms.restAssuredTests.GetAllUsersTests" />
         </classes>
     </test>
 

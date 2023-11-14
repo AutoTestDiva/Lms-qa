@@ -1,13 +1,8 @@
 package de.aittr.lms.restAssuredTests;
 
-import de.aittr.lms.dto.NewUserDto;
-import io.restassured.http.ContentType;
-import io.restassured.http.Cookie;
+import de.aittr.lms.CSVDataProviders;
 import org.testng.annotations.*;
-
 import java.sql.SQLException;
-
-import static io.restassured.RestAssured.given;
 
 public class RAUserRegistrationTests extends TestBaseRA{
 
@@ -30,16 +25,20 @@ public class RAUserRegistrationTests extends TestBaseRA{
         user.deleteUser("lilu@mail.com");
     }
 
-    //TODO Validation error register
-    @Test
-    public void registerWithNotValidData(){
+    @Test(dataProvider = "provideWrongUserData", dataProviderClass = CSVDataProviders.class)
+    public void registerWithNotValidData(String cohort, String email, String firstname, String lastname,
+    String country, String phone){
+        //TODO Validation error register
+
+        user.registerUser(cohort, email, firstname, lastname, country, phone).then()
+                .assertThat().statusCode(400);
 
     }
 
 
 
 
-//        @Test // help to deleteUser when it needs.
+//        @Test // help to deleteUser from database when it needs.
     public void deleteUser() throws SQLException {
         user.deleteUser("lilu2@mail.com");
     }

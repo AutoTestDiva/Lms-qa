@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" tests="27" skipped="0" failures="0" errors="0" timestamp="2023-11-14T20:39:59" hostname="LAPTOP-LILIIA" time="2.263">
+  <properties/>
+  <testcase name="registerWithNotValidData[0](cohort, email, firstName, lastName, country, phone)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="1.633"/>
+  <testcase name="registerWithNotValidData[1](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.026"/>
+  <testcase name="registerWithNotValidData[2](cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.026"/>
+  <testcase name="registerWithNotValidData[3](COHORT21, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.023"/>
+  <testcase name="registerWithNotValidData[4](Cohort, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.018"/>
+  <testcase name="registerWithNotValidData[5](Cohort21, lilu.mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.014"/>
+  <testcase name="registerWithNotValidData[6](Cohort21, lilu@mail, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.015"/>
+  <testcase name="registerWithNotValidData[7](Cohort21, lilu@mailcom, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.024"/>
+  <testcase name="registerWithNotValidData[8](Cohort21, li%lu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.02"/>
+  <testcase name="registerWithNotValidData[9](Cohort21, lilu@mail.com, Lilu23, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.017"/>
+  <testcase name="registerWithNotValidData[10](Cohort21, lilu@mail.com, Li_lu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.015"/>
+  <testcase name="registerWithNotValidData[11](Cohort21, lilu@mail.com, Li/lu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.016"/>
+  <testcase name="registerWithNotValidData[12](Cohort21, lilu@mail.com, Lilu, Test77, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.014"/>
+  <testcase name="registerWithNotValidData[13](Cohort21, lilu@mail.com, Lilu, Te_st, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.027"/>
+  <testcase name="registerWithNotValidData[14](Cohort21, lilu@mail.com, Lilu, Te*st, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.015"/>
+  <testcase name="registerWithNotValidData[15](Cohort21, lilu@mail.com, Lilu, Test, Germany2,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.028"/>
+  <testcase name="registerWithNotValidData[16](Cohort21, lilu@mail.com, Lilu, Test, germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.018"/>
+  <testcase name="registerWithNotValidData[17](Cohort21, lilu@mail.com, Lilu, Test, GERMANY,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.02"/>
+  <testcase name="registerWithNotValidData[18](Cohort21, lilu@mail.com, Lilu, Test, Germany$,  +491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.03"/>
+  <testcase name="registerWithNotValidData[19](Cohort21, lilu@mail.com, Lilu, Test, Germany,  491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.021"/>
+  <testcase name="registerWithNotValidData[20](Cohort21, lilu@mail.com, Lilu, Test, Germany,  -491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.02"/>
+  <testcase name="registerWithNotValidData[21](Cohort21, lilu@mail.com, Lilu, Test, Germany,  myNumber)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.012"/>
+  <testcase name="registerWithNotValidData[22](Cohort21, lilu@mail.com, Lilu, Test, Germany,  +4912345678901234567890123)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.021"/>
+  <testcase name="registerWithNotValidData[23](Cohort21, lilu@mail.com, Lilu, Test, Germany,  +49123)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.014"/>
+  <testcase name="registerWithNotValidData[24](Cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234567890$)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.022"/>
+  <testcase name="registerWithNotValidData[25](Cohort21, lilu@mail.com, Lilu, Test, Germany,  ++491234567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.033"/>
+  <testcase name="registerWithNotValidData[26](Cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234+567890)" classname="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" time="0.02"/>
+  <system-out><![CDATA[22:39:59.950 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [cohort, email, firstName, lastName, country, phone]
+22:40:01.590 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.591 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.591 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.593 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+22:40:01.620 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.621 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.622 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.625 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+22:40:01.653 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.654 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.654 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.655 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [COHORT21, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+22:40:01.680 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.680 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.680 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.682 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+22:40:01.701 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.702 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.702 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.703 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu.mail.com, Lilu, Test, Germany,  +491234567890]
+22:40:01.718 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.718 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.719 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.720 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail, Lilu, Test, Germany,  +491234567890]
+22:40:01.736 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.737 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.737 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.738 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mailcom, Lilu, Test, Germany,  +491234567890]
+22:40:01.765 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.765 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.765 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.767 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, li%lu@mail.com, Lilu, Test, Germany,  +491234567890]
+22:40:01.790 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.791 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.791 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.793 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu23, Test, Germany,  +491234567890]
+22:40:01.812 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.812 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.813 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.814 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Li_lu, Test, Germany,  +491234567890]
+22:40:01.831 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.831 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.831 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.833 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Li/lu, Test, Germany,  +491234567890]
+22:40:01.850 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.850 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.850 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.852 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test77, Germany,  +491234567890]
+22:40:01.867 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.867 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.868 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.868 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Te_st, Germany,  +491234567890]
+22:40:01.897 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.898 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.898 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.899 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Te*st, Germany,  +491234567890]
+22:40:01.915 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.916 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.916 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.917 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany2,  +491234567890]
+22:40:01.948 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.948 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.948 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.950 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, germany,  +491234567890]
+22:40:01.969 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.970 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.970 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.971 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, GERMANY,  +491234567890]
+22:40:01.992 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:01.992 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:01.992 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:01.994 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany$,  +491234567890]
+22:40:02.027 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.028 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.028 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.029 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  491234567890]
+22:40:02.052 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.053 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.053 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.054 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  -491234567890]
+22:40:02.078 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.078 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.079 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.079 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  myNumber]
+22:40:02.093 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.093 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.093 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.094 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  +4912345678901234567890123]
+22:40:02.117 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.117 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.117 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.118 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  +49123]
+22:40:02.133 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.133 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.133 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.134 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234567890$]
+22:40:02.158 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.159 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.159 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.160 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  ++491234567890]
+22:40:02.194 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.195 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.195 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+22:40:02.197 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234+567890]
+22:40:02.219 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+22:40:02.220 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+22:40:02.220 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
