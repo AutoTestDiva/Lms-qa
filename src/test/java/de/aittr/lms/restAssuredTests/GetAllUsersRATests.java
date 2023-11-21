@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class GetAllUsersTests extends TestBaseRA{
+public class GetAllUsersRATests extends TestBaseRA{
 
     private Cookie cookie;
 

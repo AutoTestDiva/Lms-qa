@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CSVDataProviders {
 
-    //Todo Data provider class
     @DataProvider(name = "provideWrongUserData")
     public static Object[][] provideWrongUserData() {
         String csvFile = "src/test/resources/DataScv/WrongUserData.csv";

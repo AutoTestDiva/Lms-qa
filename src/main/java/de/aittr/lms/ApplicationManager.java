@@ -3,6 +3,7 @@ package de.aittr.lms;
 import java.time.Duration;
 
 import de.aittr.lms.fwRA.UserHelperRA;
+import de.aittr.lms.fwUI.HeaderHelper;
 import de.aittr.lms.fwUI.UserHelperUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,6 +17,7 @@ public class ApplicationManager {
   WebDriver driver;
 
   UserHelperUI userUI;
+  HeaderHelper headerUI;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -38,6 +40,7 @@ public class ApplicationManager {
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     userUI = new UserHelperUI(driver);
+    headerUI = new HeaderHelper(driver);
 
   }
 
@@ -47,6 +50,10 @@ public class ApplicationManager {
 
   public UserHelperUI getUserUI() {
     return userUI;
+  }
+
+  public HeaderHelper getHeaderUI() {
+    return headerUI;
   }
 
 }

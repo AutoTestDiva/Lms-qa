@@ -19,6 +19,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.opencsv:opencsv:5.8'
 
+    implementation 'org.springframework:spring-web:6.1.0'
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 

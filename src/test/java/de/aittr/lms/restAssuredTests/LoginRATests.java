@@ -6,11 +6,11 @@ import org.testng.annotations.Test;
 
 import java.sql.SQLException;
 
-public class RALoginTests extends TestBaseRA{
+public class LoginRATests extends TestBaseRA{
 
     @BeforeMethod
     public void precondition() throws SQLException {
-        user.registerUser("Cohort21", "lilu@mail.com", "Lilu", "Test",
+        user.registerUser("Cohort 33", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567");
         user.setPasswordByEmail("lilu@mail.com", "Qwerty123!");
     }
@@ -23,6 +23,13 @@ public class RALoginTests extends TestBaseRA{
     @Test
     public void loginAsAdmin() {
         user.loginUserRA("admin@mail.com", "Admin123!")
+                .then()
+                .assertThat().statusCode(200);
+    }
+
+    @Test
+    public void loginAsTeacher() {
+        user.loginUserRA("teacher@mail.com", "Qwerty123!")
                 .then()
                 .assertThat().statusCode(200);
     }

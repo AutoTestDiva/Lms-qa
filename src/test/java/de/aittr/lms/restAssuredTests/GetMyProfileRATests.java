@@ -11,13 +11,13 @@ import java.sql.SQLException;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class RAGetMyProfileTests extends TestBaseRA{
+public class GetMyProfileRATests extends TestBaseRA{
 
     private Cookie cookie;
 
     @BeforeMethod
     public void precondition() throws SQLException {
-        user.registerUser("Cohort21", "lilu@mail.com", "Lilu", "Test",
+        user.registerUser("Cohort 33", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567");
         user.setPasswordByEmail("lilu@mail.com", "Qwerty123!");
         cookie = user.getLoginCookie("lilu@mail.com", "Qwerty123!");

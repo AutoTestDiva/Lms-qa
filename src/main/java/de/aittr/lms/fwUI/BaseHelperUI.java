@@ -72,7 +72,7 @@ public class BaseHelperUI {
   }
 
   public String takeScreenshot(){
-    File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE); // TODO control path
+    File tmp = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
     File screenshot = new File("src/screenshots/screen" + System.currentTimeMillis() + ".png");
     try{
       Files.copy(tmp, screenshot);

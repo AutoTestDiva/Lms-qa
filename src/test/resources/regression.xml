@@ -4,12 +4,12 @@
 
     <test name="Regression" >
         <classes>
-            <class name="de.aittr.lms.restAssuredTests.RAUserRegistrationTests" />
-            <class name="de.aittr.lms.restAssuredTests.RASetUsersPasswordTests" />
-            <class name="de.aittr.lms.restAssuredTests.RALoginTests" />
-            <class name="de.aittr.lms.restAssuredTests.RAGetMyProfileTests" />
-            <class name="de.aittr.lms.restAssuredTests.GetAllCohortsTests" />
-            <class name="de.aittr.lms.restAssuredTests.GetAllUsersTests" />
+            <class name="de.aittr.lms.restAssuredTests.UserRegistrationRATests" />
+            <class name="de.aittr.lms.restAssuredTests.SetUsersPasswordRATests" />
+            <class name="de.aittr.lms.restAssuredTests.LoginRATests" />
+            <class name="de.aittr.lms.restAssuredTests.GetMyProfileRATests" />
+            <class name="de.aittr.lms.restAssuredTests.GetAllCohortsRATests" />
+            <class name="de.aittr.lms.restAssuredTests.GetAllUsersRATests" />
         </classes>
     </test>
 

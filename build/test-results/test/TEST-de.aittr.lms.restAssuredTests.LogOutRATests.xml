@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.LogOutRATests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-21T21:32:51" hostname="LAPTOP-LILIIA" time="0.043">
+  <properties/>
+  <testcase name="notLoggedInUserLogOuNegativeTest" classname="de.aittr.lms.restAssuredTests.LogOutRATests" time="0.043"/>
+  <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+23:32:49.572 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test notLoggedInUserLogOuNegativeTest with parameters []
+23:32:51.645 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: notLoggedInUserLogOuNegativeTest
+23:32:51.645 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+23:32:51.645 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

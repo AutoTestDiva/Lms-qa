@@ -1,18 +1,60 @@
 # Tasks 
-1.  [DONE]. Create new user with ADMIN 
+- [DONE]. Create new user with ADMIN [Password -> Hash](https://www.browserling.com/tools/bcrypt)
         (admin@mail.com; Admin123!) - $2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai
+- [DONE] Creater **Teacher** {"teacher@mail.com", "Qwerty123!"}
+- [DONE] Creater **Teacher** {"student@mail.com", "Qwerty123!"}
 - [DONE] Create new user without ADMIN
 - [DONE] Set password for new user
 - [DONE] Try to log in with this user
 - [DONE] Make a sure it`s me
 - [DONE] Set up regression xml file
 - [DONE] Modify the test of new user, delete ut in Data base.
-- Add data provider
+- [DONE] Add data provider
+- Register user with phone "+4915172667876"
 - Change password
-
-[//]: # (### Afet pull: Git -> Uncommitted Changes -> Unstash Changes; )
 
 ## Questions
 
-- How register teacher? 
-- Log in Not Exist User
+- [DONE] How register teacher? == By Admin
+- Все баги после выполнения перейдут в раздел "Ready to test" ?
+- notLoggedInUserLogOuNegativeTest() - <403> ?
+
+
+### Notes
+
+[//]: # (### Afet pull: Git -> Uncommitted Changes -> Unstash Changes; )
+aws:
+s3:
+accessKey: DO002K624D4JD22CDUN9
+secretKey: qiMXJgWqK/iJTO2n7p3pdaZPuE0wwP0dwBDB8blhxHs
+serviceEndpoint: https://fra1.digitaloceanspaces.com
+signing-region: "fra1"
+
+liliia.baievea@lms.com
+Strong_password-123
+https://seahorse-app-ngeja.ondigitalocean.app/#/lessons
+
+-- java 
+/```
+{
+"cohort": "34.2",
+"module": "basic_programming",
+"type": "lecture",
+"lessonsNr": 30
+}
+/```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

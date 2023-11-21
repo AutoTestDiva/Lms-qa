@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class GetAllCohortsTests extends TestBaseRA {
+public class GetAllCohortsRATests extends TestBaseRA {
 
     @Test
     public void getAllCohortsTest(){
