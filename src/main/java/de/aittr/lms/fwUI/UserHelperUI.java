@@ -33,7 +33,8 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void logOut() {
-        click(By.cssSelector("button.p-element.p-button.p-component:nth-child(2)"));
+//        click(By.cssSelector("button.p-element.p-button.p-component:nth-child(2)"));
+        click(By.cssSelector(".pi-user"));
         click(By.xpath("//span[contains(text(),'Sign Out')]"));
     }
 }

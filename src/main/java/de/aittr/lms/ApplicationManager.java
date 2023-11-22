@@ -2,7 +2,7 @@ package de.aittr.lms;
 
 import java.time.Duration;
 
-import de.aittr.lms.fwRA.UserHelperRA;
+import de.aittr.lms.fwUI.GroupHelper;
 import de.aittr.lms.fwUI.HeaderHelper;
 import de.aittr.lms.fwUI.UserHelperUI;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +18,7 @@ public class ApplicationManager {
 
   UserHelperUI userUI;
   HeaderHelper headerUI;
+  GroupHelper groupUI;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -41,6 +42,7 @@ public class ApplicationManager {
 
     userUI = new UserHelperUI(driver);
     headerUI = new HeaderHelper(driver);
+    groupUI = new GroupHelper(driver);
 
   }
 
@@ -56,4 +58,7 @@ public class ApplicationManager {
     return headerUI;
   }
 
+  public GroupHelper getGroupUI() {
+    return groupUI;
+  }
 }

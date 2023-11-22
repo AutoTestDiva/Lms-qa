@@ -157,5 +157,8 @@ public class BaseHelperUI {
     return isElementPresent(By.cssSelector(".error-message"));
   }
 
+  public void returnBack(){
+    driver.navigate().back();
+  }
 
 }

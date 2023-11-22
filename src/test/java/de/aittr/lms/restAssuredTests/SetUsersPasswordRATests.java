@@ -15,11 +15,13 @@ public class SetUsersPasswordRATests extends TestBaseRA{
     }
 
 
+
     @Test
     public void setUsersPasswordPositiveTest() throws SQLException {
-        user.setPasswordByEmail("student2@mail.com", "Qwerty123!").then()
+        user.setPasswordByEmail("lilu@mail.com", "Qwerty123!").then()
                 .assertThat().statusCode(200);
     }
+
 
     @AfterMethod
     public void deleteUser() throws SQLException {
