@@ -11,9 +11,7 @@ public class GroupHelper extends BaseHelperUI{
 
     public boolean isCohortInSelectPresent(String cohort) {
         click(By.className("p-dropdown-trigger"));
-        if(!isElementPresent(By.cssSelector("[aria-label='" + cohort + "']"))){
-            return false;
-        }
-        return true;
+        return isElementPresent(By.cssSelector("[aria-label='" + cohort + "']"));
+
     }
 }

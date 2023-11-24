@@ -21,6 +21,12 @@ public class CSVDataProviders {
         return readDataFromCSV(csvFile);
     }
 
+    @DataProvider(name = "provideNotValidPassword")
+    public static Object[][] provideNotValidPassword() {
+        String csvFile = "src/test/resources/DataScv/NotValidPassword.csv";
+        return readDataFromCSV(csvFile);
+    }
+
     private static Object[][] readDataFromCSV(String csvFile) {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             List<String[]> data = reader.readAll();

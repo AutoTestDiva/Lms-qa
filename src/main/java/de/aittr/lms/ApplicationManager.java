@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import de.aittr.lms.fwUI.GroupHelper;
 import de.aittr.lms.fwUI.HeaderHelper;
+import de.aittr.lms.fwUI.LessonHelper;
 import de.aittr.lms.fwUI.UserHelperUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,6 +20,7 @@ public class ApplicationManager {
   UserHelperUI userUI;
   HeaderHelper headerUI;
   GroupHelper groupUI;
+  LessonHelper lesson;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -43,6 +45,7 @@ public class ApplicationManager {
     userUI = new UserHelperUI(driver);
     headerUI = new HeaderHelper(driver);
     groupUI = new GroupHelper(driver);
+    lesson = new LessonHelper(driver);
 
   }
 
@@ -60,5 +63,9 @@ public class ApplicationManager {
 
   public GroupHelper getGroupUI() {
     return groupUI;
+  }
+
+  public LessonHelper getLesson() {
+    return lesson;
   }
 }

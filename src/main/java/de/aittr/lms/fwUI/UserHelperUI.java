@@ -26,15 +26,28 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public boolean isManageHidderExist() {
-        if(isElementPresent(By.xpath("//h5[contains(text(),'Manage Users')]"))){
-            return true;
-        }
-        return false;
+        return (isElementPresent(By.xpath("//h5[contains(text(),'Manage Users')]")));
     }
 
     public void logOut() {
-//        click(By.cssSelector("button.p-element.p-button.p-component:nth-child(2)"));
         click(By.cssSelector(".pi-user"));
         click(By.xpath("//span[contains(text(),'Sign Out')]"));
+    }
+
+    public void clickOnUsersInSideBar() {
+        click(By.cssSelector("[href='#/users']"));
+    }
+
+    public boolean isUserByRoleInTableDisplayed(String role) {
+        return isElementPresent(By.xpath("//tbody/tr/td[2][contains(., '" + role + "')]"));
+    }
+
+    public void searchUser(String mail) {
+        type(By.cssSelector("[placeholder='Search...']"), mail);
+        pause(1000);
+    }
+
+    public String userOnFirstRow() {
+        return getText(By.xpath("//tr[1]/td[1]"));
     }
 }
