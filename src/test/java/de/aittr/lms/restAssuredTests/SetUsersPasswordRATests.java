@@ -1,5 +1,6 @@
 package de.aittr.lms.restAssuredTests;
 
+import de.aittr.lms.CSVDataProviders;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,13 +23,18 @@ public class SetUsersPasswordRATests extends TestBaseRA{
                 .assertThat().statusCode(200);
     }
 
+    @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
+    public void setNotValidPasswordTest(String password) throws SQLException {
+        //    TODO negative test easy password 400 Validation error
+        user.setPasswordByEmail("lilu@mail.com", password).then()
+                .assertThat().statusCode(400);
+    }
 
     @AfterMethod
     public void deleteUser() throws SQLException {
         user.deleteUser("lilu@mail.com");
     }
 
-//    TODO negative test easy password 400 Validation error
 
 
 }
