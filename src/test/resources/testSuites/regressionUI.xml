@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="RegressionUI" verbose="1" >
+
+    <test name="RegressionUI" >
+        <classes>
+<!--            <class name="de.aittr.lms.UITests.AddNewUserUITests" />-->
+            <class name="de.aittr.lms.UITests.AdminPageTests" />
+<!--            <class name="de.aittr.lms.UITests.DownloadVideoTests" />-->
+            <class name="de.aittr.lms.UITests.LoginUITests" />
+            <class name="de.aittr.lms.UITests.LogOutUITests" />
+            <class name="de.aittr.lms.UITests.UserPageTests" />
+
+        </classes>
+    </test>
+
+</suite>

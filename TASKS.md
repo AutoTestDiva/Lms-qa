@@ -9,10 +9,13 @@
 - [DONE] UI Log Out Tests
 - [DONE] RA Set not Valid password
 
-- Change password
+- [DONE] CreateNewUserByAdminRATest ...
+- [DONE] Create Zoom meeting by admin, by teacher, negative by student, and not valid values
+
 
 ## Questions
 
+- Change password
 - [DONE] How register teacher? == By Admin
 - Все баги после выполнения перейдут в раздел "Ready to test" ? Где мне их искать чтоб перетестить
 - notLoggedInUserLogOuNegativeTest() - <403> ? absent in documentation this info, is it important?
