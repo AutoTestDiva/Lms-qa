@@ -3,9 +3,9 @@ package de.aittr.lms.fwUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class GroupHelper extends BaseHelperUI{
+public class GroupHelperUI extends BaseHelperUI{
 
-    public GroupHelper(WebDriver driver) {
+    public GroupHelperUI(WebDriver driver) {
         super(driver);
     }
 

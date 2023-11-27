@@ -2,6 +2,7 @@ package de.aittr.lms.restAssuredTests;
 
 import de.aittr.lms.ApplicationManager;
 import de.aittr.lms.DataBase;
+import de.aittr.lms.fwRA.LessonHelperRA;
 import de.aittr.lms.fwRA.UserHelperRA;
 import io.restassured.RestAssured;
 
@@ -27,6 +28,7 @@ public class TestBaseRA {
     final static Logger logger = LoggerFactory.getLogger(TestBaseRA.class);
     protected static DataBase db;
     protected static UserHelperRA user = new UserHelperRA();
+    protected static LessonHelperRA lesson = new LessonHelperRA();
 
     @BeforeMethod
     public void precondition(Method method, Object[] parameters){

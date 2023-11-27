@@ -2,9 +2,9 @@ package de.aittr.lms;
 
 import java.time.Duration;
 
-import de.aittr.lms.fwUI.GroupHelper;
-import de.aittr.lms.fwUI.HeaderHelper;
-import de.aittr.lms.fwUI.LessonHelper;
+import de.aittr.lms.fwUI.GroupHelperUI;
+import de.aittr.lms.fwUI.HeaderHelperUI;
+import de.aittr.lms.fwUI.LessonHelperUI;
 import de.aittr.lms.fwUI.UserHelperUI;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,9 +18,9 @@ public class ApplicationManager {
   WebDriver driver;
 
   UserHelperUI userUI;
-  HeaderHelper headerUI;
-  GroupHelper groupUI;
-  LessonHelper lesson;
+  HeaderHelperUI headerUI;
+  GroupHelperUI groupUI;
+  LessonHelperUI lesson;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -43,9 +43,9 @@ public class ApplicationManager {
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
     userUI = new UserHelperUI(driver);
-    headerUI = new HeaderHelper(driver);
-    groupUI = new GroupHelper(driver);
-    lesson = new LessonHelper(driver);
+    headerUI = new HeaderHelperUI(driver);
+    groupUI = new GroupHelperUI(driver);
+    lesson = new LessonHelperUI(driver);
 
   }
 
@@ -57,15 +57,15 @@ public class ApplicationManager {
     return userUI;
   }
 
-  public HeaderHelper getHeaderUI() {
+  public HeaderHelperUI getHeaderUI() {
     return headerUI;
   }
 
-  public GroupHelper getGroupUI() {
+  public GroupHelperUI getGroupUI() {
     return groupUI;
   }
 
-  public LessonHelper getLesson() {
+  public LessonHelperUI getLesson() {
     return lesson;
   }
 }

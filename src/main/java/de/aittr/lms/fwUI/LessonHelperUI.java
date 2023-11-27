@@ -3,9 +3,9 @@ package de.aittr.lms.fwUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LessonHelper extends BaseHelperUI{
+public class LessonHelperUI extends BaseHelperUI{
 
-    public LessonHelper(WebDriver driver) {
+    public LessonHelperUI(WebDriver driver) {
         super(driver);
     }
 

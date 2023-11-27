@@ -16,7 +16,7 @@ public class UserRegistrationRATests extends TestBaseRA{
 
     @Test
     public void registerUserNumberPhone14PositiveTest() throws SQLException {
-        user.registerUser("Cohort24", "testlu@mail.com", "Lilu", "Test",
+        user.registerUser("Cohort 24", "testlu@mail.com", "Lilu", "Test",
                         "Germany", "+4915172667876").then()
                 .assertThat().statusCode(201);
         user.deleteUser("testlu@mail.com");
@@ -39,14 +39,6 @@ public class UserRegistrationRATests extends TestBaseRA{
     String country, String phone){
         user.registerUser(cohort, email, firstname, lastname, country, phone).then()
                 .assertThat().statusCode(400);
-    }
-
-
-
-
-//        @Test // help to deleteUser from database when it needs.
-    public void deleteUser() throws SQLException {
-        user.deleteUser("student@mail.com");
     }
 
 }

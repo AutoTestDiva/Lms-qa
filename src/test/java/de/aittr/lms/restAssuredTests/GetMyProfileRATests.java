@@ -40,9 +40,8 @@ public class GetMyProfileRATests extends TestBaseRA{
 
     @Test ()
     public void getMyProfileWithoutLoginNegativeTest(){
-        //todo verify that status code must be 403 at all
         given().contentType(ContentType.JSON).when().get("/users/me").then()
-                .assertThat().statusCode(401);
+                .assertThat().statusCode(403);
     }
 
 

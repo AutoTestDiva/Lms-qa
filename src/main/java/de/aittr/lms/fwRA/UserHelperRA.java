@@ -1,6 +1,7 @@
 package de.aittr.lms.fwRA;
 
 import de.aittr.lms.dto.NewUserDto;
+import de.aittr.lms.dto.NewUserWithRoleDto;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
@@ -103,5 +104,20 @@ public class UserHelperRA extends BaseHelperRA {
         int userId = getUserIdByEmail(email);
         deleteUserById(userId);
     }
+
+    public static NewUserWithRoleDto userWithRoleBuilder (String cohort, String email, String firstName,
+                                                          String lastName, String country, String role, String phone) {
+        NewUserWithRoleDto user = NewUserWithRoleDto.builder()
+                .cohort(cohort)
+                .email(email)
+                .firstName(firstName)
+                .lastName(lastName)
+                .country(country)
+                .phone(phone)
+                .role(role)
+                .build();
+        return user;
+    }
+
 
 }

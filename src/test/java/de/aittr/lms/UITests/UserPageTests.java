@@ -28,7 +28,7 @@ public class UserPageTests extends TestBaseUI{
         app.getLesson().selectStudentGroup("Cohort 34.2");
         app.getLesson().selectModule("basic_programming");
         app.getLesson().selectLesson("lesson_30");
-//        app.getLesson().
+//        app.getLesson(). TODO see video
     }
 
     @AfterMethod

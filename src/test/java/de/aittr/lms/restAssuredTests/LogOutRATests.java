@@ -32,7 +32,7 @@ public class LogOutRATests extends TestBaseRA{
     @Test
     public void notLoggedInUserLogOuNegativeTest(){
         given().when().post("/logout").then()
-                .assertThat().statusCode(403); // TODO verify if status code 403
+                .assertThat().statusCode(403);
     }
 
     @AfterMethod
