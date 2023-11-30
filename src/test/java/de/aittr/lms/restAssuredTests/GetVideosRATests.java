@@ -60,6 +60,22 @@ public class GetVideosRATests extends TestBaseRA{
     }
 
     @Test
+    public void getVideosCohort35AsStudent2PositiveTest(){ //TODO
+        cookie = user.getLoginCookie("student2@mail.com", "Qwerty123!");
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("35", "basic_programming", "lecture", 30)).then().
+                assertThat().statusCode(200);
+    }
+
+    @Test
+    public void getVideosCohort36AsStudent2PositiveTest(){ //TODO
+        cookie = user.getLoginCookie("student2@mail.com", "Qwerty123!");
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("36", "basic_programming", "lecture", 30)).then().
+                assertThat().statusCode(200);
+    }
+
+    @Test
     public void getVideosNotStudentsGroupNegativeTest(){
         cookie = user.getLoginCookie("student@mail.com", "Qwerty123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
@@ -96,6 +112,8 @@ public class GetVideosRATests extends TestBaseRA{
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", -5)).then().
                 assertThat().statusCode(400);
+        //todo @
+        // letters "lesson"
     }
 
     @Test
@@ -114,7 +132,6 @@ public class GetVideosRATests extends TestBaseRA{
                         user.urlBuilderGetVideo(" ", "basic_programming", "lecture", 30))
                 .then()
                 .assertThat().statusCode(400);
-//                .assertThat().statusCode(500);
     }
 
 

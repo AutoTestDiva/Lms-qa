@@ -2,11 +2,12 @@
 - [DONE]. Create new user with ADMIN [Password -> Hash](https://www.browserling.com/tools/bcrypt)
         (admin@mail.com; Admin123!) - $2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai
 - [DONE] Creater **Teacher** {"teacher@mail.com", "Qwerty123!"}
-- [DONE] Creater **Student** {"student@mail.com", "Qwerty123!"}
-- [DONE] Creater **Student** {"student2@mail.com", "Qwerty123!"}
+- [DONE] Creater **Student** {"student@mail.com", "Qwerty123!"} - cohort 34.2
+- [DONE] Creater **Student** {"student2@mail.com", "Qwerty123!"} - cohort 35, cohort 36
 
-- [DONE] CreateNewUserByAdminRATest ...
-- [DONE] Create Zoom meeting by admin, by teacher, negative by student, and not valid values
+- [DONE] push project to repo branch dev
+- [DONE] retest bags 
+- [DONE] help Jurgita
 
 
 ## Questions
