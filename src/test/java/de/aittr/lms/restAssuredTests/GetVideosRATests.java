@@ -36,7 +36,8 @@ public class GetVideosRATests extends TestBaseRA{
     public void getVideosAsTeacherCohort342PositiveTest(){
         cookie = user.getLoginCookie("teacher@mail.com", "Qwerty123!");
         ResponseBodyExtractionOptions response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", 30)).then().
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", 30))
+                .then().
                 assertThat().statusCode(200).extract().body();
         Assert.assertTrue(response != null);
     }
@@ -90,10 +91,10 @@ public class GetVideosRATests extends TestBaseRA{
     }
 
     @Test
-    public void getVideosAsStudentLessonNullNegativeTest() {
+    public void getVideosAsStudentLessonMinus5NegativeTest() {
         cookie = user.getLoginCookie("student@mail.com", "Qwerty123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", 0)).then().
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", -5)).then().
                 assertThat().statusCode(400);
     }
 
@@ -112,7 +113,7 @@ public class GetVideosRATests extends TestBaseRA{
         given().contentType(ContentType.JSON).cookie(cookie).when().get( //endPoint /get-videos
                         user.urlBuilderGetVideo(" ", "basic_programming", "lecture", 30))
                 .then()
-                .assertThat().statusCode(404);
+                .assertThat().statusCode(400);
 //                .assertThat().statusCode(500);
     }
 

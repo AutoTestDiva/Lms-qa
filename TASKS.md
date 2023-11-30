@@ -5,10 +5,6 @@
 - [DONE] Creater **Student** {"student@mail.com", "Qwerty123!"}
 - [DONE] Creater **Student** {"student2@mail.com", "Qwerty123!"}
 
-- [DONE] UI Login tests with negative tests
-- [DONE] UI Log Out Tests
-- [DONE] RA Set not Valid password
-
 - [DONE] CreateNewUserByAdminRATest ...
 - [DONE] Create Zoom meeting by admin, by teacher, negative by student, and not valid values
 
@@ -25,6 +21,12 @@
 - [LMS-64](https://ait-learn.atlassian.net/browse/LMS-64) те токены которые в постман были, по ним автотесты?
 Про срок годности их я не знала. Какие они примерно хоть должны быть. Это связанно с логаутом
 от бездействия пользователя?
+-    try{
+     connection = DriverManager.getConnection(
+     "jdbc:mysql://localhost:3306/lms",
+     "root",
+     "$Lilu1987$"
+     );
 
 
 ### Notes
