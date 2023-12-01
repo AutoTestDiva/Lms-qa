@@ -8,11 +8,10 @@ public abstract class DataBase {
 
     static {
         try{
+            String usernameDB = System.getenv("DATABASE_USERNAME"); // environment variables
+            String userPasswordDB = System.getenv("DATABASE_PASSWORD"); // environment variables
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/lms",
-                    "root",
-                    "$Lilu1987$"
-            );
+                    "jdbc:mysql://localhost:3306/lms", usernameDB, userPasswordDB);
         } catch (SQLException throwables){
             throwables.printStackTrace();
         }

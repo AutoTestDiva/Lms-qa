@@ -8,7 +8,7 @@ public class DeleteUserFromDB extends TestBaseRA{
 
     @Test // help to deleteUser from database when it needs.
     public void deleteUser() throws SQLException {
-        user.deleteUser("example@gmail.com");
+        user.deleteUser("lilu@mail.com");
     }
 
 }

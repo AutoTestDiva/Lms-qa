@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.UserRegistrationRATests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-01T17:24:25" hostname="LAPTOP-LILIIA" time="1.632">
+  <properties/>
+  <testcase name="registerUserPositiveTest" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="1.632"/>
+  <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+18:24:25.803 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerUserPositiveTest with parameters []
+18:24:27.443 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerUserPositiveTest
+18:24:27.443 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+18:24:27.443 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
