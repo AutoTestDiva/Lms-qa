@@ -1,11 +1,12 @@
 # LMS QA Project
 
-Before start to work with LMS QA Project, you have to set your access to database in application.yml
-Yo have to enter your username from database in the "username" field and enter password in "password" field.
-Example:
+Before start to work with LMS QA Project, you have to create src/test/resources/application.yml file.
+Then set your access to database in application.yml
+You have to enter your username from database in the "username" field and enter password in "password" field.
+### Example:
 ```
 url: jdbc:mysql://localhost:3306/lms
-username: root
+username: root 
 password: Password123
 ```
 
