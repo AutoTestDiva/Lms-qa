@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.GetMyProfileRATests" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-12-02T19:42:24" hostname="LAPTOP-LILIIA" time="0.272">
+  <properties/>
+  <testcase name="getMyProfilePositiveTest" classname="de.aittr.lms.restAssuredTests.GetMyProfileRATests" time="0.047"/>
+  <testcase name="getMyProfileWithoutLoginNegativeTest" classname="de.aittr.lms.restAssuredTests.GetMyProfileRATests" time="0.008"/>
+  <system-out><![CDATA[20:42:23.871 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getMyProfilePositiveTest with parameters []
+**********0c347701-26be-455b-b222-040603e2c4f4************
+20:42:24.134 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getMyProfilePositiveTest
+20:42:24.134 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:24.134 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+20:42:24.135 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getMyProfileWithoutLoginNegativeTest with parameters []
+**********420ea6a2-d4ea-4148-a5b1-65e6acfc31db************
+20:42:24.340 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getMyProfileWithoutLoginNegativeTest
+20:42:24.341 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:24.341 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

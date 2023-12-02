@@ -42,9 +42,11 @@ public class UserRegistrationRATests extends TestBaseRA{
 
     @Test(dataProvider = "provideWrongUserData", dataProviderClass = CSVDataProviders.class)
     public void registerWithNotValidData(String cohort, String email, String firstname, String lastname,
-    String country, String phone){
+    String country, String phone) throws SQLException {
         user.registerUser(cohort, email, firstname, lastname, country, phone).then()
                 .assertThat().statusCode(400);
+        user.deleteUser(email);
     }
+
 
 }

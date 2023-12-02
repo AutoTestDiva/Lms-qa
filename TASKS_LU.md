@@ -10,7 +10,7 @@
 - [DONE] retest bags 
 - [DONE] help Jurgita
 
-- Push cleared Application.yml, then add it to gitignore and fill in my properties.
+- [DONE] Push cleared Application.yml, then add it to gitignore and fill in my properties.
 - Check all methods used database, add if else and return null if not found
 - Create test Change password
 - Connect with Jurgita.
