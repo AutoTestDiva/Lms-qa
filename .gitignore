@@ -41,4 +41,8 @@ test_logs
 src/test_logs
 src/screenshots
 TASKS_LU.md
+<<<<<<< HEAD
 
+=======
+application.yml
+>>>>>>> 760ae00aca533f343c08c550e83a30c6d912754b
