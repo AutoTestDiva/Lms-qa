@@ -23,6 +23,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
+    implementation 'org.yaml:snakeyaml:1.29'
+
     implementation 'mysql:mysql-connector-java:8.0.33'
 
 }

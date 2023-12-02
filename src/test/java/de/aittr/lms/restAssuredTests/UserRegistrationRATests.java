@@ -1,13 +1,19 @@
 package de.aittr.lms.restAssuredTests;
 
 import de.aittr.lms.CSVDataProviders;
+import de.aittr.lms.DataBase;
 import org.testng.annotations.*;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class UserRegistrationRATests extends TestBaseRA{
 
     @Test ()
     public void registerUserPositiveTest() throws SQLException {
+
         user.registerUser("Cohort 33", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567").then()
                 .assertThat().statusCode(201);

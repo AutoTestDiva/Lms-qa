@@ -1,4 +1,5 @@
 # Tasks 
+
 - [DONE]. Create new user with ADMIN [Password -> Hash](https://www.browserling.com/tools/bcrypt)
         (admin@mail.com; Admin123!) - $2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai
 - [DONE] Creater **Teacher** {"teacher@mail.com", "Qwerty123!"}
@@ -8,6 +9,11 @@
 - [DONE] push project to repo branch dev
 - [DONE] retest bags 
 - [DONE] help Jurgita
+
+- Push cleared Application.yml, then add it to gitignore and fill in my properties.
+- Check all methods used database, add if else and return null if not found
+- Create test Change password
+- Connect with Jurgita.
 
 
 ## Questions

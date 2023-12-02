@@ -1,39 +1,56 @@
 package de.aittr.lms;
 
+import lombok.Value;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Map;
 
 public abstract class DataBase {
 
     private static Connection connection;
 
+
     static {
-        try{
-            String usernameDB = System.getenv("DATABASE_USERNAME"); // environment variables
-            String userPasswordDB = System.getenv("DATABASE_PASSWORD"); // environment variables
+        InputStream inputStream = DataBase
+                .class
+                .getClassLoader()
+                .getResourceAsStream("application.yml");
+        Yaml yaml = new Yaml();
+        Map<String, Object> load = yaml.load(inputStream);
+
+        String usernameDB = (String) load.get("username");
+        String userPasswordDB = (String) load.get("password");
+        String dbUrl = (String) load.get("url");
+
+        try {
+//            String usernameDB = System.getenv("DATABASE_USERNAME"); // environment variables
+//            String userPasswordDB = System.getenv("DATABASE_PASSWORD"); // environment variables
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/lms", usernameDB, userPasswordDB);
-        } catch (SQLException throwables){
+                    dbUrl, usernameDB, userPasswordDB);
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
     public static ResultSet requestSelect(String query) {
-        try{
+        try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(query);
             result.next();
             return result;
-        } catch (SQLException exception){
+        } catch (SQLException exception) {
             exception.printStackTrace();
             return null;
         }
     }
 
     public static boolean execute(String query) {
-        try{
+        try {
             return connection.createStatement().execute(query);
-        } catch (SQLException e){
-            return  false;
+        } catch (SQLException e) {
+            return false;
         }
     }
 
