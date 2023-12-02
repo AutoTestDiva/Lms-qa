@@ -60,16 +60,23 @@ public class UserHelperRA extends BaseHelperRA {
         return response.getDetailedCookie("JSESSIONID");
     }
 
-    public String getUserUuidByEmail(int userId) throws SQLException {
+    public String getUserUuidByEmail(String userId) throws SQLException {
         String userUuid = db.requestSelect("SELECT uuid FROM confirmation_code WHERE user_id = " + userId + ";")
                 .getString(1);
-        return userUuid;
+        return userUuid; // TODO change getUserUuidByEmail
     }
 
-    public int getUserIdByEmail(String email) throws SQLException {
-        int userId = db.requestSelect("SELECT id FROM account WHERE email = \"" + email + "\";")
-                .getInt(1);
-        return userId;
+    public String getUserIdByEmail(String email) throws SQLException {
+        String userId;
+        try{
+            userId = db.requestSelect("SELECT id FROM account WHERE email = \"" + email + "\";")
+                    .getString(1);
+        } catch (SQLException e){
+            userId = null;
+            System.out.println("The user is not found" + e);
+        }
+
+        return userId;  // TODO change getUserIdByEmail
     }
 
     public static Response loginUserRA(String email, String password) {
@@ -81,7 +88,7 @@ public class UserHelperRA extends BaseHelperRA {
     }
 
     public Response setPasswordByEmail(String email, String password) throws SQLException {
-        int userId = getUserIdByEmail(email);
+        String userId = getUserIdByEmail(email);
         String userUuid = getUserUuidByEmail(userId);
         return given().contentType(ContentType.JSON)
                 .body("{\n" +
@@ -92,17 +99,19 @@ public class UserHelperRA extends BaseHelperRA {
                 .post("/users/"  + userId +"/password");
     }
 
-    public void deleteUserById(int userId) throws SQLException {
+    private void deleteUserById(String userId) throws SQLException {
 
         db.requestDelete("DELETE FROM confirmation_code WHERE user_id = " + userId + ";");
         db.requestDelete("DELETE FROM student_cohort WHERE user_id = " + userId + ";");
         db.requestDelete("DELETE FROM account WHERE id = " + userId + ";");
-
     }
 
     public void deleteUser(String email) throws SQLException {
-        int userId = getUserIdByEmail(email);
-        deleteUserById(userId);
+        String userId = getUserIdByEmail(email);
+        if(userId != null){
+            deleteUserById(userId);
+        }
+        // TODO change deleteUser
     }
 
     public static NewUserWithRoleDto userWithRoleBuilder (String cohort, String email, String firstName,
