@@ -3,6 +3,7 @@ package de.aittr.lms.restAssuredTests;
 import de.aittr.lms.dto.NewUserWithRoleDto;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -23,11 +24,15 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
                 "Germany", "STUDENT", "+490123456789");
     }
 
+    @AfterMethod
+    public void postCondition() throws SQLException {
+        user.deleteUser(mail);
+    }
+
     @Test
     public void createNewUserByAdminPositiveTest() throws SQLException {
         given().contentType(ContentType.JSON).body(newUser).cookie(cookie).when().post("/users/create-user")
                 .then().assertThat().statusCode(201);
-        user.deleteUser(mail);
     }
 
 
@@ -35,7 +40,6 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
     public void createNewUserWithoutAdminNegativeTest() {
         given().contentType(ContentType.JSON).body(newUser).when().post("/users/create-user")
                 .then().assertThat().statusCode(403);
-        // TODO Without authorization add BUG that add to documentation
     }
 
     @Test
@@ -63,7 +67,7 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
     }
 
     @Test
-    public void createUserWithWrongFirstNameByAdminNegativeTest() {
+    public void createUserWithWrongFirstNameByAdminNegativeTest() throws SQLException {
         NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "+490123456789",
                 "Test", "Germany", "STUDENT", "+490123456789");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
@@ -71,14 +75,13 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
     }
 
     @Test
-    public void createUserWithWrongCountryByAdminNegativeTest() {
+    public void createUserWithWrongCountryByAdminNegativeTest() throws SQLException {
         NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu",
                 "Test", "Germany777", "STUDENT", "+490123456789");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
                 .then().assertThat().statusCode(400);
     }
 
-// TODO    Conflict error 409
     @Test
     public void createExistedUserByAdminNegativeTest() throws SQLException {
         NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", "student@mail.com",

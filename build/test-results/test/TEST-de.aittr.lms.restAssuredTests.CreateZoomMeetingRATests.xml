@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-12-02T19:42:20" hostname="LAPTOP-LILIIA" time="2.685">
+  <properties/>
+  <testcase name="createZoomMeeting32MarchNegativeTest" classname="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" time="0.096"/>
+  <testcase name="createZoomMeetingByAdminPositiveTest" classname="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" time="1.334"/>
+  <testcase name="createZoomMeetingByStudentNegativeTest" classname="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" time="0.095"/>
+  <testcase name="createZoomMeetingByTeacherPositiveTest" classname="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" time="0.972"/>
+  <testcase name="createZoomMeetingDurationOminNegativeTest" classname="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" time="0.088"/>
+  <testcase name="createZoomMeetingWithEmptyTopicNegativeTest" classname="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" time="0.085"/>
+  <system-out><![CDATA[20:42:20.968 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test createZoomMeeting32MarchNegativeTest with parameters []
+20:42:21.064 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: createZoomMeeting32MarchNegativeTest
+20:42:21.065 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:21.065 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+20:42:21.066 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test createZoomMeetingByAdminPositiveTest with parameters []
+20:42:22.401 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: createZoomMeetingByAdminPositiveTest
+20:42:22.401 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:22.402 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+20:42:22.403 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test createZoomMeetingByStudentNegativeTest with parameters []
+20:42:22.500 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: createZoomMeetingByStudentNegativeTest
+20:42:22.500 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:22.500 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+20:42:22.501 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test createZoomMeetingByTeacherPositiveTest with parameters []
+20:42:23.475 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: createZoomMeetingByTeacherPositiveTest
+20:42:23.475 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:23.475 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+20:42:23.476 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test createZoomMeetingDurationOminNegativeTest with parameters []
+20:42:23.565 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: createZoomMeetingDurationOminNegativeTest
+20:42:23.566 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:23.566 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+20:42:23.567 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test createZoomMeetingWithEmptyTopicNegativeTest with parameters []
+20:42:23.654 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: createZoomMeetingWithEmptyTopicNegativeTest
+20:42:23.654 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:23.654 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

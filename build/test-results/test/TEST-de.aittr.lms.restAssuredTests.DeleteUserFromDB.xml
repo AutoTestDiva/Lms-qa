@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.DeleteUserFromDB" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-12-02T19:42:23" hostname="LAPTOP-LILIIA" time="0.001">
+  <properties/>
+  <testcase name="deleteUser" classname="de.aittr.lms.restAssuredTests.DeleteUserFromDB" time="0.001"/>
+  <system-out><![CDATA[20:42:23.656 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test deleteUser with parameters []
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+20:42:23.659 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: deleteUser
+20:42:23.659 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+20:42:23.659 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

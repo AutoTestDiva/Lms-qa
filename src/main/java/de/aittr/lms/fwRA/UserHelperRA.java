@@ -60,9 +60,16 @@ public class UserHelperRA extends BaseHelperRA {
         return response.getDetailedCookie("JSESSIONID");
     }
 
-    public String getUserUuidByEmail(String userId) throws SQLException {
-        String userUuid = db.requestSelect("SELECT uuid FROM confirmation_code WHERE user_id = " + userId + ";")
-                .getString(1);
+    public String getUserUuidByEmail(String email) {
+        String userUuid;
+        try{
+            String userId = getUserIdByEmail(email);
+            userUuid = db.requestSelect("SELECT uuid FROM confirmation_code WHERE user_id = " + userId + ";")
+                    .getString(1);
+        }catch (SQLException e){
+            userUuid = null;
+            System.out.println("User is not found.  " + e);
+        }
         return userUuid; // TODO change getUserUuidByEmail
     }
 
@@ -75,8 +82,7 @@ public class UserHelperRA extends BaseHelperRA {
             userId = null;
             System.out.println("The user is not found" + e);
         }
-
-        return userId;  // TODO change getUserIdByEmail
+        return userId;
     }
 
     public static Response loginUserRA(String email, String password) {
@@ -89,7 +95,8 @@ public class UserHelperRA extends BaseHelperRA {
 
     public Response setPasswordByEmail(String email, String password) throws SQLException {
         String userId = getUserIdByEmail(email);
-        String userUuid = getUserUuidByEmail(userId);
+        String userUuid = getUserUuidByEmail(email);
+        System.out.println("**********" + userUuid + "************");
         return given().contentType(ContentType.JSON)
                 .body("{\n" +
                         "  \"uuid\": \"" + userUuid + "\",\n" +
@@ -111,7 +118,6 @@ public class UserHelperRA extends BaseHelperRA {
         if(userId != null){
             deleteUserById(userId);
         }
-        // TODO change deleteUser
     }
 
     public static NewUserWithRoleDto userWithRoleBuilder (String cohort, String email, String firstName,

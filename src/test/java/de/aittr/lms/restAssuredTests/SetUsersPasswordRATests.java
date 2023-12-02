@@ -25,7 +25,6 @@ public class SetUsersPasswordRATests extends TestBaseRA{
 
     @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
     public void setNotValidPasswordTest(String password) throws SQLException {
-        //    TODO negative test easy password 400 Validation error
         user.setPasswordByEmail("lilu@mail.com", password).then()
                 .assertThat().statusCode(400);
     }
