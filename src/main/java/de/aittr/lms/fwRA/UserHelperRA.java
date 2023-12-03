@@ -134,5 +134,9 @@ public class UserHelperRA extends BaseHelperRA {
         return user;
     }
 
+    public static Response passwordRecovery(String mail) {
+        return given().contentType(ContentType.JSON).body("{\"email\": \"" + mail + "\"}").when().post("/users/password-recovery");
+    }
+
 
 }
