@@ -13,7 +13,7 @@ public class BaseHelperRA {
     public BaseHelperRA() {
     }
 
-    public String urlBuilderGetVideo(String cohort, String module, String type, int lesson){
+    public String urlBuilderGetVideo(String cohort, String module, String type, String lesson){
         String parametrUrl = "get-videos?cohort=" + cohort
                 + "&module=" + module + "&type=" + type + "&lessonsNr=" + lesson + "";
         return parametrUrl;

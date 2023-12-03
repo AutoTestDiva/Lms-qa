@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.GetVideosRATests" tests="14" skipped="0" failures="2" errors="0" timestamp="2023-12-03T10:00:17" hostname="LAPTOP-LILIIA" time="5.571">
+  <properties/>
+  <testcase name="getVideosAsAdminCohort342PositiveTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="3.475"/>
+  <testcase name="getVideosAsAdminCohort35PositiveTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.198"/>
+  <testcase name="getVideosAsStudentCohortNullNegativeTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.302"/>
+  <testcase name="getVideosAsStudentCohortOnlySpaceNegativeTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.161"/>
+  <testcase name="getVideosAsStudentLessonMinus5NegativeTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.192">
+    <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;400&gt; but was &lt;200&gt;.&#10;" type="java.lang.AssertionError">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;400&gt; but was &lt;200&gt;.
+
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:57)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:263)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at de.aittr.lms.restAssuredTests.GetVideosRATests.getVideosAsStudentLessonMinus5NegativeTest(GetVideosRATests.java:112)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:146)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:91)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy1/jdk.proxy1.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="getVideosAsStudentPositiveTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.207"/>
+  <testcase name="getVideosAsStudentWrongModuleNegativeTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.115"/>
+  <testcase name="getVideosAsStudentWrongTypeNegativeTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.113"/>
+  <testcase name="getVideosAsTeacherCohort342PositiveTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.197"/>
+  <testcase name="getVideosAsTeacherCohort35PositiveTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.164"/>
+  <testcase name="getVideosCohort35AsStudent2PositiveTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.165"/>
+  <testcase name="getVideosCohort36AsStudent2PositiveTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.103">
+    <failure message="java.lang.AssertionError: 1 expectation failed.&#10;Expected status code &lt;200&gt; but was &lt;403&gt;.&#10;" type="java.lang.AssertionError">java.lang.AssertionError: 1 expectation failed.
+Expected status code &lt;200&gt; but was &lt;403&gt;.
+
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:73)
+	at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:108)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:277)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure.validate(ResponseSpecificationImpl.groovy:512)
+	at io.restassured.internal.ResponseSpecificationImpl$HamcrestAssertionClosure$validate$1.call(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.validateResponseIfRequired(ResponseSpecificationImpl.groovy:696)
+	at io.restassured.internal.ResponseSpecificationImpl.this$2$validateResponseIfRequired(ResponseSpecificationImpl.groovy)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.codehaus.groovy.runtime.callsite.PlainObjectMetaMethodSite.doInvoke(PlainObjectMetaMethodSite.java:43)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite$PogoCachedMethodSiteNoUnwrapNoCoerce.invoke(PogoMetaMethodSite.java:198)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite.callCurrent(PogoMetaMethodSite.java:62)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:185)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:135)
+	at io.restassured.specification.ResponseSpecification$statusCode$0.callCurrent(Unknown Source)
+	at io.restassured.internal.ResponseSpecificationImpl.statusCode(ResponseSpecificationImpl.groovy:143)
+	at io.restassured.internal.ValidatableResponseOptionsImpl.statusCode(ValidatableResponseOptionsImpl.java:89)
+	at de.aittr.lms.restAssuredTests.GetVideosRATests.getVideosCohort36AsStudent2PositiveTest(GetVideosRATests.java:73)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.runTests(TestNGTestClassProcessor.java:146)
+	at org.gradle.api.internal.tasks.testing.testng.TestNGTestClassProcessor.stop(TestNGTestClassProcessor.java:91)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.stop(SuiteTestClassProcessor.java:61)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy1/jdk.proxy1.$Proxy2.stop(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$3.run(TestWorker.java:193)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:133)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:71)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
+  <testcase name="getVideosNotStudentsGroupNegativeTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.116"/>
+  <testcase name="getVideosWithoutLoginNegativeTest" classname="de.aittr.lms.restAssuredTests.GetVideosRATests" time="0.013"/>
+  <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+11:00:17.736 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsAdminCohort342PositiveTest with parameters []
+11:00:21.222 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsAdminCohort342PositiveTest
+11:00:21.222 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:21.222 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:21.226 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsAdminCohort35PositiveTest with parameters []
+11:00:21.426 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsAdminCohort35PositiveTest
+11:00:21.427 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:21.427 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:21.429 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsStudentCohortNullNegativeTest with parameters []
+11:00:21.732 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsStudentCohortNullNegativeTest
+11:00:21.733 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:21.733 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:21.735 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsStudentCohortOnlySpaceNegativeTest with parameters []
+11:00:21.897 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsStudentCohortOnlySpaceNegativeTest
+11:00:21.897 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:21.897 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:21.899 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsStudentLessonMinus5NegativeTest with parameters []
+11:00:22.092 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- FAILED: getVideosAsStudentLessonMinus5NegativeTest
+11:00:22.093 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:22.093 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:22.094 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsStudentPositiveTest with parameters []
+11:00:22.304 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsStudentPositiveTest
+11:00:22.304 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:22.304 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:22.306 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsStudentWrongModuleNegativeTest with parameters []
+11:00:22.424 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsStudentWrongModuleNegativeTest
+11:00:22.424 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:22.424 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:22.425 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsStudentWrongTypeNegativeTest with parameters []
+11:00:22.542 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsStudentWrongTypeNegativeTest
+11:00:22.542 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:22.542 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:22.544 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsTeacherCohort342PositiveTest with parameters []
+11:00:22.742 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsTeacherCohort342PositiveTest
+11:00:22.742 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:22.742 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:22.743 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosAsTeacherCohort35PositiveTest with parameters []
+11:00:22.909 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosAsTeacherCohort35PositiveTest
+11:00:22.909 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:22.909 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:22.911 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosCohort35AsStudent2PositiveTest with parameters []
+11:00:23.076 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosCohort35AsStudent2PositiveTest
+11:00:23.077 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:23.077 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:23.078 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosCohort36AsStudent2PositiveTest with parameters []
+11:00:23.182 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- FAILED: getVideosCohort36AsStudent2PositiveTest
+11:00:23.182 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:23.182 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:23.183 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosNotStudentsGroupNegativeTest with parameters []
+11:00:23.301 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosNotStudentsGroupNegativeTest
+11:00:23.302 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:23.302 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+11:00:23.303 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test getVideosWithoutLoginNegativeTest with parameters []
+11:00:23.317 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: getVideosWithoutLoginNegativeTest
+11:00:23.317 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+11:00:23.318 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
