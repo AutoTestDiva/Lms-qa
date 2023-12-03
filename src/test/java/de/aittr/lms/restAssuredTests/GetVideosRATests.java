@@ -4,8 +4,6 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
 import io.restassured.response.ResponseBodyExtractionOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -60,7 +58,7 @@ public class GetVideosRATests extends TestBaseRA{
     }
 
     @Test
-    public void getVideosCohort35AsStudent2PositiveTest(){ //TODO
+    public void getVideosCohort35AsStudent2PositiveTest(){
         cookie = user.getLoginCookie("student2@mail.com", "Qwerty123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("35", "basic_programming", "lecture", 30)).then().
@@ -68,7 +66,7 @@ public class GetVideosRATests extends TestBaseRA{
     }
 
     @Test
-    public void getVideosCohort36AsStudent2PositiveTest(){ //TODO
+    public void getVideosCohort36AsStudent2PositiveTest(){
         cookie = user.getLoginCookie("student2@mail.com", "Qwerty123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("36", "basic_programming", "lecture", 30)).then().

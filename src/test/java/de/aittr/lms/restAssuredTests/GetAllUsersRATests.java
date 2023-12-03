@@ -2,6 +2,7 @@ package de.aittr.lms.restAssuredTests;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
+import io.restassured.response.ResponseBodyExtractionOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -18,8 +19,9 @@ public class GetAllUsersRATests extends TestBaseRA{
 
     @Test
     public void getAllUsersByAdminPositiveTest(){
-        given().contentType(ContentType.JSON).cookie(cookie).when().get("/users").then()
-                .assertThat().statusCode(200);
+        String body = given().contentType(ContentType.JSON).cookie(cookie).when().get("/users").then()
+                .assertThat().statusCode(200).extract().response().asString();
+        System.out.println(body);
     }
 
     @Test
