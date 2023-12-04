@@ -11,17 +11,29 @@ username: root
 password: Password123
 ```
 
-```sql
-INSERT INTO account ()
-Germany,admin@mail.com,$2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai,Jhon,Admin,true,+490577777777,ADMIN,CONFIRMED,
-Germany,teacher@mail.com,$2a$10$lIVNxb6bl2Uas/bOz6LdAetYzzSfTRIFx4iJS9fR5u1XqkLujcApS,Teacher,Testteach,true,+401871234567,TEACHER,CONFIRMED,
-Germany,student2@mail.com,$2a$10$humjffaz25vyY1zmB2FwuONfXnIuN7AKyTJ4nhBAzXG7WfMeLyc9i,Student,Test,true,+490571234567,STUDENT,CONFIRMED,41
-Germany,student@mail.com,$2a$10$9QI9ukaxgJTEYMTeuezGKundlfK9pc9WiHmNyQQvxmxaaNyF9y4ca,Student,Test,true,+490571234567,STUDENT,CONFIRMED,39
-```
+The next step you have to run sql file to add a cohorts ``src/test/resources/sql/Cohort.sql``
+to create main users as admin, teacher, student and student2. You have to run sql file:
+``src/test/resources/sql/adminTeacherStudents.sql``
 
 ## Run Rest Assured test.
 The first you have do "git pull" of [Back-End](https://github.com/ait-tr/lms-be) project.
-Then setting it with local variables. And run in localhost:8080.
+Then set local variables. Where you see [info] you have to put there your data.
+
+```
+base.url=http://localhost:8080;
+DATABASE_HOST=127.0.0.1;
+DATABASE_NAME=lms;
+DATABASE_PORT=3306; 
+DATABASE_USERNAME= [here must be your name to conect to database] ;
+DATABASE_PASSWORD= [here must be your password];
+MAIL_USERNAME=johndoe.aittr@gmail.com;
+MAIL_PASSWORD=jjxvtlblshoswhzr;
+ZOOM_ACCOUNT_ID= [your zoom accaunt id] ;
+ZOOM_CLIENT_ID= [your zoom client id];
+ZOOM_CLIENT_SECRET= [ZOOM_CLIENT_SECRET]
+```
+
+And run in localhost:8080.
 All back-end documentation in [swagger](http://localhost:8080/swagger-ui/index.html#/).
 
 ## Run UI tests
