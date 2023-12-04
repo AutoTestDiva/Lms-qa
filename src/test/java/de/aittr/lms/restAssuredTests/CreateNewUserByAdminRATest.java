@@ -30,7 +30,7 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
     }
 
     @Test
-    public void createNewUserByAdminPositiveTest() throws SQLException {
+    public void createNewUserByAdminPositiveTest() {
         given().contentType(ContentType.JSON).body(newUser).cookie(cookie).when().post("/users/create-user")
                 .then().assertThat().statusCode(201);
     }

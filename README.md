@@ -15,6 +15,11 @@ The next step you have to run sql file to add a cohorts ``src/test/resources/sql
 to create main users as admin, teacher, student and student2. You have to run sql file:
 ``src/test/resources/sql/adminTeacherStudents.sql``
 
+Create new user with ADMIN Password -> Hash (admin@mail.com; Admin123!) - $2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai
+Create Teacher {"teacher@mail.com", "Qwer123!"}
+Create Student {"student@mail.com", "Qwer123!"} - cohort 34.2
+Create Student {"student2@mail.com", "Qwer123!"} - cohort 35, cohort 36
+
 ## Run Rest Assured test.
 The first you have do "git pull" of [Back-End](https://github.com/ait-tr/lms-be) project.
 Then set local variables. Where you see [info] you have to put there your data.
