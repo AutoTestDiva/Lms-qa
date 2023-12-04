@@ -12,7 +12,7 @@ public class LoginRATests extends TestBaseRA{
     public void precondition() throws SQLException {
         user.registerUser("Cohort 33", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567");
-        user.setPasswordByEmail("lilu@mail.com", "Qwerty123!");
+        user.setPasswordByEmail("lilu@mail.com", "Qwer123!");
     }
 
     @AfterMethod
@@ -29,7 +29,7 @@ public class LoginRATests extends TestBaseRA{
 
     @Test
     public void loginAsTeacher() {
-        user.loginUserRA("teacher@mail.com", "Qwerty123!")
+        user.loginUserRA("teacher@mail.com", "Qwer123!")
                 .then()
                 .assertThat().statusCode(200);
     }
@@ -37,7 +37,7 @@ public class LoginRATests extends TestBaseRA{
     @Test ()
     public void loginAsUserPositiveTest() {
 
-        user.loginUserRA("lilu@mail.com", "Qwerty123!")
+        user.loginUserRA("lilu@mail.com", "Qwer123!")
                 .then()
                 .assertThat().statusCode(200);
     }
@@ -45,7 +45,7 @@ public class LoginRATests extends TestBaseRA{
     @Test ()
     public void loginAsUserWithWrongPasswordNegativeTest() {
 
-        user.loginUserRA("lilu@mail.com", "Qwerty132!")
+        user.loginUserRA("lilu@mail.com", "Qwer132!")
                 .then()
                 .assertThat().statusCode(401);
     }
@@ -53,7 +53,7 @@ public class LoginRATests extends TestBaseRA{
     @Test ()
     public void loginNotExistedUserNegativeTest() {
 
-        user.loginUserRA("lilu25@mail.com", "Qwerty123!")
+        user.loginUserRA("lilu25@mail.com", "Qwer123!")
                 .then()
                 .assertThat().statusCode(401);
     }

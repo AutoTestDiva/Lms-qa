@@ -1,13 +1,8 @@
 package de.aittr.lms.restAssuredTests;
 
 import de.aittr.lms.CSVDataProviders;
-import de.aittr.lms.DataBase;
 import org.testng.annotations.*;
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Map;
 
 public class UserRegistrationRATests extends TestBaseRA{
 

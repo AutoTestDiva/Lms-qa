@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="de.aittr.lms.restAssuredTests.UserRegistrationRATests" tests="30" skipped="0" failures="0" errors="0" timestamp="2023-12-04T11:26:23" hostname="LAPTOP-LILIIA" time="3.58">
+  <properties/>
+  <testcase name="registerExistedUserNegativeTest" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="2.415"/>
+  <testcase name="registerUserNumberPhone14PositiveTest" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.052"/>
+  <testcase name="registerUserPositiveTest" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.059"/>
+  <testcase name="registerWithNotValidData[0](cohort, email, firstName, lastName, country, phone)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.136"/>
+  <testcase name="registerWithNotValidData[1](Cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.049"/>
+  <testcase name="registerWithNotValidData[2](cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.019"/>
+  <testcase name="registerWithNotValidData[3](COHORT 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.025"/>
+  <testcase name="registerWithNotValidData[4](Cohort, lilu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.033"/>
+  <testcase name="registerWithNotValidData[5](Cohort 21, lilu.mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.02"/>
+  <testcase name="registerWithNotValidData[6](Cohort 21, lilu@mail, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.029"/>
+  <testcase name="registerWithNotValidData[7](Cohort 21, lilu@mailcom, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.016"/>
+  <testcase name="registerWithNotValidData[8](Cohort 21, li%lu@mail.com, Lilu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.027"/>
+  <testcase name="registerWithNotValidData[9](Cohort 21, lilu@mail.com, Lilu23, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.039"/>
+  <testcase name="registerWithNotValidData[10](Cohort 21, lilu@mail.com, Li_lu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.023"/>
+  <testcase name="registerWithNotValidData[11](Cohort 21, lilu@mail.com, Li/lu, Test, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.052"/>
+  <testcase name="registerWithNotValidData[12](Cohort 21, lilu@mail.com, Lilu, Test77, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.018"/>
+  <testcase name="registerWithNotValidData[13](Cohort 21, lilu@mail.com, Lilu, Te_st, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.015"/>
+  <testcase name="registerWithNotValidData[14](Cohort 21, lilu@mail.com, Lilu, Te*st, Germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.024"/>
+  <testcase name="registerWithNotValidData[15](Cohort 21, lilu@mail.com, Lilu, Test, Germany2,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.015"/>
+  <testcase name="registerWithNotValidData[16](Cohort 21, lilu@mail.com, Lilu, Test, germany,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.089"/>
+  <testcase name="registerWithNotValidData[17](Cohort 21, lilu@mail.com, Lilu, Test, GERMANY,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.019"/>
+  <testcase name="registerWithNotValidData[18](Cohort 21, lilu@mail.com, Lilu, Test, Germany$,  +491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.125"/>
+  <testcase name="registerWithNotValidData[19](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.034"/>
+  <testcase name="registerWithNotValidData[20](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  -491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.016"/>
+  <testcase name="registerWithNotValidData[21](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  myNumber)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.014"/>
+  <testcase name="registerWithNotValidData[22](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +4912345678901234567890123)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.016"/>
+  <testcase name="registerWithNotValidData[23](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +49123)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.016"/>
+  <testcase name="registerWithNotValidData[24](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890$)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.012"/>
+  <testcase name="registerWithNotValidData[25](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  ++491234567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.015"/>
+  <testcase name="registerWithNotValidData[26](Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234+567890)" classname="de.aittr.lms.restAssuredTests.UserRegistrationRATests" time="0.021"/>
+  <system-out><![CDATA[Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+12:26:23.893 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerExistedUserNegativeTest with parameters []
+12:26:26.316 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerExistedUserNegativeTest
+12:26:26.317 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.318 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.322 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerUserNumberPhone14PositiveTest with parameters []
+12:26:26.375 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerUserNumberPhone14PositiveTest
+12:26:26.376 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.376 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.378 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerUserPositiveTest with parameters []
+12:26:26.438 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerUserPositiveTest
+12:26:26.438 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.439 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.461 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [cohort, email, firstName, lastName, country, phone]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.598 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.599 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.599 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.600 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort21, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.653 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.654 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.654 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.655 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.676 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.676 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.676 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.678 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [COHORT 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.704 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.704 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.704 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.705 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort, lilu@mail.com, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.740 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.741 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.741 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.743 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu.mail.com, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.764 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.764 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.764 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.765 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.797 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.797 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.798 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.799 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mailcom, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.817 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.817 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.817 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.819 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, li%lu@mail.com, Lilu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.848 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.848 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.848 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.849 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu23, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.890 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.890 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.890 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.892 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Li_lu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.922 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.923 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.923 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.925 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Li/lu, Test, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:26.979 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:26.979 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:26.979 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:26.981 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test77, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.000 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.000 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.000 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.002 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Te_st, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.019 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.019 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.019 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.020 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Te*st, Germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.044 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.045 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.045 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.046 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany2,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.063 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.064 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.064 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.065 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, germany,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.156 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.156 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.156 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.157 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, GERMANY,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.178 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.178 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.178 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.179 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany$,  +491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.306 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.308 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.309 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.310 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.346 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.346 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.346 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.347 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  -491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.364 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.364 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.364 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.365 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  myNumber]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.381 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.382 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.382 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.383 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +4912345678901234567890123]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.401 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.401 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.401 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.402 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +49123]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.421 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.422 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.422 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.422 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234567890$]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.436 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.436 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.436 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.438 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  ++491234567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.455 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.455 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.455 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+12:26:27.456 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Start test registerWithNotValidData with parameters [Cohort 21, lilu@mail.com, Lilu, Test, Germany,  +491234+567890]
+The user is not foundjava.sql.SQLException: Illegal operation on empty result set.
+12:26:27.479 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- PASSED: registerWithNotValidData
+12:26:27.479 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- Stop test
+12:26:27.479 [Test worker] INFO  d.a.lms.restAssuredTests.TestBaseRA -- ==============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

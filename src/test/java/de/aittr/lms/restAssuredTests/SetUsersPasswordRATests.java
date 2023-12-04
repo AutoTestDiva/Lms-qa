@@ -19,7 +19,7 @@ public class SetUsersPasswordRATests extends TestBaseRA{
 
     @Test
     public void setUsersPasswordPositiveTest() throws SQLException {
-        user.setPasswordByEmail("lilu@mail.com", "Qwerty123!").then()
+        user.setPasswordByEmail("lilu@mail.com", "Qwer123!").then()
                 .assertThat().statusCode(200);
     }
 

@@ -31,7 +31,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA{
 
     @Test
     public void createZoomMeetingByTeacherPositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwerty123!");
+        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
         zoomMeeting = lesson.ZoomMeetingBuilder(
                 "Java lesson #23", "2024-03-17", "17:00", 300);
         lesson.createZoomMeeting(cookie, zoomMeeting).then().
@@ -40,7 +40,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA{
 
     @Test
     public void createZoomMeeting32MarchNegativeTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwerty123!");
+        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
         zoomMeeting = lesson.ZoomMeetingBuilder(
                 "Java lesson #23", "2024-03-32", "17:00", 300);
         lesson.createZoomMeeting(cookie, zoomMeeting).then().
@@ -49,7 +49,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA{
 
     @Test
     public void createZoomMeetingDurationOminNegativeTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwerty123!");
+        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
         zoomMeeting = lesson.ZoomMeetingBuilder(
                 "Java lesson #23", "2024-03-02", "17:00", 0);
         lesson.createZoomMeeting(cookie, zoomMeeting).then().
@@ -58,7 +58,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA{
 
     @Test
     public void createZoomMeetingByStudentNegativeTest(){
-        cookie = user.getLoginCookie("student@mail.com", "Qwerty123!");
+        cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         zoomMeeting = lesson.ZoomMeetingBuilder(
                 "Java lesson #23", "2024-03-02", "17:00", 300);
         lesson.createZoomMeeting(cookie, zoomMeeting).then().
@@ -67,7 +67,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA{
 
     @Test
     public void createZoomMeetingWithEmptyTopicNegativeTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwerty123!");
+        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
         zoomMeeting = lesson.ZoomMeetingBuilder(
                 "", "2024-03-17", "17:00", 300);
         lesson.createZoomMeeting(cookie, zoomMeeting).then().

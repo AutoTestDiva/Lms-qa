@@ -17,8 +17,8 @@ public class LogOutRATests extends TestBaseRA{
     public void precondition() throws SQLException {
         user.registerUser("Cohort 33", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567");
-        user.setPasswordByEmail("lilu@mail.com", "Qwerty123!");
-        cookie = user.getLoginCookie("lilu@mail.com", "Qwerty123!");
+        user.setPasswordByEmail("lilu@mail.com", "Qwer123!");
+        cookie = user.getLoginCookie("lilu@mail.com", "Qwer123!");
     }
 
     @Test
