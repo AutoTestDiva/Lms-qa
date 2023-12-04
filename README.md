@@ -11,14 +11,19 @@ username: root
 password: Password123
 ```
 
-The next step you have to run sql file to add a cohorts ``src/test/resources/sql/Cohort.sql``
-to create main users as admin, teacher, student and student2. You have to run sql file:
-``src/test/resources/sql/adminTeacherStudents.sql``
+## Run SQL files
 
-Create new user with ADMIN Password -> Hash (admin@mail.com; Admin123!) - $2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai
-Create Teacher {"teacher@mail.com", "Qwer123!"}
-Create Student {"student@mail.com", "Qwer123!"} - cohort 34.2
-Create Student {"student2@mail.com", "Qwer123!"} - cohort 35, cohort 36
+1. The next step you have to run sql file to add a cohorts ``src/test/resources/sql/Cohort.sql``
+to create main users as admin, teacher, student and student2. 
+2. You have to run sql file:
+``src/test/resources/sql/adminTeacherStudents.sql``.
+3. Then run sql file ``src/test/resources/sql/student_cohort.sql`` following the instruction in this file.
+
+### Data to Login as User.
+- ADMIN  ->  {email: "admin@mail.com", password: "Admin123!"} Hash - $2a$10$ZRBVssy0mqXLL1Wv80LaROywrAWdW1mo0.8IAfKrxiswmcBlE1bai
+- TEACHER -> {email: "teacher@mail.com", password: "Qwer123!"}
+- STUDENT -> {email: "student@mail.com", password: "Qwer123!"} - cohort 34.2
+- STUDENT -> {email: "student2@mail.com", password: "Qwer123!"} - cohort 35, cohort 36
 
 ## Run Rest Assured test.
 The first you have do "git pull" of [Back-End](https://github.com/ait-tr/lms-be) project.
