@@ -7,7 +7,7 @@ public class DownloadVideoTests extends TestBaseUI{
 
         @BeforeMethod
         public void precondition(){
-                app.getUserUI().loginWithData("student@mail.com", "Qwerty123!");
+                app.getUserUI().loginWithData("student@mail.com", "Qwer123!");
         }
 //        Предусловие: залогиниться как пользователь
 //        с данными {email: “student@mail.com“, password: “Qwerty123!“, cohort: “Cohort 34.2“}

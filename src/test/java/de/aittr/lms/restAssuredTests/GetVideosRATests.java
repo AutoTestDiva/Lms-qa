@@ -114,7 +114,7 @@ public class GetVideosRATests extends TestBaseRA{
 
     @Test
     public void getVideosAsStudentLessonAsSymbolNegativeTest() {
-        cookie = user.getLoginCookie("student@mail.com", "Qwerty123!");
+        cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "@")).then().
                 assertThat().statusCode(400);
@@ -122,7 +122,7 @@ public class GetVideosRATests extends TestBaseRA{
 
     @Test
     public void getVideosAsStudentLessonAsStringNegativeTest() {
-        cookie = user.getLoginCookie("student@mail.com", "Qwerty123!");
+        cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "lesson")).then().
                 assertThat().statusCode(400);
