@@ -31,7 +31,9 @@ public class UserHelperUI extends BaseHelperUI {
 
     public void logOut() {
         click(By.cssSelector(".pi-user"));
+        pause(2000);
         click(By.xpath("//span[contains(text(),'Sign Out')]"));
+        pause(3000);
     }
 
     public void clickOnUsersInSideBar() {
@@ -43,11 +45,14 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void searchUser(String mail) {
+        pause(5000);
         type(By.cssSelector("[placeholder='Search...']"), mail);
-        pause(1000);
     }
 
     public String userOnFirstRow() {
-        return getText(By.xpath("//tr[1]/td[1]"));
+        pause(1000);
+        String text = getText(By.xpath("//tr[1]/td[1]"));
+        System.out.println("****" + text + "****");
+        return text;
     }
 }

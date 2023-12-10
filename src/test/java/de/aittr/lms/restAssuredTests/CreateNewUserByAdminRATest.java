@@ -75,7 +75,15 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
     }
 
     @Test
-    public void createUserWithWrongCountryByAdminNegativeTest() throws SQLException {
+    public void createUserFirstNameWithSymbolByAdminNegativeTest() {
+        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu@bat",
+                "Test", "Germany", "STUDENT", "+490123456789");
+        given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
+                .then().assertThat().statusCode(400);
+    }
+
+    @Test
+    public void createUserWithWrongCountryByAdminNegativeTest() {
         NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu",
                 "Test", "Germany777", "STUDENT", "+490123456789");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
