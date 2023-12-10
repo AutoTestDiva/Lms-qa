@@ -1,11 +1,8 @@
 package de.aittr.lms.restAssuredTests;
 
+import de.aittr.lms.CSVDataProviders;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
-import io.restassured.response.ResponseBodyExtractionOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -152,42 +149,6 @@ public class GetVideosRATests extends TestBaseRA{
     }
 
     @Test
-    public void getVideosAsTeacherCohort371BasProgram10PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("37.1", "basic_programming", "lecture", "10"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort371BasProgram13PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("37.1", "basic_programming", "lecture", "13"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort371LinGit1PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("37.1", "linux_git", "lecture", "1"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort371LinGit2PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("37.1", "linux_git", "lecture", "2"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
     public void getVideosAsStudentBasProg50PositiveTest(){
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
@@ -195,7 +156,6 @@ public class GetVideosRATests extends TestBaseRA{
                 assertThat().statusCode(200).extract().response().body().asString();
         Assert.assertTrue(response.length()>2);
     }
-
 
     @Test
     public void getVideosAsStudentLinGit03PositiveTest(){
@@ -206,102 +166,13 @@ public class GetVideosRATests extends TestBaseRA{
         Assert.assertTrue(response.length()>2);
     }
 
-    @Test
-    public void getVideosAsTeacherCohort372BasProgr10PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("37.2", "basic_programming", "lecture", "10"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort372BasProgr15PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("37.2", "basic_programming", "lecture", "15"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort38BasProgr7PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("38", "basic_programming", "lecture", "7"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
 
 
-    @Test
-    public void getVideosAsTeacherCohort38BasProgr13PositiveTest(){
+    @Test(dataProvider = "provideGetVideoData", dataProviderClass = CSVDataProviders.class)
+    public void getVideosAsTeacherWithCSVDataPositiveTest(String cohort, String module, String lesson){
         cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
         String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("38", "basic_programming", "lecture", "13"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort312Frontend01PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("31.2", "front_end", "lecture", "1"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort312Frontend18PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("31.2", "front_end", "lecture", "18"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort312Program5PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("31.2", "basic_programming", "lecture", "5"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort312Program55PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("31.2", "basic_programming", "lecture", "55"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort29Back02PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("29", "back_end", "lecture", "2"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort29Back15PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("29", "back_end", "lecture", "15"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
-    }
-
-    @Test
-    public void getVideosAsTeacherCohort29QA5PositiveTest(){
-        cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("29", "qa", "lecture", "5"))
+                        user.urlBuilderGetVideo(cohort, module, "lecture", lesson))
                 .then().assertThat().statusCode(200).extract().response().body().asString();
         Assert.assertTrue(response.length()>2);
     }

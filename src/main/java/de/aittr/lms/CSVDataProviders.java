@@ -27,6 +27,12 @@ public class CSVDataProviders {
         return readDataFromCSV(csvFile);
     }
 
+    @DataProvider(name = "provideGetVideoData")
+    public static Object[][] provideGetVideoData() {
+        String csvFile = "src/test/resources/DataScv/GetVideoData.csv";
+        return readDataFromCSV(csvFile);
+    }
+
     private static Object[][] readDataFromCSV(String csvFile) {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             List<String[]> data = reader.readAll();
