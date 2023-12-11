@@ -5,11 +5,17 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class AdminPageTests extends TestBaseUI {
+public class AdminPageUITests extends TestBaseUI {
 
     @BeforeMethod
     public void precondition(){
         app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+        app.getUserUI().closeLoginMessage();
+    }
+
+    @AfterMethod
+    public void postCondition(){
+        app.getUserUI().logOut();
     }
 
     @Test
@@ -42,8 +48,5 @@ public class AdminPageTests extends TestBaseUI {
         Assert.assertEquals("student@mail.com", app.getUserUI().userOnFirstRow());
     }
 
-    @AfterMethod
-    public void postCondition(){
-        app.getUserUI().logOut();
-    }
+
 }

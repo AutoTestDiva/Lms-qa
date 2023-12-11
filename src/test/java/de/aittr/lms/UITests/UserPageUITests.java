@@ -5,31 +5,28 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class UserPageTests extends TestBaseUI{
+public class UserPageUITests extends TestBaseUI{
 
     @BeforeMethod
     public void precondition(){
         app.getUserUI().loginWithData("student@mail.com", "Qwer123!");
+        app.getUserUI().closeLoginMessage();
     }
 
     @Test
     public void verifyTheoryDisplayed(){
-        app.getLesson().selectStudentGroup("Cohort 34.2");
-        app.getLesson().selectModule("basic_programming");
-        app.getLesson().selectLesson("lesson_30");
-        app.getLesson().clickOnTheory();
-        app.getLesson().selectRULanguage();
+        app.getLesson().selectLessonByModuleByCohort("Cohort 34.2","basic_programming","lesson_30");
+        app.getLesson().clickOnRUTheory(); // TODO fix
         Assert.assertTrue(app.getLesson().isTheoryContainsText("1. Введение в интерфейсы:"));
-                //[header="Home work"]
     }
 
     @Test
     public void verifyVideoDisplayed(){
-        app.getLesson().selectStudentGroup("Cohort 34.2");
-        app.getLesson().selectModule("basic_programming");
-        app.getLesson().selectLesson("lesson_30");
-//        app.getLesson(). TODO see video
+        app.getLesson().selectLessonByModuleByCohort("Cohort 34.2", "basic_programming", "lesson_30");
+        Assert.assertTrue(app.getLesson().isVideoDisplayed()); //TODO see video
     }
+
+
 
     @AfterMethod
     public void postCondition(){
