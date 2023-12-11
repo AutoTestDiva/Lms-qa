@@ -1,8 +1,6 @@
 package de.aittr.lms.fwRA;
 
 import de.aittr.lms.DataBase;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

@@ -31,7 +31,7 @@ public class UserHelperUI extends BaseHelperUI {
 
     public void logOut() {
         click(By.cssSelector(".pi-user"));
-        pause(2000);
+        pause(5000);
         click(By.xpath("//span[contains(text(),'Sign Out')]"));
         pause(3000);
     }
@@ -54,5 +54,54 @@ public class UserHelperUI extends BaseHelperUI {
         String text = getText(By.xpath("//tr[1]/td[1]"));
         System.out.println("****" + text + "****");
         return text;
+    }
+
+
+
+
+    public void clickOnEmailSort() {
+        click(By.xpath("//thead/tr[1]/th[1]/p-sorticon[1]/i[1]"));
+    }
+    public boolean isUpperEmailPresent(String email1) {
+        return isElementPresent(By.xpath("//tbody/tr[1]/td[1][contains(., '" + email1 + "')]"));
+    }
+
+    public boolean isDownEmailPresent(String email2) {
+        return isElementPresent(By.xpath("//tbody/tr[4]/td[1][contains(., '" + email2 + "')]"));
+    }
+
+    public void clickOnRoleSort() {
+        click(By.xpath("//thead/tr[1]/th[2]/p-sorticon[1]/i[1]"));
+    }
+    public boolean isUpperRolePresent(String admin1) {
+        return isElementPresent(By.xpath("//tbody/tr[1]/td[2][contains(., '" + admin1 + "')]"));
+    }
+
+    public boolean isDownRolePresent(String admin2) {
+        return isElementPresent(By.xpath("//tbody/tr[4]/td[2][contains(., '" + admin2 + "')]"));
+    }
+
+    public void clickOnStateSort() {
+        click(By.xpath("//thead/tr[1]/th[3]/p-sorticon[1]/i[1]"));
+    }
+
+    public boolean isUpperStatePresent(String confirmed1) {
+        return isElementPresent(By.xpath("//tbody/tr[1]/td[3][contains(., '" + confirmed1 + "')]"));
+    }
+
+    public boolean isDownStatePresent(String confirmed2) {
+        return isElementPresent(By.xpath("//tbody/tr[4]/td[3][contains(., '" + confirmed2 + "')]"));
+    }
+
+    public void clickOnPrimaryGroupSort() {
+        click(By.xpath("//thead/tr[1]/th[4]/p-sorticon[1]/i[1]"));
+    }
+
+    public boolean isUpperPrimaryGroupPresent(String primaryGroup1) {
+        return isElementPresent(By.xpath("//tbody/tr[1]/td[4][contains(., '" + primaryGroup1 + "')]"));
+    }
+
+    public boolean isDownPrimaryGroupPresent(String primaryGroup2) {
+        return isElementPresent(By.xpath("//tbody/tr[4]/td[4][contains(., '" + primaryGroup2 + "')]"));
     }
 }

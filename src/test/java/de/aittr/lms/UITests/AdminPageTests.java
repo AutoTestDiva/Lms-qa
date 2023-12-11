@@ -32,6 +32,7 @@ public class AdminPageTests extends TestBaseUI {
         app.getUserUI().clickOnUsersInSideBar();
         app.getUserUI().searchUser("teacher@mail.com");
         Assert.assertEquals("teacher@mail.com", app.getUserUI().userOnFirstRow());
+
     }
 
     @Test
@@ -45,5 +46,4 @@ public class AdminPageTests extends TestBaseUI {
     public void postCondition(){
         app.getUserUI().logOut();
     }
-
 }

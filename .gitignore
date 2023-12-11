@@ -43,4 +43,4 @@ src/screenshots
 
 TASKS_LU.md
 src/test/resources/application.yml
-/build/
+/build/**

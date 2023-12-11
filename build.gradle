@@ -19,11 +19,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.opencsv:opencsv:5.8'
 
-    implementation 'org.springframework:spring-web:6.1.0'
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
-    implementation 'org.yaml:snakeyaml:1.29'
+    implementation 'org.yaml:snakeyaml:2.0'
 
     implementation 'mysql:mysql-connector-java:8.0.33'
 
@@ -55,3 +54,5 @@ task qa(type:Test) {
         systemProperty 'browser', "${browser}"
     }
 }
+sourceCompatibility = JavaVersion.VERSION_15
+targetCompatibility = JavaVersion.VERSION_15

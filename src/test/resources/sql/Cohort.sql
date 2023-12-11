@@ -40,8 +40,6 @@ INSERT INTO lms.cohort (alias, github_repository, name)
 VALUES ('Cohort 35', 'cohort35', 'Cohort 35');
 INSERT INTO lms.cohort (alias, github_repository, name)
 VALUES ('Cohort 36', 'cohort36', 'Cohort 36');
-
-
 INSERT INTO lms.cohort (alias, github_repository, name)
 VALUES ('Cohort 37.1', 'cohort37.1', 'Cohort 37.1');
 INSERT INTO lms.cohort (alias, github_repository, name)
