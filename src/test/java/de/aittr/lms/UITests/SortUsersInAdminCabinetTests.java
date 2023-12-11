@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class SortUsersInAdminCabinet extends TestBaseUI {
+public class SortUsersInAdminCabinetTests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
         app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
