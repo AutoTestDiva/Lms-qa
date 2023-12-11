@@ -3,10 +3,14 @@ package de.aittr.lms.restAssuredTests;
 import de.aittr.lms.CSVDataProviders;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
+import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
 
 public class GetVideosRATests extends TestBaseRA{
 
@@ -171,10 +175,12 @@ public class GetVideosRATests extends TestBaseRA{
     @Test(dataProvider = "provideGetVideoData", dataProviderClass = CSVDataProviders.class)
     public void getVideosAsTeacherWithCSVDataPositiveTest(String cohort, String module, String lesson){
         cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo(cohort, module, "lecture", lesson))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+                .then().assertThat().statusCode(200)
+                .assertThat().body (containsString(
+                        "https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString(module));
     }
 
 //    TEST-CASES
