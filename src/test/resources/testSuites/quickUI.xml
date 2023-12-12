@@ -4,10 +4,10 @@
 
     <test name="QuickUI" >
         <classes>
-            <class name="de.aittr.lms.UITests.AdminPageTests" />
+            <class name="de.aittr.lms.UITests.AdminPageUITests" />
             <class name="de.aittr.lms.UITests.LoginUITests" />
             <class name="de.aittr.lms.UITests.LogOutUITests" />
-            <class name="de.aittr.lms.UITests.UserPageTests" />
+            <class name="de.aittr.lms.UITests.UserPageUITests" />
 
         </classes>
     </test>

@@ -29,6 +29,10 @@ public class LessonHelperUI extends BaseHelperUI{
     }
 
     public void clickOnTheory() {
+        click(By.cssSelector("[header=' Theory ']"));
+    }
+
+    public void clickOnHomeWork() {
         click(By.cssSelector("[header='Home work']"));
     }
 
@@ -38,6 +42,22 @@ public class LessonHelperUI extends BaseHelperUI{
 
     public boolean isTheoryContainsText(String text) {
         return isElementPresent(By.xpath("//*[contains(text(),'" + text + "')]"));
+    }
+
+    public void selectLessonByModuleByCohort(String cohort, String module, String lesson) {
+        selectStudentGroup(cohort);
+        selectModule(module);
+        selectLesson(lesson);
+    }
+
+    public void clickOnRUTheory() {
+        clickOnTheory();
+        selectRULanguage();
+    }
+
+    public boolean isVideoDisplayed() {
+
+        return false;
     }
 }
 

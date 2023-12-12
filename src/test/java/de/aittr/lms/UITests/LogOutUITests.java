@@ -9,12 +9,13 @@ public class LogOutUITests extends TestBaseUI{
     @BeforeMethod
     public void precondition(){
         app.getUserUI().loginWithData("student@mail.com", "Qwer123!");
+        app.getUserUI().closeLoginMessage();
     }
 
     @Test
     public void LogOutTest(){
         app.getUserUI().logOut();
-        Assert.assertTrue(app.getHeaderUI().isSignInLinkPresent());
+        Assert.assertTrue(app.getUserUI().isLogoutMessageDisplayed());
     }
 
 }
