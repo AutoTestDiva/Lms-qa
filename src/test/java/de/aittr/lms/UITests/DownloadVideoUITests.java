@@ -3,11 +3,12 @@ package de.aittr.lms.UITests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class DownloadVideoTests extends TestBaseUI{
+public class DownloadVideoUITests extends TestBaseUI{
 
         @BeforeMethod
         public void precondition(){
                 app.getUserUI().loginWithData("student@mail.com", "Qwer123!");
+                app.getUserUI().closeLoginMessage();
         }
 //        Предусловие: залогиниться как пользователь
 //        с данными {email: “student@mail.com“, password: “Qwerty123!“, cohort: “Cohort 34.2“}

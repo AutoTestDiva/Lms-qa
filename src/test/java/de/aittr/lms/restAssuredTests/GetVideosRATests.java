@@ -19,78 +19,93 @@ public class GetVideosRATests extends TestBaseRA{
     @Test
     public void getVideosAsAdminCohort342PositiveTest(){
         cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30"))
+                .then().
+                assertThat().statusCode(200)
+                .assertThat().body (containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
     public void getVideosAsAdminCohort35PositiveTest(){
         cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("35", "basic_programming", "lecture", "30")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("35", "basic_programming", "lecture", "30"))
+                .then().
+                assertThat().statusCode(200)
+                .assertThat().body (containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
     public void getVideosAsTeacherCohort342PositiveTest() {
         cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30"))
-                .then().assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length() > 2);
+                .then().assertThat().statusCode(200)
+                .assertThat().body (containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
-    public void getVideosAsTeacherCohort35PositiveTest(){
+    public void getVideosAsTeacherCohort35PositiveTest() {
         cookie = user.getLoginCookie("teacher@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("35", "basic_programming", "lecture", "30")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("35", "basic_programming", "lecture", "30"))
+                .then().
+                assertThat().statusCode(200)
+                .assertThat().body(containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
     public void getVideosAsStudentPositiveTest() {
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30"))
+                .then().
+                assertThat().statusCode(200)
+                .assertThat().body(containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
     public void getVideosCohort35AsStudent2PositiveTest(){
         cookie = user.getLoginCookie("student2@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("35", "basic_programming", "lecture", "30")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("35", "basic_programming", "lecture", "30"))
+                .then().
+                assertThat().statusCode(200)
+                .assertThat().body (containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
-    public void getVideosCohort36AsStudent2PositiveTest(){
+    public void getVideosCohort36AsStudent2PositiveTest() {
         cookie = user.getLoginCookie("student2@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("36", "basic_programming", "lecture", "30")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("36", "basic_programming", "lecture", "30"))
+                .then().
+                assertThat().statusCode(200)
+                .assertThat().body(containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
     public void getVideosNotStudentsGroupNegativeTest(){
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("33", "basic_programming", "lecture", "30")).then().
+                        user.urlBuilderGetVideo("33", "basic_programming", "lecture", "30"))
+                .then().
                 assertThat().statusCode(403);
     }
 
     @Test
     public void getVideosWithoutLoginNegativeTest(){
         given().contentType(ContentType.JSON).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30")).then().
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30"))
+                .then().
                 assertThat().statusCode(403);
     }
 
@@ -98,7 +113,8 @@ public class GetVideosRATests extends TestBaseRA{
     public void getVideosAsStudentWrongModuleNegativeTest() {
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "programming", "lecture", "30")).then().
+                        user.urlBuilderGetVideo("34.2", "programming", "lecture", "30"))
+                .then().
                 assertThat().statusCode(400);
     }
 
@@ -106,7 +122,8 @@ public class GetVideosRATests extends TestBaseRA{
     public void getVideosAsStudentWrongTypeNegativeTest() {
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "video", "30")).then().
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "video", "30"))
+                .then().
                 assertThat().statusCode(400);
     }
 
@@ -114,7 +131,8 @@ public class GetVideosRATests extends TestBaseRA{
     public void getVideosAsStudentLessonMinus5NegativeTest() {
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "-5")).then().
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "-5"))
+                .then().
                 assertThat().statusCode(400);
     }
 
@@ -122,7 +140,8 @@ public class GetVideosRATests extends TestBaseRA{
     public void getVideosAsStudentLessonAsSymbolNegativeTest() {
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "@")).then().
+                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "@"))
+                .then().
                 assertThat().statusCode(400);
     }
 
@@ -130,7 +149,8 @@ public class GetVideosRATests extends TestBaseRA{
     public void getVideosAsStudentLessonAsStringNegativeTest() {
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "lesson")).then().
+                        user.urlBuilderGetVideo("34.2","basic_programming","lecture","lesson"))
+                .then().
                 assertThat().statusCode(400);
     }
 
@@ -155,19 +175,24 @@ public class GetVideosRATests extends TestBaseRA{
     @Test
     public void getVideosAsStudentBasProg50PositiveTest(){
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "50")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+                assertThat().statusCode(200)
+                .assertThat().body (containsString(
+                        "https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("basic_programming"));
     }
 
     @Test
     public void getVideosAsStudentLinGit03PositiveTest(){
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
-        String response = given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "linux_git", "lecture", "3")).then().
-                assertThat().statusCode(200).extract().response().body().asString();
-        Assert.assertTrue(response.length()>2);
+        given().contentType(ContentType.JSON).cookie(cookie).when().get(
+                        user.urlBuilderGetVideo("34.2", "linux_git", "lecture", "3"))
+                .then()
+                .assertThat().statusCode(200)
+                .assertThat().body (containsString(
+                        "https://lesson-videos.fra1.digitaloceanspaces.com/"))
+                .assertThat().body(containsString("linux_git"));
     }
 
 
