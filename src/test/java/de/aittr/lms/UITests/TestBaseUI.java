@@ -39,11 +39,9 @@ public class TestBaseUI {
     if (result.isSuccess()) {
       logger.info("PASSED: " + result.getMethod().getMethodName());
     } else {
-      logger.info("FAILED: " + result.getMethod().getMethodName() + " Screenshot: ");
-//          + app.getUser().takeScreenshot());
+      logger.info("FAILED: " + result.getMethod().getMethodName() + " Screenshot: " + app.getUserUI().takeScreenshot());
     }
-    logger.info("Stop test");
-    logger.info("===============================");
+    logger.info("============== Stop test =================");
   }
 
 }

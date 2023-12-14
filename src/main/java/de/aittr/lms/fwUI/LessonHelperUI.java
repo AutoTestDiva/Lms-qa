@@ -1,7 +1,14 @@
 package de.aittr.lms.fwUI;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 public class LessonHelperUI extends BaseHelperUI{
 
@@ -55,10 +62,47 @@ public class LessonHelperUI extends BaseHelperUI{
         selectRULanguage();
     }
 
-    public boolean isVideoDisplayed() {
+    public boolean isAllVideoInLessonEnabled() {
+        click(By.xpath("//span[contains(text(),'Video')]"));
+        scrollDown(70);
 
-        return false;
+        boolean result = true;
+        double videoDuration = 0;
+
+        List<WebElement> videoElements = driver.findElements(By.tagName("video"));
+        for(WebElement video : videoElements){
+            try{
+                 videoDuration = getVideoDuration(video);
+            }catch (ScriptTimeoutException e){
+                System.out.println("Timeout waiting for video to be visible or meet condition."); // не пишет
+                result = false;
+            }catch (Exception e){
+                System.out.println("The video is not displayed. ");
+                result = false;
+            }
+
+            if(videoDuration == 0){
+                result = false;
+            }
+        }
+
+        return result;
     }
+
+    private double getVideoDuration(WebElement videoPlayer) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        double duration = (Double) jsExecutor.executeAsyncScript(
+                "var callback = arguments[arguments.length - 1];" +
+                        "var video = arguments[0];" +
+                        "video.onloadedmetadata = function() {" +
+                        "  callback(video.duration);" +
+                        "};" +
+                        "video.load();", videoPlayer);
+        System.out.println("********** Video length = " + duration + " (sec)");
+        return duration;
+    }
+
+
 }
 
 

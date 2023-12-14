@@ -3,11 +3,7 @@ package de.aittr.lms.restAssuredTests;
 import de.aittr.lms.CSVDataProviders;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
-import io.restassured.path.json.JsonPath;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
@@ -187,7 +183,7 @@ public class GetVideosRATests extends TestBaseRA{
     public void getVideosAsStudentLinGit03PositiveTest(){
         cookie = user.getLoginCookie("student@mail.com", "Qwer123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "linux_git", "lecture", "3"))
+                        user.urlBuilderGetVideo("34.2", "linux_git", "lecture", "03"))
                 .then()
                 .assertThat().statusCode(200)
                 .assertThat().body (containsString(
