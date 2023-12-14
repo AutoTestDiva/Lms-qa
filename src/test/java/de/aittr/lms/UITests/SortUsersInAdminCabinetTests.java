@@ -9,6 +9,7 @@ public class SortUsersInAdminCabinetTests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
         app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+        app.getUserUI().closeLoginMessage();
     }
 
     @Test
@@ -42,14 +43,12 @@ public class SortUsersInAdminCabinetTests extends TestBaseUI {
     @Test
     public void isStateSortUpPositiveTest() {
         app.getUserUI().clickOnUsersInSideBar();
-        app.getUserUI().pause(5000);
         app.getUserUI().clickOnStateSort();
         Assert.assertTrue(app.getUserUI().isUpperStatePresent("CONFIRMED"));
     }
     @Test
     public void isStateSortDownPositiveTest() {
         app.getUserUI().clickOnUsersInSideBar();
-        app.getUserUI().pause(5000);
         app.getUserUI().clickOnStateSort();
         app.getUserUI().clickOnStateSort();
         Assert.assertTrue(app.getUserUI().isDownStatePresent("CONFIRMED"));
@@ -59,14 +58,12 @@ public class SortUsersInAdminCabinetTests extends TestBaseUI {
     @Test
     public void isPrimaryGroupSortUpPositiveTest() {
         app.getUserUI().clickOnUsersInSideBar();
-        app.getUserUI().pause(5000);
         app.getUserUI().clickOnPrimaryGroupSort();
         Assert.assertTrue(app.getUserUI().isUpperPrimaryGroupPresent(""));
     }
     @Test
     public void isPrimaryGroupSortDownPositiveTest() {
         app.getUserUI().clickOnUsersInSideBar();
-        app.getUserUI().pause(5000);
         app.getUserUI().clickOnPrimaryGroupSort();
         app.getUserUI().clickOnPrimaryGroupSort();
         Assert.assertTrue(app.getUserUI().isDownPrimaryGroupPresent(""));
