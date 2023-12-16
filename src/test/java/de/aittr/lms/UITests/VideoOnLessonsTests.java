@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideoOnLessonsTests extends TestBaseUI {
@@ -19,58 +20,43 @@ public class VideoOnLessonsTests extends TestBaseUI {
     @Test
     public void isVideoPresentPositiveTest() {
         app.getUserUI().clickOnLessonsInSideBar();
+
         app.getUserUI().clickOnSelectYourGroup();
+        List<WebElement> groups = app.getUserUI().getDropdownListOfGroups();
+        List<String> listOfGroups = new ArrayList<>();
+        for (WebElement item : groups) {
+            listOfGroups.add(item.getText());
+        }
+        for (int j = 18; j < listOfGroups.size(); j++) {
+            app.getUserUI().clickOnSelectedGroup(listOfGroups.get(j));
+            System.out.println("***********************************************");
+            System.out.println("Group: " + listOfGroups.get(j));
+            System.out.println("***********************************************");
 
-        app.getUserUI().getDropdownListOfGroups(By.xpath("//span[contains(text(),'Select your group')]"));
-        List<WebElement> groups = app.getUserUI().findElements();
-       // for (WebElement group : groups) {
-       //     System.out.println("Найдено список групп" + group.getText());
-       // }
-        for (WebElement group : groups) {
-            app.getUserUI().clickOnSelectedGroup(group.getText());
-            // app.getUserUI().clickOnSelectedGroup("Cohort 34.1");
-           // System.out.println("Group: " + group.getText());
-
-
+    if(app.getUserUI().isModulePresent()){
             app.getUserUI().clickOnSelectModule();
-            app.getUserUI().getDropdownListOfModules(By.xpath("//span[contains(text(),'Select module')]"));
-            List<WebElement> modules = app.getUserUI().findElements();
-          //  for (WebElement module : modules) {
-          //      System.out.println("Найдено список модулей" + module.getText());
-          //  }
-            for (WebElement module : modules) {
-                app.getUserUI().clickOnSelectedModule(module.getText());
-                //app.getUserUI().clickOnSelectedModule("basic_programming");
-                //System.out.println("Module: " + module.getText());
+            List<WebElement> modules = app.getUserUI().getDropdownListOfModules();
+            List<String> listOfModules = new ArrayList<>();
+            for (WebElement item : modules) {
+                listOfModules.add(item.getText());
+            }
+            for (int l = 1; l < listOfModules.size(); l++) {
+                app.getUserUI().clickOnSelectedModule(listOfModules.get(l));
+                System.out.println("----------------------------------");
+                System.out.println("         Module: " + listOfModules.get(l));
+                System.out.println("----------------------------------");
 
                 app.getUserUI().clickOnSelectLesson();
-                app.getUserUI().getDropdownListOfLessons(By.xpath("//span[contains(text(),'Select lesson')]"));
-                List<WebElement> lessons = app.getUserUI().findElements();
-             //   for (WebElement lesson : lessons) {
-             //       System.out.println("Найдено список уроков" + lesson.getText());
-             //   }
-            //    for (WebElement lesson : lessons) {
-              //      app.getUserUI().clickOnSelectedLesson(lesson.getText());
-                    //app.getUserUI().clickOnSelectedLesson("lesson_04");
-                    //System.out.println("Lesson: " + lesson.getText());
-// Переход к следующему уроку с использованием цикла for
-                for (int i = 0; i < lessons.size() - 1; i++) {
-                    WebElement currentLesson = lessons.get(i);
-                   // WebElement nextLesson = lessons.get(i + 1);
-
-                    app.getUserUI().clickOnSelectedLesson(currentLesson.getText());
-                    // Ваш код для текущего урока
-
-                    // Переход к следующему уроку
-                   // app.getUserUI().clickOnSelectedLesson(nextLesson.getText());
-                    // Ваш код для следующего урока
-
-
-
+                List<WebElement> lessons = app.getUserUI().getDropdownListOfLessons();
+                List<String> listOfLessons = new ArrayList<>();
+                for (WebElement item : lessons) {
+                    listOfLessons.add(item.getText());
+                }
+                for (int i = 0; i < listOfLessons.size(); i++) {
+                    app.getUserUI().clickOnSelectedLesson(listOfLessons.get(i));
+                    System.out.println("Lesson: " + listOfLessons.get(i));
 
                     app.getUserUI().clickOnVideoLine();
-
-
                     try {
                         // Использование метода для поиска видеоэлементов
                         List<WebElement> videoElements = app.getUserUI().findVideoElements();
@@ -78,26 +64,32 @@ public class VideoOnLessonsTests extends TestBaseUI {
                         if (videoElements.isEmpty()) {
                             System.out.println("Видео не найдено на странице");
                         } else {
-                            // Итерация по списку видео
+                            System.out.println("В уроке " + videoElements.size() + " видео");
                             for (WebElement videoElement : videoElements) {
-                                // Ваши дополнительные проверки и действия с каждым видео
-                                System.out.println("Найдено видео. Используйте videoElement для работы с каждым видео.");
-                                // Проверка атрибута "src" для каждого видео
+
                                 String videoSource = videoElement.getAttribute("src");
+                                System.out.println("src-видео = " + videoSource);
                                 assert videoSource != null && !videoSource.isEmpty() : "Отсутствует атрибут 'src' у видео";
                                 System.out.println(videoSource);
                             }
                         }
-
                     } catch (Exception e) {
                         System.err.println("Произошла ошибка: " + e.getMessage());
                     }
                     app.getUserUI().clickOnNextSelectedLesson();
-                    app.getUserUI().pause(5000);
-                   // app.getUserUI().clickOnSelectedLesson(nextLesson.getText());
+                    app.getUserUI().pause(1000);
+                    // app.getUserUI().clickOnSelectedLesson(nextLesson.getText());
                 }
-
+                app.getUserUI().clickOnNextSelectedModule();
+                app.getUserUI().pause(1000);
+            }else{
+        System.out.println("В данной группе модулей еще нет");
+    }
+                app.getUserUI().clickOnNextSelectedGroup();
+    }
+            app.getUserUI().pause(1000);
             }
         }
-    }
+
 }
+

@@ -193,24 +193,36 @@ public List<WebElement> findElements() {
 }
 
 
-    public List<WebElement> getDropdownListOfGroups(By dropdownLocator) {
-        WebElement dropdown = driver.findElement(dropdownLocator);
+    public List<WebElement> getDropdownListOfGroups() {
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
         List<WebElement> groups = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return groups;
     }
 
-    public List<WebElement> getDropdownListOfModules(By dropdownLocator) {
-        WebElement dropdown = driver.findElement(By.xpath("//span[contains(text(),'Select module')]"));
+    public List<WebElement> getDropdownListOfModules() {
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
         List<WebElement> modules = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return modules;
     }
-    public List<WebElement> getDropdownListOfLessons(By dropdownLocator) {
-        WebElement dropdown = driver.findElement(By.xpath("//span[contains(text(),'Select lesson')]"));
+    public List<WebElement> getDropdownListOfLessons() {
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
         List<WebElement> lessons = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return lessons;
     }
 
     public void clickOnNextSelectedLesson() {
         click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+    }
+
+    public void clickOnNextSelectedModule() {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+    }
+
+    public void clickOnNextSelectedGroup() {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+    }
+
+    public boolean isModulePresent() {
+        return isElementPresent(By.xpath("//span[contains(text(),'Select module')]"));
     }
 }
