@@ -82,14 +82,14 @@ public class VideoOnLessonsTests extends TestBaseUI {
                 }
                 app.getUserUI().clickOnNextSelectedModule();
                 app.getUserUI().pause(1000);
-            }else{
+            }
+            }else
+            {
         System.out.println("В данной группе модулей еще нет");
     }
                 app.getUserUI().clickOnNextSelectedGroup();
     }
             app.getUserUI().pause(1000);
             }
-        }
-
-}
+    }
 
