@@ -4,7 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -178,21 +181,18 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void clickOnVideoLine() {
-        if(isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*"))) {
+        if (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*"))) {
             click(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*"));
-        }else {
+        } else {
             System.out.println("Элемента Video на вкладке урока нет");
         }
     }
+
     public List<WebElement> findVideoElements() {
         return driver.findElements(By.tagName("video"));
     }
-//------------------------------------------------------------------
-public List<WebElement> findElements() {
-    return driver.findElements(By.xpath("//p-dropdownitem"));
-}
 
-
+    //------------------------------------------------------------------
     public List<WebElement> getDropdownListOfGroups() {
         WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
         List<WebElement> groups = dropdown.findElements(By.xpath("//p-dropdownitem"));
@@ -209,20 +209,59 @@ public List<WebElement> findElements() {
         List<WebElement> lessons = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return lessons;
     }
-
     public void clickOnNextSelectedLesson() {
         click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
     }
-
     public void clickOnNextSelectedModule() {
         click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
     }
-
     public void clickOnNextSelectedGroup() {
         click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
     }
-
     public boolean isModulePresent() {
         return isElementPresent(By.xpath("//span[contains(text(),'Select module')]"));
+    }
+    public boolean isTextPresent() {
+        // Находим элемент с тегом <ol>
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        WebElement tabContent = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li")));
+        // Проверьте, есть ли текст внутри элемента
+        return (!tabContent.getText().isEmpty());
+    }
+
+    public void clickOnPlanLine() {
+        click(By.xpath("//*/text()[normalize-space(.)='Plan']/parent::*"));
+    }
+
+    public void clickOnTheoryLine() {
+        click(By.xpath("//*/text()[normalize-space(.)='Theory']/parent::*"));
+    }
+    public void clickOnHomeWorkLine() {
+        click(By.xpath("//*/text()[normalize-space(.)='Home work']/parent::*"));
+    }
+    public void clickOnCodeLine() {
+        click(By.xpath("//*/text()[normalize-space(.)='Code']/parent::*"));
+    }
+    public void scrollPageUp() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0);");
+    }
+    public boolean isCodePresent() {
+        return (isElementPresent(By.xpath("//button[.='Copy']")) &&
+                isElementPresent(By.xpath("//button[.='Download']")));
+    }
+    public boolean isPlanLinePresent() {
+        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Plan']/parent::*")));
+    }
+    public boolean isTheoryLinePresent() {
+        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Theory']/parent::*")));
+    }
+    public boolean isHomeWorkLinePresent() {
+        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Home work']/parent::*")));
+    }
+    public boolean isCodeLinePresent() {
+        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Code']/parent::*")));
+    }
+    public boolean isVideoLinePresent() { return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*")));
     }
 }
