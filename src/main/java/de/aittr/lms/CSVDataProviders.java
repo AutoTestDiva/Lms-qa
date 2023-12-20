@@ -45,6 +45,16 @@ public class CSVDataProviders {
         return readDataFromCSV(csvFile);
     }
 
+    @DataProvider(name = "provideGetGroupModuleLessonData")
+    public static Object[][] provideGetGroupModuleLessonData() {
+        String csvFile = "src/test/resources/DataScv/GetGroupModuleLessonData.csv";
+        return readDataFromCSV(csvFile);
+    }
+
+
+
+
+
     private static Object[][] readDataFromCSV(String csvFile) {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             List<String[]> data = reader.readAll();
