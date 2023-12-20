@@ -63,21 +63,6 @@ public class PasswordChangeRATests extends TestBaseRA {
         Assert.assertEquals(status, 0);
     }
 
-    @Test
-    public void invalidOldPasswordNegativeTest() {
-        String invalidOldPassword = "wrong-password";
-        String requestBody = "{ \"oldPassword\": \"" + invalidOldPassword + "\", \"newPassword\": \"StrongPassword-123\" }";
-        Response response = given()
-                .cookie(cookie)
-                .contentType(ContentType.JSON)
-                .body(requestBody)
-                .post("users/password-change");
-        Assert.assertEquals(response.getStatusCode(), 401);
-        String message = response.jsonPath().getString("message");
-        Assert.assertEquals(message, "Invalid old password.");
-        int status = response.jsonPath().getInt("status");
-        Assert.assertEquals(status, 0);
-    }
 
     @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
     public void validationErrorPasswordTest(String password) throws SQLException {

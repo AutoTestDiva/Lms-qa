@@ -266,4 +266,9 @@ public class UserHelperUI extends BaseHelperUI {
     }
     public boolean isVideoLinePresent() { return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*")));
     }
+
+    public void selectGroup(String cohort) {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        click(By.cssSelector("[aria-label='" + cohort + "']"));
+    }
 }
