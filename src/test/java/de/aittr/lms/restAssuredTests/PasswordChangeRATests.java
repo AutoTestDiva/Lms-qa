@@ -1,5 +1,6 @@
 package de.aittr.lms.restAssuredTests;
 
+import de.aittr.lms.CSVDataProviders;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
 import io.restassured.response.Response;
@@ -30,7 +31,7 @@ public class PasswordChangeRATests extends TestBaseRA {
     }
 
     @Test
-    public void testPasswordChangeSuccessPositiveTest() {
+    public void passwordChangeSuccessPositiveTest() {
         String requestBody = """
                 {
                   "oldPassword": "Qwerty123!",
@@ -43,11 +44,11 @@ public class PasswordChangeRATests extends TestBaseRA {
                 .body(requestBody)
                 .when()
                 .post("/users/password-change").then().assertThat().statusCode(201)
-                .assertThat().body("message", equalTo("Your password has been successfully changed"));
+                .assertThat().body("message", equalTo("Password changed successfully"));
     }
 
     @Test
-    public void testInvalidOldPasswordNegativeTest() {
+    public void invalidOldPasswordNegativeTest() {
         String invalidOldPassword = "wrong-password";
         String requestBody = "{ \"oldPassword\": \"" + invalidOldPassword + "\", \"newPassword\": \"StrongPassword-123\" }";
         Response response = given()
@@ -55,11 +56,33 @@ public class PasswordChangeRATests extends TestBaseRA {
                 .contentType(ContentType.JSON)
                 .body(requestBody)
                 .post("users/password-change");
-        Assert.assertEquals(response.getStatusCode(), 400);
+        Assert.assertEquals(response.getStatusCode(), 401);
         String message = response.jsonPath().getString("message");
         Assert.assertEquals(message, "Invalid old password.");
         int status = response.jsonPath().getInt("status");
         Assert.assertEquals(status, 0);
+    }
+
+    @Test
+    public void invalidOldPasswordNegativeTest() {
+        String invalidOldPassword = "wrong-password";
+        String requestBody = "{ \"oldPassword\": \"" + invalidOldPassword + "\", \"newPassword\": \"StrongPassword-123\" }";
+        Response response = given()
+                .cookie(cookie)
+                .contentType(ContentType.JSON)
+                .body(requestBody)
+                .post("users/password-change");
+        Assert.assertEquals(response.getStatusCode(), 401);
+        String message = response.jsonPath().getString("message");
+        Assert.assertEquals(message, "Invalid old password.");
+        int status = response.jsonPath().getInt("status");
+        Assert.assertEquals(status, 0);
+    }
+
+    @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
+    public void validationErrorPasswordTest(String password) throws SQLException {
+        user.setPasswordByEmail("lilu@mail.com", password).then()
+                .assertThat().statusCode(400);
     }
 }
 
