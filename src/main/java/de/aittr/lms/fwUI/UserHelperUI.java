@@ -271,4 +271,9 @@ public class UserHelperUI extends BaseHelperUI {
         click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
         click(By.cssSelector("[aria-label='" + cohort + "']"));
     }
+
+    public void selectModule(String module) {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        click(By.cssSelector("[aria-label='" + module + "']"));
+    }
 }
