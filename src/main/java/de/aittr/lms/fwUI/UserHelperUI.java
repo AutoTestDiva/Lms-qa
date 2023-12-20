@@ -1,7 +1,14 @@
 package de.aittr.lms.fwUI;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+import java.util.List;
 
 
 public class UserHelperUI extends BaseHelperUI {
@@ -112,7 +119,7 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public boolean isLogoutMessageDisplayed() {
-        if(isElementPresent(By.xpath("//div[contains(., 'Sing out')]/button"))){
+        if (isElementPresent(By.xpath("//div[contains(., 'Sing out')]/button"))) {
             click(By.xpath("//div[contains(., 'Sing out')]/button"));
             return true;
         }
@@ -120,7 +127,7 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public boolean isErrorNotValidEmailOrPasswordMessageDisplayed() {
-        if(isElementPresent(By.xpath("//div[contains(., 'Invalid login or password')]"))){
+        if (isElementPresent(By.xpath("//div[contains(., 'Invalid login or password')]"))) {
             closeErrorNotValidEmailOrPasswordMessage();
             returnBack();
             return true;
@@ -136,8 +143,8 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public boolean isErrorNotValidEmailFormatDisplayed() {
-        if(isElementPresent(
-                By.xpath("//app-input-error-message/div[contains(., ' Invalid email format ')]"))){
+        if (isElementPresent(
+                By.xpath("//app-input-error-message/div[contains(., ' Invalid email format ')]"))) {
             returnBack();
             return true;
         }
@@ -145,4 +152,118 @@ public class UserHelperUI extends BaseHelperUI {
 
     }
 
+    public void clickOnLessonsInSideBar() {
+        click(By.xpath("//span[contains(text(),'Lessons')]"));
+    }
+
+    public void clickOnSelectYourGroup() {
+        click(By.xpath("//span[contains(text(),'Select your group')]"));
+    }
+
+    public void clickOnSelectedGroup(String group) {
+        click(By.xpath("//*/text()[normalize-space(.)='" + group + "']/parent::*"));
+    }
+
+    public void clickOnSelectModule() {
+        click(By.xpath("//span[contains(text(),'Select module')]"));
+    }
+
+    public void clickOnSelectedModule(String module) {
+        click(By.xpath("//*/text()[normalize-space(.)='" + module + "']/parent::*"));
+    }
+
+    public void clickOnSelectLesson() {
+        click(By.xpath("//span[contains(text(),'Select lesson')]"));
+    }
+
+    public void clickOnSelectedLesson(String lesson) {
+        click(By.xpath("//*/text()[normalize-space(.)='" + lesson + "']/parent::*"));
+    }
+
+    public void clickOnVideoLine() {
+        if (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*"))) {
+            click(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*"));
+        } else {
+            System.out.println("Элемента Video на вкладке урока нет");
+        }
+    }
+
+    public List<WebElement> findVideoElements() {
+        return driver.findElements(By.tagName("video"));
+    }
+
+    //------------------------------------------------------------------
+    public List<WebElement> getDropdownListOfGroups() {
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        List<WebElement> groups = dropdown.findElements(By.xpath("//p-dropdownitem"));
+        return groups;
+    }
+
+    public List<WebElement> getDropdownListOfModules() {
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        List<WebElement> modules = dropdown.findElements(By.xpath("//p-dropdownitem"));
+        return modules;
+    }
+    public List<WebElement> getDropdownListOfLessons() {
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        List<WebElement> lessons = dropdown.findElements(By.xpath("//p-dropdownitem"));
+        return lessons;
+    }
+    public void clickOnNextSelectedLesson() {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+    }
+    public void clickOnNextSelectedModule() {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+    }
+    public void clickOnNextSelectedGroup() {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+    }
+    public boolean isModulePresent() {
+        return isElementPresent(By.xpath("//span[contains(text(),'Select module')]"));
+    }
+    public boolean isTextPresent() {
+        // Находим элемент с тегом <ol>
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        WebElement tabContent = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//li")));
+        // Проверьте, есть ли текст внутри элемента
+        return (!tabContent.getText().isEmpty());
+    }
+
+    public void clickOnPlanLine() {
+        click(By.xpath("//*/text()[normalize-space(.)='Plan']/parent::*"));
+    }
+
+    public void clickOnTheoryLine() {
+       // click(By.xpath("//*/text()[normalize-space(.)='Theory']/parent::*"));
+        click(By.xpath("//span[contains(text(),'Theory')]"));
+    }
+    public void clickOnHomeWorkLine() {
+        click(By.xpath("//*/text()[normalize-space(.)='Home work']/parent::*"));
+    }
+    public void clickOnCodeLine() {
+        click(By.xpath("//*/text()[normalize-space(.)='Code']/parent::*"));
+    }
+    public void scrollPageUp() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0);");
+    }
+    public boolean isCodePresent() {
+        return (isElementPresent(By.xpath("//button[.='Copy']")) &&
+                isElementPresent(By.xpath("//button[.='Download']")));
+    }
+    public boolean isPlanLinePresent() {
+        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Plan']/parent::*")));
+    }
+    public boolean isTheoryLinePresent() {
+        //return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Theory']/parent::*")));
+        return (isElementPresent(By.xpath("//span[contains(text(),'Theory')]")));
+    }
+    public boolean isHomeWorkLinePresent() {
+        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Home work']/parent::*")));
+    }
+    public boolean isCodeLinePresent() {
+        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Code']/parent::*")));
+    }
+    public boolean isVideoLinePresent() { return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*")));
+    }
 }
