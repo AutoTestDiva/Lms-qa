@@ -15,16 +15,23 @@ import java.util.List;
             app.getUserUI().closeLoginMessage();
         }
 
-    @Test(dataProvider = "provideGetGroupAndModuleData", dataProviderClass = CSVDataProviders.class)
-    public void isAllElementsInGroupTest(String group,String module) {
-        app.getUserUI().clickOnLessonsInSideBar();
 
-        app.getUserUI().selectGroup(group);
-        System.out.println("********************************************************************");
-        System.out.println("                       Group: " + group);
-        System.out.println("********************************************************************");
+        @Test(dataProvider = "provideGetGroupAndModuleData", dataProviderClass = CSVDataProviders.class)
+        public void isAllElementsInGroupAndModuleTest(String group, String module) {
+            app.getUserUI().clickOnLessonsInSideBar();
 
-        if (app.getUserUI().isModulePresent()) {
+            app.getUserUI().isGroupPresent();//
+            app.getUserUI().clickOnSelectYourGroup();//
+            if (app.getUserUI().selectMyGroup(group)) {//
+                app.getUserUI().clickOnMyGroup(group);//
+
+                System.out.println("********************************************************************");
+                System.out.println("                       Group: " + group);
+                System.out.println("********************************************************************");
+
+
+                if (app.getUserUI().isModulePresent()) {
+
             app.getUserUI().selectModule(module);
             System.out.println("--------------------------------------------------------------------");
             System.out.println("                       Module: " + module);
@@ -122,6 +129,17 @@ import java.util.List;
                 app.getUserUI().clickOnNextSelectedLesson();
                 app.getUserUI().pause(2000);
             }
+
+
+                } else {
+                    System.out.println("В данной группе модулей еще нет");
+                }
+                app.getUserUI().scrollPageUp();
+            } else {
+                System.out.println("Данной группы еще нет");
+            }
+        }
+    }
 
         } else {
             System.out.println("В данной группе модулей еще нет");
