@@ -1,3 +1,0 @@
-isAllElementsInGroupTest
-
-Данной группы еще нет

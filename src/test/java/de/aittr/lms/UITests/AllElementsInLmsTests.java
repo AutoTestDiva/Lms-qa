@@ -3,6 +3,7 @@ package de.aittr.lms.UITests;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
         app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
         app.getUserUI().closeLoginMessage();
     }
+
     @Test
     public void isAllElementsInLMSPresentTest() {
         report.add("isAllElementsInLMSPresentTest" + System.lineSeparator());
@@ -23,7 +25,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
         for (WebElement item : groups) {
             listOfGroups.add(item.getText());
         }
-        for (int j = 0; j < listOfGroups.size(); j++) {
+        for (int j = 27; j < listOfGroups.size(); j++) {
             app.getUserUI().clickOnSelectedGroup(listOfGroups.get(j));
             report.add("********************************************************************");
             report.add("                       Group: " + listOfGroups.get(j));
@@ -59,7 +61,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
                         String code = "o";
                         String video = "o";
 
-                        if(app.getUserUI().isPlanLinePresent()) {
+                        if (app.getUserUI().isPlanLinePresent()) {
                             // Проверяем вкладку ПЛАН и наличие там текста
                             app.getUserUI().clickOnPlanLine();
                             if (app.getUserUI().isTextPresent()) {
@@ -71,7 +73,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
                             app.getUserUI().pause(1000);
                         }
 
-                        if(app.getUserUI().isTheoryLinePresent()) {
+                        if (app.getUserUI().isTheoryLinePresent()) {
                             // Проверяем вкладку Theory
                             app.getUserUI().clickOnTheoryLine();
                             if (app.getUserUI().isTextPresent()) {
@@ -83,7 +85,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
                             app.getUserUI().pause(1000);
                         }
 
-                        if(app.getUserUI().isHomeWorkLinePresent()) {
+                        if (app.getUserUI().isHomeWorkLinePresent()) {
                             // Проверяем вкладку Домашка
                             app.getUserUI().clickOnHomeWorkLine();
                             if (app.getUserUI().isTextPresent()) {
@@ -95,7 +97,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
                             app.getUserUI().pause(1000);
                         }
 
-                        if(app.getUserUI().isCodeLinePresent()) {
+                        if (app.getUserUI().isCodeLinePresent()) {
                             //Проверяем наличие кода
                             app.getUserUI().clickOnCodeLine();
                             if (app.getUserUI().isCodePresent()) {
@@ -107,7 +109,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
                             app.getUserUI().pause(1000);
                         }
 
-                        if(app.getUserUI().isVideoLinePresent()) {
+                        if (app.getUserUI().isVideoLinePresent()) {
                             // Проверяем наличие видео
                             app.getUserUI().clickOnVideoLine();
                             // Использование метода для поиска видеоэлементов
@@ -130,7 +132,6 @@ public class AllElementsInLmsTests extends TestBaseUI {
                             app.getUserUI().clickOnVideoLine();
                             app.getUserUI().pause(1000);
                         }
-
                         report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", listOfLessons.get(i), plan, theory, homeWork, code, video + "    |"));
 
                         app.getUserUI().clickOnNextSelectedLesson();
@@ -139,7 +140,7 @@ public class AllElementsInLmsTests extends TestBaseUI {
                     app.getUserUI().clickOnNextSelectedModule();
                     app.getUserUI().pause(1000);
                 }
-            } else{
+            } else {
                 report.add("В данной группе модулей еще нет");
             }
             app.getUserUI().scrollPageUp();

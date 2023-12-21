@@ -4,7 +4,6 @@ import de.aittr.lms.CSVDataProviders;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,14 +19,14 @@ public class GroupInfoUITests extends TestBaseUI {
         report.add("isGroupInfoUITests" + System.lineSeparator());
         app.getUserUI().clickOnLessonsInSideBar();
 
-        app.getUserUI().isGroupPresent();//
-        app.getUserUI().clickOnSelectYourGroup();//
-        if (app.getUserUI().selectMyGroup(group)) {//
-            app.getUserUI().clickOnMyGroup(group);//
-
+        app.getUserUI().isGroupPresent();
+        app.getUserUI().clickOnSelectYourGroup();
+        if (app.getUserUI().selectMyGroup(group)) {
+            app.getUserUI().clickOnMyGroup(group);
             report.add("********************************************************************");
             report.add("                       Group: " + group);
             report.add("********************************************************************");
+
 
             if (app.getUserUI().isModulePresent()) {
                 app.getUserUI().clickOnSelectModule();
@@ -126,7 +125,6 @@ public class GroupInfoUITests extends TestBaseUI {
                                 System.out.println(videoSource);
                             }*/
                             }
-
                             app.getUserUI().clickOnVideoLine();
                             app.getUserUI().pause(1000);
                         }
@@ -143,6 +141,8 @@ public class GroupInfoUITests extends TestBaseUI {
                 report.add("В данной группе модулей еще нет");
             }
             app.getUserUI().scrollPageUp();
+        } else {
+            report.add("Данной группы еще нет");
         }
     }
 }

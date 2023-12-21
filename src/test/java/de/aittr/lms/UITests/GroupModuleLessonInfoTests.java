@@ -4,6 +4,7 @@ import de.aittr.lms.CSVDataProviders;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.List;
 
 public class GroupModuleLessonInfoTests extends TestBaseUI {
@@ -12,15 +13,16 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
         app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
         app.getUserUI().closeLoginMessage();
     }
+
     @Test(dataProvider = "provideGetGroupModuleLessonData", dataProviderClass = CSVDataProviders.class)
     public void isGroupModuleLessonInfoTest(String group, String module, String lesson) {
         report.add("isGroupModuleLessonInfoTest" + System.lineSeparator());
         app.getUserUI().clickOnLessonsInSideBar();
 
-        app.getUserUI().isGroupPresent();//
-        app.getUserUI().clickOnSelectYourGroup();//
-        if (app.getUserUI().selectMyGroup(group)) {//
-            app.getUserUI().clickOnMyGroup(group);//
+        app.getUserUI().isGroupPresent();
+        app.getUserUI().clickOnSelectYourGroup();
+        if (app.getUserUI().selectMyGroup(group)) {
+            app.getUserUI().clickOnMyGroup(group);
             report.add("********************************************************************");
             report.add("                       Group: " + group);
             report.add("********************************************************************");
@@ -33,7 +35,7 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
                 report.add("     Lesson   |  Plan  |  Theory  |  Home work  |  Code  |  Video  |");
                 report.add("--------------------------------------------------------------------");
 
-                    app.getUserUI().clickOnSelectLesson();
+                app.getUserUI().clickOnSelectLesson();
                 if (app.getUserUI().selectMyLesson(lesson)) {
                     app.getUserUI().clickOnMyLesson(lesson);
 
@@ -114,18 +116,15 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
                         app.getUserUI().pause(1000);
                     }
                     report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", lesson, plan, theory, homeWork, code, video + "    |"));
-                }
-            else {
+                } else {
                     report.add("Данного урока еще нет");
                 }
-                }
-            else {
+            } else {
                 report.add("В данной группе модулей еще нет");
-                }
-                app.getUserUI().scrollPageUp();
             }
-            else {
+            app.getUserUI().scrollPageUp();
+        } else {
             report.add("Данной группы еще нет");
-            }
-          }
         }
+    }
+}
