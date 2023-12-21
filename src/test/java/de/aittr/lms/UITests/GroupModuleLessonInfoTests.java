@@ -4,35 +4,38 @@ import de.aittr.lms.CSVDataProviders;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class GroupModuleLessonInfoTests extends TestBaseUI{
-        @BeforeMethod
-        public void precondition() {
-            app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
-            app.getUserUI().closeLoginMessage();
-        }
+public class GroupModuleLessonInfoTests extends TestBaseUI {
+    @BeforeMethod
+    public void precondition() {
+        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+        app.getUserUI().closeLoginMessage();
+    }
+    @Test(dataProvider = "provideGetGroupModuleLessonData", dataProviderClass = CSVDataProviders.class)
+    public void isGroupModuleLessonInfoTest(String group, String module, String lesson) {
+        report.add("isGroupModuleLessonInfoTest" + System.lineSeparator());
+        app.getUserUI().clickOnLessonsInSideBar();
 
-        @Test(dataProvider = "provideGetGroupModuleLessonData", dataProviderClass = CSVDataProviders.class)
-        public void isAllElementsInGroupTest(String group,String module, String lesson) {
-            app.getUserUI().clickOnLessonsInSideBar();
-
-            app.getUserUI().selectGroup(group);
-            System.out.println("********************************************************************");
-            System.out.println("                       Group: " + group);
-            System.out.println("********************************************************************");
+        app.getUserUI().isGroupPresent();//
+        app.getUserUI().clickOnSelectYourGroup();//
+        if (app.getUserUI().selectMyGroup(group)) {//
+            app.getUserUI().clickOnMyGroup(group);//
+            report.add("********************************************************************");
+            report.add("                       Group: " + group);
+            report.add("********************************************************************");
 
             if (app.getUserUI().isModulePresent()) {
                 app.getUserUI().selectModule(module);
-                System.out.println("--------------------------------------------------------------------");
-                System.out.println("                       Module: " + module);
-                System.out.println("--------------------------------------------------------------------");
-                System.out.println("     Lesson   |  Plan  |  Theory  |  Home work  |  Code  |  Video  |");
-                System.out.println("--------------------------------------------------------------------");
+                report.add("--------------------------------------------------------------------");
+                report.add("                       Module: " + module);
+                report.add("--------------------------------------------------------------------");
+                report.add("     Lesson   |  Plan  |  Theory  |  Home work  |  Code  |  Video  |");
+                report.add("--------------------------------------------------------------------");
 
-                app.getUserUI().selectLesson(lesson);
+                    app.getUserUI().clickOnSelectLesson();
+                if (app.getUserUI().selectMyLesson(lesson)) {
+                    app.getUserUI().clickOnMyLesson(lesson);
 
                     String plan = "o";
                     String theory = "o";
@@ -110,10 +113,19 @@ public class GroupModuleLessonInfoTests extends TestBaseUI{
                         app.getUserUI().clickOnVideoLine();
                         app.getUserUI().pause(1000);
                     }
-                    System.out.printf("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", lesson, plan, theory, homeWork, code, video + "    |");
-            } else {
-                System.out.println("В данной группе модулей еще нет");
+                    report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", lesson, plan, theory, homeWork, code, video + "    |"));
+                }
+            else {
+                    report.add("Данного урока еще нет");
+                }
+                }
+            else {
+                report.add("В данной группе модулей еще нет");
+                }
+                app.getUserUI().scrollPageUp();
             }
-            app.getUserUI().scrollPageUp();
+            else {
+            report.add("Данной группы еще нет");
+            }
+          }
         }
-    }

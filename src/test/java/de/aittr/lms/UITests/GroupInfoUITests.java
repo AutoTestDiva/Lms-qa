@@ -8,22 +8,21 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupInfoUITests extends TestBaseUI{
+public class GroupInfoUITests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
         app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
         app.getUserUI().closeLoginMessage();
     }
+
     @Test(dataProvider = "provideGetGroupData", dataProviderClass = CSVDataProviders.class)
     public void isAllElementsInGroupTest(String group) {
         app.getUserUI().clickOnLessonsInSideBar();
 
-       // app.getUserUI().selectGroup(group);
-        app.getUserUI().isGroupPresent();
+        app.getUserUI().isGroupPresent();//
         app.getUserUI().clickOnSelectYourGroup();//
-        if(app.getUserUI().selectMyGroup(group)){//
-
-           app.getUserUI().clickOnMyGroup(group);
+        if (app.getUserUI().selectMyGroup(group)) {//
+            app.getUserUI().clickOnMyGroup(group);//
 
             System.out.println("********************************************************************");
             System.out.println("                       Group: " + group);
@@ -143,9 +142,6 @@ public class GroupInfoUITests extends TestBaseUI{
                 System.out.println("В данной группе модулей еще нет");
             }
             app.getUserUI().scrollPageUp();
-        }
-        else{
-            System.out.println("Данной группы еще нет");
         }
     }
 }

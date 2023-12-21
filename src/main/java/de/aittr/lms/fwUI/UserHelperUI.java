@@ -277,15 +277,6 @@ public class UserHelperUI extends BaseHelperUI {
         click(By.cssSelector("[aria-label='" + module + "']"));
     }
 
-    public boolean isGroupPresent() {
-        return isElementPresent(By.xpath("//span[contains(text(),'Select your group')]"));
-    }
-    public boolean selectMyGroup(String group) {
-        return isElementPresent(By.cssSelector("[aria-label='" + group + "']"));
-    }
-    public void clickOnMyGroup(String group) {
-
-
     public void selectLesson(String lesson) {
         click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
         click(By.cssSelector("[aria-label='" + lesson + "']"));
@@ -301,9 +292,16 @@ public class UserHelperUI extends BaseHelperUI {
 
 
     public void clickOnMyGroup(String group) {
-
-       // click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
-
         click(By.cssSelector("[aria-label='" + group + "']"));
+    }
+
+
+    public boolean selectMyLesson(String lesson) {
+        return isElementPresent(By.cssSelector("[aria-label='" + lesson + "']"));
+    }
+
+    public void clickOnMyLesson(String lesson) {
+        click(By.cssSelector("[aria-label='" + lesson + "']"));
+
     }
 }
