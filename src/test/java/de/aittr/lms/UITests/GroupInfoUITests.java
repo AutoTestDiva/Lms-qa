@@ -16,7 +16,8 @@ public class GroupInfoUITests extends TestBaseUI {
     }
 
     @Test(dataProvider = "provideGetGroupData", dataProviderClass = CSVDataProviders.class)
-    public void isAllElementsInGroupTest(String group) {
+    public void isGroupInfoUITests(String group) {
+        report.add("isGroupInfoUITests" + System.lineSeparator());
         app.getUserUI().clickOnLessonsInSideBar();
 
         app.getUserUI().isGroupPresent();//
@@ -24,9 +25,9 @@ public class GroupInfoUITests extends TestBaseUI {
         if (app.getUserUI().selectMyGroup(group)) {//
             app.getUserUI().clickOnMyGroup(group);//
 
-            System.out.println("********************************************************************");
-            System.out.println("                       Group: " + group);
-            System.out.println("********************************************************************");
+            report.add("********************************************************************");
+            report.add("                       Group: " + group);
+            report.add("********************************************************************");
 
             if (app.getUserUI().isModulePresent()) {
                 app.getUserUI().clickOnSelectModule();
@@ -37,11 +38,11 @@ public class GroupInfoUITests extends TestBaseUI {
                 }
                 for (int l = 0; l < listOfModules.size(); l++) {
                     app.getUserUI().clickOnSelectedModule(listOfModules.get(l));
-                    System.out.println("--------------------------------------------------------------------");
-                    System.out.println("                       Module: " + listOfModules.get(l));
-                    System.out.println("--------------------------------------------------------------------");
-                    System.out.println("     Lesson   |  Plan  |  Theory  |  Home work  |  Code  |  Video  |");
-                    System.out.println("--------------------------------------------------------------------");
+                    report.add("--------------------------------------------------------------------");
+                    report.add("                       Module: " + listOfModules.get(l));
+                    report.add("--------------------------------------------------------------------");
+                    report.add("     Lesson   |  Plan  |  Theory  |  Home work  |  Code  |  Video  |");
+                    report.add("--------------------------------------------------------------------");
 
                     app.getUserUI().clickOnSelectLesson();
                     List<WebElement> lessons = app.getUserUI().getDropdownListOfLessons();
@@ -130,7 +131,7 @@ public class GroupInfoUITests extends TestBaseUI {
                             app.getUserUI().pause(1000);
                         }
 
-                        System.out.printf("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", listOfLessons.get(i), plan, theory, homeWork, code, video + "    |");
+                        report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", listOfLessons.get(i), plan, theory, homeWork, code, video + "    |"));
 
                         app.getUserUI().clickOnNextSelectedLesson();
                         app.getUserUI().pause(2000);
@@ -139,7 +140,7 @@ public class GroupInfoUITests extends TestBaseUI {
                     app.getUserUI().pause(1000);
                 }
             } else {
-                System.out.println("В данной группе модулей еще нет");
+                report.add("В данной группе модулей еще нет");
             }
             app.getUserUI().scrollPageUp();
         }

@@ -16,8 +16,8 @@ import java.util.List;
         }
 
         @Test(dataProvider = "provideGetGroupAndModuleData", dataProviderClass = CSVDataProviders.class)
-        public void isAllElementsInGroupAndModuleTest(String group, String module) {
-            report.add("isAllElementsInGroupAndModuleTest" + System.lineSeparator());
+        public void isGroupAndModuleInfoTests(String group, String module) {
+            report.add("isGroupAndModuleInfoTests" + System.lineSeparator());
             app.getUserUI().clickOnLessonsInSideBar();
 
             app.getUserUI().isGroupPresent();//
