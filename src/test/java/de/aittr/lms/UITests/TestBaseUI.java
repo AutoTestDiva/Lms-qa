@@ -29,7 +29,7 @@ public class TestBaseUI {
   protected static ApplicationManager app = new ApplicationManager(
       System.getProperty("browser", Browser.CHROME.browserName()));
 
-  Logger logger = LoggerFactory.getLogger(TestBaseUI.class);
+  Logger logger = LoggerFactory.getLogger(TestBaseUI.class); // надо для report
   @BeforeSuite
   public void setUp(){
     app.init();
@@ -45,7 +45,7 @@ public class TestBaseUI {
     logger.info("Start test " + m.getName() + " with data: " + Arrays.asList(p));
   }
 
-  private void printToFile() {
+  private void printToFile() { // надо метод  для report
     String dir = "report/";
     String fileName =
             LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))

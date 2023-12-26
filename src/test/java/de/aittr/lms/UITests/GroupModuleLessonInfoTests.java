@@ -16,28 +16,29 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
 
     @Test(dataProvider = "provideGetGroupModuleLessonData", dataProviderClass = CSVDataProviders.class)
     public void isGroupModuleLessonInfoTest(String group, String module, String lesson) {
-        report.add("isGroupModuleLessonInfoTest" + System.lineSeparator());
+        report.add("isGroupModuleLessonInfoTest" + System.lineSeparator()); // надо для report
         app.getUserUI().clickOnLessonsInSideBar();
 
-        app.getUserUI().isGroupPresent();
-        app.getUserUI().clickOnSelectYourGroup();
-        if (app.getUserUI().selectMyGroup(group)) {
-            app.getUserUI().clickOnMyGroup(group);
+
+        app.getCSVReaderUI().isGroupPresent();
+        app.getCSVReaderUI().clickOnSelectYourGroup();
+        if (app.getCSVReaderUI().selectMyGroup(group)) {
+            app.getCSVReaderUI().clickOnMyGroup(group);
             report.add("********************************************************************");
             report.add("                       Group: " + group);
             report.add("********************************************************************");
 
-            if (app.getUserUI().isModulePresent()) {
-                app.getUserUI().selectModule(module);
+            if (app.getCSVReaderUI().isModulePresent()) {
+                app.getCSVReaderUI().selectModule(module);
                 report.add("--------------------------------------------------------------------");
                 report.add("                       Module: " + module);
                 report.add("--------------------------------------------------------------------");
                 report.add("     Lesson   |  Plan  |  Theory  |  Home work  |  Code  |  Video  |");
                 report.add("--------------------------------------------------------------------");
 
-                app.getUserUI().clickOnSelectLesson();
-                if (app.getUserUI().selectMyLesson(lesson)) {
-                    app.getUserUI().clickOnMyLesson(lesson);
+                app.getCSVReaderUI().clickOnSelectLesson();
+                if (app.getCSVReaderUI().selectMyLesson(lesson)) {
+                    app.getCSVReaderUI().clickOnMyLesson(lesson);
 
                     String plan = "o";
                     String theory = "o";
@@ -45,59 +46,59 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
                     String code = "o";
                     String video = "o";
 
-                    if (app.getUserUI().isPlanLinePresent()) {
+                    if (app.getCSVReaderUI().isPlanLinePresent()) {
                         // Проверяем вкладку ПЛАН и наличие там текста
-                        app.getUserUI().clickOnPlanLine();
-                        if (app.getUserUI().isTextPresent()) {
+                        app.getCSVReaderUI().clickOnPlanLine();
+                        if (app.getCSVReaderUI().isTextPresent()) {
                             plan = "+";
                         } else {
                             plan = "-";
                         }
-                        app.getUserUI().clickOnPlanLine();
+                        app.getCSVReaderUI().clickOnPlanLine();
                         app.getUserUI().pause(1000);
                     }
 
-                    if (app.getUserUI().isTheoryLinePresent()) {
+                    if (app.getCSVReaderUI().isTheoryLinePresent()) {
                         // Проверяем вкладку Theory
-                        app.getUserUI().clickOnTheoryLine();
-                        if (app.getUserUI().isTextPresent()) {
+                        app.getCSVReaderUI().clickOnTheoryLine();
+                        if (app.getCSVReaderUI().isTextPresent()) {
                             theory = "+";
                         } else {
                             theory = "-";
                         }
-                        app.getUserUI().clickOnTheoryLine();
+                        app.getCSVReaderUI().clickOnTheoryLine();
                         app.getUserUI().pause(1000);
                     }
 
-                    if (app.getUserUI().isHomeWorkLinePresent()) {
+                    if (app.getCSVReaderUI().isHomeWorkLinePresent()) {
                         // Проверяем вкладку Домашка
-                        app.getUserUI().clickOnHomeWorkLine();
-                        if (app.getUserUI().isTextPresent()) {
+                        app.getCSVReaderUI().clickOnHomeWorkLine();
+                        if (app.getCSVReaderUI().isTextPresent()) {
                             homeWork = "+";
                         } else {
                             homeWork = "-";
                         }
-                        app.getUserUI().clickOnHomeWorkLine();
+                        app.getCSVReaderUI().clickOnHomeWorkLine();
                         app.getUserUI().pause(1000);
                     }
 
-                    if (app.getUserUI().isCodeLinePresent()) {
+                    if (app.getCSVReaderUI().isCodeLinePresent()) {
                         //Проверяем наличие кода
-                        app.getUserUI().clickOnCodeLine();
-                        if (app.getUserUI().isCodePresent()) {
+                        app.getCSVReaderUI().clickOnCodeLine();
+                        if (app.getCSVReaderUI().isCodePresent()) {
                             code = "+";
                         } else {
                             code = "-";
                         }
-                        app.getUserUI().clickOnCodeLine();
+                        app.getCSVReaderUI().clickOnCodeLine();
                         app.getUserUI().pause(1000);
                     }
 
-                    if (app.getUserUI().isVideoLinePresent()) {
+                    if (app.getCSVReaderUI().isVideoLinePresent()) {
                         // Проверяем наличие видео
-                        app.getUserUI().clickOnVideoLine();
+                        app.getCSVReaderUI().clickOnVideoLine();
                         // Использование метода для поиска видеоэлементов
-                        List<WebElement> videoElements = app.getUserUI().findVideoElements();
+                        List<WebElement> videoElements = app.getCSVReaderUI().findVideoElements();
                         // Проверьте, что найдено хотя бы одно видео
                         if (videoElements.isEmpty()) {
                             video = "-";
@@ -112,7 +113,7 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
                                 System.out.println(videoSource);
                             }*/
                         }
-                        app.getUserUI().clickOnVideoLine();
+                        app.getCSVReaderUI().clickOnVideoLine();
                         app.getUserUI().pause(1000);
                     }
                     report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", lesson, plan, theory, homeWork, code, video + "    |"));
@@ -122,7 +123,7 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
             } else {
                 report.add("В данной группе модулей еще нет");
             }
-            app.getUserUI().scrollPageUp();
+            app.getCSVReaderUI().scrollPageUp();
         } else {
             report.add("Данной группы еще нет");
         }

@@ -26,6 +26,8 @@ dependencies {
 
     implementation 'mysql:mysql-connector-java:8.0.33'
 
+    implementation 'com.opencsv:opencsv:5.7'
+
 }
 
 test {
