@@ -158,27 +158,28 @@ public class UniversalUITest extends TestBaseUI {
                                         app.getCSVReaderUI().clickOnNextSelectedLesson();
                                         app.getUserUI().pause(2000);
                                     } else {
-                                        report.add("В данной группе урока еще нет");
+                                       report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ "  " +listOfLessons.get(i)+ " еще нет");
                                     }
                                 }
                             } else {
-                                report.add("В данной группе уроков нет");
+                                report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ " уроков еще нет");
                             }
                         } else {
-                            report.add("В данной группе  такого модуля нет");
+                            report.add("В группе " + listOfGroups.get(j) + " модуля " + listOfModules.get(l)+ " еще нет");
                         }
                         app.getCSVReaderUI().clickOnNextSelectedModule();
                         app.getUserUI().pause(1000);
                     }
                 } else {
-                    report.add("В данной группе модулей еще нет");
+                    report.add("В группе " + listOfGroups.get(j) + "  модулей еще нет");
                 }
 
                 app.getCSVReaderUI().scrollPageUp();
                 app.getCSVReaderUI().clickOnNextSelectedGroup();
                 app.getUserUI().pause(1000);
+            } else {
+                report.add("Группы " + listOfGroups.get(j) + " еще нет");
             }
-            else{ report.add("Такой группы нет");}
         }
     }
 }
