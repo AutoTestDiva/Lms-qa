@@ -33,6 +33,28 @@ public class CSVDataProviders {
         return readDataFromCSV(csvFile);
     }
 
+
+    @DataProvider(name = "provideGetGroupData")
+    public static Object[][] provideGetGroupData() {
+        String csvFile = "src/test/resources/DataScv/GetGroupData.csv";
+        return readDataFromCSV(csvFile);
+    }
+    @DataProvider(name = "provideGetGroupAndModuleData")
+    public static Object[][] provideGetGroupAndModuleData() {
+        String csvFile = "src/test/resources/DataScv/GetGroupAndModuleData.csv";
+        return readDataFromCSV(csvFile);
+    }
+
+
+    @DataProvider(name = "provideGetGroupModuleLessonData")
+    public static Object[][] provideGetGroupModuleLessonData() {
+        String csvFile = "src/test/resources/DataScv/GetGroupModuleLessonData.csv";
+        return readDataFromCSV(csvFile);
+    }
+
+
+
+
     private static Object[][] readDataFromCSV(String csvFile) {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
             List<String[]> data = reader.readAll();

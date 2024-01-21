@@ -22,8 +22,16 @@ public class UserPageUITests extends TestBaseUI{
 
     @Test
     public void verifyVideoDisplayed(){
-        app.getLesson().selectLessonByModuleByCohort("Cohort 34.2", "basic_programming", "lesson_30");
-        Assert.assertTrue(app.getLesson().isVideoDisplayed()); //TODO see video
+        app.getLesson().selectLessonByModuleByCohort(
+                "Cohort 34.2","basic_programming","lesson_30");
+        Assert.assertTrue(app.getLesson().isAllVideoInLessonEnabled());
+    }
+
+    @Test
+    public void verifyVideoDisplayed2(){
+        app.getLesson().selectLessonByModuleByCohort(
+                "Cohort 34.2","linux_git","lesson_03");
+//        Assert.assertTrue(app.getLesson().isVideoEnabled());
     }
 
 

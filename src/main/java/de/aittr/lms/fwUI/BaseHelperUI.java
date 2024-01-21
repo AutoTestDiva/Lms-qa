@@ -114,8 +114,8 @@ public class BaseHelperUI {
     element.click();
   }
 
-  public void clickWithRectangle(WebElement element, int x, int y){
-
+  public void clickWithRectangle(By locator, int x, int y){
+    WebElement element = driver.findElement(locator);
     Rectangle rectangle = element.getRect();
 
     int offSetX = rectangle.getWidth() / x;
@@ -159,6 +159,15 @@ public class BaseHelperUI {
 
   public void returnBack(){
     driver.navigate().back();
+  }
+
+  public boolean isEnable(By locator){
+    return driver.findElement(locator).isEnabled();
+  }
+
+  public void scrollDown(int downValue) {
+    JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+    jsExecutor.executeScript("window.scrollBy(0, " + downValue + ");");
   }
 
 }

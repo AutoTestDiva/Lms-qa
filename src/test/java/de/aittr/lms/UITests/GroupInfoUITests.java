@@ -1,35 +1,32 @@
 package de.aittr.lms.UITests;
 
+import de.aittr.lms.CSVDataProviders;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllElementsInLmsTests extends TestBaseUI {
+public class GroupInfoUITests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
         app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
         app.getUserUI().closeLoginMessage();
     }
 
-    @Test
-    public void isAllElementsInLMSPresentTest() {
-        report.add("isAllElementsInLMSPresentTest" + System.lineSeparator()); // надо для report
+    @Test(dataProvider = "provideGetGroupData", dataProviderClass = CSVDataProviders.class)
+    public void isGroupInfoUITests(String group) {
+        report.add("isGroupInfoUITests" + System.lineSeparator());
         app.getUserUI().clickOnLessonsInSideBar();
 
+        app.getCSVReaderUI().isGroupPresent();
         app.getCSVReaderUI().clickOnSelectYourGroup();
-        List<WebElement> groups = app.getCSVReaderUI().getDropdownListOfGroups();
-        List<String> listOfGroups = new ArrayList<>();
-        for (WebElement item : groups) {
-            listOfGroups.add(item.getText());
-        }
-        for (int j = 0; j < listOfGroups.size(); j++) {
-            app.getCSVReaderUI().clickOnSelectedGroup(listOfGroups.get(j));
+        if (app.getCSVReaderUI().selectMyGroup(group)) {
+            app.getCSVReaderUI().clickOnMyGroup(group);
             report.add("********************************************************************");
-            report.add("                       Group: " + listOfGroups.get(j));
+            report.add("                       Group: " + group);
             report.add("********************************************************************");
+
 
             if (app.getCSVReaderUI().isModulePresent()) {
                 app.getCSVReaderUI().clickOnSelectModule();
@@ -128,10 +125,10 @@ public class AllElementsInLmsTests extends TestBaseUI {
                                 System.out.println(videoSource);
                             }*/
                             }
-
                             app.getCSVReaderUI().clickOnVideoLine();
                             app.getUserUI().pause(1000);
                         }
+
                         report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", listOfLessons.get(i), plan, theory, homeWork, code, video + "    |"));
 
                         app.getCSVReaderUI().clickOnNextSelectedLesson();
@@ -144,9 +141,8 @@ public class AllElementsInLmsTests extends TestBaseUI {
                 report.add("В данной группе модулей еще нет");
             }
             app.getCSVReaderUI().scrollPageUp();
-            app.getCSVReaderUI().clickOnNextSelectedGroup();
-            app.getUserUI().pause(1000);
+        } else {
+            report.add("Данной группы еще нет");
         }
     }
 }
-
