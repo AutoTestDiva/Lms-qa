@@ -1,14 +1,7 @@
 package de.aittr.lms.fwUI;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 public class LessonHelperUI extends BaseHelperUI{
 
@@ -35,8 +28,16 @@ public class LessonHelperUI extends BaseHelperUI{
         click(By.id("p-accordiontab-9"));
     }
 
-    public void clickOnTheory() {
-        click(By.cssSelector("[header=' Theory ']"));
+    public void clickOnTheory(String language) {
+        click(By.xpath("//span[contains(text(), ' Theory ')]"));
+        if(isElementPresent(By.xpath("//details[contains(., 'English')]"))
+                && !language.isEmpty()){
+            if(language.equalsIgnoreCase("ru")){
+                click(By.xpath("//details[contains(., 'На русском')]"));
+            } else if (language.equalsIgnoreCase("en")) {
+                click(By.xpath("//details[contains(., 'English')]"));
+            }
+        }
     }
 
     public void clickOnHomeWork() {
@@ -57,8 +58,9 @@ public class LessonHelperUI extends BaseHelperUI{
         selectLesson(lesson);
     }
 
-    public void clickOnRUTheory() {
-        clickOnTheory();
+    public void clickOnRUTheory() { // bette use clickOnTheory(String language)
+        // universal if choose language exist
+        clickOnTheory("");
         selectRULanguage();
     }
 

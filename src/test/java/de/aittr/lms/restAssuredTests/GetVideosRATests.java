@@ -14,6 +14,7 @@ public class GetVideosRATests extends TestBaseRA{
 
     @Test
     public void getVideosAsAdminCohort342PositiveTest(){
+        //акокоотма
         cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
                         user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30"))

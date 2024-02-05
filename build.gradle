@@ -28,9 +28,23 @@ dependencies {
 
 }
 
+
+
+
 test {
     useTestNG()
     ignoreFailures = true
+//    systemProperty 'user.timezone', 'Europe/Berlin'
+}
+
+//run {
+//    systemProperty 'user.timezone', 'Europe/Berlin'
+//}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+//    options.fork = true
+//    options.forkOptions.jvmArgs.add('-Duser.timezone=Europe/Berlin')
 }
 
 task qa(type:Test) {

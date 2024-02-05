@@ -36,6 +36,7 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void logOut() {
+        pause(1000);
         click(By.cssSelector(".pi-user"));
         pause(1000);
         click(By.xpath("//span[contains(text(),'Sign Out')]"));

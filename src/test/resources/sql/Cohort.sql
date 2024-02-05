@@ -46,3 +46,17 @@ INSERT INTO lms.cohort (alias, github_repository, name)
 VALUES ('Cohort 37.2', 'cohort37.2', 'Cohort 37.2');
 INSERT INTO lms.cohort (alias, github_repository, name)
 VALUES ('Cohort 38', 'cohort38', 'Cohort 38');
+INSERT INTO lms.cohort (alias, github_repository, name)
+VALUES ('Cohort 39.1', 'cohort39.1', 'Cohort 39.1');
+INSERT INTO lms.cohort (alias, github_repository, name)
+VALUES ('Cohort 39.2', 'cohort39.2', 'Cohort 39.2');
+INSERT INTO lms.cohort (alias, github_repository, name)
+VALUES ('Cohort 40.1', 'cohort40.1', 'Cohort 40.1');
+INSERT INTO lms.cohort (alias, github_repository, name)
+VALUES ('Cohort 40.2', 'cohort40.2', 'Cohort 40.2');
+INSERT INTO lms.cohort (alias, github_repository, name)
+VALUES ('Cohort 41', 'cohort41', 'Cohort 41');
+INSERT INTO lms.cohort (alias, github_repository, name)
+VALUES ('Cohort 42.1', 'cohort42.1', 'Cohort 42.1');
+INSERT INTO lms.cohort (alias, github_repository, name)
+VALUES ('Cohort 42.2', 'cohort42.2', 'Cohort 42.2');

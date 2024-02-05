@@ -4,6 +4,16 @@ Before start to work with LMS QA Project, you have to create src/test/resources/
 Then set your access to database in application.yml
 You have to enter your username from database in the "username" field and enter password in "password" field.
 
+## Documentation
+[Test plan of project](https://docs.google.com/document/d/115SB79CmmhLYndd9Wf6cEAfDaiN7c6eA8NFb9hjn_I4/edit?usp=drive_link)
+
+Documentation is on google account:
+```
+Login: project.lms.2023@gmail.com
+Password: Qwer123!
+```
+With this email you can enter in zoom account. There are data for back-end project to set up environments variable.
+
 ### Example:
 ```
 url: jdbc:mysql://localhost:3306/lms
@@ -24,6 +34,8 @@ to create main users as admin, teacher, student and student2.
 - TEACHER -> {email: "teacher@mail.com", password: "Qwer123!"}
 - STUDENT -> {email: "student@mail.com", password: "Qwer123!"} - cohort 34.2
 - STUDENT -> {email: "student2@mail.com", password: "Qwer123!"} - cohort 35, cohort 36
+
+[To encoding password](https://bcrypt-generator.com/)
 
 ## Run Rest Assured test.
 The first you have to do "git pull" of [Back-End](https://github.com/ait-tr/lms-be) project.
@@ -113,3 +125,7 @@ It will start in http://localhost:4200/.
    if there is a video tab and it contains video, then the number of attached videos is written,
    if there is a video tab and it doesn't contain video, then "-").
 - The result look in folder 'result'.
+
+
+**********************
+https://marketplace.zoom.us/

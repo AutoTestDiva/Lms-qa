@@ -1,24 +1,17 @@
 package de.aittr.lms.restAssuredTests;
 
-import de.aittr.lms.ApplicationManager;
 import de.aittr.lms.DataBase;
-import de.aittr.lms.fwRA.LessonHelperRA;
+import de.aittr.lms.fwRA.ZoomHelperRA;
 import de.aittr.lms.fwRA.UserHelperRA;
 import io.restassured.RestAssured;
 
-import io.restassured.http.ContentType;
-import io.restassured.http.Cookie;
-import io.restassured.response.Response;
-import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterGroups;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
-import java.sql.SQLException;
 import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
@@ -28,7 +21,7 @@ public class TestBaseRA {
     final static Logger logger = LoggerFactory.getLogger(TestBaseRA.class);
     protected static DataBase db;
     protected static UserHelperRA user = new UserHelperRA();
-    protected static LessonHelperRA lesson = new LessonHelperRA();
+    protected static ZoomHelperRA zoom = new ZoomHelperRA();
 
     @BeforeMethod
     public void precondition(Method method, Object[] parameters){
@@ -43,8 +36,7 @@ public class TestBaseRA {
         } else {
             logger.info("FAILED: " + result.getMethod().getMethodName());
         }
-        logger.info("Stop test");
-        logger.info("==============================");
+        logger.info("=============== Stop test ===============");
     }
 
 }

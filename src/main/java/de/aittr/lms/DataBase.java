@@ -46,7 +46,7 @@ public abstract class DataBase {
         }
     }
 
-    public static boolean execute(String query) {
+    public boolean execute(String query) {
         try {
             return connection.createStatement().execute(query);
         } catch (SQLException e) {
@@ -57,7 +57,6 @@ public abstract class DataBase {
     public static void requestDelete(String query) {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//            preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
 
         } catch (SQLException exception) {

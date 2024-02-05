@@ -106,7 +106,7 @@ public class UserHelperRA extends BaseHelperRA {
                 .post("/users/"  + userId +"/password");
     }
 
-    private void deleteUserById(String userId) throws SQLException {
+    private void deleteUserById(String userId) {
 
         db.requestDelete("DELETE FROM confirmation_code WHERE user_id = " + userId + ";");
         db.requestDelete("DELETE FROM student_cohort WHERE user_id = " + userId + ";");

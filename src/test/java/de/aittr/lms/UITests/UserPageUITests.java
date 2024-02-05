@@ -16,7 +16,8 @@ public class UserPageUITests extends TestBaseUI{
     @Test
     public void verifyTheoryDisplayed(){
         app.getLesson().selectLessonByModuleByCohort("Cohort 34.2","basic_programming","lesson_30");
-        app.getLesson().clickOnRUTheory(); // TODO fix
+        app.getLesson().clickOnTheory("ru"); // TODO fix
+//        app.getLesson().click(By.xpath("//details[contains(., 'На русском')]"));
         Assert.assertTrue(app.getLesson().isTheoryContainsText("1. Введение в интерфейсы:"));
     }
 

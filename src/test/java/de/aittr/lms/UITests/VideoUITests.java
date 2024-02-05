@@ -2,19 +2,17 @@ package de.aittr.lms.UITests;
 
 import de.aittr.lms.CSVDataProviders;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class VideoUITests extends TestBaseUI{
 
-    @BeforeClass
+    @BeforeMethod
     public void precondition(){
         app.getUserUI().loginWithData("teacher@mail.com", "Qwer123!");
         app.getUserUI().closeLoginMessage();
     }
 
-    @AfterClass
+    @AfterMethod
     public void postCondition(){
         app.getUserUI().logOut();
     }
