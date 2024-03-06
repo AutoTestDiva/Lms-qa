@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="AnaliticUI" verbose="1" >
+
+    <test name="AnaliticUI" >
+        <classes>
+            <class name="de.aittr.lms.UITests.UniversalUITest" />
+        </classes>
+    </test>
+
+</suite>

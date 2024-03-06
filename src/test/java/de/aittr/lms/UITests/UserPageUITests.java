@@ -5,40 +5,39 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class UserPageUITests extends TestBaseUI{
+public class UserPageUITests extends TestBaseUI {
 
     @BeforeMethod
-    public void precondition(){
+    public void precondition() {
         app.getUserUI().loginWithData("student@mail.com", "Qwer123!");
         app.getUserUI().closeLoginMessage();
     }
 
     @Test
-    public void verifyTheoryDisplayed(){
-        app.getLesson().selectLessonByModuleByCohort("Cohort 34.2","basic_programming","lesson_30");
+    public void verifyTheoryDisplayed() {
+        app.getLesson().selectLessonByModuleByCohort("Cohort 34.2", "basic_programming", "lesson_30");
         app.getLesson().clickOnTheory("ru"); // TODO fix
 //        app.getLesson().click(By.xpath("//details[contains(., 'На русском')]"));
         Assert.assertTrue(app.getLesson().isTheoryContainsText("1. Введение в интерфейсы:"));
     }
 
     @Test
-    public void verifyVideoDisplayed(){
+    public void verifyVideoDisplayed() {
         app.getLesson().selectLessonByModuleByCohort(
-                "Cohort 34.2","basic_programming","lesson_30");
+                "Cohort 34.2", "basic_programming", "lesson_30");
         Assert.assertTrue(app.getLesson().isAllVideoInLessonEnabled());
     }
 
     @Test
-    public void verifyVideoDisplayed2(){
+    public void verifyVideoDisplayed2() {
         app.getLesson().selectLessonByModuleByCohort(
-                "Cohort 34.2","linux_git","lesson_03");
+                "Cohort 34.2", "linux_git", "lesson_03");
 //        Assert.assertTrue(app.getLesson().isVideoEnabled());
     }
 
 
-
     @AfterMethod
-    public void postCondition(){
+    public void postCondition() {
         app.getUserUI().logOut();
     }
 

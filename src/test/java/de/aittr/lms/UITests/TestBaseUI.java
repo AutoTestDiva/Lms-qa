@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -27,9 +28,9 @@ public class TestBaseUI {
   protected List<String> report = new LinkedList<>();
 
   protected static ApplicationManager app = new ApplicationManager(
-      System.getProperty("browser", Browser.CHROME.browserName()));
+          System.getProperty("browser", Browser.CHROME.browserName()));
 
-  Logger logger = LoggerFactory.getLogger(TestBaseUI.class);
+  Logger logger = LoggerFactory.getLogger(TestBaseUI.class); // надо для report
   @BeforeSuite
   public void setUp(){
     app.init();
@@ -45,24 +46,52 @@ public class TestBaseUI {
     logger.info("Start test " + m.getName() + " with data: " + Arrays.asList(p));
   }
 
+//  private void printToFile() { // надо метод  для report
+//    String dir = "report/";
+//    String fileName =
+//            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
+//                    + "_report.txt";
+//    try {
+//      Path directories = Files.createDirectories(Path.of(dir));
+//      Path file = Files.createFile(Path.of(directories + "/", fileName));
+//      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true));
+//      for (String r : report) {
+//        bufferedWriter.write(r + System.lineSeparator());
+//      }
+//      bufferedWriter.close();
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
+//
+//  }
+
   private void printToFile() {
     String dir = "report/";
-    String fileName =
-            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
-                    + "_report.txt";
+    String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_report.txt";
+
     try {
-      Path directories = Files.createDirectories(Path.of(dir));
-      Path file = Files.createFile(Path.of(directories + "/", fileName));
-      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true));
-      for (String r : report) {
-        bufferedWriter.write(r + System.lineSeparator());
+      // Проверяем, существует ли директория, если нет, то создаем
+      if (!Files.exists(Paths.get(dir))) {
+        Files.createDirectories(Paths.get(dir));
       }
-      bufferedWriter.close();
+
+      // Создаем файл внутри директории
+      Path file = Paths.get(dir, fileName);
+      Files.createFile(file);
+
+      try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true))) {
+        for (String r : report) {
+          bufferedWriter.write(r + System.lineSeparator());
+        }
+      }
+
+      logger.info("Test logs have been written to: " + file.toString());
     } catch (IOException e) {
+      logger.error("Error writing test logs to file", e);
       throw new RuntimeException(e);
     }
-
   }
+
   @AfterMethod
   public void stopTest(ITestResult result){
     if (result.isSuccess()) {

@@ -16,11 +16,11 @@ public class GroupModuleLessonInfoTests extends TestBaseUI {
 
     @Test(dataProvider = "provideGetGroupModuleLessonData", dataProviderClass = CSVDataProviders.class)
     public void isGroupModuleLessonInfoTest(String group, String module, String lesson) {
+        report.add("isGroupModuleLessonInfoTest" + System.lineSeparator());
         app.getUserUI().clickOnLessonsInSideBar();
         app.getUserUI().isGroupPresent();
         app.getUserUI().clickOnSelectYourGroup();
 
-        report.add("isGroupModuleLessonInfoTest" + System.lineSeparator());
         if (app.getUserUI().selectMyGroup(group)) {
             app.getUserUI().clickOnMyGroup(group);
             report.add("********************************************************************");

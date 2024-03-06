@@ -18,17 +18,29 @@ public class UserHelperUI extends BaseHelperUI {
 
     public void loginWithData(String mail, String password) {
 
-        click(By.cssSelector("[label='Sign in']")); //click on Sign in button
+        click(By.xpath("//button[contains(text(),'Login')]")); //click on Sign in button
         type(By.id("email-login-page"), mail);
         type(By.cssSelector("[type='password']"), password);
-        click(By.cssSelector("[label='Sign In']"));
+       // click(By.xpath("//span[contains(text(),'Sign In')]"));
+        clickWithScroll(By.xpath("//span[contains(text(),'Sign In')]"));
+    }
+    public void clickWithScroll(By locator) {
+        // Прокрутка вниз на 500 пикселей (можете настроить значение по вашему усмотрению)
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,500);");
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Выполнение клика
+        driver.findElement(locator).click();
     }
 
-    public void clickOnUserList() {
-
+   public void clickOnUserList() {
         click(By.xpath("//span[contains(text(),'Users')]"));
-
     }
 
     public boolean isManageHidderExist() {
@@ -112,7 +124,7 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void closeLoginMessage() {
-        click(By.xpath("//div[contains(., 'Login is succes')]/button"));
+       click(By.xpath("//div[contains(text(),'Success')]"));
     }
 
     public void closeLogoutMessage() {
@@ -154,7 +166,7 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void clickOnLessonsInSideBar() {
-        click(By.xpath("//span[contains(text(),'Lessons')]"));
+        click(By.xpath("//a[contains(text(),'Lessons')]"));
     }
 
     public void clickOnSelectYourGroup() {
@@ -182,8 +194,9 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void clickOnVideoLine() {
-        if (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*"))) {
-            click(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*"));
+        //if (isElementPresent(By.cssSelector("#video-toggle"))) {
+        if (isElementPresent(By.xpath("//button[@id='video-toggle']"))) {
+            clickWithScroll(By.cssSelector("#video-toggle"));
         } else {
             System.out.println("Элемента Video на вкладке урока нет");
         }
@@ -195,29 +208,29 @@ public class UserHelperUI extends BaseHelperUI {
 
     //------------------------------------------------------------------
     public List<WebElement> getDropdownListOfGroups() {
-        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
         List<WebElement> groups = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return groups;
     }
 
     public List<WebElement> getDropdownListOfModules() {
-        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[2]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
         List<WebElement> modules = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return modules;
     }
     public List<WebElement> getDropdownListOfLessons() {
-        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[3]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
         List<WebElement> lessons = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return lessons;
     }
     public void clickOnNextSelectedLesson() {
-        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[3]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
     }
     public void clickOnNextSelectedModule() {
-        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[2]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
     }
     public void clickOnNextSelectedGroup() {
-        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
     }
     public boolean isModulePresent() {
         return isElementPresent(By.xpath("//span[contains(text(),'Select module')]"));
@@ -231,18 +244,19 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void clickOnPlanLine() {
-        click(By.xpath("//*/text()[normalize-space(.)='Plan']/parent::*"));
+        click(By.cssSelector("#plan-toggle"));
     }
 
     public void clickOnTheoryLine() {
-       // click(By.xpath("//*/text()[normalize-space(.)='Theory']/parent::*"));
-        click(By.xpath("//span[contains(text(),'Theory')]"));
+        click(By.cssSelector("#theory-toggle"));
     }
+
     public void clickOnHomeWorkLine() {
-        click(By.xpath("//*/text()[normalize-space(.)='Home work']/parent::*"));
+        click(By.cssSelector("#home_work-toggle"));
     }
+
     public void clickOnCodeLine() {
-        click(By.xpath("//*/text()[normalize-space(.)='Code']/parent::*"));
+        click(By.cssSelector("#code-toggle"));
     }
     public void scrollPageUp() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -250,23 +264,28 @@ public class UserHelperUI extends BaseHelperUI {
     }
     public boolean isCodePresent() {
         return (isElementPresent(By.xpath("//button[.='Copy']")) &&
-                isElementPresent(By.xpath("//button[.='Download']")));
+                isElementPresent(By.xpath("//button[.='Download File']")));
     }
     public boolean isPlanLinePresent() {
-        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Plan']/parent::*")));
+        return (isElementPresent(By.cssSelector("#plan-toggle")));
     }
+
     public boolean isTheoryLinePresent() {
-        //return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Theory']/parent::*")));
-        return (isElementPresent(By.xpath("//span[contains(text(),'Theory')]")));
+        return (isElementPresent(By.cssSelector("#theory-toggle")));
     }
+
     public boolean isHomeWorkLinePresent() {
-        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Home work']/parent::*")));
+        return (isElementPresent(By.cssSelector("#home_work-toggle")));
     }
+
     public boolean isCodeLinePresent() {
-        return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Code']/parent::*")));
+        return (isElementPresent(By.cssSelector("#code-toggle")));
     }
-    public boolean isVideoLinePresent() { return (isElementPresent(By.xpath("//*/text()[normalize-space(.)='Video']/parent::*")));
+
+    public boolean isVideoLinePresent() {
+        return (isElementPresent(By.cssSelector("#video-toggle")));
     }
+
 
     public void selectGroup(String cohort) {
         click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
@@ -274,7 +293,7 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void selectModule(String module) {
-        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[2]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
         click(By.cssSelector("[aria-label='" + module + "']"));
     }
 

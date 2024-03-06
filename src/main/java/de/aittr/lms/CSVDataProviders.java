@@ -51,6 +51,11 @@ public class CSVDataProviders {
         String csvFile = "src/test/resources/DataScv/GetGroupModuleLessonData.csv";
         return readDataFromCSV(csvFile);
     }
+    @DataProvider(name = "provideGetCombinationData")
+    public static Object[][] provideGetCombinationData() {
+        String csvFile = "src/test/resources/DataScv/GetCombinationData.csv";
+        return readDataFromCSV(csvFile);
+    }
 
 
 
