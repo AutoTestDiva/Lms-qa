@@ -26,7 +26,6 @@ public class MyHomeWorkUITests2 extends TestBaseUI{
         app.getUserUI().clickOnSelectLesson();
         app.getUserUI().selectMyLesson(lesson);
         app.getUserUI().clickOnMyLesson(lesson);
-
         Assert.assertTrue(app.getCSVReaderUI().isMyHomeWorkPresent());
     }
 }
