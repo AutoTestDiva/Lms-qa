@@ -11,7 +11,7 @@ import java.util.List;
 public class UploadHomeWorkSolutionUITests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+        app.getUserUI().loginWithData("a01@dev-lms.de", "lms-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 

@@ -58,7 +58,17 @@ public class CSVDataProviders {
     }
 
 
+    @DataProvider(name = "provideUploadHomeWorkSolutionData")
+    public static Object[][] provideUploadHomeWorkSolutionData() {
+        String csvFile = "src/test/resources/DataScv/UploadHomeWorkSolutionData.csv";
+        return readDataFromCSV(csvFile);
+    }
 
+    @DataProvider(name = "provideMyHomeWorkData")
+    public static Object[][] provideMyHomeWorkData() {
+        String csvFile = "src/test/resources/DataScv/MyHomeWorkData.csv";
+        return readDataFromCSV(csvFile);
+    }
 
     private static Object[][] readDataFromCSV(String csvFile) {
         try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
