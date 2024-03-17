@@ -324,4 +324,23 @@ public class UserHelperUI extends BaseHelperUI {
         click(By.cssSelector("[aria-label='" + lesson + "']"));
 
     }
+
+
+    public void enterEmailData(String mail) {
+
+            click(By.xpath("//button[contains(text(),'Login')]")); //click on Sign in button
+            type(By.id("email-login-page"), mail);
+    }
+
+    public void clickOnForgotPassword(String mail) {
+        click(By.xpath("//a[contains(text(),'Forgot password?')]"));
+        click(By.cssSelector("#email-reset-page"));
+        type(By.cssSelector("#email-reset-page"), mail);
+        click(By.xpath("//span[contains(text(),'Reset Password')]"));
+}
+
+    public boolean isErrorPresent() {
+        return isElementPresent(By.xpath("//div[contains(text(),'Error')]"));
+    }
+
 }

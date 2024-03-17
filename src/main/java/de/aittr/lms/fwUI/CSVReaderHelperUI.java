@@ -243,6 +243,24 @@ public class CSVReaderHelperUI extends BaseHelperUI {
     public boolean selectMyModule(String module) {
         return isElementPresent(By.cssSelector("[aria-label='" + module + "']"));
     }
+
+    public boolean isUploadHomeWorkSolutionPresent() {
+        if (isElementPresent(By.xpath("//button[contains(text(),'Upload home work solution')]"))) {
+            return true;
+        }
+        return false;
+
+    }
+
+    public boolean isMyHomeWorkPresent() {
+        if (isElementPresent(By.xpath("//button[contains(text(),'My home work')]"))) {
+           return true;
+        }
+        return false;
+
+    }
+
+
 }
 
 

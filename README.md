@@ -63,6 +63,26 @@ The first you have to do "git pull" of [Front_end](https://github.com/ait-tr/lms
 To start frontend you have to enter "ng serve" in terminal.
 It will start in http://localhost:4200/.
 
+## Getting complete information on a one or a few Cohorts, Modules, Lessons
+- Open file 'GetCombinationData.csv', enter one or a few  cohorts and/or one or a few modules,
+  and/or one or a few lessons for which you want to get information about the presence/absence of tabs
+  (Plan, Theory, Homework, Code, Video) and information about the presence/absence of data in each of these tabs.
+- If the file 'GetCombinationData.csv' will be empty, then  you`ll get information on all cohorts. modules and lessons
+  about the presence/absence of tabs (Plan, Theory, Homework, Code, Video) and information about the presence/absence
+  of data in each of these tabs.
+- Open the 'UniversalUITest' class in UI-tests.
+  The report folder gives the following information options:
+1) if the entered cohort(s), module(s) and lesson(s) exist, it gives information about the presence of tabs
+   in the lesson(s)
+   (if there is no tab, then "0";
+   if there is a tab and it contains information, then "+";
+   if there is a tab and it doesn't contain information, then "-";
+   if there is a video tab and it contains video, then the number of attached videos is written,
+   if there is a video tab and it doesn't contain video, then "-");
+2) if the entered cohort or module or lesson does not exist, it gives information about absence
+   of such cohort or module or lesson.
+- The result look in folder 'result'.
+
 ## Getting complete information on a Cohort, Module and Lesson
 - Open file 'GetGroupModuleLessonData.csv', enter the cohort, module and lesson for which you want 
   to get information about the presence/absence of tabs (Plan, Theory, Homework, Code, Video) and 

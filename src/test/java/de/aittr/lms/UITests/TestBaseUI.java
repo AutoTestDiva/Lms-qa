@@ -69,17 +69,25 @@ public class TestBaseUI {
     String dir = "report/";
     String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_report.txt";
 
+    System.out.println("File name: " + fileName);
     try {
       // Проверяем, существует ли директория, если нет, то создаем
       if (!Files.exists(Paths.get(dir))) {
+        System.out.println("File not exist: " + dir);
+
         Files.createDirectories(Paths.get(dir));
       }
+
+      System.out.println("create dir " + dir);
 
       // Создаем файл внутри директории
       Path file = Paths.get(dir, fileName);
       Files.createFile(file);
 
       try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true))) {
+
+        System.out.println("pring lines " + report);
+
         for (String r : report) {
           bufferedWriter.write(r + System.lineSeparator());
         }
@@ -100,7 +108,7 @@ public class TestBaseUI {
       logger.info("FAILED: " + result.getMethod().getMethodName() + " Screenshot: " + app.getUserUI().takeScreenshot());
     }
     logger.info("============== Stop test =================");
-
+    System.out.println("test stopped, try start print to file");
     printToFile();
   }
 

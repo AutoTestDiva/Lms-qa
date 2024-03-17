@@ -1,6 +1,8 @@
 package de.aittr.lms.UITests;
 
 
+import de.aittr.lms.CSVDataProviders;
+
 import org.openqa.selenium.WebElement;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -20,11 +22,13 @@ import java.util.List;
 public class UniversalUITest extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+
+        app.getUserUI().loginWithData("a01@dev-lms.de", "lms-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
-    @Test //(dataProvider = "provideGetCombinationData", dataProviderClass = CSVDataProviders.class)
+    @Test
+
     public void isAllElementsUniversalTest() {
         report.add("isAllElementsUniversalTest" + System.lineSeparator()); // надо для report
         app.getUserUI().clickOnLessonsInSideBar();
@@ -210,23 +214,6 @@ public class UniversalUITest extends TestBaseUI {
             throw new RuntimeException(e);
         }
 
-    }
-    @AfterMethod
-    public void stopTest(ITestResult result) {
-        if (result.isSuccess()) {
-            logger.info("PASSED: " + result.getMethod().getMethodName());
-        } else {
-            logger.info("FAILED: " + result.getMethod().getMethodName() + " Screenshot: " + app.getUserUI().takeScreenshot());
-        }
-        logger.info("============== Stop test =================");
-
-        // Пример добавления информации в report
-        report.add("Test: " + result.getMethod().getMethodName());
-        if (!result.isSuccess()) {
-            report.add("Failed with message: " + result.getThrowable().getMessage());
-        }
-
-       printToFile();
     }
 }
 
