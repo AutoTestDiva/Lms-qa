@@ -1,136 +1,37 @@
-name: 🐞 Java CI with Gradle [UBUNTU] Selenium Tests
+name: UI Tests
+
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
-    inputs:
-      deployment_target:
-        description: Choose target
-        required: true
-        default: 'all_tests'
-        type: choice
-        options:
-          - 'all_tests'
-          - 'login_users'
+    branches:
+      - main  # замените на вашу основную ветку
+
 jobs:
-  # !  Checking code for compliance with standards
   test:
-    runs-on: ubuntu-latest
+    name: Run UI Tests
+    runs-on: ubuntu-latest  # используем Ubuntu
+
     steps:
-      - uses: actions/checkout@v4
-      # !  Installation Java
-      - name: ✅ ⚙️ Set execute permission for gradlew
-        run: chmod +x gradlew
-      - name: ✅ ⚙️ Install Java version "17"
-        uses: actions/setup-java@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
         with:
-          distribution: 'temurin'
           java-version: '17'
-      # !  Checking versions Java, JVM, Java Core
-      - name: ❎ ⌛️ Check Java version
-        run: java -version
-      - name: ❎ ⌛️ Check JVM version
-        run: echo $JAVA_HOME
-      - name: ❎ ⌛️ Check Java Core version
-        run: javac -version
-#      # !  Installation Node.js
-#      - name: ✅ ⚙️ Install Node version "20"
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: '20'
-#      - name: ❎ ⌛️ Check Node version
-#        run: node --version
-      # !  Installation Gradle
-      - name: ✅ ⚙️ Build with Gradle
-        run: ./gradlew build -x test --no-build-cache > build.log 2>&1 || true
-      - name: ❎ ⌛️ Check Gradle version
-        run: ./gradlew --version
-      - name: ✅ 🚿 Clean Gradle build
-        run: ./gradlew clean
-#      # ! Installing dependencies forPlaywright
-#      - name: ✅ ⚙️ Install Playwright dependencies
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y libevent-2.1-7 libopus0 libharfbuzz-icu0 libgstreamer-plugins-base1.0-0 libgstreamer1.0-0 libgstreamer-gl1.0-0 libgstreamer-plugins-bad1.0-0 libhyphen0 libmanette-0.2-0 libflite1 libgles2 libwoff1 libvpx7 gstreamer1.0-libav
-#      # !  Installation Debug
-#      - name: ✅ ⚙️ Uninstall old Debug
-#        run: npm uninstall debug
-#      - name: ✅ ⚙️ Install Debug "4.3.1"
-#        run: npm install debug@4.3.1
-#      - name: ❎ ⌛️ Check Debug version
-#        run: npm list debug
-#      # !  Installation Playwright
-#      - name: ✅ ⚙️ Install Playwright version "1.42.0"
-#        run: npm install playwright@1.42.0
-#      - name: ❎ ⌛️ Check Playwright version
-#        run: npx playwright --version
-#      # !  Installing browsers for Playwright
-#      - name: ✅ ⚙️ Install Playwright browsers
-#        run: npx playwright install chrome
-#      - name: ❎ ⌛️️ Check installed Playwright browsers versions
-#        run: npx playwright --version
-#      # !  Installation Allure
-#      - name: ✅ ⚙️ Install Allure
-#        run: npm install -g allure-commandline
-#      - name: ❎ ⌛️ Check Allure version
-#        run: allure --version
-      # !  List of folders before tests
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
-      # !  Running tests
-      - name: ▶️ 🐞 Run all tests
-        run: xvfb-run --auto-servernum --server-args="-screen 0 2000x1000x24" ./gradlew test
-      # !  List of folders after tests
-      - name: ✅ 📂 List Directories after tests
-        if: always()
-        run: ls -R
-      # !  Upload Gradle build log
-      - name: ✅ 📦 Archive [Gradle build log]
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: gradle-build-log.zip
-          path: build.log
-      # ! Upload Gradle Report
-      - name: ✅ 📦 Archive [test results]
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: gradle-results.zip
-          path: |
-            build/reports/tests/test/*
-      # !  Upload archive with TEST_logs files of failed tests
-      - name: ✅ 📦 Archive [Allure attachments for failed tests]
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: allure-attachments for failed tests.zip
-          path: |
-            src/test_logs/*
-      # *  Load test report history (remove this step if you need a clean history)
-      - name: ✅ 💾 Load previous test report history
-        uses: actions/checkout@v3
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-#      # *  Build allure report
-#      - name: ✅ 🤖 Build allure report on gh-pages
-#        uses: simple-elf/allure-report-action@v1.7
-#        if: always()
-#        with:
-#          gh_pages: gh-pages
-#          allure_history: allure-history
-#          allure_results: build/allure-results
-#      # *  Publish test report on gh-pages
-#      - name: ✅ 💻 Publish test report
-#        uses: peaceiris/actions-gh-pages@v3
-#        if: always()
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_branch: gh-pages
-#          publish_dir: allure-history
+
+      - name: Install Chrome
+        run: |
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install ./google-chrome-stable_current_amd64.deb
+
+      - name: Set up ChromeDriver
+        run: |
+          LATEST_CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+
+      - name: Build and Run Tests
+        run: |
+          ./gradlew clean test
+
