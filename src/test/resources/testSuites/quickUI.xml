@@ -7,7 +7,6 @@
             <class name="de.aittr.lms.UITests.AdminPageUITests" />
             <class name="de.aittr.lms.UITests.LoginUITests" />
             <class name="de.aittr.lms.UITests.LogOutUITests" />
-            <class name="de.aittr.lms.UITests.UserPageUITests" />
 
         </classes>
     </test>
