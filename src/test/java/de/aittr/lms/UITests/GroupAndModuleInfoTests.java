@@ -2,23 +2,23 @@ package de.aittr.lms.UITests;
 
 import de.aittr.lms.CSVDataProviders;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroupAndModuleInfoTests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
     @Test(dataProvider = "provideGetGroupAndModuleData", dataProviderClass = CSVDataProviders.class)
     public void isGroupAndModuleInfoTests(String group, String module) {
         report.add("isGroupAndModuleInfoTests" + System.lineSeparator());
-        app.getUserUI().clickOnLessonsInSideBar();
-
         app.getUserUI().isGroupPresent();
         app.getUserUI().clickOnSelectYourGroup();
         if (app.getUserUI().selectMyGroup(group)) {
@@ -27,8 +27,7 @@ public class GroupAndModuleInfoTests extends TestBaseUI {
             report.add("                       Group: " + group);
             report.add("********************************************************************");
 
-
-            if (app.getUserUI().isModulePresent()) {
+            if (app.getCSVReaderUI().isModulePresent()) {
                 app.getUserUI().selectModule(module);
                 report.add("--------------------------------------------------------------------");
                 report.add("                       Module: " + module);
@@ -90,7 +89,7 @@ public class GroupAndModuleInfoTests extends TestBaseUI {
                     if (app.getUserUI().isCodeLinePresent()) {
                         //Проверяем наличие кода
                         app.getUserUI().clickOnCodeLine();
-                        if (app.getUserUI().isCodePresent()) {
+                        if (app.getCSVReaderUI().isCodePresent()) {
                             code = "+";
                         } else {
                             code = "-";
@@ -99,11 +98,11 @@ public class GroupAndModuleInfoTests extends TestBaseUI {
                         app.getUserUI().pause(1000);
                     }
 
-                    if (app.getUserUI().isVideoLinePresent()) {
+                    if (app.getCSVReaderUI().isVideoLinePresent()) {
                         // Проверяем наличие видео
                         app.getUserUI().clickOnVideoLine();
                         // Использование метода для поиска видеоэлементов
-                        List<WebElement> videoElements = app.getUserUI().findVideoElements();
+                        List<WebElement> videoElements = app.getCSVReaderUI().findVideoElements();
                         // Проверьте, что найдено хотя бы одно видео
                         if (videoElements.isEmpty()) {
                             video = "-";
@@ -118,12 +117,11 @@ public class GroupAndModuleInfoTests extends TestBaseUI {
                                 System.out.println(videoSource);
                             }*/
                         }
-
-                        app.getUserUI().clickOnVideoLine();
+                        app.getCSVReaderUI().clickOnVideoLine();
                         app.getUserUI().pause(1000);
                     }
                     report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", listOfLessons.get(i), plan, theory, homeWork, code, video + "    |"));
-                    app.getUserUI().clickOnNextSelectedLesson();
+                    app.getCSVReaderUI().clickOnNextSelectedLesson();
                     app.getUserUI().pause(2000);
                 }
             } else {
@@ -133,6 +131,11 @@ public class GroupAndModuleInfoTests extends TestBaseUI {
         } else {
             report.add("Данной группы еще нет");
         }
+    }
+
+    @AfterMethod
+    public void postCondition() {
+        app.getUserUI().logOut();
     }
 }
 

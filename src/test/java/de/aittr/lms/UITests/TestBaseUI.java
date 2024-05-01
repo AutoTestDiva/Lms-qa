@@ -25,91 +25,69 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 public class TestBaseUI {
-  protected List<String> report = new LinkedList<>();
+    protected List<String> report = new LinkedList<>();
 
-  protected static ApplicationManager app = new ApplicationManager(
-          System.getProperty("browser", Browser.CHROME.browserName()));
+    protected static ApplicationManager app = new ApplicationManager(
+            System.getProperty("browser", Browser.CHROME.browserName()));
 
-  Logger logger = LoggerFactory.getLogger(TestBaseUI.class); // надо для report
-  @BeforeSuite
-  public void setUp(){
-    app.init();
-  }
+    Logger logger = LoggerFactory.getLogger(TestBaseUI.class); // надо для report
 
-  @AfterSuite(enabled = true)
-  public void tierDown(){
-    app.stop();
-  }
+    @BeforeSuite
+    public void setUp() {
+        app.init();
+    }
 
-  @BeforeMethod
-  public void startTest(Method m, Object[] p){
-    logger.info("Start test " + m.getName() + " with data: " + Arrays.asList(p));
-  }
+    @AfterSuite(enabled = true)
+    public void tierDown() {
+        app.stop();
+    }
 
-//  private void printToFile() { // надо метод  для report
-//    String dir = "report/";
-//    String fileName =
-//            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
-//                    + "_report.txt";
-//    try {
-//      Path directories = Files.createDirectories(Path.of(dir));
-//      Path file = Files.createFile(Path.of(directories + "/", fileName));
-//      BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true));
-//      for (String r : report) {
-//        bufferedWriter.write(r + System.lineSeparator());
-//      }
-//      bufferedWriter.close();
-//    } catch (IOException e) {
-//      throw new RuntimeException(e);
-//    }
-//
-//  }
+    @BeforeMethod
+    public void startTest(Method m, Object[] p) {
+        logger.info("Start test " + m.getName() + " with data: " + Arrays.asList(p));
+    }
 
-  private void printToFile() {
-    String dir = "report/";
-    String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_report.txt";
+    private void printToFile() {
+        String dir = "report/";
+        String fileName = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + "_report.txt";
 
-    System.out.println("File name: " + fileName);
-    try {
-      // Проверяем, существует ли директория, если нет, то создаем
-      if (!Files.exists(Paths.get(dir))) {
-        System.out.println("File not exist: " + dir);
+        System.out.println("File name: " + fileName);
+        try {
+            // Проверяем, существует ли директория, если нет, то создаем
+            if (!Files.exists(Paths.get(dir))) {
+                System.out.println("File not exist: " + dir);
 
-        Files.createDirectories(Paths.get(dir));
-      }
+                Files.createDirectories(Paths.get(dir));
+            }
+            System.out.println("create dir " + dir);
 
-      System.out.println("create dir " + dir);
+            // Создаем файл внутри директории
+            Path file = Paths.get(dir, fileName);
+            Files.createFile(file);
 
-      // Создаем файл внутри директории
-      Path file = Paths.get(dir, fileName);
-      Files.createFile(file);
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true))) {
+                System.out.println("pring lines " + report);
 
-      try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true))) {
-
-        System.out.println("pring lines " + report);
-
-        for (String r : report) {
-          bufferedWriter.write(r + System.lineSeparator());
+                for (String r : report) {
+                    bufferedWriter.write(r + System.lineSeparator());
+                }
+            }
+            logger.info("Test logs have been written to: " + file.toString());
+        } catch (IOException e) {
+            logger.error("Error writing test logs to file", e);
+            throw new RuntimeException(e);
         }
-      }
-
-      logger.info("Test logs have been written to: " + file.toString());
-    } catch (IOException e) {
-      logger.error("Error writing test logs to file", e);
-      throw new RuntimeException(e);
     }
-  }
 
-  @AfterMethod
-  public void stopTest(ITestResult result){
-    if (result.isSuccess()) {
-      logger.info("PASSED: " + result.getMethod().getMethodName());
-    } else {
-      logger.info("FAILED: " + result.getMethod().getMethodName() + " Screenshot: " + app.getUserUI().takeScreenshot());
+    @AfterMethod
+    public void stopTest(ITestResult result) {
+        if (result.isSuccess()) {
+            logger.info("PASSED: " + result.getMethod().getMethodName());
+        } else {
+            logger.info("FAILED: " + result.getMethod().getMethodName() + " Screenshot: " + app.getUserUI().takeScreenshot());
+        }
+        logger.info("============== Stop test =================");
+        System.out.println("test stopped, try start print to file");
+        printToFile();
     }
-    logger.info("============== Stop test =================");
-    System.out.println("test stopped, try start print to file");
-    printToFile();
-  }
-
 }

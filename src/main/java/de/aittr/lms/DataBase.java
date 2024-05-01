@@ -2,7 +2,7 @@ package de.aittr.lms;
 
 import lombok.Value;
 import org.yaml.snakeyaml.Yaml;
-
+import java.lang.String;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Map;
@@ -10,7 +10,6 @@ import java.util.Map;
 public abstract class DataBase {
 
     private static Connection connection;
-
 
     static {
         InputStream inputStream = DataBase
@@ -64,7 +63,15 @@ public abstract class DataBase {
         }
     }
 
-}
+           public static void executeUpdate(String query) {
+               try (
+                    Statement statement = connection.createStatement()) {
+                   statement.executeUpdate(query);
+               } catch (SQLException exception) {
+                   exception.printStackTrace();
+               }
+        }
+    }
 
 
 

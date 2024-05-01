@@ -17,10 +17,10 @@ public class GetMyProfileRATests extends TestBaseRA{
 
     @BeforeMethod
     public void precondition() throws SQLException {
-        user.registerUser("Cohort 33", "lilu@mail.com", "Lilu", "Test",
-                "Germany", "+490571234567");
-        user.setPasswordByEmail("lilu@mail.com", "Qwer123!");
-        cookie = user.getLoginCookie("lilu@mail.com", "Qwer123!");
+        user.registerUser("Cohort 99", "lilu@mail.com", "Lilu", "Test",
+                "Germany", "+490571234567", "STUDENT");
+        user.setPasswordByEmail("lilu@mail.com", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("lilu@mail.com", "LMS-dev-pass-2024");
     }
 
     @AfterMethod
@@ -41,7 +41,7 @@ public class GetMyProfileRATests extends TestBaseRA{
     @Test ()
     public void getMyProfileWithoutLoginNegativeTest(){
         given().contentType(ContentType.JSON).when().get("/users/me").then()
-                .assertThat().statusCode(403);
+                .assertThat().statusCode(401);
     }
 
 

@@ -15,5 +15,6 @@ public class NewUserWithRoleDto {
         String country;
         String role;
         String phone;
+       // String state;
 
 }

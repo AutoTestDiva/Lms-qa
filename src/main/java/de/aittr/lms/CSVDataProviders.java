@@ -58,13 +58,13 @@ public class CSVDataProviders {
     }
 
 
-    @DataProvider(name = "provideUploadHomeWorkSolutionData")
+    @DataProvider(name = "provideUploadYourHomeworkData")
     public static Object[][] provideUploadHomeWorkSolutionData() {
-        String csvFile = "src/test/resources/DataScv/UploadHomeWorkSolutionData.csv";
+        String csvFile = "src/test/resources/DataScv/UploadYourHomeworkData.csv";
         return readDataFromCSV(csvFile);
     }
 
-    @DataProvider(name = "provideMyHomeWorkData")
+    @DataProvider(name = "provideGoToMyHomeWorkData")
     public static Object[][] provideMyHomeWorkData() {
         String csvFile = "src/test/resources/DataScv/MyHomeWorkData.csv";
         return readDataFromCSV(csvFile);

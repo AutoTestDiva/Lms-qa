@@ -1,27 +1,27 @@
-cohort,email,firstName,lastName,country,phone
-Cohort21,lilu@mail.com,Lilu,Test,Germany, +491234567890
-cohort 21,lilu@mail.com,Lilu,Test,Germany, +491234567890
-COHORT 21,lilu@mail.com,Lilu,Test,Germany, +491234567890
-Cohort,lilu@mail.com,Lilu,Test,Germany, +491234567890
-Cohort 21,lilu.mail.com,Lilu,Test,Germany, +491234567890
-Cohort 21,lilu@mail,Lilu,Test,Germany, +491234567890
-Cohort 21,lilu@mailcom,Lilu,Test,Germany, +491234567890
-Cohort 21,li%lu@mail.com,Lilu,Test,Germany, +491234567890
-Cohort 21,lilu@mail.com,Lilu23,Test,Germany, +491234567890
-Cohort 21,lilu@mail.com,Li_lu,Test,Germany, +491234567890
-Cohort 21,lilu@mail.com,Li/lu,Test,Germany, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Test77,Germany, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Te_st,Germany, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Te*st,Germany, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,Germany2, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,germany, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,GERMANY, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,Germany$, +491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, 491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, -491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, myNumber
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, +4912345678901234567890123
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, +49123
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, +491234567890$
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, ++491234567890
-Cohort 21,lilu@mail.com,Lilu,Test,Germany, +491234+567890
+cohort,email,firstName,lastName,country,phone,role
+Cohort21,lilu@mail.com,Lilu,Test,Germany, +491234567890,STUDENT
+cohort 21,lilu@mail.com,Lilu,Test,Germany, +491234567890,STUDENT
+COHORT 21,lilu@mail.com,Lilu,Test,Germany, +491234567890,STUDENT
+Cohort,lilu@mail.com,Lilu,Test,Germany, +491234567890,STUDENT
+Cohort 21,lilu.mail.com,Lilu,Test,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail,Lilu,Test,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mailcom,Lilu,Test,Germany, +491234567890,STUDENT
+Cohort 21,li%lu@mail.com,Lilu,Test,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu23,Test,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Li_lu,Test,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Li/lu,Test,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test77,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Te_st,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Te*st,Germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany2, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,germany, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,GERMANY, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany$, +491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, 491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, -491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, myNumber,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, +4912345678901234567890123,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, +49123,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, +491234567890$,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, ++491234567890,STUDENT
+Cohort 21,lilu@mail.com,Lilu,Test,Germany, +491234+567890,STUDENT

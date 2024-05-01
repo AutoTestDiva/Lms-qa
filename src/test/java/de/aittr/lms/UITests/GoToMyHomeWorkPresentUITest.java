@@ -1,25 +1,24 @@
 package de.aittr.lms.UITests;
 
-import de.aittr.lms.CSVDataProviders;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UploadHomeWorkSolutionUITests extends TestBaseUI {
+public class GoToMyHomeWorkPresentUITest extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-        app.getUserUI().loginWithData("a01@dev-lms.de", "lms-dev-pass-2024");
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
     @Test
-    public void isUploadHomeWorkSolutionTest() {
-        report.add("isUploadHomeWorkSolutionTest" + System.lineSeparator()); // надо для report
-        app.getUserUI().clickOnLessonsInSideBar();
-
+    public void goToMyHomeWorkPresentUITest() {
+        report.add("goToMyHomeWorkPresentUITest" + System.lineSeparator()); // надо для report
         app.getCSVReaderUI().clickOnSelectYourGroup();
         List<WebElement> groups = app.getCSVReaderUI().getDropdownListOfGroups();
         List<String> listOfGroups = new ArrayList<>();
@@ -43,7 +42,6 @@ public class UploadHomeWorkSolutionUITests extends TestBaseUI {
                     List<WebElement> modules = app.getCSVReaderUI().getDropdownListOfModules();
                     List<String> listOfModules = new ArrayList<>();
                     listOfModules = app.getCSVReaderUI().readerHelper()[1];
-                    // System.out.println(listOfModules);
 
                     if (listOfModules.size() == 0 || listOfModules.get(0).equals("")) {
                         listOfModules.clear();
@@ -57,7 +55,7 @@ public class UploadHomeWorkSolutionUITests extends TestBaseUI {
                             report.add("--------------------------------------------------------------------");
                             report.add("                       Module: " + listOfModules.get(l));
                             report.add("--------------------------------------------------------------------");
-                            report.add("     Lesson   |            UploadHomeWorkSolution                  |");
+                            report.add("   Element 'MyHomeWork' in module  *" + listOfModules.get(l) + "*  present");
                             report.add("--------------------------------------------------------------------");
 
                             if (app.getCSVReaderUI().isLessonPresent()) {
@@ -77,30 +75,19 @@ public class UploadHomeWorkSolutionUITests extends TestBaseUI {
                                     if (app.getCSVReaderUI().selectMyLesson(listOfLessons.get(i))) {
                                         app.getCSVReaderUI().clickOnSelectedLesson(listOfLessons.get(i));
 
-                                        String uploadHomeWorkSolution = "o";
-
-                                 if (app.getCSVReaderUI().isUploadHomeWorkSolutionPresent()) {
-                                            // Проверяем вкладку ПЛАН и наличие там текста
-
-                                            uploadHomeWorkSolution = "+";
-                                            } else {
-                                                uploadHomeWorkSolution = "-";
-                                            }
-                                           app.getCSVReaderUI().pause(1000);
-
-                                        report.add(String.format("    %-5s |                     %-5s%n", listOfLessons.get(i), uploadHomeWorkSolution + "                              |"));
+                                        Assert.assertTrue(app.getCSVReaderUI().goToMyHomeWorkPresent());
 
                                         app.getCSVReaderUI().clickOnNextSelectedLesson();
                                         app.getUserUI().pause(2000);
                                     } else {
-                                        report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ "  " +listOfLessons.get(i)+ " еще нет");
+                                        report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l) + "  " + listOfLessons.get(i) + " еще нет");
                                     }
                                 }
                             } else {
-                                report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ " уроков еще нет");
+                                report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l) + " уроков еще нет");
                             }
                         } else {
-                            report.add("В группе " + listOfGroups.get(j) + " модуля " + listOfModules.get(l)+ " еще нет");
+                            report.add("В группе " + listOfGroups.get(j) + " модуля " + listOfModules.get(l) + " еще нет");
                         }
                         app.getCSVReaderUI().clickOnNextSelectedModule();
                         app.getUserUI().pause(1000);
@@ -108,7 +95,6 @@ public class UploadHomeWorkSolutionUITests extends TestBaseUI {
                 } else {
                     report.add("В группе " + listOfGroups.get(j) + "  модулей еще нет");
                 }
-
                 app.getCSVReaderUI().scrollPageUp();
                 app.getCSVReaderUI().clickOnNextSelectedGroup();
                 app.getUserUI().pause(1000);
@@ -116,6 +102,11 @@ public class UploadHomeWorkSolutionUITests extends TestBaseUI {
                 report.add("Группы " + listOfGroups.get(j) + " еще нет");
             }
         }
+    }
+
+    @AfterMethod
+    public void postCondition() {
+        app.getUserUI().logOut();
     }
 }
 

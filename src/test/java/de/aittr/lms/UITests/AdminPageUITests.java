@@ -6,47 +6,45 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AdminPageUITests extends TestBaseUI {
-
     @BeforeMethod
-    public void precondition(){
-        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+    public void precondition() {
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
     @AfterMethod
-    public void postCondition(){
+    public void postCondition() {
         app.getUserUI().logOut();
     }
 
     @Test
-    public void isAdminTeacherStudentDisplayedTest(){
-        app.getUserUI().clickOnUsersInSideBar();
-        Assert.assertTrue(app.getUserUI().isUserByRoleInTableDisplayed("ADMIN")
-                            && app.getUserUI().isUserByRoleInTableDisplayed("TEACHER")
-                            && app.getUserUI().isUserByRoleInTableDisplayed("STUDENT"));
+    public void isAdminTeacherStudentDisplayedTest() {
+        app.getUserUI().clickOnAdministrationOnMenu();
+        Assert.assertTrue(app.getUserUI().isUserByRoleInTableDisplayed("Students")
+                && app.getUserUI().isUserByRoleInTableDisplayed("Cohorts")
+                && app.getUserUI().isUserByRoleInTableDisplayed("Users"));
     }
 
     @Test
-    public void searchPanelStudent2Test(){
-        app.getUserUI().clickOnUsersInSideBar();
-        app.getUserUI().searchUser("student2@mail.com");
-        Assert.assertEquals("student2@mail.com", app.getUserUI().userOnFirstRow());
+    public void searchPanelStudent2Test() {
+        app.getUserUI().clickOnAdministrationOnMenu();
+        app.getUserUI().clickOnStudents();
+        Assert.assertEquals("s03@dev-lms.de", app.getUserUI().studentOnFirstRow());
     }
 
     @Test
-    public void searchPanelTeacherTest(){
-        app.getUserUI().clickOnUsersInSideBar();
-        app.getUserUI().searchUser("teacher@mail.com");
-        Assert.assertEquals("teacher@mail.com", app.getUserUI().userOnFirstRow());
-
+    public void searchPanelTeacherTest() {
+        app.getUserUI().clickOnAdministrationOnMenu();
+        app.getUserUI().clickOnUsers();
+        app.getUserUI().clickOnFieldSearchEndEnter("t03@dev-lms.de");
+        app.getUserUI().clickOnSearch();
+        Assert.assertEquals("t03@dev-lms.de", app.getUserUI().userOnFirstRow());
     }
 
     @Test
-    public void searchPanelStudentTest(){
-        app.getUserUI().clickOnUsersInSideBar();
-        app.getUserUI().searchUser("student@mail.com");
-        Assert.assertEquals("student@mail.com", app.getUserUI().userOnFirstRow());
+    public void searchPanelCohortsTest() {
+        app.getUserUI().clickOnAdministrationOnMenu();
+        app.getUserUI().clickOnCohorts();
+        Assert.assertEquals("Cohort 30", app.getUserUI().cohortOnFirstRow());
     }
-
-
 }

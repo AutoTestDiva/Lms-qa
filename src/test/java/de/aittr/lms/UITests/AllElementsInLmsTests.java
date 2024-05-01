@@ -1,6 +1,7 @@
 package de.aittr.lms.UITests;
 
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -10,22 +11,20 @@ import java.util.List;
 public class AllElementsInLmsTests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
     @Test
     public void isAllElementsInLMSPresentTest() {
         report.add("isAllElementsInLMSPresentTest" + System.lineSeparator());
-        app.getUserUI().clickOnLessonsInSideBar();
-
         app.getUserUI().clickOnSelectYourGroup();
         List<WebElement> groups = app.getUserUI().getDropdownListOfGroups();
         List<String> listOfGroups = new ArrayList<>();
         for (WebElement item : groups) {
             listOfGroups.add(item.getText());
         }
-        for (int j = 27; j < listOfGroups.size(); j++) {
+        for (int j = 37; j < listOfGroups.size(); j++) {
             app.getUserUI().clickOnSelectedGroup(listOfGroups.get(j));
             report.add("********************************************************************");
             report.add("                       Group: " + listOfGroups.get(j));
@@ -54,7 +53,6 @@ public class AllElementsInLmsTests extends TestBaseUI {
                     }
                     for (int i = 0; i < listOfLessons.size(); i++) {
                         app.getUserUI().clickOnSelectedLesson(listOfLessons.get(i));
-
                         String plan = "o";
                         String theory = "o";
                         String homeWork = "o";
@@ -63,49 +61,49 @@ public class AllElementsInLmsTests extends TestBaseUI {
 
                         if (app.getUserUI().isPlanLinePresent()) {
                             // Проверяем вкладку ПЛАН и наличие там текста
-                            app.getUserUI().clickOnPlanLine();
-                            if (app.getUserUI().isTextPresent()) {
+                            app.getCSVReaderUI().clickOnPlanLine();
+                            if (app.getCSVReaderUI().isTextPresent()) {
                                 plan = "+";
                             } else {
                                 plan = "-";
                             }
-                            app.getUserUI().clickOnPlanLine();
+                            app.getCSVReaderUI().clickOnPlanLine();
                             app.getUserUI().pause(1000);
                         }
 
                         if (app.getUserUI().isTheoryLinePresent()) {
                             // Проверяем вкладку Theory
-                            app.getUserUI().clickOnTheoryLine();
-                            if (app.getUserUI().isTextPresent()) {
+                            app.getCSVReaderUI().clickOnTheoryLine();
+                            if (app.getCSVReaderUI().isTextPresent()) {
                                 theory = "+";
                             } else {
                                 theory = "-";
                             }
-                            app.getUserUI().clickOnTheoryLine();
+                            app.getCSVReaderUI().clickOnTheoryLine();
                             app.getUserUI().pause(1000);
                         }
 
                         if (app.getUserUI().isHomeWorkLinePresent()) {
                             // Проверяем вкладку Домашка
-                            app.getUserUI().clickOnHomeWorkLine();
-                            if (app.getUserUI().isTextPresent()) {
+                            app.getCSVReaderUI().clickOnHomeWorkLine();
+                            if (app.getCSVReaderUI().isTextPresent()) {
                                 homeWork = "+";
                             } else {
                                 homeWork = "-";
                             }
-                            app.getUserUI().clickOnHomeWorkLine();
+                            app.getCSVReaderUI().clickOnHomeWorkLine();
                             app.getUserUI().pause(1000);
                         }
 
                         if (app.getUserUI().isCodeLinePresent()) {
                             //Проверяем наличие кода
-                            app.getUserUI().clickOnCodeLine();
-                            if (app.getUserUI().isCodePresent()) {
+                            app.getCSVReaderUI().clickOnCodeLine();
+                            if (app.getCSVReaderUI().isCodePresent()) {
                                 code = "+";
                             } else {
                                 code = "-";
                             }
-                            app.getUserUI().clickOnCodeLine();
+                            app.getCSVReaderUI().clickOnCodeLine();
                             app.getUserUI().pause(1000);
                         }
 
@@ -128,25 +126,27 @@ public class AllElementsInLmsTests extends TestBaseUI {
                                 System.out.println(videoSource);
                             }*/
                             }
-
-                            app.getUserUI().clickOnVideoLine();
+                            app.getCSVReaderUI().clickOnVideoLine();
                             app.getUserUI().pause(1000);
                         }
                         report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", listOfLessons.get(i), plan, theory, homeWork, code, video + "    |"));
 
-                        app.getUserUI().clickOnNextSelectedLesson();
+                        app.getCSVReaderUI().clickOnNextSelectedLesson();
                         app.getUserUI().pause(2000);
                     }
-                    app.getUserUI().clickOnNextSelectedModule();
+                    app.getCSVReaderUI().clickOnNextSelectedModule();
                     app.getUserUI().pause(1000);
                 }
             } else {
                 report.add("В данной группе модулей еще нет");
             }
             app.getUserUI().scrollPageUp();
-            app.getUserUI().clickOnNextSelectedGroup();
-            app.getUserUI().pause(1000);
         }
+    }
+
+    @AfterMethod
+    public void postCondition() {
+        app.getUserUI().logOut();
     }
 }
 

@@ -1,63 +1,56 @@
 package de.aittr.lms.UITests;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-public class LoginUITests extends TestBaseUI{
-
+public class LoginUITests extends TestBaseUI {
     @Test(groups = "positive")
-    public void loginAsAdminPositiveTest(){
-        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+    public void loginAsAdminPositiveTest() {
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
-        app.getUserUI().clickOnUserList();
-        Assert.assertTrue(app.getUserUI().isManageHidderExist());
-        app.getUserUI().logOut();
-    }
-
-        @Test(groups = "positive")
-    public void loginAsTeacherPositiveTest(){
-            app.getUserUI().loginWithData("teacher@mail.com", "Qwer123!");
-            app.getUserUI().closeLoginMessage();
-            Assert.assertTrue(app.getGroupUI().isCohortInSelectPresent("Cohort 23")
-                    && app.getGroupUI().isCohortInSelectPresent("Cohort 24")
-                    && app.getGroupUI().isCohortInSelectPresent("Cohort 35"));
-            app.getUserUI().logOut();
-        }
-
-        @Test(groups = "positive")
-    public void loginAsStudentPositiveTest(){
-            app.getUserUI().loginWithData("student@mail.com","Qwer123!");
-            app.getUserUI().closeLoginMessage();
-            Assert.assertTrue(app.getGroupUI().isCohortInSelectPresent("Cohort 34.2"));
-            app.getUserUI().logOut();
+        Assert.assertTrue(app.getGroupUI().isAdministrationInHeaderPresent());
     }
 
     @Test(groups = "positive")
-    public void loginAsStudent2PositiveTest(){
-        app.getUserUI().loginWithData("student2@mail.com","Qwer123!");
+    public void loginAsTeacherPositiveTest() {
+        app.getUserUI().loginWithData("t03@dev-lms.de", "LMS-dev-pass-2024");
+        app.getCSVReaderUI().scrollPageUp();
         app.getUserUI().closeLoginMessage();
-        Assert.assertTrue(app.getGroupUI().isCohortInSelectPresent("Cohort 35"));
-        app.getUserUI().logOut();
+        Assert.assertTrue(app.getGroupUI().isTeacherCabinetPresent());
     }
 
-        @Test(groups = "negative")
-    public void loginAsNotExistStudentNegativeTest(){
-        app.getUserUI().loginWithData("student3@mail.com","Qwer123!");
+    @Test(groups = "negative")
+    public void loginAsNotExistStudentNegativeTest() {
+        app.getUserUI().loginWithData("test@dev-lms.de", "LMS-dev-pass-2024");
         Assert.assertTrue(app.getUserUI().isErrorNotValidEmailOrPasswordMessageDisplayed());
+        //1 part of aftermethod
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().closeLoginMessage();
     }
 
-        @Test
-    public void loginAsStudentWithWrongFormatEmailNegativeTest(){
-            app.getUserUI().loginWithData("student.mail.com","Qwer123!");
-            Assert.assertTrue(app.getUserUI().isErrorNotValidEmailFormatDisplayed());
+    @Test
+    public void loginAsStudentWithWrongFormatEmailNegativeTest() {
+        app.getUserUI().loginWithWrongData("s03.dev-lms.de", "LMS-dev-pass-2024");
+        Assert.assertTrue(app.getUserUI().isErrorNotValidEmailFormatDisplayed());
+        //1 part of aftermethod
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().closeLoginMessage();
     }
 
-        @Test
-    public void loginAsStudentWithNotValidPasswordNegativeTest(){
-            app.getUserUI().loginWithData("student@mail.com","Qwerty111!");
-            Assert.assertTrue(app.getUserUI().isErrorNotValidEmailOrPasswordMessageDisplayed());
+    @Test
+    public void loginAsStudentWithNotValidPasswordNegativeTest() {
+        app.getUserUI().loginWithData("s03@dev-lms.de", "TEST-dev-pass-2024");
+        Assert.assertTrue(app.getUserUI().isErrorNotValidEmailOrPasswordMessageDisplayed());
+        //1 part of aftermethod
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().closeLoginMessage();
     }
 
+    @AfterMethod
+    public void postCondition() {
+        app.getUserUI().logOut();
+    }
 }
 
 

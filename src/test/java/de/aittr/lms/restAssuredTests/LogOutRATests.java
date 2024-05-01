@@ -15,8 +15,8 @@ public class LogOutRATests extends TestBaseRA{
 
     @BeforeMethod
     public void precondition() throws SQLException {
-        user.registerUser("Cohort 33", "lilu@mail.com", "Lilu", "Test",
-                "Germany", "+490571234567");
+        user.registerUser("Cohort 99", "lilu@mail.com", "Lilu", "Test",
+                "Germany", "+490571234567", "STUDENT");
         user.setPasswordByEmail("lilu@mail.com", "Qwer123!");
         cookie = user.getLoginCookie("lilu@mail.com", "Qwer123!");
     }
@@ -28,13 +28,6 @@ public class LogOutRATests extends TestBaseRA{
                 .assertThat().statusCode(200);
 
     }
-
-//    @Test - "Enpoint /logout должен возвращать 200 в любом случае."
-    public void notLoggedInUserLogOuNegativeTest(){
-        given().when().post("/logout").then()
-                .assertThat().statusCode(403);
-    }
-
     @AfterMethod
     public void postCondition() throws SQLException {
         user.deleteUser("lilu@mail.com");

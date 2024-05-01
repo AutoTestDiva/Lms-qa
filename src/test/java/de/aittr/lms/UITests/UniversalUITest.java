@@ -1,10 +1,7 @@
 package de.aittr.lms.UITests;
 
-
-import de.aittr.lms.CSVDataProviders;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -22,17 +19,14 @@ import java.util.List;
 public class UniversalUITest extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-
-        app.getUserUI().loginWithData("a01@dev-lms.de", "lms-dev-pass-2024");
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getCSVReaderUI().scrollPageUp();
         app.getUserUI().closeLoginMessage();
     }
 
     @Test
-
     public void isAllElementsUniversalTest() {
         report.add("isAllElementsUniversalTest" + System.lineSeparator()); // надо для report
-        app.getUserUI().clickOnLessonsInSideBar();
-
         app.getCSVReaderUI().clickOnSelectYourGroup();
         List<WebElement> groups = app.getCSVReaderUI().getDropdownListOfGroups();
         List<String> listOfGroups = new ArrayList<>();
@@ -56,7 +50,6 @@ public class UniversalUITest extends TestBaseUI {
                     List<WebElement> modules = app.getCSVReaderUI().getDropdownListOfModules();
                     List<String> listOfModules = new ArrayList<>();
                     listOfModules = app.getCSVReaderUI().readerHelper()[1];
-                    // System.out.println(listOfModules);
 
                     if (listOfModules.size() == 0 || listOfModules.get(0).equals("")) {
                         listOfModules.clear();
@@ -78,7 +71,6 @@ public class UniversalUITest extends TestBaseUI {
                                 List<WebElement> lessons = app.getCSVReaderUI().getDropdownListOfLessons();
                                 List<String> listOfLessons = new ArrayList<>();
                                 listOfLessons = app.getCSVReaderUI().readerHelper()[2];
-                                // System.out.println(listOfLessons);
                                 if (listOfLessons.size() == 0 || listOfLessons.get(0).equals("")) {
                                     listOfLessons.clear();
 
@@ -89,7 +81,6 @@ public class UniversalUITest extends TestBaseUI {
                                 for (int i = 0; i < listOfLessons.size(); i++) {
                                     if (app.getCSVReaderUI().selectMyLesson(listOfLessons.get(i))) {
                                         app.getCSVReaderUI().clickOnSelectedLesson(listOfLessons.get(i));
-
                                         String plan = "o";
                                         String theory = "o";
                                         String homeWork = "o";
@@ -105,9 +96,8 @@ public class UniversalUITest extends TestBaseUI {
                                                 plan = "-";
                                             }
                                             app.getCSVReaderUI().clickOnPlanLine();
-                                            app.getCSVReaderUI().pause(1000);
+                                            app.getCSVReaderUI().pause(500);
                                         }
-
                                         if (app.getCSVReaderUI().isTheoryLinePresent()) {
                                             // Проверяем вкладку Theory
                                             app.getCSVReaderUI().clickOnTheoryLine();
@@ -117,9 +107,8 @@ public class UniversalUITest extends TestBaseUI {
                                                 theory = "-";
                                             }
                                             app.getCSVReaderUI().clickOnTheoryLine();
-                                            app.getCSVReaderUI().pause(1000);
+                                            app.getCSVReaderUI().pause(500);
                                         }
-
                                         if (app.getCSVReaderUI().isHomeWorkLinePresent()) {
                                             // Проверяем вкладку Домашка
                                             app.getCSVReaderUI().clickOnHomeWorkLine();
@@ -129,9 +118,8 @@ public class UniversalUITest extends TestBaseUI {
                                                 homeWork = "-";
                                             }
                                             app.getCSVReaderUI().clickOnHomeWorkLine();
-                                            app.getCSVReaderUI().pause(1000);
+                                            app.getCSVReaderUI().pause(500);
                                         }
-
                                         if (app.getCSVReaderUI().isCodeLinePresent()) {
                                             //Проверяем наличие кода
                                             app.getCSVReaderUI().clickOnCodeLine();
@@ -141,21 +129,22 @@ public class UniversalUITest extends TestBaseUI {
                                                 code = "-";
                                             }
                                             app.getCSVReaderUI().clickOnCodeLine();
-                                            app.getCSVReaderUI().pause(1000);
+                                            app.getCSVReaderUI().pause(500);
                                         }
-
                                         if (app.getCSVReaderUI().isVideoLinePresent()) {
-                                            // Проверяем наличие видео
+                                            // Проверяем наличие
+                                            app.getCSVReaderUI().scrollElementDown(By.xpath("//button[@id='video-toggle']"));
                                             app.getCSVReaderUI().clickOnVideoLine();
                                             // Использование метода для поиска видеоэлементов
                                             List<WebElement> videoElements = app.getCSVReaderUI().findVideoElements();
                                             // Проверьте, что найдено хотя бы одно видео
+                                            app.getCSVReaderUI().pause(1000);
                                             if (videoElements.isEmpty()) {
                                                 video = "-";
                                             } else {
                                                 video = "" + videoElements.size();
 
-                          /* выводит src каждого видео:
+                         /*  выводит src каждого видео:
                             for (WebElement videoElement : videoElements) {
                                 String videoSource = videoElement.getAttribute("src");
                                 System.out.println("src-видео = " + videoSource);
@@ -163,23 +152,22 @@ public class UniversalUITest extends TestBaseUI {
                                 System.out.println(videoSource);
                             }*/
                                             }
-
+                                            app.getCSVReaderUI().pause(1000);
                                             app.getCSVReaderUI().clickOnVideoLine();
                                             app.getCSVReaderUI().pause(1000);
                                         }
                                         report.add(String.format("    %-5s |   %-5s|    %-5s |      %-5s  |   %-5s|    %-5s%n", listOfLessons.get(i), plan, theory, homeWork, code, video + "    |"));
-
                                         app.getCSVReaderUI().clickOnNextSelectedLesson();
                                         app.getUserUI().pause(2000);
                                     } else {
-                                        report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ "  " +listOfLessons.get(i)+ " еще нет");
+                                        report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l) + "  " + listOfLessons.get(i) + " еще нет");
                                     }
                                 }
                             } else {
-                                report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ " уроков еще нет");
+                                report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l) + " уроков еще нет");
                             }
                         } else {
-                            report.add("В группе " + listOfGroups.get(j) + " модуля " + listOfModules.get(l)+ " еще нет");
+                            report.add("В группе " + listOfGroups.get(j) + " модуля " + listOfModules.get(l) + " еще нет");
                         }
                         app.getCSVReaderUI().clickOnNextSelectedModule();
                         app.getUserUI().pause(1000);
@@ -187,15 +175,17 @@ public class UniversalUITest extends TestBaseUI {
                 } else {
                     report.add("В группе " + listOfGroups.get(j) + "  модулей еще нет");
                 }
-
                 app.getCSVReaderUI().scrollPageUp();
                 app.getCSVReaderUI().clickOnNextSelectedGroup();
                 app.getUserUI().pause(1000);
+                app.getCSVReaderUI().scrollPageUp();
+
             } else {
                 report.add("Группы " + listOfGroups.get(j) + " еще нет");
             }
         }
     }
+
     private void printToFile() {
         String dir = "/report/";
         String fileName =
@@ -213,7 +203,11 @@ public class UniversalUITest extends TestBaseUI {
             logger.error("Error writing report to file", e);
             throw new RuntimeException(e);
         }
+    }
 
+    @AfterMethod
+    public void postCondition() {
+        app.getUserUI().logOut();
     }
 }
 

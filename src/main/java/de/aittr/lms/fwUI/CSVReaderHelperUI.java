@@ -1,12 +1,12 @@
 package de.aittr.lms.fwUI;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,10 +16,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class CSVReaderHelperUI extends BaseHelperUI {
+
     public CSVReaderHelperUI(WebDriver driver) {
         super(driver);
     }
-    public  List<String>[] readerHelper() {
+
+    public List<String>[] readerHelper() {
         // Путь к вашему CSV-файлу
         String csvFilePath = "src/test/resources/DataScv/GetCombinationData.csv";
         // Создаем два списка для хранения данных
@@ -44,7 +46,7 @@ public class CSVReaderHelperUI extends BaseHelperUI {
             if (line != null) {
                 list3.addAll(parseCsvLine(line));
             }
-     } catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return csvDataOfLists;
@@ -57,11 +59,11 @@ public class CSVReaderHelperUI extends BaseHelperUI {
     }
 
     public void clickOnSelectYourGroup() {
-        click(By.xpath("//span[contains(text(),'Select your group')]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/div[1]/div[1]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
     }
 
     public void clickOnSelectedGroup(String group) {
-        click(By.xpath("//*/text()[normalize-space(.)='" + group + "']/parent::*"));
+        click(By.xpath("//span[contains(text(),'" + group + "')]"));
     }
 
     public void clickOnSelectModule() {
@@ -69,7 +71,7 @@ public class CSVReaderHelperUI extends BaseHelperUI {
     }
 
     public void clickOnSelectedModule(String module) {
-        click(By.xpath("//*/text()[normalize-space(.)='" + module + "']/parent::*"));
+        click(By.xpath("//div[contains(text(),'" + module + "')]"));
     }
 
     public void clickOnSelectLesson() {
@@ -77,67 +79,60 @@ public class CSVReaderHelperUI extends BaseHelperUI {
     }
 
     public void clickOnSelectedLesson(String lesson) {
-        click(By.xpath("//*/text()[normalize-space(.)='" + lesson + "']/parent::*"));
+        click(By.xpath("//div[contains(text(),'" + lesson + "')]"));
     }
 
     public void clickOnVideoLine() {
-        if (isElementPresent(By.cssSelector("#video-toggle"))) {
-           clickWithScroll(By.cssSelector("#video-toggle"));
+        if (isElementPresent(By.xpath("//button[@id='video-toggle']"))) {
+            click(By.xpath("//button[@id='video-toggle']"));
         } else {
             System.out.println("Элемента Video на вкладке урока нет");
         }
     }
-    public void clickWithScroll(By locator) {
+
+    public void scrollElementDown(By locator) {
         // Прокрутка вниз на 500 пикселей (можете настроить значение по вашему усмотрению)
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,500);");
-
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        // Выполнение клика
-        driver.findElement(locator).click();
     }
-
-
-
 
     public List<WebElement> findVideoElements() {
-        return driver.findElements(By.xpath("//div[@id='video-collapse']"));
+        return driver.findElements(By.cssSelector("div.accordion-collapse.collapse.show div.accordion-body app-lesson-video.ng-star-inserted div.ng-star-inserted > div.ng-star-inserted"));
     }
 
-    //------------------------------------------------------------------
     public List<WebElement> getDropdownListOfGroups() {
-        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/div[1]/div[1]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
         List<WebElement> groups = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return groups;
     }
 
     public List<WebElement> getDropdownListOfModules() {
-        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[2]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/div[1]/div[2]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
         List<WebElement> modules = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return modules;
     }
 
     public List<WebElement> getDropdownListOfLessons() {
-        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[3]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
+        WebElement dropdown = driver.findElement(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/div[1]/div[3]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
         List<WebElement> lessons = dropdown.findElements(By.xpath("//p-dropdownitem"));
         return lessons;
     }
 
     public void clickOnNextSelectedLesson() {
-        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[3]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/div[1]/div[3]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
     }
 
     public void clickOnNextSelectedModule() {
-        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[2]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/div[1]/div[2]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
     }
 
     public void clickOnNextSelectedGroup() {
-        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/div[1]/div[1]/p-dropdown[1]/div[1]/div[1]/chevrondownicon[1]/*[1]"));
     }
 
     public boolean isModulePresent() {
@@ -157,7 +152,7 @@ public class CSVReaderHelperUI extends BaseHelperUI {
     }
 
     public void clickOnTheoryLine() {
-       click(By.cssSelector("#theory-toggle"));
+        click(By.cssSelector("#theory-toggle"));
     }
 
     public void clickOnHomeWorkLine() {
@@ -174,8 +169,7 @@ public class CSVReaderHelperUI extends BaseHelperUI {
     }
 
     public boolean isCodePresent() {
-        return (isElementPresent(By.xpath("//button[.='Copy']")) &&
-                isElementPresent(By.xpath("//button[.='Download File']")));
+        return (isElementPresent(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-lessons-list[1]/app-lesson[1]/div[2]/div[4]/div[2]/div[1]/app-lesson-code-list[1]/div[1]/div[2]/div[1]/app-lesson-code[1]/div[1]/div[1]/div[1]/div[1]/button[1]")));
     }
 
     public boolean isPlanLinePresent() {
@@ -183,7 +177,7 @@ public class CSVReaderHelperUI extends BaseHelperUI {
     }
 
     public boolean isTheoryLinePresent() {
-      return (isElementPresent(By.cssSelector("#theory-toggle")));
+        return (isElementPresent(By.cssSelector("#theory-toggle")));
     }
 
     public boolean isHomeWorkLinePresent() {
@@ -198,69 +192,138 @@ public class CSVReaderHelperUI extends BaseHelperUI {
         return (isElementPresent(By.cssSelector("#video-toggle")));
     }
 
-//    public void selectGroup(String cohort) {
-//        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[1]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
-//        click(By.cssSelector("[aria-label='" + cohort + "']"));
-//    }
-//
-//    public void selectModule(String module) {
-//        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[2]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
-//        click(By.cssSelector("[aria-label='" + module + "']"));
-//    }
-//
-//    public boolean isGroupPresent() {
-//        return isElementPresent(By.xpath("//span[contains(text(),'Select your group')]"));
-//    }
-
     public boolean selectMyGroup(String group) {
         return isElementPresent(By.cssSelector("[aria-label='" + group + "']"));
     }
 
-
-//    public void selectLesson(String lesson) {
-//        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[2]/div[1]/app-lessons-list[1]/div[1]/div[1]/div[1]/div[1]/div[3]/span[1]/p-dropdown[1]/div[1]/div[2]/span[1]"));
-//        click(By.cssSelector("[aria-label='" + lesson + "']"));
-//    }
-//
-//    public void clickOnMyGroup(String group) {
-//        click(By.cssSelector("[aria-label='" + group + "']"));
-//    }
-
-
     public boolean selectMyLesson(String lesson) {
-        return isElementPresent(By.cssSelector("[aria-label='" + lesson + "']"));
+        return isElementPresent(By.xpath("//div[contains(text(),'" + lesson + "')]"));
     }
-
-//    public void clickOnMyLesson(String lesson) {
-//        click(By.cssSelector("[aria-label='" + lesson + "']"));
-//
-//    }
 
     public boolean isLessonPresent() {
         return isElementPresent(By.xpath("//span[contains(text(),'Select lesson')]"));
     }
 
     public boolean selectMyModule(String module) {
-        return isElementPresent(By.cssSelector("[aria-label='" + module + "']"));
+        return isElementPresent(By.xpath("//div[contains(text(),'" + module + "')]"));
     }
 
-    public boolean isUploadHomeWorkSolutionPresent() {
-        if (isElementPresent(By.xpath("//button[contains(text(),'Upload home work solution')]"))) {
+    public boolean isUploadYourHomeworkPresent() {
+        if (isElementPresent(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-home-work[1]/div[1]/div[1]/div[1]/button[1]"))) {
             return true;
         }
         return false;
-
     }
 
-    public boolean isMyHomeWorkPresent() {
-        if (isElementPresent(By.xpath("//button[contains(text(),'My home work')]"))) {
-           return true;
+    public boolean goToMyHomeWorkPresent() {
+        if (isElementPresent(By.xpath("//button[@id='navigate-btn-hw']"))) {
+            return true;
         }
         return false;
-
     }
 
+    public boolean isSelectDirectoryToUploadPresent() {
+        if (isElementPresent(By.xpath("//body/ngb-modal-window[1]/div[1]/div[1]/app-home-work-upload[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/label[1]"))) {
+            return true;
+        }
+        return false;
+    }
 
+    public void clickGoToMyHomeWork() {
+        click(By.xpath("//button[@id='navigate-btn-hw']"));
+    }
+
+    public void clickOnUploadYourHomework() {
+        click(By.xpath("//body/app-root[1]/app-layout[1]/div[1]/div[1]/div[1]/app-student-cabinet[1]/div[1]/app-home-work[1]/div[1]/div[1]/div[1]/button[1]"));
+    }
+
+    public boolean isClearSelectionPresent() {
+        if (isElementPresent(By.xpath("//button[@id='submit-upload-hw-cancel']"))) {
+            return true;
+        }
+        return false;
+    }
+
+    public void clickOnSelectFilesToUpload() {
+        click(By.xpath("//body/ngb-modal-window[1]/div[1]/div[1]/app-home-work-upload[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/label[1]"));
+    }
+
+    public boolean isTotalFilesToUploadPresent() {
+        if (isElementPresent(By.xpath("//body/ngb-modal-window[1]/div[1]/div[1]/app-home-work-upload[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]/b[1]"))) {
+            return true;
+        }
+        return false;
+    }
+
+    public void clickOnClearSelection() {
+        click(By.xpath("//button[@id='submit-upload-hw-cancel']"));
+    }
+
+    public void clickOnCloseButtonInUploadHomework() {
+        click(By.xpath("//button[@id='close-btn-modal-upload-hw']"));
+    }
+
+    public void clickOnSelectDirectoryToUpload() {
+        click(By.xpath("//body/ngb-modal-window[1]/div[1]/div[1]/app-home-work-upload[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/label[1]"));
+    }
+
+    public void uploadDirectoryOn_SelectDirectoryToUpload() throws AWTException, InterruptedException {
+        // Подготовка пути к папке
+        String filePath = "C:\\TEST"; // Укажи путь к папке, которую надо загрузить
+        // Копируем путь к файлу в буфер обмена
+        StringSelection stringSelection = new StringSelection(filePath);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+        Robot robot = new Robot();
+        // Подождать некоторое время, чтобы окно выбора папки появилось
+        pause(2000);
+        // Имитация нажатия на клавиши Control + V для вставки пути к папке из буфера обмена
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        // Имитация нажатия на клавишу Enter для выбора папки
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+       // Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        pause(1000);
+        //кнопкой влево т.о. нажимаем в АЛЕРТЕ браузера "Загрузить"
+        robot.keyPress(KeyEvent.VK_LEFT);
+        robot.keyRelease(KeyEvent.VK_LEFT);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+    }
+
+    public void uploadFile_OnSelectFilesToUpload() throws AWTException {
+        // Подготовка пути к файлу
+        String filePath = "C:\\TEST\\test.docx"; // Укажи путь к файлу, который надо загрузить
+        // Копируем путь к файлу в буфер обмена
+        StringSelection stringSelection = new StringSelection(filePath);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+        Robot robot = new Robot();
+        // Подождать некоторое время, чтобы окно выбора файла появилось
+        pause(2000);
+        // Имитация нажатия на клавиши Control + V для вставки пути к файлу из буфера обмена
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        // Подождать некоторое время после ввода пути к файлу
+        pause(2000);
+        // Имитация нажатия на клавишу Enter для выбора файла
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+    }
+
+    public boolean isVideoElementsPresent() {
+        List<WebElement> videoElements = findVideoElements();
+        pause(1000);
+        System.out.println(videoElements);
+        if (videoElements.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
-
-

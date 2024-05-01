@@ -9,9 +9,12 @@ public class GroupHelperUI extends BaseHelperUI{
         super(driver);
     }
 
-    public boolean isCohortInSelectPresent(String cohort) {
-        click(By.className("p-dropdown-trigger"));
-        return isElementPresent(By.cssSelector("[aria-label='" + cohort + "']"));
+    public boolean isTeacherCabinetPresent() {
+        return  (isElementPresent(By.xpath("//a[contains(text(),'Teacher cabinet')]")));
 
+    }
+
+    public boolean isAdministrationInHeaderPresent() {
+        return  (isElementPresent(By.xpath("//button[contains(text(),'Administration')]")));
     }
 }

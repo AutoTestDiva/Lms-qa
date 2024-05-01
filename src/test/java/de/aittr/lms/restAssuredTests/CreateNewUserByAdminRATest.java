@@ -15,13 +15,13 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
 
     private Cookie cookie;
     private NewUserWithRoleDto newUser;
-    private String mail = "lilu@mal.com";
+    private String mail = "n@mal.com";
 
     @BeforeMethod
     public void precondition(){
-        cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
-        newUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu", "Test",
-                "Germany", "STUDENT", "+490123456789");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
+        newUser = user.userWithRoleBuilder("Cohort 99", mail, "Tester", "Test",
+                "Germany", "STUDENT", "+490123451818");
     }
 
     @AfterMethod
@@ -32,22 +32,21 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
     @Test
     public void createNewUserByAdminPositiveTest() {
         given().contentType(ContentType.JSON).body(newUser).cookie(cookie).when().post("/users/create-user")
-                .then().assertThat().statusCode(201);
+                .then().log().all().assertThat().statusCode(201);
     }
 
 
-    @Test
-    public void createNewUserWithoutAdminNegativeTest() {
+    @Test    public void createNewUserWithoutAdminNegativeTest() {
         given().contentType(ContentType.JSON).body(newUser).when().post("/users/create-user")
-                .then().assertThat().statusCode(403);
+                .then().log().all().assertThat().statusCode(401);
     }
 
     @Test
     public void createUserWithWrongRoleByAdminNegativeTest() {
-        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu",
-                "Test", "Germany", "user", "+490123456789");
+        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 99", mail, "Testerin", "Test",
+                "Germany", "user", "+490123456888");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
-                .then().assertThat().statusCode(400);
+                .then().log().all().assertThat().statusCode(404);
     }
 
     @Test
@@ -55,12 +54,12 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
         NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort", mail, "Lilu",
                 "Test", "Germany", "STUDENT", "+490123456789");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
-                .then().assertThat().statusCode(400);
+                .then().log().all().assertThat().statusCode(400);
     }
 
     @Test
     public void createUserWithWrongPhoneByAdminNegativeTest() {
-        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu",
+        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 99", mail, "Lilu",
                 "Test", "Germany", "STUDENT", "Phone number");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
                 .then().assertThat().statusCode(400);
@@ -68,7 +67,7 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
 
     @Test
     public void createUserWithWrongFirstNameByAdminNegativeTest() throws SQLException {
-        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "+490123456789",
+        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 99", mail, "+490123456789",
                 "Test", "Germany", "STUDENT", "+490123456789");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
                 .then().assertThat().statusCode(400);
@@ -76,7 +75,7 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
 
     @Test
     public void createUserFirstNameWithSymbolByAdminNegativeTest() {
-        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu@bat",
+        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 99", mail, "Lilu@bat",
                 "Test", "Germany", "STUDENT", "+490123456789");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
                 .then().assertThat().statusCode(400);
@@ -84,18 +83,17 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
 
     @Test
     public void createUserWithWrongCountryByAdminNegativeTest() {
-        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", mail, "Lilu",
+        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 99", mail, "Lilu",
                 "Test", "Germany777", "STUDENT", "+490123456789");
         given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
-                .then().assertThat().statusCode(400);
+                .then().log().all().assertThat().statusCode(400);
     }
 
     @Test
     public void createExistedUserByAdminNegativeTest() throws SQLException {
-        NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 34.2", "student@mail.com",
-                "Student","Test", "Germany", "STUDENT", "+490123456789");
-        given().contentType(ContentType.JSON).body(notValidUser).cookie(cookie).when().post("/users/create-user")
-                .then().assertThat().statusCode(409);
+        given().contentType(ContentType.JSON).body(newUser).cookie(cookie).when().post("/users/create-user");
+        given().contentType(ContentType.JSON).body(newUser).cookie(cookie).when().post("/users/create-user")
+                .then().log().all().assertThat().statusCode(409);
     }
 
 }

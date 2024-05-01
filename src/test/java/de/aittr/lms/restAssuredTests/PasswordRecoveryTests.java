@@ -7,13 +7,13 @@ public class PasswordRecoveryTests extends TestBaseRA {
 
     @Test
     public void passwordRecoveryPositiveTest(){
-        user.passwordRecovery("student@mail.com").then()
+        user.passwordRecovery("s03@dev-lms.de").then()
                 .assertThat().statusCode(201);
     }
 
     @Test
     public void passwordRecoveryWithNotValidEmailNegativeTest(){
-        user.passwordRecovery("student.mail.com").then()
+        user.passwordRecovery("s03.dev-lms.de").then()
                 .assertThat().statusCode(400);
     }
 

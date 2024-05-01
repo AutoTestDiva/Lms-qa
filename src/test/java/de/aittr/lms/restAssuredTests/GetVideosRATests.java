@@ -15,13 +15,13 @@ public class GetVideosRATests extends TestBaseRA{
     @Test
     public void getVideosAsAdminCohort342PositiveTest(){
         //акокоотма
-        cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         given().contentType(ContentType.JSON).cookie(cookie).when().get(
-                        user.urlBuilderGetVideo("34.2", "basic_programming", "lecture", "30"))
+                        user.urlBuilderGetVideo("30", "BASIC PROGRAMMING", "lecture", "01"))
                 .then().
                 assertThat().statusCode(200)
-                .assertThat().body (containsString("https://lesson-videos.fra1.digitaloceanspaces.com/"))
-                .assertThat().body(containsString("basic_programming"));
+                .assertThat().body (containsString("https://lms-dev.ait-tr.eu/#/student-cabinet/lessons/group/cohort30/module/basic_programming/lesson/lesson_01#video"))
+                .assertThat().body(containsString("Successful operation"));
     }
 
     @Test

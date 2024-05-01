@@ -17,5 +17,7 @@ public class NewUserDto {
     private String lastName;
     private String country;
     private String phone;
+    private String role;
+    private String state;
 
 }

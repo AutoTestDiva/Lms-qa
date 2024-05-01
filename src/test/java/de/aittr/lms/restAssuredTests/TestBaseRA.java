@@ -25,7 +25,7 @@ public class TestBaseRA {
 
     @BeforeMethod
     public void precondition(Method method, Object[] parameters){
-        RestAssured.baseURI = "http://localhost:8080";
+        RestAssured.baseURI = "https://lms-dev.ait-tr.eu/api";
         logger.info("Start test " + method.getName() + " with parameters " + Arrays.asList(parameters));
     }
 

@@ -14,7 +14,7 @@ public class GetAllUsersRATests extends TestBaseRA{
 
     @BeforeMethod
     public void precondition(){
-        cookie = user.getLoginCookie("admin@mail.com", "Admin123!");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
     }
 
     @Test
@@ -27,7 +27,7 @@ public class GetAllUsersRATests extends TestBaseRA{
     @Test
     public void getAllUsersWithoutAdminNegativeTest(){
         given().contentType(ContentType.JSON).when().get("/users").then()
-                .assertThat().statusCode(403);
+                .assertThat().statusCode(401);
     }
 
 

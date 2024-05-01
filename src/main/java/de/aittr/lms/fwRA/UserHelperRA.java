@@ -11,6 +11,7 @@ import java.net.URLEncoder;
 import java.sql.SQLException;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
 public class UserHelperRA extends BaseHelperRA {
 
@@ -33,7 +34,7 @@ public class UserHelperRA extends BaseHelperRA {
     }
 
     public Response registerUser(String cohort, String email, String firstname, String lastname,
-    String country, String phone){
+    String country, String phone, String role){
         NewUserDto user = NewUserDto.builder()
                 .cohort(cohort)
                 .email(email)
@@ -41,6 +42,8 @@ public class UserHelperRA extends BaseHelperRA {
                 .lastName(lastname)
                 .country(country)
                 .phone(phone)
+                .role(role)
+               // .state(state)
                 .build();
 
         return given()
@@ -58,6 +61,15 @@ public class UserHelperRA extends BaseHelperRA {
                 .post("/login");
 
         return response.getDetailedCookie("JSESSIONID");
+        //  return response.getDetailedCookie("Successful authorization");
+    }
+
+    public static Response loginUserRA(String email, String password) {
+        return given()
+                .contentType(ContentType.fromContentType("application/x-www-form-urlencoded"))
+                .body(loginDataEncoded(email, password))
+                .when()
+                .post("/login");
     }
 
     public String getUserUuidByEmail(String email) {
@@ -76,7 +88,8 @@ public class UserHelperRA extends BaseHelperRA {
     public String getUserIdByEmail(String email) throws SQLException {
         String userId;
         try{
-            userId = db.requestSelect("SELECT id FROM account WHERE email = \"" + email + "\";")
+            userId = db.requestSelect("SELECT id FROM account WHERE email = '" + email + "';")
+           // userId = db.requestSelect("SELECT * FROM users WHERE email = \"" + email + "\";")
                     .getString(1);
         } catch (SQLException e){
             userId = null;
@@ -85,18 +98,11 @@ public class UserHelperRA extends BaseHelperRA {
         return userId;
     }
 
-    public static Response loginUserRA(String email, String password) {
-        return given()
-                .contentType(ContentType.fromContentType("application/x-www-form-urlencoded"))
-                .body(loginDataEncoded(email, password))
-                .when()
-                .post("/login");
-    }
+
 
     public Response setPasswordByEmail(String email, String password) throws SQLException {
         String userId = getUserIdByEmail(email);
         String userUuid = getUserUuidByEmail(email);
-        System.out.println("**********" + userUuid + "************");
         return given().contentType(ContentType.JSON)
                 .body("{\n" +
                         "  \"uuid\": \"" + userUuid + "\",\n" +
@@ -110,6 +116,7 @@ public class UserHelperRA extends BaseHelperRA {
 
         db.requestDelete("DELETE FROM confirmation_code WHERE user_id = " + userId + ";");
         db.requestDelete("DELETE FROM student_cohort WHERE user_id = " + userId + ";");
+        db.requestDelete("DELETE FROM account_aud WHERE id = " + userId + ";");
         db.requestDelete("DELETE FROM account WHERE id = " + userId + ";");
     }
 
@@ -130,6 +137,7 @@ public class UserHelperRA extends BaseHelperRA {
                 .country(country)
                 .phone(phone)
                 .role(role)
+                //.state(state)
                 .build();
         return user;
     }
@@ -138,5 +146,19 @@ public class UserHelperRA extends BaseHelperRA {
         return given().contentType(ContentType.JSON).body("{\"email\": \"" + mail + "\"}").when().post("/users/password-recovery");
     }
 
+
+    public void userStatusConfirmed(String email) {//Changes the status to CONFIRMED in 2 database tables users, users_aud
+            try {
+                String userId = getUserIdByEmail(email);
+                if (userId != null) {
+                    db.executeUpdate("UPDATE account SET state = 'CONFIRMED' WHERE id = '" + userId + "';");
+                    db.executeUpdate("UPDATE account_aud SET state = 'CONFIRMED' WHERE id = '" + userId + "';");
+                } else {
+                    System.out.println("User not found");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
 }

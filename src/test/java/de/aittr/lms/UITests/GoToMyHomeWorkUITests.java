@@ -1,25 +1,23 @@
 package de.aittr.lms.UITests;
 
-import de.aittr.lms.CSVDataProviders;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyHomeWorkUITests extends TestBaseUI {
+public class GoToMyHomeWorkUITests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-        app.getUserUI().loginWithData("admin@mail.com", "Admin123!");
+        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
     @Test
     public void isMyHomeWorkTest() {
-        report.add("isMyHomeWorkTest" + System.lineSeparator()); // надо для report
-        app.getUserUI().clickOnLessonsInSideBar();
-
+        report.add("goToMyHomeWorkTest" + System.lineSeparator()); // надо для report
         app.getCSVReaderUI().clickOnSelectYourGroup();
         List<WebElement> groups = app.getCSVReaderUI().getDropdownListOfGroups();
         List<String> listOfGroups = new ArrayList<>();
@@ -43,7 +41,6 @@ public class MyHomeWorkUITests extends TestBaseUI {
                     List<WebElement> modules = app.getCSVReaderUI().getDropdownListOfModules();
                     List<String> listOfModules = new ArrayList<>();
                     listOfModules = app.getCSVReaderUI().readerHelper()[1];
-                    // System.out.println(listOfModules);
 
                     if (listOfModules.size() == 0 || listOfModules.get(0).equals("")) {
                         listOfModules.clear();
@@ -76,31 +73,27 @@ public class MyHomeWorkUITests extends TestBaseUI {
                                 for (int i = 0; i < listOfLessons.size(); i++) {
                                     if (app.getCSVReaderUI().selectMyLesson(listOfLessons.get(i))) {
                                         app.getCSVReaderUI().clickOnSelectedLesson(listOfLessons.get(i));
-
                                         String myHomeWork = "o";
 
-                                        if (app.getCSVReaderUI().isMyHomeWorkPresent()) {
+                                        if (app.getCSVReaderUI().goToMyHomeWorkPresent()) {
                                             // Проверяем вкладку ПЛАН и наличие там текста
-
                                             myHomeWork = "+";
                                         } else {
                                             myHomeWork = "-";
                                         }
                                         app.getCSVReaderUI().pause(1000);
-
                                         report.add(String.format("    %-5s |                       %-5s%n", listOfLessons.get(i), myHomeWork + "                            |"));
-
                                         app.getCSVReaderUI().clickOnNextSelectedLesson();
                                         app.getUserUI().pause(2000);
                                     } else {
-                                        report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ "  " +listOfLessons.get(i)+ " еще нет");
+                                        report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l) + "  " + listOfLessons.get(i) + " еще нет");
                                     }
                                 }
                             } else {
-                                report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l)+ " уроков еще нет");
+                                report.add("В группе " + listOfGroups.get(j) + " в модуле " + listOfModules.get(l) + " уроков еще нет");
                             }
                         } else {
-                            report.add("В группе " + listOfGroups.get(j) + " модуля " + listOfModules.get(l)+ " еще нет");
+                            report.add("В группе " + listOfGroups.get(j) + " модуля " + listOfModules.get(l) + " еще нет");
                         }
                         app.getCSVReaderUI().clickOnNextSelectedModule();
                         app.getUserUI().pause(1000);
@@ -108,7 +101,6 @@ public class MyHomeWorkUITests extends TestBaseUI {
                 } else {
                     report.add("В группе " + listOfGroups.get(j) + "  модулей еще нет");
                 }
-
                 app.getCSVReaderUI().scrollPageUp();
                 app.getCSVReaderUI().clickOnNextSelectedGroup();
                 app.getUserUI().pause(1000);
@@ -116,6 +108,11 @@ public class MyHomeWorkUITests extends TestBaseUI {
                 report.add("Группы " + listOfGroups.get(j) + " еще нет");
             }
         }
+    }
+
+    @AfterMethod
+    public void postCondition() {
+        app.getUserUI().logOut();
     }
 }
 

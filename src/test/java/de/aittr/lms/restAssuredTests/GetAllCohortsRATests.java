@@ -9,7 +9,7 @@ public class GetAllCohortsRATests extends TestBaseRA {
 
     @Test
     public void getAllCohortsTest(){
-        given().contentType(ContentType.JSON).when().get("/cohorts").then()
+        given().contentType(ContentType.JSON).when().get("/cohorts").then().log().all()
                 .assertThat().statusCode(200);
     }
 

@@ -11,12 +11,12 @@ import lombok.ToString;
 @Builder
 public class ZoomParametrizedMeetingDto {
 
-    Integer cohortId;
+    Integer [] cohortIds;
     String lessonType;
     String lessonModule;
-    Integer lessonsNr;
+    String lessonsNr;
     String lessonTopic;
-    String meetingOwnerEmail;
+    //String meetingOwnerEmail; //
     String agenda;
     String dateToStart;
     String timeToStart;

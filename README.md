@@ -147,5 +147,15 @@ It will start in http://localhost:4200/.
 - The result look in folder 'result'.
 
 
+## Check if the "Upload Home Work Solution" element is present on the page
+- Open file 'UploadHomeWorkSolutionData.csv', enter the cohort, module and lesson for which you want
+  to get information about the presence/absence of "Upload Home Work Solution" element
+- Start "UploadHomeWorkSolutionUITests2"
+
+## Check if the "MyHomeWork" element is present on the page
+- Open file 'MyHomeWorkData.csv', enter the cohort, module and lesson for which you want
+  to get information about the presence/absence of "MyHomeWork" element
+- Start "MyHomeWorkUITests2"
+
 **********************
 https://marketplace.zoom.us/
