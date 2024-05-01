@@ -1,4 +1,4 @@
-name: UI Tests
+name: UI Tests #для старта тестов на ГитХабе Экшнс
 
 on:
   push:
