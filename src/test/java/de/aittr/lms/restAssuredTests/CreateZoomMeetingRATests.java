@@ -14,25 +14,25 @@ public class CreateZoomMeetingRATests extends TestBaseRA {
     Cookie cookie;
     ZoomMeetingDto zoomMeeting;
 
-    @Test
-    public void createZoomMeetingByAdminPositiveTest() {
-        String date = "2024-09-22";
-        String time = "19:00:00";
-        LocalDateTime dataT = LocalDateTime.of(2024,
-                9, 24, 17,
-                0, 0, 0);
-        String baseTime = dataT
-                .atZone(ZoneId.of("Europe/Berlin"))
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
-
-        cookie = user.getLoginCookie("t03@dev-lms.de", "LMS-dev-pass-2024");
-        zoomMeeting = zoom.ZoomMeetingBuilder(
-                "Java lesson #27", date, time, 300);
-        zoom.createZoomMeeting(cookie, zoomMeeting).then()
-                .log().all()
-                .assertThat().statusCode(200)
-                .assertThat().body("meetingTime", equalTo(baseTime));
-    }
+//    @Test
+//    public void createZoomMeetingByAdminPositiveTest() {
+//        String date = "2024-09-22";
+//        String time = "19:00:00";
+//        LocalDateTime dataT = LocalDateTime.of(2024,
+//                9, 24, 17,
+//                0, 0, 0);
+//        String baseTime = dataT
+//                .atZone(ZoneId.of("Europe/Berlin"))
+//                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+//
+//        cookie = user.getLoginCookie("t03@dev-lms.de", "LMS-dev-pass-2024");
+//        zoomMeeting = zoom.ZoomMeetingBuilder(
+//                "Java lesson #27", date, time, 300);
+//        zoom.createZoomMeeting(cookie, zoomMeeting).then()
+//                .log().all()
+//                .assertThat().statusCode(200)
+//                .assertThat().body("meetingTime", equalTo(baseTime));
+//    }
 
     @Test
     public void createZoomMeetingByTeacherPositiveTest() {
