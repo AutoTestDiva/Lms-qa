@@ -24,7 +24,7 @@ public class GetMyProfileRATests extends TestBaseRA{
     }
 
     @AfterMethod
-    public void postCondition() throws SQLException {
+    public void postCondition(){
         user.deleteUser("lilu@mail.com");
     }
 

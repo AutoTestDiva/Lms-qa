@@ -29,7 +29,7 @@ public class LogOutRATests extends TestBaseRA{
 
     }
     @AfterMethod
-    public void postCondition() throws SQLException, InterruptedException {
+    public void postCondition() {
         user.deleteUser("lilu@mail.com");
     }
 
