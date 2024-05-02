@@ -85,7 +85,7 @@ public class UserHelperRA extends BaseHelperRA {
         return userUuid; // TODO change getUserUuidByEmail
     }
 
-    public String getUserIdByEmail(String email) throws SQLException {
+    public String getUserIdByEmail(String email) {
         String userId;
         try{
             userId = db.requestSelect("SELECT id FROM account WHERE email = '" + email + "';")
@@ -100,7 +100,7 @@ public class UserHelperRA extends BaseHelperRA {
 
 
 
-    public Response setPasswordByEmail(String email, String password) throws SQLException {
+    public Response setPasswordByEmail(String email, String password)  {
         String userId = getUserIdByEmail(email);
         String userUuid = getUserUuidByEmail(email);
         return given().contentType(ContentType.JSON)
@@ -120,7 +120,7 @@ public class UserHelperRA extends BaseHelperRA {
         db.requestDelete("DELETE FROM account WHERE id = " + userId + ";");
     }
 
-    public void deleteUser(String email) throws SQLException {
+    public void deleteUser(String email) {
         String userId = getUserIdByEmail(email);
         if(userId != null){
             deleteUserById(userId);
@@ -148,17 +148,13 @@ public class UserHelperRA extends BaseHelperRA {
 
 
     public void userStatusConfirmed(String email) {//Changes the status to CONFIRMED in 2 database tables users, users_aud
-            try {
-                String userId = getUserIdByEmail(email);
-                if (userId != null) {
-                    db.executeUpdate("UPDATE account SET state = 'CONFIRMED' WHERE id = '" + userId + "';");
-                    db.executeUpdate("UPDATE account_aud SET state = 'CONFIRMED' WHERE id = '" + userId + "';");
-                } else {
-                    System.out.println("User not found");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        String userId = getUserIdByEmail(email);
+        if (userId != null) {
+            db.executeUpdate("UPDATE account SET state = 'CONFIRMED' WHERE id = '" + userId + "';");
+            db.executeUpdate("UPDATE account_aud SET state = 'CONFIRMED' WHERE id = '" + userId + "';");
+        } else {
+            System.out.println("User not found");
         }
+    }
 
 }

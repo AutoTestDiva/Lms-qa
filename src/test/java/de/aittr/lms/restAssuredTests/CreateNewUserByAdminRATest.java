@@ -25,7 +25,7 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
     }
 
     @AfterMethod
-    public void postCondition() throws SQLException {
+    public void postCondition() {
         user.deleteUser(mail);
     }
 

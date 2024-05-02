@@ -14,7 +14,7 @@ public class LogOutRATests extends TestBaseRA{
     private Cookie cookie;
 
     @BeforeMethod
-    public void precondition() throws SQLException{
+    public void precondition() {
         user.registerUser("Cohort 99", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567", "STUDENT");
         user.setPasswordByEmail("lilu@mail.com", "LMS-dev-pass-2024");
