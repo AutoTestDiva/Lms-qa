@@ -28,7 +28,7 @@ public class PasswordChangeRATests extends TestBaseRA {
    }
 
     @AfterMethod
-    public void afterTest() throws SQLException {
+    public void afterTest() throws SQLException, InterruptedException {
         user.deleteUser("lilu3@mail.com");
     }
 

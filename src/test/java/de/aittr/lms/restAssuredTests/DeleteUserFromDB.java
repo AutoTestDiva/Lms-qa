@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DeleteUserFromDB extends TestBaseRA{
 
     @Test // help to deleteUser from database when it needs.
-    public void deleteUser() throws SQLException {
+    public void deleteUser() throws SQLException, InterruptedException {
         user.deleteUser("nata@mal.com");
     }
 
