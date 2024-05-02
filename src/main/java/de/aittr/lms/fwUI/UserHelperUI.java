@@ -109,6 +109,7 @@ public class UserHelperUI extends BaseHelperUI {
     }
 
     public void closeLoginMessage() {
+        pause(500);
        click(By.cssSelector(".p-icon.p-toast-icon-close-icon"));
        pause(500);
         scrollPageUp();
