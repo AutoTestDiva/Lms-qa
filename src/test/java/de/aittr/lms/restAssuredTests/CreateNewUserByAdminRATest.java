@@ -26,6 +26,7 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
 
     @AfterMethod
     public void postCondition() throws SQLException, InterruptedException {
+        Thread.sleep(500);
         user.deleteUser(mail);
     }
 

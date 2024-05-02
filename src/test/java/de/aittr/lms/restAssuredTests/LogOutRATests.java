@@ -14,10 +14,12 @@ public class LogOutRATests extends TestBaseRA{
     private Cookie cookie;
 
     @BeforeMethod
-    public void precondition() throws SQLException {
+    public void precondition() throws SQLException, InterruptedException {
         user.registerUser("Cohort 99", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567", "STUDENT");
+        Thread.sleep(500);
         user.setPasswordByEmail("lilu@mail.com", "Qwer123!");
+        Thread.sleep(500);
         cookie = user.getLoginCookie("lilu@mail.com", "Qwer123!");
     }
 

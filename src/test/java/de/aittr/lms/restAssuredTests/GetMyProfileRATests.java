@@ -19,7 +19,9 @@ public class GetMyProfileRATests extends TestBaseRA{
     public void precondition() throws SQLException, InterruptedException {
         user.registerUser("Cohort 99", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567", "STUDENT");
+        Thread.sleep(500);
         user.setPasswordByEmail("lilu@mail.com", "LMS-dev-pass-2024");
+        Thread.sleep(500);
         cookie = user.getLoginCookie("lilu@mail.com", "LMS-dev-pass-2024");
         Thread.sleep(500);
     }
