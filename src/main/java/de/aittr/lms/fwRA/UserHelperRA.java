@@ -120,12 +120,11 @@ public class UserHelperRA extends BaseHelperRA {
         db.requestDelete("DELETE FROM account WHERE id = " + userId + ";");
     }
 
-    public void deleteUser(String email) throws SQLException, InterruptedException {
+    public void deleteUser(String email) throws SQLException {
         String userId = getUserIdByEmail(email);
         if(userId != null){
             deleteUserById(userId);
         }
-        Thread.sleep(500);
     }
 
     public static NewUserWithRoleDto userWithRoleBuilder (String cohort, String email, String firstName,

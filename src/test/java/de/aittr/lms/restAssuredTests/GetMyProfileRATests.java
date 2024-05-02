@@ -16,18 +16,15 @@ public class GetMyProfileRATests extends TestBaseRA{
     private Cookie cookie;
 
     @BeforeMethod
-    public void precondition() throws SQLException, InterruptedException {
+    public void precondition() throws SQLException{
         user.registerUser("Cohort 99", "lilu@mail.com", "Lilu", "Test",
                 "Germany", "+490571234567", "STUDENT");
-        Thread.sleep(500);
         user.setPasswordByEmail("lilu@mail.com", "LMS-dev-pass-2024");
-        Thread.sleep(500);
         cookie = user.getLoginCookie("lilu@mail.com", "LMS-dev-pass-2024");
-        Thread.sleep(500);
     }
 
     @AfterMethod
-    public void postCondition() throws SQLException, InterruptedException {
+    public void postCondition() throws SQLException {
         user.deleteUser("lilu@mail.com");
     }
 
