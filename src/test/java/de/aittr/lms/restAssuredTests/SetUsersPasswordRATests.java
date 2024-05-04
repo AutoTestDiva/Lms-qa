@@ -21,13 +21,13 @@ public class SetUsersPasswordRATests extends TestBaseRA {
     }
 
     @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
-    public void setNotValidPasswordTest(String password) throws SQLException {
+    public void setNotValidPasswordTest(String password) {
         user.setPasswordByEmail("lilu3@mail.com", password).then()
                 .assertThat().statusCode(400);
     }
 
     @AfterMethod
-    public void afterTest() throws SQLException, InterruptedException {
+    public void afterTest() {
         user.deleteUser("lilu3@mail.com");
     }
 }
