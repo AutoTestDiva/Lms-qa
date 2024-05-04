@@ -19,7 +19,7 @@ public class PasswordChangeRATests extends TestBaseRA {
     private Cookie cookie;
 
    @BeforeMethod
-    public void precondition() throws SQLException {
+    public void precondition()  {
        user.registerUser("Cohort 99", "lilu3@mail.com", "Tester", "Test",
                "Germany", "+490123651812","STUDENT");
         user.setPasswordByEmail("lilu3@mail.com", "LMS-dev-pass-2024");
@@ -28,15 +28,9 @@ public class PasswordChangeRATests extends TestBaseRA {
    }
 
     @AfterMethod
-    public void afterTest() throws SQLException, InterruptedException {
+    public void afterTest() {
         user.deleteUser("lilu3@mail.com");
     }
-
-    //@BeforeMethod
-//    @Test
-//    public void precondition(){
-//        user.loginUserRA("a01@dev-lms.de", "LMS-dev-pass-2024");
-//    }
 
     @Test
     public void passwordChangeSuccessPositiveTest() {
@@ -72,7 +66,6 @@ public class PasswordChangeRATests extends TestBaseRA {
 //                .assertThat().body("message", equalTo(PASS_CHANGED_SUCCESSFULLY_MSG));
 //
 //    }
-
     @Test
     public void invalidOldPasswordNegativeTest() {
         String invalidOldPassword = "wrong-password123!";
@@ -88,8 +81,6 @@ public class PasswordChangeRATests extends TestBaseRA {
         int status = response.jsonPath().getInt("status");
         Assert.assertEquals(status, 0);
     }
-
-
     @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
     public void validationErrorPasswordTest(String password) throws SQLException {
         user.setPasswordByEmail("lilu3@mail.com", password).then()
