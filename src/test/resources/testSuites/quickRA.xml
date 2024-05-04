@@ -4,12 +4,7 @@
 
     <test name="QuickRA" >
         <classes>
-            <class name="de.aittr.lms.restAssuredTests.CreateNewUserByAdminRATest" />
-            <class name="de.aittr.lms.restAssuredTests.GetAllCohortsRATests" />
-            <class name="de.aittr.lms.restAssuredTests.GetAllUsersRATests" />
-            <class name="de.aittr.lms.restAssuredTests.GetMyProfileRATests" />
             <class name="de.aittr.lms.restAssuredTests.LoginRATests" />
-            <class name="de.aittr.lms.restAssuredTests.LogOutRATests" />
         </classes>
     </test>
 
