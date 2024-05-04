@@ -5,16 +5,19 @@
     <test name="RegressionRA" >
         <classes>
             <class name="de.aittr.lms.restAssuredTests.CreateNewUserByAdminRATest" />
+            <class name="de.aittr.lms.restAssuredTests.CreateParamZoomMeetingTests" />
             <class name="de.aittr.lms.restAssuredTests.CreateZoomMeetingRATests" />
+            <class name="de.aittr.lms.restAssuredTests.DeleteUserFromDB" />
             <class name="de.aittr.lms.restAssuredTests.GetAllCohortsRATests" />
             <class name="de.aittr.lms.restAssuredTests.GetAllUsersRATests" />
             <class name="de.aittr.lms.restAssuredTests.GetMyProfileRATests" />
             <class name="de.aittr.lms.restAssuredTests.GetVideosRATests" />
             <class name="de.aittr.lms.restAssuredTests.LoginRATests" />
             <class name="de.aittr.lms.restAssuredTests.LogOutRATests" />
+            <class name="de.aittr.lms.restAssuredTests.PasswordChangeRATests" />
+            <class name="de.aittr.lms.restAssuredTests.PasswordRecoveryTests" />
             <class name="de.aittr.lms.restAssuredTests.SetUsersPasswordRATests" />
             <class name="de.aittr.lms.restAssuredTests.UserRegistrationRATests" />
         </classes>
     </test>
-
 </suite>
