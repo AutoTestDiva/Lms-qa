@@ -9,13 +9,13 @@ import java.sql.SQLException;
 
 public class SetUsersPasswordRATests extends TestBaseRA {
     @BeforeMethod
-    public void precondition() throws SQLException {
+    public void precondition()  {
         user.registerUser("Cohort 99", "lilu3@mail.com", "Tester", "Test",
                 "Germany", "+490123651812", "STUDENT");
     }
 
     @Test
-    public void setUsersPasswordPositiveTest() throws SQLException {
+    public void setUsersPasswordPositiveTest()  {
         user.setPasswordByEmail("lilu3@mail.com", "LMS-dev-pass-2024").then()
                 .assertThat().statusCode(200);
     }
@@ -27,6 +27,7 @@ public class SetUsersPasswordRATests extends TestBaseRA {
     }
 
     @AfterMethod
+   // @Test
     public void afterTest() {
         user.deleteUser("lilu3@mail.com");
     }
