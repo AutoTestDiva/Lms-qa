@@ -33,6 +33,8 @@ dependencies {
 test {
     useTestNG()
     ignoreFailures = true
+
+        systemProperty "db.password", System.getenv("DB_PASSWORD")
 }
 
 task qa(type:Test) {
