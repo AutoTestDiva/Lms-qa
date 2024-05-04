@@ -2,7 +2,6 @@ package de.aittr.lms.restAssuredTests;
 
 import org.testng.annotations.Test;
 
-
 public class PasswordRecoveryTests extends TestBaseRA {
 
     @Test
