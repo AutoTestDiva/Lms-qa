@@ -61,7 +61,6 @@ public class UserHelperRA extends BaseHelperRA {
                 .post("/login");
 
         return response.getDetailedCookie("JSESSIONID");
-        //  return response.getDetailedCookie("Successful authorization");
     }
 
     public static Response loginUserRA(String email, String password) {
@@ -98,8 +97,6 @@ public class UserHelperRA extends BaseHelperRA {
         return userId;
     }
 
-
-
     public Response setPasswordByEmail(String email, String password)  {
         String userId = getUserIdByEmail(email);
         String userUuid = getUserUuidByEmail(email);
@@ -113,7 +110,6 @@ public class UserHelperRA extends BaseHelperRA {
     }
 
     private void deleteUserById(String userId) {
-
         db.requestDelete("DELETE FROM confirmation_code WHERE user_id = " + userId + ";");
         db.requestDelete("DELETE FROM student_cohort WHERE user_id = " + userId + ";");
         db.requestDelete("DELETE FROM account_aud WHERE id = " + userId + ";");
