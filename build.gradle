@@ -29,12 +29,13 @@ dependencies {
     implementation 'com.opencsv:opencsv:5.7'
 
 }
+sourceCompatibility = '1.8'
+
 
 test {
     useTestNG()
     ignoreFailures = true
 
-        systemProperty "db.password", System.getenv("DB_PASSWORD")
 }
 
 task qa(type:Test) {
