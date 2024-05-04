@@ -42,6 +42,6 @@ src/test_logs
 src/screenshots
 
 TASKS_LU.md
-src/test/resources/application.yml
+#src/test/resources/application.yml
 /build/**
 /report/
