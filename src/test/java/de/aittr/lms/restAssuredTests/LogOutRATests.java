@@ -12,7 +12,6 @@ import static io.restassured.RestAssured.given;
 public class LogOutRATests extends TestBaseRA{
 
     private Cookie cookie;
-
     @BeforeMethod
     public void precondition() {
         user.registerUser("Cohort 99", "lilu@mail.com", "Lilu", "Test",
