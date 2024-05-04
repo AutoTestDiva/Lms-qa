@@ -35,17 +35,15 @@ public class LoginRATests extends TestBaseRA{
     @Test ()
     public void loginAsUserWithWrongPasswordNegativeTest() {
 
-        user.loginUserRA("s01@dev-lms.de", "Qwer132!")
+        user.loginUserRA("s01@dev-lms.de", "test-dev-pass-2024")
                 .then()
                 .assertThat().statusCode(401);
     }
 
     @Test ()
     public void loginNotExistedUserNegativeTest() {
-
-        user.loginUserRA("lilu225@mail.com", "Qwer123!")
+        user.loginUserRA("lilu225@mail.com", "LMS-dev-pass-2024")
                 .then()
                 .assertThat().statusCode(401);
     }
-
 }
