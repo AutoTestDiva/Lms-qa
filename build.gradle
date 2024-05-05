@@ -37,7 +37,6 @@ dependencies {
 test {
     useTestNG()
     ignoreFailures = true
-
 }
 
 task qa(type:Test) {
