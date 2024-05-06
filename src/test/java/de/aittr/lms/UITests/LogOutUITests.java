@@ -10,7 +10,6 @@ public class LogOutUITests extends TestBaseUI {
         app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
-
     @Test
     public void LogOutTest() {
         app.getUserUI().logOut();
