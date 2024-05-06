@@ -12,10 +12,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        java-version: [15] # Укажите версии Java, которые вам нужны для тестирования
-
     env:
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
@@ -23,10 +19,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK ${{ matrix.java-version }}
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: ${{ matrix.java-version }}
+          java-version: '15'
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v2
@@ -41,3 +37,4 @@ jobs:
           ./gradlew clean qa -Psuite3
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
