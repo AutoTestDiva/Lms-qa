@@ -1,42 +1,41 @@
 name: UI Tests
 
-#on:
-#  push:
-#    branches:
-#      - main  # замените на вашу основную ветку
-#
-#jobs:
-#  test:
-#    name: Run UI Tests
-#    runs-on: ubuntu-latest  # используем Ubuntu
-#
-#    steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@v2
-#
-#      - name: Install Amazon Corretto 17
-#        run: |
-#          sudo apt-get update
-#          sudo apt-get install -y wget
-#          wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
-#          sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
-#          sudo apt-get update
-#          sudo apt-get install -y java-17-amazon-corretto-jdk
-#
-#      - name: Install Chrome
-#        run: |
-#          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#          sudo apt install ./google-chrome-stable_current_amd64.deb
-#
-#      - name: Set up ChromeDriver
-#        run: |
-#          LATEST_CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE)
-#          wget https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-#          unzip chromedriver_linux64.zip
-#          sudo mv chromedriver /usr/local/bin/
-#
-#      - name: Build and Run Tests
-#        run: |
-#          ./gradlew qa
-#
-##           Здесь замените на фактическую команду для сборки и запуска ваших тестов
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 15
+        uses: actions/setup-java@v2
+        with:
+          java-version: 15
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Run tests
+        run: |
+          ./gradlew clean qa -Psuite3
+        env:
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
