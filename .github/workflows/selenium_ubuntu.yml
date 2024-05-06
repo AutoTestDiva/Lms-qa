@@ -24,6 +24,9 @@ jobs:
         run: |
           echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
 
+      - name: Grant execute permissions for gradlew
+        run: chmod +x ./gradlew
+
       - name: Run tests
         run: |
           ./gradlew clean qa -Psuite1
