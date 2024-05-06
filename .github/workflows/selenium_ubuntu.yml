@@ -16,6 +16,11 @@ jobs:
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -37,4 +42,3 @@ jobs:
           ./gradlew clean qa -Psuite3
         env:
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-
