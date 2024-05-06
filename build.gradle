@@ -1,6 +1,10 @@
+
+
 plugins {
     id 'java'
+
 }
+
 
 group 'org.example'
 version '1.0-SNAPSHOT'
@@ -36,9 +40,8 @@ dependencies {
 
 test {
     useTestNG()
-    ignoreFailures = true
-}
 
+}
 task qa(type:Test) {
     useTestNG(){
         def suite1 = project.hasProperty("suite1")
