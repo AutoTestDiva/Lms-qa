@@ -27,9 +27,11 @@ jobs:
       - name: ✅ ⚙️ Install Node version "20"
         uses: actions/setup-node@v4
         with:
-        node-version: '20'
+          node-version: '20'
+
       - name: ❎ ⌛ Check Node version
         run: node --version
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
