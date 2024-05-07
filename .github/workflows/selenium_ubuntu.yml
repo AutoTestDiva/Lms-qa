@@ -56,7 +56,7 @@ jobs:
         run: |
 #          ./gradlew clean qa -Psuite1
 #          ./gradlew clean qa -Psuite2
-           ./gradlew clean qa -Psuite3
+          ./gradlew clean qa -Psuite3
 #          ./gradlew clean qa -Psuite4
 
       - name: Deploy
