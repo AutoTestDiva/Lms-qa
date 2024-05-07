@@ -17,11 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: ✅ ⚙️ Install Java version "15"
+      - name: ✅ ⚙️ Install Java version "17"
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '15'
+          distribution: 'Amazon Corretto'
+          java-version: '17'
       # !  Installation Node.js
       - name: ✅ ⚙️ Install Node version "20"
         uses: actions/setup-node@v4
