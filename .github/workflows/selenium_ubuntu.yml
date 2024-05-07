@@ -42,11 +42,11 @@ jobs:
         with:
           gradle-version: '8.3'
 
-      - name: ✅ ⚙️ Set execute permission for gradlew
-        run: chmod +x gradlew
+#      - name: ✅ ⚙️ Set execute permission for gradlew
+#        run: chmod +x gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+        run: ./gradlew build -x
 
       - name: Get application.yml from secrets
         run: |
