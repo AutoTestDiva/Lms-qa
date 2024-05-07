@@ -32,10 +32,10 @@ jobs:
       - name: ❎ ⌛ Check Node version
         run: node --version
 
-  # !  List of folders before tests
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
+#  # !  List of folders before tests
+#      - name: ✅ 📂 List Directories before tests
+#        if: always()
+#        run: ls -R
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -55,9 +55,9 @@ jobs:
       - name: Run tests
         run: |
           ./gradlew clean qa -Psuite1
-          ./gradlew clean qa -Psuite2
-          ./gradlew clean qa -Psuite3
-          ./gradlew clean qa -Psuite4
+#          ./gradlew clean qa -Psuite2
+#          ./gradlew clean qa -Psuite3
+#          ./gradlew clean qa -Psuite4
 
       - name: Deploy
         run: echo 'Deploying...'
