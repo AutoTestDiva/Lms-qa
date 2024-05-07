@@ -36,7 +36,7 @@ jobs:
       - name: ✅ 📂 List Directories before tests
         if: always()
         run: ls -R
-      -
+
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
 
