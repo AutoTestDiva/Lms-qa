@@ -52,7 +52,6 @@ jobs:
         run: |
           echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
 
-
   # !  List of folders before tests
       - name: ✅ 📂 List Directories before tests
         if: always()
@@ -61,17 +60,9 @@ jobs:
 #      - name: Build with Gradle Wrapper
 #        run: ./gradlew build
 
-#      - name: Clean Gradle build cache
-#        run: ./gradlew cleanBuildCache
-
-#      - name: Run tests
-#        run: |
-#          ./gradlew clean qa -Psuite4
-
       - name: Run tests
         run: |
-          ./gradlew clean build
-          ./gradlew qa -Psuite4
-          
+          ./gradlew clean qa -Psuite4
+
       - name: Deploy
         run: echo 'Deploying...'
