@@ -57,9 +57,12 @@ jobs:
 #        if: always()
 #        run: ls -R
 
+# убирает точку перед src
       - name: List Directories before tests
+        if: always()
         run: |
-          find src/test/resources/DataScv -type f
+          find src/test/resources/DataScv -type f  
+          
 
 
 #      - name: Build with Gradle Wrapper
