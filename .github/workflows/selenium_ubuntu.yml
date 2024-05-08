@@ -52,17 +52,12 @@ jobs:
         run: |
           echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
 
-#  # !  List of folders before tests
-#      - name: ✅ 📂 List Directories before tests
-#        if: always()
-#        run: ls -R
-
-      - name: List Directories before tests
-        run: |
-          find src/test/resources/DataScv -type f
+  # !  List of folders before tests
+      - name: ✅ 📂 List Directories before tests
+        if: always()
+        run: ls -R
 
 
-#
 ## убирает точку перед src
 #      - name: List Directories before tests
 #        if: always()
@@ -80,8 +75,7 @@ jobs:
 
       - name: Run tests
         run: |
-          export CSV_PATH=".src/test/resources/DataScv/"
-          ./gradlew clean qa -Psuite3
+         ./gradlew clean qa -Psuite3
       
       
 
