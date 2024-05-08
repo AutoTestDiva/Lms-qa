@@ -63,6 +63,7 @@ jobs:
       - name: Run tests
         run: |
           ./gradlew clean qa -Psuite3
+           ./gradlew compileJava -Xlint:unchecked
 
       - name: Deploy
         run: echo 'Deploying...'
