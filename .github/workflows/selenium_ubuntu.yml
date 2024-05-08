@@ -32,10 +32,11 @@ jobs:
       - name: ❎ ⌛ Check Node version
         run: node --version
 
-#  # !  List of folders before tests
-#      - name: ✅ 📂 List Directories before tests
-#        if: always()
-#        run: ls -R
+  # !  List of folders before tests
+      - name: ✅ 📂 List Directories before tests
+        if: always()
+        run: ls -
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -44,12 +45,20 @@ jobs:
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle Wrapper
-        run: ./gradlew build
-
       - name: Get application.yml from secrets
         run: |
           echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
+
+
+  # !  List of folders before tests
+      - name: ✅ 📂 List Directories before tests
+        if: always()
+        run: ls -
+
+
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
+
 
       - name: Run tests
         run: |
