@@ -23,7 +23,7 @@ public class CSVDataProviders {
 
     @DataProvider(name = "provideNotValidPassword")
     public static Object[][] provideNotValidPassword() {
-        String csvFile = ".src/test/resources/DataScv/NotValidPassword.csv"; //!!
+        String csvFile = "src/test/resources/DataScv/NotValidPassword.csv";
         return readDataFromCSV(csvFile);
     }
 

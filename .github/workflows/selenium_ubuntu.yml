@@ -62,6 +62,7 @@ jobs:
 
       - name: Run tests
         run: |
+          cd $GITHUB_WORKSPACE  # Переходим в корневую директорию проекта
           ./gradlew clean qa -Psuite3
 
       - name: Deploy
