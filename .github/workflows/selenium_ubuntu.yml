@@ -64,11 +64,11 @@ jobs:
 #        run: |
 #          ./gradlew clean qa -Psuite3
 
-      - name: Run tests with CSV files
+      - name: Run tests
+        working-directory: ./
         run: |
-         for file in .src/test/resources/DataScv/*.csv; do
-         ./gradlew clean qa -Psuite3 -Pcsv="$file"
-         done
+          ./gradlew clean qa -Psuite3
+      
 
       - name: Deploy
         run: echo 'Deploying...'
