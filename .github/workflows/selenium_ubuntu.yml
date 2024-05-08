@@ -58,10 +58,6 @@ jobs:
         run: ls -R
 
 
-      - name: ✅ 📂 Create symlink for src directory    #
-        run: ln -s .src src
-
-
 #      - name: Build with Gradle Wrapper
 #        run: ./gradlew build
 
@@ -70,9 +66,10 @@ jobs:
 #          ./gradlew clean qa -Psuite3
 
       - name: Run tests
-        working-directory: ./
         run: |
+          export CSV_PATH=".src/test/resources/DataScv/"
           ./gradlew clean qa -Psuite3
+      
       
 
       - name: Deploy
