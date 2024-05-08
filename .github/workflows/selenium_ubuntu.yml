@@ -62,7 +62,7 @@ jobs:
 
       - name: Run tests
         run: |
-          ./gradlew clean qa -Psuite4
+          ./gradlew clean qa -Psuite3
 
       - name: Deploy
         run: echo 'Deploying...'
