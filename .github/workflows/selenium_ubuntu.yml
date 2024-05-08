@@ -52,6 +52,9 @@ jobs:
         run: |
           echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
 
+      - name: Set up environment
+        run: echo "export GITHUB_WORKSPACE=$(pwd)" >> $GITHUB_ENV
+
   # !  List of folders before tests
       - name: ✅ 📂 List Directories before tests
         if: always()
@@ -62,7 +65,7 @@ jobs:
 
       - name: Run tests
         run: |
-          cd $GITHUB_WORKSPACE/lms-qa
+          
           ./gradlew clean qa -Psuite3
 
       - name: Deploy
