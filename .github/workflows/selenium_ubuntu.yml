@@ -57,11 +57,17 @@ jobs:
 #        if: always()
 #        run: ls -R
 
-# убирает точку перед src
       - name: List Directories before tests
-        if: always()
         run: |
-          find src/test/resources/DataScv -type f  
+          find src/test/resources/DataScv -type f
+
+
+#
+## убирает точку перед src
+#      - name: List Directories before tests
+#        if: always()
+#        run: |
+#          find src/test/resources/DataScv -type f
           
 
 
