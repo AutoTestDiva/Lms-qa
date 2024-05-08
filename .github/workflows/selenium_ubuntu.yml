@@ -52,10 +52,14 @@ jobs:
         run: |
           echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
 
-  # !  List of folders before tests
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
+#  # !  List of folders before tests
+#      - name: ✅ 📂 List Directories before tests
+#        if: always()
+#        run: ls -R
+
+      - name: List Directories before tests
+        run: |
+          find src/test/resources/DataScv -type f
 
 
 #      - name: Build with Gradle Wrapper
