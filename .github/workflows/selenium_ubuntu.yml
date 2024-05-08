@@ -37,8 +37,8 @@ jobs:
         if: always()
         run: ls -R
 
-      - name: Stop Gradle Daemon
-        run: ./gradlew --stop
+#      - name: Stop Gradle Daemon
+#        run: ./gradlew --stop
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
