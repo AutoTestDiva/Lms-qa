@@ -71,9 +71,14 @@ jobs:
 #        run: |
 #          ./gradlew clean qa -Psuite3
 
+      - name: Modify CSV file paths
+        run: |
+            sed -i 's/src\/test/.src\/test/' src/test/java/de/aittr/lms/CSVDataProviders.java
+      
+      
+
       - name: Run tests
         run: |
-          sed -i 's/src/test/.src/test/' Selenium_ubuntu.yml
          ./gradlew clean qa -Psuite3
       
       - name: Deploy
