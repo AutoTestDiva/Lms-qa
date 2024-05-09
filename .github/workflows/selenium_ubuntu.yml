@@ -73,7 +73,7 @@ jobs:
 
       - name: Run tests
         run: |
-          sed -i 's/src/test/.src/test/' selenium_ubuntu.yml
+          sed -i 's/src/test/.src/test/' Selenium_ubuntu.yml
          ./gradlew clean qa -Psuite3
       
       - name: Deploy
