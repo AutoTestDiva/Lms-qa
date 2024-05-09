@@ -63,8 +63,6 @@ jobs:
 #        if: always()
 #        run: |
 #          find src/test/resources/DataScv -type f
-          
-
 
 #      - name: Build with Gradle Wrapper
 #        run: ./gradlew build
@@ -75,7 +73,7 @@ jobs:
 
       - name: Run tests
         run: |
-          sed -i 's/src/test/.src/test/' Selenium_ubuntu.yml
+          sed -i 's/src/test/.src/test/' selenium_ubuntu.yml
          ./gradlew clean qa -Psuite3
       
       - name: Deploy
