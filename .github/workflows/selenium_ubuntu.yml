@@ -55,17 +55,10 @@ jobs:
         if: always()
         run: ls -R
 
-
-
-
       - name: Run tests
         run: |
-          
          ./gradlew clean qa -Psuite3
          ./gradlew clean qa -Psuite4
-
-     
-
 
       - name: Deploy
         run: echo 'Deploying...'
