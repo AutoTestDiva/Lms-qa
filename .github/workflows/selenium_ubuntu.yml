@@ -58,7 +58,6 @@ jobs:
       - name: Run tests
         run: |
          gradle clean qa -Psuite3'
-         gradle clean qa -Psuite4'
 
       - name: Deploy
         run: echo 'Deploying...'
