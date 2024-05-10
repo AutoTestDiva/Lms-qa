@@ -37,8 +37,6 @@ jobs:
         if: always()
         run: ls -R
 
-#      - name: Stop Gradle Daemon
-#        run: ./gradlew --stop
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -58,22 +56,7 @@ jobs:
         run: ls -R
 
 
-## убирает точку перед src
-#      - name: List Directories before tests
-#        if: always()
-#        run: |
-#          find src/test/resources/DataScv -type f
 
-#      - name: Build with Gradle Wrapper
-#        run: ./gradlew build
-
-#      - name: Run tests
-#        run: |
-#          ./gradlew clean qa -Psuite3
-
-#      - name: Modify CSV file paths
-#        run: |
-#            sed -i 's/src\/test/.src\/test/' src/test/java/de/aittr/lms/CSVDataProviders.java
 
       - name: Run tests
         run: |
