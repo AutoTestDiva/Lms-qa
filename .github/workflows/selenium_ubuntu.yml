@@ -43,6 +43,12 @@ jobs:
         with:
           gradle-version: '8.3'
 
+      - name: Set up Chrome
+        run: |
+            sudo apt update
+            sudo apt install -y chromium-browser
+
+
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
 
@@ -57,7 +63,7 @@ jobs:
 
       - name: Run tests
         run: |
-         gradle clean qa -Psuite3
+         gradle clean qa -Psuite4
 
       - name: Deploy
         run: echo 'Deploying...'
