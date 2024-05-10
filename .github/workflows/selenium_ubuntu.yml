@@ -57,8 +57,8 @@ jobs:
 
       - name: Run tests
         run: |
-         gradlew.bat clean qa -Psuite3'
-         gradlew.bat clean qa -Psuite4'
+         gradlew\gradlew.bat clean qa -Psuite3'
+         gradlew\gradlew.bat clean qa -Psuite4'
 
       - name: Deploy
         run: echo 'Deploying...'
