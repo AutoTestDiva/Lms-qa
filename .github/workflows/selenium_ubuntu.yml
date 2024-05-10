@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 #    permissions:
 #      contents: read
 
@@ -71,9 +71,9 @@ jobs:
 #        run: |
 #          ./gradlew clean qa -Psuite3
 
-      - name: Modify CSV file paths
-        run: |
-            sed -i 's/src\/test/.src\/test/' src/test/java/de/aittr/lms/CSVDataProviders.java
+#      - name: Modify CSV file paths
+#        run: |
+#            sed -i 's/src\/test/.src\/test/' src/test/java/de/aittr/lms/CSVDataProviders.java
       
       
 
