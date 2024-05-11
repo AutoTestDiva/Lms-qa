@@ -37,7 +37,6 @@ public class ApplicationManager {
       driver = (WebDriver) new EdgeDriver();
     }
 
-   // driver.get("http://localhost:4200");
     driver.get("https://lms-dev.ait-tr.eu/");
     driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

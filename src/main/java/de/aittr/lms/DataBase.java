@@ -8,9 +8,7 @@ import java.sql.*;
 import java.util.Map;
 
 public abstract class DataBase {
-
-    private static Connection connection;
-
+   private static Connection connection;
     static {
         InputStream inputStream = DataBase
                 .class
@@ -57,7 +55,6 @@ public abstract class DataBase {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
-
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

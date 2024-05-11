@@ -1,69 +1,57 @@
-name: Java CI with Gradle (JDK 15, Gradle 8.3)
+  name:  Java CI with Gradle [UBUNTU]
+  on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+        - name: Set up JDK 15
+          uses: actions/setup-java@v4
+          with:
+            distribution: 'adopt'
+            java-version: '15'
 
-jobs:
-  build:
+        - name: Check Java version
+          run: java -version
 
-    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
+        - name: Grant execute permission for gradlew
+          run: chmod +x gradlew
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+        - name: Install dependencies
+          run: sudo apt-get install -y xvfb x11-utils
 
-      - name: Set up JDK 15
-        uses: actions/setup-java@v3
-        with:
-          java-version: '15'
-          distribution: 'adopt'
+        - name: Start Xvfb
+          run: Xvfb :99 -screen 0 1920x1080x24 &
+          env:
+              DISPLAY: :99
 
-  # !  Installation Node.js
-      - name: ✅ ⚙️ Install Node version "20"
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+        - name: Verify Xvfb
+          run: xdpyinfo | grep dimensions
+          env:
+              DISPLAY: :99
 
-      - name: ❎ ⌛ Check Node version
-        run: node --version
+        - name: Get application.yml from secrets and decode it
+          run: |
+              echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
+              echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
+              echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
-  # !  List of folders before tests
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
+        - name: Build with Gradle
+          run: ./gradlew clean qa -Psuite5
+          env:
+              DISPLAY: :99
 
+        - name: Upload test reports
+          uses: actions/upload-artifact@v2
+          with:
+            name: test-reports
+            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '8.3'
-
-      - name: Set up Chrome
-        run: |
-            sudo apt update
-            sudo apt install -y chromium-browser
-
-
-      - name: ✅ ⚙️ Set execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Get application.yml from secrets
-        run: |
-          echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
-
-  # !  List of folders before tests
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
-
-      - name: Run tests
-        run: |
-         gradle clean qa -Psuite4
-
-      - name: Deploy
-        run: echo 'Deploying...'
+        - name: Deploy
+          run: echo 'Deploying...'

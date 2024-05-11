@@ -41,6 +41,7 @@ public class LoginUITests extends TestBaseUI {
     @Test
     public void loginAsStudentWithNotValidPasswordNegativeTest() {
         app.getUserUI().loginWithData("s03@dev-lms.de", "TEST-dev-pass-2024");
+        app.getUserUI().pause(500);
         Assert.assertTrue(app.getUserUI().isErrorNotValidEmailOrPasswordMessageDisplayed());
         //1 part of aftermethod
         app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
@@ -49,6 +50,7 @@ public class LoginUITests extends TestBaseUI {
 
     @AfterMethod
     public void postCondition() {
+        app.getUserUI().pause(500);
         app.getUserUI().logOut();
     }
 }
