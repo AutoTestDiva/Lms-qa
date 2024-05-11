@@ -11,60 +11,62 @@ public class CSVDataProviders {
 
     @DataProvider(name = "provideWrongUserData")
     public static Object[][] provideWrongUserData() {
-        String csvFile = "src\\test\\resources\\DataScv\\WrongUserData.csv";
+        String csvFile = "/src/test/resources/DataScv/WrongUserData.csv";
         return readDataFromCSV(csvFile);
     }
 
     @DataProvider(name = "provideUsersForLoginTest")
     public static Object[][] provideUsersForLoginTest() {
-        String csvFile = "src\\test\\resources\\DataScv\\UsersForLoginTest.csv";
+        String csvFile = "src/test/resources/DataScv/UsersForLoginTest.csv";
         return readDataFromCSV(csvFile);
     }
 
     @DataProvider(name = "provideNotValidPassword")
     public static Object[][] provideNotValidPassword() {
-        String csvFile = "src\\test\\resources\\DataScv\\NotValidPassword.csv";
+        String csvFile = "src/test/resources/DataScv/NotValidPassword.csv";
         return readDataFromCSV(csvFile);
     }
 
     @DataProvider(name = "provideGetVideoData")
     public static Object[][] provideGetVideoData() {
-        String csvFile = "src\\test\\resources\\DataScv\\GetVideoData.csv";
+        String csvFile = "src/test/resources/DataScv/GetVideoData.csv";
         return readDataFromCSV(csvFile);
     }
+
 
     @DataProvider(name = "provideGetGroupData")
     public static Object[][] provideGetGroupData() {
-        String csvFile = "src\\test\\resources\\DataScv\\GetGroupData.csv";
+        String csvFile = "src/test/resources/DataScv/GetGroupData.csv";
+        return readDataFromCSV(csvFile);
+    }
+    @DataProvider(name = "provideGetGroupAndModuleData")
+    public static Object[][] provideGetGroupAndModuleData() {
+        String csvFile = "src/test/resources/DataScv/GetGroupAndModuleData.csv";
         return readDataFromCSV(csvFile);
     }
 
-    @DataProvider(name = "provideGetGroupAndModuleData")
-    public static Object[][] provideGetGroupAndModuleData() {
-        String csvFile = "src\\test\\resources\\DataScv\\GetGroupAndModuleData.csv";
-        return readDataFromCSV(csvFile);
-    }
 
     @DataProvider(name = "provideGetGroupModuleLessonData")
     public static Object[][] provideGetGroupModuleLessonData() {
-        String csvFile = "src\\test\\resources\\DataScv\\GetGroupModuleLessonData.csv";
+        String csvFile = "src/test/resources/DataScv/GetGroupModuleLessonData.csv";
         return readDataFromCSV(csvFile);
     }
     @DataProvider(name = "provideGetCombinationData")
     public static Object[][] provideGetCombinationData() {
-        String csvFile = "src\\test\\resources\\DataScv\\GetCombinationData.csv";
+        String csvFile = "src/test/resources/DataScv/GetCombinationData.csv";
         return readDataFromCSV(csvFile);
     }
 
+
     @DataProvider(name = "provideUploadYourHomeworkData")
     public static Object[][] provideUploadHomeWorkSolutionData() {
-        String csvFile = "src\\test\\resources\\DataScv\\UploadYourHomeworkData.csv";
+        String csvFile = "src/test/resources/DataScv/UploadYourHomeworkData.csv";
         return readDataFromCSV(csvFile);
     }
 
     @DataProvider(name = "provideGoToMyHomeWorkData")
     public static Object[][] provideMyHomeWorkData() {
-        String csvFile = "src\\test\\resources\\DataScv\\MyHomeWorkData.csv";
+        String csvFile = "src/test/resources/DataScv/MyHomeWorkData.csv";
         return readDataFromCSV(csvFile);
     }
 
@@ -81,4 +83,6 @@ public class CSVDataProviders {
             return new Object[0][0];
         }
     }
+
+
 }
