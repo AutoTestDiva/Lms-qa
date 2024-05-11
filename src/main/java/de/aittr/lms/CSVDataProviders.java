@@ -11,7 +11,7 @@ public class CSVDataProviders {
 
     @DataProvider(name = "provideWrongUserData")
     public static Object[][] provideWrongUserData() {
-        String csvFile = "src/test/resources/DataScv/WrongUserData.csv";
+        String csvFile = "/src/test/resources/DataScv/WrongUserData.csv";
         return readDataFromCSV(csvFile);
     }
 
