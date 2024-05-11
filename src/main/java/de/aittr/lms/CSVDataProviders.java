@@ -17,7 +17,7 @@ public class CSVDataProviders {
 
     @DataProvider(name = "provideUsersForLoginTest")
     public static Object[][] provideUsersForLoginTest() {
-        String csvFile = "src/test/resources/DataScv/UsersForLoginTest.csv";
+        String csvFile = "/src/test/resources/DataScv/UsersForLoginTest.csv";
         return readDataFromCSV(csvFile);
     }
 
