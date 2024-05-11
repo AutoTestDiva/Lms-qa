@@ -11,13 +11,13 @@ public class CSVDataProviders {
 
     @DataProvider(name = "provideWrongUserData")
     public static Object[][] provideWrongUserData() {
-        String csvFile = "/src/test/resources/DataScv/WrongUserData.csv";
+        String csvFile = "src/test/resources/DataScv/WrongUserData.csv";
         return readDataFromCSV(csvFile);
     }
 
     @DataProvider(name = "provideUsersForLoginTest")
     public static Object[][] provideUsersForLoginTest() {
-        String csvFile = "/src/test/resources/DataScv/UsersForLoginTest.csv";
+        String csvFile = "src/test/resources/DataScv/UsersForLoginTest.csv";
         return readDataFromCSV(csvFile);
     }
 
