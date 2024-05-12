@@ -43,10 +43,10 @@ jobs:
         with:
           gradle-version: '8.3'
 
-      - name: Set up Chrome
-        run: |
-            sudo apt update
-            sudo apt install -y chromium-browser
+#      - name: Set up Chrome
+#        run: |
+#            sudo apt update
+#            sudo apt install -y chromium-browser
 
 
       - name: ✅ ⚙️ Set execute permission for gradlew
