@@ -20,11 +20,11 @@ public class SetUsersPasswordRATests extends TestBaseRA {
                 .assertThat().statusCode(200);
     }
 
-//    @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
-//    public void setNotValidPasswordTest(String password) {
-//        user.setPasswordByEmail("lilu3@mail.com", password).then()
-//                .assertThat().statusCode(400);
-//    }
+    @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
+    public void setNotValidPasswordTest(String password) {
+        user.setPasswordByEmail("lilu3@mail.com", password).then()
+                .assertThat().statusCode(400);
+    }
 
     @AfterMethod
    // @Test
