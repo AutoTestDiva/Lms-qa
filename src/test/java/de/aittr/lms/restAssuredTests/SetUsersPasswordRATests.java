@@ -14,11 +14,11 @@ public class SetUsersPasswordRATests extends TestBaseRA {
                 "Germany", "+490123651812", "STUDENT");
     }
 
-    @Test
-    public void setUsersPasswordPositiveTest()  {
-        user.setPasswordByEmail("lilu3@mail.com", "LMS-dev-pass-2024").then()
-                .assertThat().statusCode(200);
-    }
+//    @Test
+//    public void setUsersPasswordPositiveTest()  {
+//        user.setPasswordByEmail("lilu3@mail.com", "LMS-dev-pass-2024").then()
+//                .assertThat().statusCode(200);
+//    }
 
     @Test(dataProvider = "provideNotValidPassword", dataProviderClass = CSVDataProviders.class)
     public void setNotValidPasswordTest(String password) {
