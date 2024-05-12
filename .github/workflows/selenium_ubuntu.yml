@@ -62,7 +62,7 @@ jobs:
         run: ls -R
 
       - name: show file
-        run:  cat ./src/test/resources/application.yml
+        run:  cat src/test/resources/application.yml
 
       - name: Run tests
         run: |
