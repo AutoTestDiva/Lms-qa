@@ -52,11 +52,11 @@ jobs:
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Get application.yml from secrets
-        run: |
-          echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
+      - name: Copy secret to file
+        run: printf "%s" "${{ secrets.APPLICATION_YML }}" > ./src/test/resources/application.yml
 
-  # !  List of folders before tests
+
+      # !  List of folders before tests
       - name: ✅ 📂 List Directories before tests
         if: always()
         run: ls -R
