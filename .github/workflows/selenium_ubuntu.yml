@@ -61,11 +61,15 @@ jobs:
         if: always()
         run: ls -R
 
-      - name: show file
-        run:  ls -l ./src/test/resources/testSuites/quickRA.xml
+      - name: Make changes to application.yml
+        run: echo "New content to add" >> ./src/test/resources/application.yml
+
+      - name: View changes
+        run: git diff -- ./src/test/resources/application.yml
+
 
       - name: show 1
-        run:  cat ./src/test/resources/testSuites/quickRA.xml
+        run:  cat ./src/test/resources/application.yml
 
       - name: ✅ 📂 List Directories before tests
         if: always()
