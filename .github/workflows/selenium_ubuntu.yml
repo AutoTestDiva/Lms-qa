@@ -54,7 +54,7 @@ jobs:
 
       - name: Get application.yml from secrets
         run: |
-          echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
+          echo "${{ secrets.QQQ }}" > src/test/resources/application.yml
 
   # !  List of folders before tests
       - name: ✅ 📂 List Directories before tests
