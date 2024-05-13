@@ -53,7 +53,8 @@ jobs:
         run: chmod +x gradlew
 
       - name: Copy secret to file
-        run: cp /dev/stdin ./src/test/resources/application.yml <<< "${{ secrets.WWW }}"
+        run: cp ./src/test/resources/testSuites/www.txt ../src/test/resources/application.yml
+
 
 
 
