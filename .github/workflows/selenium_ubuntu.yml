@@ -61,13 +61,15 @@ jobs:
         if: always()
         run: ls -R
 
-      - name: Check application.yml contents
+      - name: Check file size
         run: |
-          if grep -q "expected_value" ./src/test/resources/application.yml; then
+          file_size=$(wc -c < ./src/test/resources/application.yml)
+          if [ $file_size -gt 0 ]; then
             echo "Secret copied successfully"
           else
             echo "Secret not copied"
           fi
+      
       
       
 
