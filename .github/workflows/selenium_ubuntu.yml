@@ -61,12 +61,15 @@ jobs:
         if: always()
         run: ls -R
 
-      - name: Make changes to application.yml
-        run: echo "New content to add" >> ./src/test/resources/application.yml
-
-      - name: View changes
-        run: git diff -- ./src/test/resources/application.yml
-
+      - name: Check application.yml contents
+        run: |
+          if grep -q "expected_value" ./src/test/resources/application.yml; then
+            echo "Secret copied successfully"
+          else
+            echo "Secret not copied"
+          fi
+      
+      
 
       - name: show 1
         run:  cat ./src/test/resources/application.yml
