@@ -54,7 +54,7 @@ jobs:
 
       - name: Get application.yml from secrets
         run: |
-          echo "${{ secrets.QQQ }}" > src/test/resources/application.yml
+          echo "${{ secrets.APPLICATION_YML }}" > src/test/resources/application.yml
 
   # !  List of folders before tests
       - name: ✅ 📂 List Directories before tests
@@ -65,7 +65,7 @@ jobs:
         run:  ls -l ./src/test/resources/application.yml
 
       - name: show 1
-        run:  cat ./src/test/resources/application.yml
+        run:  less ./src/test/resources/application.yml
 
       - name: ✅ 📂 List Directories before tests
         if: always()
