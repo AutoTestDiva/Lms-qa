@@ -31,7 +31,7 @@ public class SortUsersInAdminCabinetTests extends TestBaseUI {
         app.getUserUI().clickOnUsers();
         app.getUserUI().clickOnEmailSort();
         app.getUserUI().clickOnEmailSort();
-        Assert.assertTrue(app.getUserUI().isDownEmailPresent("teacher@mal.com"));
+        Assert.assertTrue(app.getUserUI().isDownEmailPresent("testlu@mail.com"));
     }
 
     @Test

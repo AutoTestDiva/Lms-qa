@@ -141,6 +141,9 @@ public class AllElementsInLmsTests extends TestBaseUI {
                 report.add("В данной группе модулей еще нет");
             }
             app.getUserUI().scrollPageUp();
+            app.getCSVReaderUI().clickOnNextSelectedGroup();
+            app.getUserUI().pause(1000);
+            app.getCSVReaderUI().scrollPageUp();
         }
     }
 

@@ -186,24 +186,24 @@ public class UniversalUITest extends TestBaseUI {
         }
     }
 
-    private void printToFile() {
-        String dir = "/report/";
-        String fileName =
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
-                        + "_report.txt";
-        try {
-            Path directories = Files.createDirectories(Path.of(dir));
-            Path file = Files.createFile(Path.of(directories + "/", fileName));
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true));
-            for (String r : report) {
-                bufferedWriter.write(r + System.lineSeparator());
-            }
-            bufferedWriter.close();
-        } catch (IOException e) {
-            logger.error("Error writing report to file", e);
-            throw new RuntimeException(e);
-        }
-    }
+//    private void printToFile() {
+//        String dir = "/report/";
+//        String fileName =
+//                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
+//                        + "_report.txt";
+//        try {
+//            Path directories = Files.createDirectories(Path.of(dir));
+//            Path file = Files.createFile(Path.of(directories + "/", fileName));
+//            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file.toFile(), true));
+//            for (String r : report) {
+//                bufferedWriter.write(r + System.lineSeparator());
+//            }
+//            bufferedWriter.close();
+//        } catch (IOException e) {
+//            logger.error("Error writing report to file", e);
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     @AfterMethod
     public void postCondition() {
