@@ -55,7 +55,9 @@ jobs:
 
       - name: Get application.yml from secrets and decode it
         run: |
-          echo "${{ secrets.WW }}" | base64 --decode > ./src/test/resources/application.yml
+          echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
+          echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
+          echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
 
 
