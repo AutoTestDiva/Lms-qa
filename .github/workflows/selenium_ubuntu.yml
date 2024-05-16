@@ -81,7 +81,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: test-report
-            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
+#            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
+            path: ./build/reports/tests/qa/index.html
 
       - name: Deploy
         run: echo 'Deploying...'
