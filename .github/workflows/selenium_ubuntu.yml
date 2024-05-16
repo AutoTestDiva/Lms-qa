@@ -32,12 +32,6 @@ jobs:
       - name: ❎ ⌛ Check Node version
         run: node --version
 
-  # !  List of folders before tests
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
-
-
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
@@ -58,27 +52,6 @@ jobs:
           echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
-      # !  List of folders before tests
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
-
-      - name: Check file size
-        run: |
-          file_size=$(wc -c < ./src/test/resources/application.yml)
-          if [ $file_size -gt 0 ]; then
-            echo "Secret copied successfully"
-          else
-            echo "Secret not copied"
-          fi
-
-      - name: show 1
-        run:  cat ./src/test/resources/application.yml
-
-      - name: ✅ 📂 List Directories before tests
-        if: always()
-        run: ls -R
-
       - name: Run tests
         run: |
          gradle clean qa -Psuite1
@@ -86,8 +59,11 @@ jobs:
          gradle clean qa -Psuite3
          gradle clean qa -Psuite4
 
-      - name: Copy test report to docs directory
-        run: cat /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa/index.html
+      - - name: Upload test report
+          uses: actions/upload-artifact@v2
+          with:
+            name: test-report
+            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa/index.html
 
       - name: Deploy
         run: echo 'Deploying...'
