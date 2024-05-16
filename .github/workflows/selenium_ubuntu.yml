@@ -73,23 +73,19 @@ jobs:
         if: always()
         run: ls -R ./build/reports/tests/qa
 
-      - name: Check test report
-        run: cat ./build/reports/tests/qa/index.html
+      - name: Check
+        run: cat build/reports/tests/qa/index.html
 
-      - name: List contents of the test  directory
-        if: always()
-        run: ls -R home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
 
-      - name: List contents of the test  directory
-        if: always()
-        run: ls -R home
+
+
 
       - name: Upload test report
         uses: actions/upload-artifact@v2
         with:
             name: test-report
 #            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
-            path: ./build/reports/tests/qa/index.html
+            path: build/reports/tests/qa/index.html
 
       - name: Deploy
         run: echo 'Deploying...'
