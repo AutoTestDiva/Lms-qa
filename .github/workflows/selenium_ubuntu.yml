@@ -52,15 +52,11 @@ jobs:
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
 
-
       - name: Get application.yml from secrets and decode it
         run: |
           echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
-
-
-
 
       # !  List of folders before tests
       - name: ✅ 📂 List Directories before tests
@@ -75,9 +71,6 @@ jobs:
           else
             echo "Secret not copied"
           fi
-      
-      
-      
 
       - name: show 1
         run:  cat ./src/test/resources/application.yml
@@ -88,7 +81,10 @@ jobs:
 
       - name: Run tests
         run: |
+         gradle clean qa -Psuite1
+         gradle clean qa -Psuite2
          gradle clean qa -Psuite3
+         gradle clean qa -Psuite4
 
       - name: Deploy
         run: echo 'Deploying...'
