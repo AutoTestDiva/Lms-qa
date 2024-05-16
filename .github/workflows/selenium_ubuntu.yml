@@ -76,8 +76,17 @@ jobs:
       - name: Check
         run: cat .build/reports/tests/qa/index.html
 
+      - name: Check 1
+        run: cp /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa/index.html /home/runner/qqq.txt
 
+      -  name: Check11
+         run: cat /home/runner/qqq.txt
 
+      -  name: Check 2
+         run: cp ./build/reports/tests/qa/index.html qqq.txt
+
+      -  name: Check22
+         run: cat qqq.txt
 
 
       - name: Upload test report
