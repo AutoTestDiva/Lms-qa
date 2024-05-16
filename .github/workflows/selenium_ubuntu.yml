@@ -86,5 +86,8 @@ jobs:
          gradle clean qa -Psuite3
          gradle clean qa -Psuite4
 
+      - name: Copy test report to docs directory
+        run: cp ./build/reports/tests/qa/index.html ./docs/index.html
+
       - name: Deploy
         run: echo 'Deploying...'
