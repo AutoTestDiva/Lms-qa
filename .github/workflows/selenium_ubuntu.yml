@@ -52,12 +52,22 @@ jobs:
           echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
+      # !  List of folders before tests
+      - name: ✅ 📂 List Directories before tests
+        if: always()
+        run: ls -R
+
       - name: Run tests
         run: |
          gradle clean qa -Psuite1
          gradle clean qa -Psuite2
          gradle clean qa -Psuite3
          gradle clean qa -Psuite4
+          
+            # !  List of folders before tests
+      - name: ✅ 📂 List Directories before tests
+        if: always()
+        run: ls -R
 
       - name: List contents of the test report directory
         run: ls -R /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa/
