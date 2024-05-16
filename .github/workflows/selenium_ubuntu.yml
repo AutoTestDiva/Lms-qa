@@ -70,7 +70,7 @@ jobs:
         run: ls -R
 
       - name: List contents of the test report directory
-        run: ls -R ./build/reports/tests/qa/index.html
+        run: ls -R ./build/reports/tests/qa
 
       - name: Check test report
         run: cat ./build/reports/tests/qa/index.html
