@@ -59,6 +59,10 @@ jobs:
          gradle clean qa -Psuite3
          gradle clean qa -Psuite4
 
+      - name: List contents of the test report directory
+        run: ls -R /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa/
+
+
       - name: Upload test report
         uses: actions/upload-artifact@v2
         with:
