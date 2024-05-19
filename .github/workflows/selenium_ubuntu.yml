@@ -39,17 +39,12 @@ jobs:
 
       - name: Set up Chrome and ChromeDriver
         run: |
-            # Обновление пакетов и установка Chromium Browser
             sudo apt update
             sudo apt install -y chromium-browser
-            
-            # Установка chromedriver из пакетов Ubuntu
             sudo apt install -y chromium-chromedriver
-            
-            # Загрузка и установка chromedriver версии 125.0.6422.60
-            wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chromedriver-linux64.zip
+            wget -P /tmp https://chromedriver.storage.googleapis.com/125.0.6422.60/chromedriver_linux64.zip
             sudo unzip /tmp/chromedriver_linux64.zip -d /tmp
-            sudo cp /tmp/chromedriver /usr/local/bin/chromedriver
+            sudo cp /tmp/chromedriver_linux64/chromedriver /usr/local/bin/
             sudo chmod +x /usr/local/bin/chromedriver
         env:
             CHROME_BIN: /usr/bin/chromium-browser
