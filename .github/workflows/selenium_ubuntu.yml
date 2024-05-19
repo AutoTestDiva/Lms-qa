@@ -45,9 +45,6 @@ jobs:
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
       - name: Get application.yml from secrets and decode it
         run: |
           echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
