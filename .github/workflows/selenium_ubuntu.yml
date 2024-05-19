@@ -58,7 +58,7 @@ jobs:
       - name: Run tests
         run: |
             gradle clean qa -Psuite4 --info --stacktrace | tee result4.log || true
-          continue-on-error: true
+        continue-on-error: true
 
       - name: Check if log file exists and has content
         run: |
