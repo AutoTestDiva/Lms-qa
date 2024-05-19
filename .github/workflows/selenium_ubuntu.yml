@@ -41,7 +41,7 @@ jobs:
           sudo apt install -y chromium-browser
 
           # Скачиваем и распаковываем нужную версию ChromeDriver
-          wget -P /tmp https://storage.googleapis.com/chrome-for-testing/125.0.6422.60/linux64/chromedriver-linux64.zip
+          wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chromedriver-linux64.zip
           sudo unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin/
 
           # Убедимся, что файл ChromeDriver существует и имеет права на выполнение
