@@ -34,25 +34,27 @@ jobs:
         with:
           gradle-version: '8.3'
 
-      - name: Установка Chrome и ChromeDriver
+      - name: Установка Google Chrome и ChromeDriver
         run: |
-          # Обновляем список пакетов и устанавливаем Chromium браузер
-          sudo apt update
-          sudo apt install -y chromium-browser
-
-          # Скачиваем и распаковываем нужную версию ChromeDriver
-          wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chromedriver-linux64.zip
-          sudo unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin/
-
-          # Убедимся, что файл ChromeDriver существует и имеет права на выполнение
-          sudo chmod +x /usr/local/bin/chromedriver
-
-          # Устанавливаем переменные окружения для Chrome и ChromeDriver
-          echo "CHROME_BIN=/usr/bin/chromium-browser" >> $GITHUB_ENV
-          echo "CHROME_DRIVER=/usr/local/bin/chromedriver" >> $GITHUB_ENV
-
-          # Проверяем установку ChromeDriver
-          /usr/local/bin/chromedriver --version
+            # Обновляем список пакетов и устанавливаем Google Chrome
+            sudo apt update
+            sudo apt install -y google-chrome-stable
+            
+            # Скачиваем и распаковываем нужную версию ChromeDriver
+            wget -P /tmp https://storage.googleapis.com/chrome-for-testing/125.0.6422.60/linux64/chromedriver-linux64.zip
+            sudo unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin/
+            
+            # Перемещаем ChromeDriver в правильное место и устанавливаем права доступа
+            sudo mv /usr/local/bin/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+            sudo chmod +x /usr/local/bin/chromedriver
+            
+            # Устанавливаем переменные окружения для Chrome и ChromeDriver
+            echo "CHROME_BIN=/usr/bin/google-chrome" >> $GITHUB_ENV
+            echo "CHROME_DRIVER=/usr/local/bin/chromedriver" >> $GITHUB_ENV
+            
+            # Проверяем установку ChromeDriver
+            /usr/local/bin/chromedriver --version
+      
 
       - name: ✅ ⚙️ Установить права на выполнение для gradlew
         run: chmod +x gradlew
