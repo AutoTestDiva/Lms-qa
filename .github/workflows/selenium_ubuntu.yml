@@ -110,8 +110,7 @@ jobs:
       # Добавленный шаг для установки ChromeDriver
       - name: Install ChromeDriver
         run: |
-          wget -P /tmp https://chromedriver.storage.googleapis.com/125.0.6422.60/chromedriver_linux64.zip
-          sudo unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/
+          wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chrome-linux64.zip -d /usr/local/bin/
           sudo chmod +x /usr/local/bin/chromedriver
           
 
