@@ -8,113 +8,79 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 15
+      - name: Установка JDK 15
         uses: actions/setup-java@v3
         with:
           java-version: '15'
           distribution: 'adopt'
 
-  # !  Installation Node.js
-      - name: ✅ ⚙️ Install Node version "20"
+      # Установка Node.js
+      - name: ✅ ⚙️ Установить Node версии "20"
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: ❎ ⌛ Check Node version
+      - name: ❎ ⌛ Проверить версию Node
         run: node --version
 
-      - name: Setup Gradle
+      - name: Настройка Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.3'
 
-      - name: Set up Chrome and ChromeDriver
+      - name: Установка Chrome и ChromeDriver
         run: |
+          # Обновляем список пакетов и устанавливаем Chromium браузер
           sudo apt update
           sudo apt install -y chromium-browser
-          sudo apt install -y chromium-chromedriver
-          wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chromedriver-linux64.zip
-          sudo unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin/chromedriver
+
+          # Скачиваем и распаковываем нужную версию ChromeDriver
+          wget -P /tmp https://storage.googleapis.com/chrome-for-testing/125.0.6422.60/linux64/chromedriver-linux64.zip
+          sudo unzip /tmp/chromedriver-linux64.zip -d /usr/local/bin/
+
+          # Убедимся, что файл ChromeDriver существует и имеет права на выполнение
           sudo chmod +x /usr/local/bin/chromedriver
-        env:
-          CHROME_BIN: /usr/bin/chromium-browser
-          CHROME_DRIVER: /usr/local/bin/chromedriver
 
-      - name: Check if chromedriver-linux64.zip exists in /tmp
-        run: |
-                ls /tmp/chromedriver-linux64.zip
-        if: always()
+          # Устанавливаем переменные окружения для Chrome и ChromeDriver
+          echo "CHROME_BIN=/usr/bin/chromium-browser" >> $GITHUB_ENV
+          echo "CHROME_DRIVER=/usr/local/bin/chromedriver" >> $GITHUB_ENV
 
-      - name: ✅ ⚙️ Set execute permission for gradlew
+          # Проверяем установку ChromeDriver
+          /usr/local/bin/chromedriver --version
+
+      - name: ✅ ⚙️ Установить права на выполнение для gradlew
         run: chmod +x gradlew
 
-      - name: Get application.yml from secrets and decode it
+      - name: Получение application.yml из секретов и декодирование
         run: |
           echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
-      - name: Run tests
+      - name: Запуск тестов
         run: |
-            gradle clean qa -Psuite4 --info --stacktrace | tee result4.log || true
+          ./gradlew clean qa -Psuite4 --info --stacktrace | tee result4.log || true
         continue-on-error: true
 
-      - name: Check if log file exists and has content
+      - name: Проверка наличия и содержимого файла журнала
         run: |
-           if [ ! -s result4.log ]; then
-                  echo "Log file is empty or does not exist" >&2
-                  exit 1
-           fi
+          if [ ! -s result4.log ]; then
+            echo "Файл журнала пуст или не существует" >&2
+            exit 1
+          fi
 
-
-      - name: Upload test report
+      - name: Загрузка отчета о тестировании
         if: always()
         uses: actions/upload-artifact@v3
         with:
-                name: test-report
-                path: result4.log
-
-#            # !  List of folders before tests
-#      - name: ✅ 📂 List Directories before tests
-#        if: always()
-#        run: ls -R
-
-#      - name: List contents of the test report directory
-#        if: always()
-#        run: ls -R ./build/reports/tests/qa
-#
-#      - name: Check
-#        run: cat .build/reports/tests/qa/index.html
-#
-#      - name: Check 1
-#        run: cp /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa/index.html /home/runner/qqq.txt
-#
-#      -  name: Check11
-#         run: cat /home/runner/qqq.txt
-#
-#      -  name: Check 2
-#         run: cp ./build/reports/tests/qa/index.html qqq.txt
-#
-#      -  name: Check22
-#         run: cat qqq.txt
-#
-
-#      - name: Upload test report
-#        uses: actions/upload-artifact@v2
-#        with:
-#            name: test-report
-##            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
-#            path: /build/reports/tests/qa/index.html
-
+          name: test-report
+          path: result4.log
 
       - name: Deploy
         run: echo 'Deploying...'
