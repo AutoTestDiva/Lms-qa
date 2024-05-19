@@ -50,7 +50,7 @@ jobs:
         env:
           CHROME_BIN: /usr/bin/chromium-browser
           CHROME_DRIVER: /usr/local/bin/chromedriver
-          CHROME_OPTIONS: "--headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222"
+
 
       - name: Check if chromedriver-linux64.zip exists in /tmp
         run: |
@@ -67,9 +67,14 @@ jobs:
           echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
       - name: Run tests
-        run: |
-            gradle clean qa -Psuite4 --info --stacktrace | tee result4.log || true
+        run: export CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 --disable-gpu"
+        # Запуск тестов с использованием Gradle
+          gradle clean qa -Psuite4 --info --stacktrace | tee result4.log || true
         continue-on-error: true
+        env:
+          CHROME_BIN: /usr/bin/chromium-browser
+          CHROME_DRIVER: /usr/local/bin/chromedriver
+          CHROME_OPTIONS: "--headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 --disable-gpu"
 
       - name: Check if log file exists and has content
         run: |
