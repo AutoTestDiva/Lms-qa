@@ -68,8 +68,7 @@ jobs:
 
       - name: Run tests
         run: export CHROME_OPTIONS="--headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 --disable-gpu"
-        # Запуск тестов с использованием Gradle
-          gradle clean qa -Psuite4 --info --stacktrace | tee result4.log || true
+               gradle clean qa -Psuite4 --info --stacktrace | tee result4.log || true
         continue-on-error: true
         env:
           CHROME_BIN: /usr/bin/chromium-browser
