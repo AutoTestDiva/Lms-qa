@@ -58,7 +58,6 @@ jobs:
 #      - name: ✅ 📂 List Directories before tests
 #        if: always()
 #        run: ls -R
-
       - name: Run tests
         run: |
 #         gradle clean qa -Psuite1 | tee result1.log || true
