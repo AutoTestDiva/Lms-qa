@@ -107,5 +107,13 @@ jobs:
 ##            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
 #            path: /build/reports/tests/qa/index.html
 
+      # Добавленный шаг для установки ChromeDriver
+      - name: Install ChromeDriver
+        run: |
+          wget -P /tmp https://chromedriver.storage.googleapis.com/125.0.6422.60/chromedriver_linux64.zip
+          sudo unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+          
+
       - name: Deploy
         run: echo 'Deploying...'
