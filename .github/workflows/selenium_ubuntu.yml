@@ -43,7 +43,7 @@ jobs:
           sudo apt install -y chromium-browser
           sudo apt install -y chromium-chromedriver
           wget -P /tmp https://chromedriver.storage.googleapis.com/125.0.6422.60/chromedriver_linux64.zip
-          sudo unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/
+          sudo unzip /tmp/chromedriver_linux64.zip -d /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
         env:
           CHROME_BIN: /usr/bin/chromium-browser
