@@ -54,7 +54,6 @@ jobs:
       - name: Run tests
         run: |
          gradle clean qa -Psuite4 | tee result4.log || true
-        continue-on-error: true
 
       - name: Upload test report
         if: failure()
