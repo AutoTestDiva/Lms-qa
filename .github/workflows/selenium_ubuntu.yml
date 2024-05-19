@@ -42,7 +42,6 @@ jobs:
           sudo apt update
           sudo apt install -y chromium-browser
           sudo apt install -y chromium-chromedriver
-          # Загрузить и установить рекомендуемую версию chromedriver
           wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chromedriver-linux64.zip
           sudo unzip /tmp/chromedriver_linux64.zip -d /tmp
           sudo cp /tmp/chromedriver /usr/local/bin/chromedriver
