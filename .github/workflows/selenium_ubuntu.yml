@@ -42,9 +42,12 @@ jobs:
           sudo apt update
           sudo apt install -y chromium-browser
           sudo apt install -y chromium-chromedriver
+          wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chrome-linux64.zip
+          sudo unzip /tmp/chrome-linux64.zip -d /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
         env:
           CHROME_BIN: /usr/bin/chromium-browser
-          CHROME_DRIVER: /usr/lib/chromium-browser/chromedriver
+          CHROME_DRIVER: /usr/local/bin/chromedriver
 
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
@@ -107,12 +110,6 @@ jobs:
 ##            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
 #            path: /build/reports/tests/qa/index.html
 
-      # Добавленный шаг для установки ChromeDriver
-      - name: Install ChromeDriver
-        run: |
-          wget -P /tmp https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/linux64/chrome-linux64.zip -d /usr/local/bin/
-          sudo chmod +x /usr/local/bin/chromedriver
-          
 
       - name: Deploy
         run: echo 'Deploying...'
