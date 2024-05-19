@@ -53,15 +53,22 @@ jobs:
 
       - name: Run tests
         run: |
-          gradle clean qa -Psuite4 | tee result4.log
+            gradle clean qa -Psuite4 | tee result4.log || true
         continue-on-error: true
 
+      - name: Check if log file exists and has content
+        run: |
+                if [ ! -s result4.log ]; then
+                  echo "Log file is empty or does not exist" >&2
+                  exit 1
+                fi
+
       - name: Upload test report
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: test-report
-          path: result4.log
+                name: test-report
+                path: result4.log
 
 #            # !  List of folders before tests
 #      - name: ✅ 📂 List Directories before tests
