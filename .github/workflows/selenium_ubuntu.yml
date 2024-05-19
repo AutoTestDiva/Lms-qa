@@ -56,9 +56,6 @@ jobs:
 
       - name: Run tests
         run: |
-#         gradle clean qa -Psuite1 | tee result1.log || true
-#         gradle clean qa -Psuite2 | tee result2.log || true
-#         gradle clean qa -Psuite3 | tee result3.log || true
          gradle clean qa -Psuite4 | tee result4.log || true
         continue-on-error: true
 
