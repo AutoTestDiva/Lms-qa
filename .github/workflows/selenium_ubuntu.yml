@@ -42,16 +42,15 @@ jobs:
           sudo apt update
           sudo apt install -y chromium-browser
           sudo apt install -y chromium-chromedriver
-#          wget -P /tmp https://chromedriver.storage.googleapis.com/125.0.6422.60/chromedriver_linux64.zip
-          curl -o /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/125.0.6422.60/chromedriver_linux64.zip
-
-          sudo unzip /tmp/chromedriver_linux64.zip -d /tmp
-          sudo cp /tmp/chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
-        env:
-          CHROME_BIN: /usr/bin/chromium-browser
-          CHROME_DRIVER: /usr/local/bin/chromedriver
-
+          CHROMEDRIVER_VERSION="125.0.6422.60"
+          CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+          CHROMEDRIVER_ZIP="/tmp/chromedriver_linux64.zip"
+          CHROMEDRIVER_DIR="/usr/local/bin"
+          wget -O $CHROMEDRIVER_ZIP $CHROMEDRIVER_URL
+          sudo unzip -o $CHROMEDRIVER_ZIP -d $CHROMEDRIVER_DIR
+          sudo chmod +x $CHROMEDRIVER_DIR/chromedriver
+      
+      
 
       - name: Check if chromedriver_linux64.zip exists in /tmp
         run: |
