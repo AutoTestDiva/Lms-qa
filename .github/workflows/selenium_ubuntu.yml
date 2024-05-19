@@ -37,10 +37,14 @@ jobs:
         with:
           gradle-version: '8.3'
 
-      - name: Set up Chrome
+      - name: Set up Chrome and ChromeDriver
         run: |
-            sudo apt update
-            sudo apt install -y chromium-browser
+          sudo apt update
+          sudo apt install -y chromium-browser
+          sudo apt install -y chromium-chromedriver
+        env:
+          CHROME_BIN: /usr/bin/chromium-browser
+          CHROME_DRIVER: /usr/lib/chromium-browser/chromedriver
 
       - name: ✅ ⚙️ Set execute permission for gradlew
         run: chmod +x gradlew
