@@ -69,6 +69,12 @@ jobs:
 #          CHROME_BIN: /usr/bin/chromium-browser
 #          CHROME_DRIVER: /usr/local/bin/chromedriver
 #          CHROME_OPTIONS: "--headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 --disable-gpu"
+      # Загрузка отчетов о тестировании как артефактов
+      - name: Upload test reports
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-reports
+          path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
 
       - name: Check if log file exists and has content
         run: |
