@@ -13,8 +13,8 @@ jobs:
     services:
       selenium:
         image: selenium/standalone-chrome:latest
-        ports:
-          - 4444:4444
+#        ports:
+#          - 4444:4444
 #    env:
 #        CHROME_VERSION: '125.0.6422.60' # Укажите нужную версию ChromeDriver
 
