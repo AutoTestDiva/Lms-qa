@@ -29,6 +29,13 @@ jobs:
           java-version: '15'
           distribution: 'adopt'
 
+      - name: install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+                  chrome-version: 125
+                  install-chromedriver: true
+                  install-dependencies: true
+
 
 #    !  Installation Node.js
 #      - name: ✅ ⚙️ Install Node version "20"
@@ -60,15 +67,8 @@ jobs:
           echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
-
-        steps:
-         - uses: browser-actions/setup-chrome@v1
-           with:
-                  chrome-version: 125
-                  install-chromedriver: true
-                  install-dependencies: true
+     
           
-
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew # give permission to Gradle to run the commands
       - name: Build with Gradle
