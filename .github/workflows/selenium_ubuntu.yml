@@ -32,7 +32,7 @@
                 export DISPLAY=:99
 
         - name: Build with Gradle
-          run: ./gradlew clean qa -Psuite4 -Pheadless
+          run: ./gradlew clean qa -Psuite4
 
         - name: Upload test reports
           uses: actions/upload-artifact@v4
