@@ -3,11 +3,13 @@ package de.aittr.lms;
 import java.time.Duration;
 
 import de.aittr.lms.fwUI.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 
 public class ApplicationManager {
 
@@ -50,18 +52,18 @@ public class ApplicationManager {
 // }
 public void init() {
     if (browser.equalsIgnoreCase("chrome")) {
-        // Set the system property for ChromeDriver with the path to your ChromeDriver executable
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
     } else if (browser.equalsIgnoreCase("firefox")) {
+        WebDriverManager.firefoxdriver().setup();
         driver = new FirefoxDriver();
     } else if (browser.equalsIgnoreCase("edge")) {
+        WebDriverManager.edgedriver().setup();
         EdgeOptions options = new EdgeOptions();
         options.addArguments("remote-allow-origins=*");
         driver = new EdgeDriver(options);
     }
 
-    // driver.get("http://localhost:4200");
     driver.get("https://lms-dev.ait-tr.eu/");
     driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -72,7 +74,6 @@ public void init() {
     lesson = new LessonHelperUI(driver);
     CSVReaderUI = new CSVReaderHelperUI(driver);
 }
-
   public void stop() {
     driver.quit();
   }
