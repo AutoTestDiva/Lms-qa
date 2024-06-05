@@ -52,7 +52,7 @@ public class ApplicationManager {
 // }
 public void init() {
     if (browser.equalsIgnoreCase("chrome")) {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().driverVersion("125.0.6422.112").setup();
         driver = new ChromeDriver();
     } else if (browser.equalsIgnoreCase("firefox")) {
         WebDriverManager.firefoxdriver().setup();
