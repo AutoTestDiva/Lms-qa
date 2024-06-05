@@ -36,6 +36,12 @@
           env:
               DISPLAY: :99
 
+        - name: Get application.yml from secrets and decode it
+          run: |
+              echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
+              echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
+              echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
+
         - name: Build with Gradle
           run: ./gradlew clean qa -Psuite3
           env:
