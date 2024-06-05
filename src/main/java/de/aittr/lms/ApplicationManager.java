@@ -57,17 +57,20 @@ public void init() {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
             driver = new ChromeDriver(options);
         } else if (browser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions options = new FirefoxOptions();
             options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
             driver = new FirefoxDriver(options);
         }
         else if (browser.equalsIgnoreCase("edge")) {
             WebDriverManager.edgedriver().setup();
             EdgeOptions options = new EdgeOptions();
             options.addArguments("--headless");
+            options.addArguments("--window-size=1920,1080");
             driver = new EdgeDriver(options);
         }
 
