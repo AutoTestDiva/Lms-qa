@@ -36,7 +36,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: ./gradlew clean qa -Psuite4 | tee build.log
+        run: ./gradlew clean qa -Psuite4  > build.log 2>&1
       - name: Upload build log
         uses: actions/upload-artifact@v2
         with:
