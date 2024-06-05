@@ -48,11 +48,32 @@
               DISPLAY: :99
 
         - name: Upload test reports
-          uses: actions/upload-artifact@v4
-          if: always()
+          uses: actions/upload-artifact@v2
           with:
             name: test-reports
-            path: build/reports/tests/test
+            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
+
+        - name: Check if log file exists and has content
+          run: |
+            if [ ! -s build.log ]; then
+              echo "Log file is empty or does not exist" >&2
+              exit 1
+            fi
+
+        - name: Upload test report
+          if: always()
+          uses: actions/upload-artifact@v3
+          with:
+            name: build-log
+            path: build.log
+
+
+        #        - name: Upload test reports
+#          uses: actions/upload-artifact@v4
+#          if: always()
+#          with:
+#            name: test-reports
+#            path: build/reports/tests/test
 
         - name: Deploy
           run: echo 'Deploying...'
