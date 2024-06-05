@@ -43,7 +43,7 @@
               echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
         - name: Build with Gradle
-          run: ./gradlew clean qa -Psuite3
+          run: ./gradlew clean qa -Psuite5
           env:
               DISPLAY: :99
 
