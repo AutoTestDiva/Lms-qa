@@ -27,6 +27,9 @@ jobs:
           install-chromedriver: true
           install-dependencies: true
 
+      - name: Check Chrome version
+        run: google-chrome --version
+
       - name: Get application.yml from secrets and decode it
         run: |
           echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
