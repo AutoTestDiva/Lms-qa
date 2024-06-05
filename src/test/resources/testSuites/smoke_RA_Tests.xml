@@ -1,13 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="QuickRA" verbose="1" >
+<suite name="Smoke_RA_Tests" verbose="1" >
 
-    <test name="QuickRA" >
+    <test name="Smoke_RA_Tests" >
         <classes>
             <class name="de.aittr.lms.restAssuredTests.LoginRATests" />
             <class name="de.aittr.lms.restAssuredTests.SetUsersPasswordRATests" />
-<!--            <class name="de.aittr.lms.restAssuredTests.PasswordChangeRATests" />-->
         </classes>
     </test>
-
 </suite>

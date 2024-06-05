@@ -5,8 +5,12 @@
     <test name="RegressionUI" >
         <classes>
             <class name="de.aittr.lms.UITests.AdminPageUITests" />
+            <class name="de.aittr.lms.UITests.ChangePasswordUITest" />
             <class name="de.aittr.lms.UITests.LoginUITests" />
             <class name="de.aittr.lms.UITests.LogOutUITests" />
+            <class name="de.aittr.lms.UITests.SortUsersInAdminCabinetTests" />
+            <class name="de.aittr.lms.UITests.StudentCabinetUITests" />
+            <class name="de.aittr.lms.UITests.StudentCabinetUITests" />
         </classes>
     </test>
 

@@ -22,7 +22,7 @@ public class SortUsersInAdminCabinetTests extends TestBaseUI {
         app.getUserUI().clickOnAdministrationOnMenu();
         app.getUserUI().clickOnUsers();
         app.getUserUI().clickOnEmailSort();
-        Assert.assertTrue(app.getUserUI().isUpperEmailPresent("a01@dev-lms.de"));
+        Assert.assertTrue(app.getUserUI().isUpperEmailPresent("2aexample@gmail.com"));
     }
 
     @Test

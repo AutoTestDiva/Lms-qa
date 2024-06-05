@@ -56,11 +56,11 @@ task qa(type:Test) {
             suites 'src/test/resources/testSuites/regressionUI.xml'
         }
         else if (suite3){
-              suites 'src/test/resources/testSuites/quickRA.xml'
+              suites 'src/test/resources/testSuites/smoke_RA_Tests.xml'
         } else if (suite4){
-            suites 'src/test/resources/testSuites/quickUI.xml'
+            suites 'src/test/resources/testSuites/smoke_UI_Tests.xml'
         }else if (suite5){
-            suites 'src/test/resources/testSuites/analiticUI.xml'
+            suites 'src/test/resources/testSuites/regressionRA_and_UI_Tests.xml'
         }
     }
     if(project.hasProperty('browser')){
@@ -69,89 +69,3 @@ task qa(type:Test) {
 }
 sourceCompatibility = JavaVersion.VERSION_15
 targetCompatibility = JavaVersion.VERSION_15
-
-//******************
-//plugins {
-//    id 'java'
-//}
-//
-//group 'org.example'
-//version '1.0-SNAPSHOT'
-//
-//repositories {
-//    mavenCentral()
-//}
-//
-//dependencies {
-//    //implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
-//    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.18.1'
-//
-//    implementation 'org.testng:testng:7.8.0'
-//
-//    implementation 'ch.qos.logback:logback-classic:1.4.8'
-//    implementation 'org.projectlombok:lombok:1.18.28'
-//    implementation 'io.rest-assured:rest-assured:5.3.1'
-//    implementation 'com.google.code.gson:gson:2.10.1'
-//    implementation 'com.opencsv:opencsv:5.8'
-//
-//    compileOnly 'org.projectlombok:lombok:1.18.26'
-//    annotationProcessor 'org.projectlombok:lombok:1.18.26'
-//
-//    implementation 'org.yaml:snakeyaml:2.0'
-//
-//    implementation 'mysql:mysql-connector-java:8.0.26'
-//
-//    implementation 'com.opencsv:opencsv:5.7'
-//
-//    implementation 'net.java.dev.jna:autoitx:v3.3.14.2'
-//
-//    implementation 'com.opencsv:opencsv:5.7'
-//
-//}
-//
-//compileJava {
-//    options.fork = true
-//    options.forkOptions.executable = 'javac'
-//    options.compilerArgs.add('--release')
-//    options.compilerArgs.add('17') // Укажите версию Java, которую вы используете
-//}
-//
-//sourceCompatibility = '15'
-//targetCompatibility = '15'
-//
-//
-//test {
-//    useTestNG()
-//    ignoreFailures = true
-//}
-//tasks.withType(JavaCompile) {
-//    options.encoding = 'UTF-8'
-//}
-//
-//task qa(type:Test) {
-//    useTestNG(){
-//        def suite1 = project.hasProperty("suite1")
-//        def suite2 = project.hasProperty("suite2")
-//        def suite3 = project.hasProperty("suite3")
-//        def suite4 = project.hasProperty("suite4")
-//        def suite5 = project.hasProperty("suite5")
-//        if(suite1){
-//            suites 'src/test/resources/testSuites/regressionRA.xml'
-//        } else if(suite2){
-//            suites 'src/test/resources/testSuites/regressionUI.xml'
-//        }
-//        else if (suite3){
-//            suites 'src/test/resources/testSuites/quickRA.xml'
-//        } else if (suite4){
-//            suites 'src/test/resources/testSuites/quickUI.xml'
-//        }else if (suite5){
-//            suites 'src/test/resources/testSuites/analiticUI.xml'
-//        }
-//    }
-//    if(project.hasProperty('browser')){
-//        systemProperty 'browser', "${browser}"
-//    }
-//}
-
-//sourceCompatibility = JavaVersion.VERSION_15
-//targetCompatibility = JavaVersion.VERSION_15

@@ -1,14 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="QuickUI" verbose="1" >
+<suite name="Smoke_UI_Tests" verbose="1" >
 
-    <test name="QuickUI" >
+    <test name="Smoke_UI_Tests" >
         <classes>
             <class name="de.aittr.lms.UITests.AdminPageUITests" />
             <class name="de.aittr.lms.UITests.LoginUITests" />
             <class name="de.aittr.lms.UITests.LogOutUITests" />
-
         </classes>
     </test>
-
 </suite>
