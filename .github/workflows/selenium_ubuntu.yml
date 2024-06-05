@@ -37,7 +37,7 @@
               DISPLAY: :99
 
         - name: Build with Gradle
-          run: ./gradlew clean qa -Psuite5
+          run: ./gradlew clean qa -Psuite3
           env:
               DISPLAY: :99
 

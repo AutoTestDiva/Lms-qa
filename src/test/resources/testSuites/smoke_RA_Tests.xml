@@ -5,7 +5,8 @@
     <test name="Smoke_RA_Tests" >
         <classes>
             <class name="de.aittr.lms.restAssuredTests.LoginRATests" />
-            <class name="de.aittr.lms.restAssuredTests.SetUsersPasswordRATests" />
+            <class name="de.aittr.lms.restAssuredTests.CreateNewUserByAdminRATest" />
+            <class name="de.aittr.lms.restAssuredTests.LogOutRATests" />
         </classes>
     </test>
 </suite>
