@@ -24,7 +24,7 @@
           run: chmod +x gradlew
 
         - name: Build with Gradle
-          run: ./gradlew clean qa -Psuite4 -Pheadless
+          run: ./gradlew build clean qa -Psuite4 -Pheadless
 
         - name: Upload test reports
           uses: actions/upload-artifact@v4
