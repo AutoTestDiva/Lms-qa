@@ -29,51 +29,19 @@ public class ApplicationManager {
     this.browser = browser;
   }
 
-//  public void init() {
-//
-//    if (browser.equalsIgnoreCase("chrome")) {
-//      driver = new ChromeDriver();
-//    } else if (browser.equalsIgnoreCase("firefox")) {
-//      driver = new FirefoxDriver();
-//    } else if (browser.equalsIgnoreCase("edge")) {
-//      EdgeOptions options = new EdgeOptions();
-//      options.addArguments("remote-allow-origins=*");
-//      driver = (WebDriver) new EdgeDriver();
-//    }
-//
-//   // driver.get("http://localhost:4200");
-//    driver.get("https://lms-dev.ait-tr.eu/");
-//    driver.manage().window().maximize();
-//    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-//
-//    userUI = new UserHelperUI(driver);
-//    headerUI = new HeaderHelperUI(driver);
-//    groupUI = new GroupHelperUI(driver);
-//    lesson = new LessonHelperUI(driver);
-//    CSVReaderUI = new CSVReaderHelperUI(driver);
-// }
-public void init() {
-        if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
-            options.addArguments("--window-size=1920,1080");
-            driver = new ChromeDriver(options);
-        } else if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
-            FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("--headless");
-            options.addArguments("--window-size=1920,1080");
-            driver = new FirefoxDriver(options);
-        }
-        else if (browser.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
-            EdgeOptions options = new EdgeOptions();
-            options.addArguments("--headless");
-            options.addArguments("--window-size=1920,1080");
-            driver = new EdgeDriver(options);
-        }
+  public void init() {
 
+    if (browser.equalsIgnoreCase("chrome")) {
+      driver = new ChromeDriver();
+    } else if (browser.equalsIgnoreCase("firefox")) {
+      driver = new FirefoxDriver();
+    } else if (browser.equalsIgnoreCase("edge")) {
+      EdgeOptions options = new EdgeOptions();
+      options.addArguments("remote-allow-origins=*");
+      driver = (WebDriver) new EdgeDriver();
+    }
+
+   // driver.get("http://localhost:4200");
     driver.get("https://lms-dev.ait-tr.eu/");
     driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -83,7 +51,39 @@ public void init() {
     groupUI = new GroupHelperUI(driver);
     lesson = new LessonHelperUI(driver);
     CSVReaderUI = new CSVReaderHelperUI(driver);
-}
+ }
+//public void init() {
+//        if (browser.equalsIgnoreCase("chrome")) {
+//            WebDriverManager.chromedriver().setup();
+//            ChromeOptions options = new ChromeOptions();
+//            options.addArguments("--headless");
+//            options.addArguments("--window-size=1920,1080");
+//            driver = new ChromeDriver(options);
+//        } else if (browser.equalsIgnoreCase("firefox")) {
+//            WebDriverManager.firefoxdriver().setup();
+//            FirefoxOptions options = new FirefoxOptions();
+//            options.addArguments("--headless");
+//            options.addArguments("--window-size=1920,1080");
+//            driver = new FirefoxDriver(options);
+//        }
+//        else if (browser.equalsIgnoreCase("edge")) {
+//            WebDriverManager.edgedriver().setup();
+//            EdgeOptions options = new EdgeOptions();
+//            options.addArguments("--headless");
+//            options.addArguments("--window-size=1920,1080");
+//            driver = new EdgeDriver(options);
+//        }
+//
+//    driver.get("https://lms-dev.ait-tr.eu/");
+//    driver.manage().window().maximize();
+//    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//
+//    userUI = new UserHelperUI(driver);
+//    headerUI = new HeaderHelperUI(driver);
+//    groupUI = new GroupHelperUI(driver);
+//    lesson = new LessonHelperUI(driver);
+//    CSVReaderUI = new CSVReaderHelperUI(driver);
+//}
   public void stop() {
     driver.quit();
   }
