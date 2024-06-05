@@ -25,19 +25,43 @@ public class ApplicationManager {
     this.browser = browser;
   }
 
-  public void init() {
-
+//  public void init() {
+//
+//    if (browser.equalsIgnoreCase("chrome")) {
+//      driver = new ChromeDriver();
+//    } else if (browser.equalsIgnoreCase("firefox")) {
+//      driver = new FirefoxDriver();
+//    } else if (browser.equalsIgnoreCase("edge")) {
+//      EdgeOptions options = new EdgeOptions();
+//      options.addArguments("remote-allow-origins=*");
+//      driver = (WebDriver) new EdgeDriver();
+//    }
+//
+//   // driver.get("http://localhost:4200");
+//    driver.get("https://lms-dev.ait-tr.eu/");
+//    driver.manage().window().maximize();
+//    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//
+//    userUI = new UserHelperUI(driver);
+//    headerUI = new HeaderHelperUI(driver);
+//    groupUI = new GroupHelperUI(driver);
+//    lesson = new LessonHelperUI(driver);
+//    CSVReaderUI = new CSVReaderHelperUI(driver);
+// }
+public void init() {
     if (browser.equalsIgnoreCase("chrome")) {
-      driver = new ChromeDriver();
+        // Set the system property for ChromeDriver with the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        driver = new ChromeDriver();
     } else if (browser.equalsIgnoreCase("firefox")) {
-      driver = new FirefoxDriver();
+        driver = new FirefoxDriver();
     } else if (browser.equalsIgnoreCase("edge")) {
-      EdgeOptions options = new EdgeOptions();
-      options.addArguments("remote-allow-origins=*");
-      driver = (WebDriver) new EdgeDriver();
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("remote-allow-origins=*");
+        driver = new EdgeDriver(options);
     }
 
-   // driver.get("http://localhost:4200");
+    // driver.get("http://localhost:4200");
     driver.get("https://lms-dev.ait-tr.eu/");
     driver.manage().window().maximize();
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -47,7 +71,7 @@ public class ApplicationManager {
     groupUI = new GroupHelperUI(driver);
     lesson = new LessonHelperUI(driver);
     CSVReaderUI = new CSVReaderHelperUI(driver);
- }
+}
 
   public void stop() {
     driver.quit();
