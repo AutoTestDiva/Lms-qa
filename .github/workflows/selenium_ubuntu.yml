@@ -10,18 +10,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-#    services:
-#      selenium:
-#        image: selenium/standalone-chrome:latest
-#        ports:
-#          - 4444:4444
-#    env:
-#        CHROME_VERSION: '125.0.6422.60' # Укажите нужную версию ChromeDriver
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-#        uses: actions/checkout@v4
 
       - name: Set up JDK 15
         uses: actions/setup-java@v3
@@ -32,102 +23,37 @@ jobs:
       - name: install Chrome
         uses: browser-actions/setup-chrome@v1
         with:
-                  chrome-version: 125
-                  install-chromedriver: true
-                  install-dependencies: true
-
-
-#    !  Installation Node.js
-#      - name: ✅ ⚙️ Install Node version "20"
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: '20'
-#
-#      - name: ❎ ⌛ Check Node version
-#        run: node --version
-
-#      - name: Cache Gradle packages
-#        uses: actions/cache@v2
-#        with:
-#            path: |
-#              ~/.gradle/caches
-#              ~/.gradle/wrapper
-#            key: ${{ runner.os }}-gradle-${{ hashFiles('/*.gradle*', '/gradle-wrapper.properties') }}
-#            restore-keys: |
-#              ${{ runner.os }}-gradle-
-#
-#      - name: Set up Gradle
-#        uses: gradle/gradle-build-action@v2
-
-#      - name: ✅ ⚙️ Set execute permission for gradlew
-#        run: chmod +x gradlew
+          chrome-version: 'latest'
+          install-chromedriver: true
+          install-dependencies: true
 
       - name: Get application.yml from secrets and decode it
         run: |
           echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
           echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
-     
-          
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew # give permission to Gradle to run the commands
-      - name: Build with Gradle
-        run: gradle clean qa -Psuite4 # Run our tests using Gradle
 
-#      - name: Run tests
-#        run:
-#            gradle clean qa -Psuite4 #--info --stacktrace | tee result4.log || true
-#        continue-on-error: true
-#        env:
-#          CHROME_BIN: /usr/bin/chromium-browser
-#          CHROME_DRIVER: /usr/local/bin/chromedriver
-#          CHROME_OPTIONS: "--headless --no-sandbox --disable-dev-shm-usage --remote-debugging-port=9222 --disable-gpu"
-      # Загрузка отчетов о тестировании как артефактов
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew clean qa -Psuite4 | tee build.log
+      - name: Upload build log
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-log
+          path: ./build.log
       - name: Upload test reports
         uses: actions/upload-artifact@v2
         with:
           name: test-reports
-          path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
+          path: ./build/reports/tests/qa
 
       - name: Upload test report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
-                name: test-report
-                path: result4.log
-
-#            # !  List of folders before tests
-#      - name: ✅ 📂 List Directories before tests
-#        if: always()
-#        run: ls -R
-
-#      - name: List contents of the test report directory
-#        if: always()
-#        run: ls -R ./build/reports/tests/qa
-#
-#      - name: Check
-#        run: cat .build/reports/tests/qa/index.html
-#
-#      - name: Check 1
-#        run: cp /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa/index.html /home/runner/qqq.txt
-#
-#      -  name: Check11
-#         run: cat /home/runner/qqq.txt
-#
-#      -  name: Check 2
-#         run: cp ./build/reports/tests/qa/index.html qqq.txt
-#
-#      -  name: Check22
-#         run: cat qqq.txt
-#
-
-#      - name: Upload test report
-#        uses: actions/upload-artifact@v2
-#        with:
-#            name: test-report
-##            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
-#            path: /build/reports/tests/qa/index.html
-
+          name: test-report
+          path: ./result4.log
 
       - name: Deploy
         run: echo 'Deploying...'
