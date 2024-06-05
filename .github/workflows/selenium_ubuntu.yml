@@ -1,58 +1,100 @@
-name: Java CI with Gradle (JDK 15, Gradle 8.3)
+  name:  Java CI with Gradle [UBUNTU]
+  on:
+    push:
+      branches: [ main ]
+    pull_request:
+      branches: [ main ]
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+        - name: Set up JDK 15
+          uses: actions/setup-java@v4
+          with:
+            distribution: 'adopt'
+            java-version: '15'
 
-jobs:
-  build:
+        - name: Check Java version
+          run: java -version
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+        - name: Grant execute permission for gradlew
+          run: chmod +x gradlew
 
-      - name: Set up JDK 15
-        uses: actions/setup-java@v3
-        with:
-          java-version: '15'
-          distribution: 'adopt'
+        - name: Build with Gradle
+          run: ./gradlew clean qa -Psuite4 -Pheadless
 
-      - name: install Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: 'latest'
-          install-chromedriver: true
-          install-dependencies: true
+        - name: Upload test reports
+          uses: actions/upload-artifact@v4
+          if: always()
+          with:
+            name: test-reports
+            path: build/reports/tests/test
 
-      - name: Check Chrome version
-        run: google-chrome --version
+        - name: Deploy
+          run: echo 'Deploying...'
 
-      - name: Get application.yml from secrets and decode it
-        run: |
-          echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
-          echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
-          echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: Build with Gradle
-        run: ./gradlew clean qa -Psuite4
 
-      - name: Upload test reports
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-reports
-          path: ./build/reports/tests/qa
-
-      - name: Upload test report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-report
-          path: ./result4.log
-
-      - name: Deploy
-        run: echo 'Deploying...'
+#
+#
+#name: Java CI with Gradle (JDK 15, Gradle 8.3)
+#
+#on:
+#  push:
+#    branches: [ main ]
+#  pull_request:
+#    branches: [ main ]
+#
+#jobs:
+#  build:
+#
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#
+#      - name: Set up JDK 15
+#        uses: actions/setup-java@v3
+#        with:
+#          java-version: '15'
+#          distribution: 'adopt'
+#
+#      - name: install Chrome
+#        uses: browser-actions/setup-chrome@v1
+#        with:
+#          chrome-version: 'latest'
+#          install-chromedriver: true
+#          install-dependencies: true
+#
+#      - name: Check Chrome version
+#        run: google-chrome --version
+#
+#      - name: Get application.yml from secrets and decode it
+#        run: |
+#          echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
+#          echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
+#          echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
+#
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x gradlew
+#      - name: Build with Gradle
+#        run: ./gradlew clean qa -Psuite4 -Pheadless
+#
+#      - name: Upload test reports
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: test-reports
+#          path: ./build/reports/tests/qa
+#
+#      - name: Upload test report
+#        if: always()
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: test-report
+#          path: ./result4.log
+#
+#      - name: Deploy
+#        run: echo 'Deploying...'

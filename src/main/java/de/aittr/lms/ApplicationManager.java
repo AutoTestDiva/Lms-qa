@@ -6,9 +6,11 @@ import de.aittr.lms.fwUI.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 
 public class ApplicationManager {
@@ -51,18 +53,23 @@ public class ApplicationManager {
 //    CSVReaderUI = new CSVReaderHelperUI(driver);
 // }
 public void init() {
-    if (browser.equalsIgnoreCase("chrome")) {
-        WebDriverManager.chromedriver().driverVersion("125.0.6422.112").setup();
-        driver = new ChromeDriver();
-    } else if (browser.equalsIgnoreCase("firefox")) {
-        WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
-    } else if (browser.equalsIgnoreCase("edge")) {
-        WebDriverManager.edgedriver().setup();
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments("remote-allow-origins=*");
-        driver = new EdgeDriver(options);
-    }
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless");
+            driver = new ChromeDriver(options);
+        } else if (browser.equalsIgnoreCase("firefox")) {
+            WebDriverManager.firefoxdriver().setup();
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
+            driver = new FirefoxDriver(options);
+        }
+        else if (browser.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();
+            EdgeOptions options = new EdgeOptions();
+            options.addArguments("--headless");
+            driver = new EdgeDriver(options);
+        }
 
     driver.get("https://lms-dev.ait-tr.eu/");
     driver.manage().window().maximize();
