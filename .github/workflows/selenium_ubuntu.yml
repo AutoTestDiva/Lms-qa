@@ -43,7 +43,7 @@
               echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
 
         - name: Build with Gradle
-          run: ./gradlew clean qa -Psuite5 > build.log 2>&1
+          run: ./gradlew clean qa -Psuite4 > build.log 2>&1
           env:
               DISPLAY: :99
 
@@ -55,17 +55,34 @@
 
         - name: Check if log file exists and has content
           run: |
-            if [ ! -s build.log ]; then
-              echo "Log file is empty or does not exist" >&2
-              exit 1
+            if [ ! -s result4.log ]; then
+                   echo "Log file is empty or does not exist" >&2
+                   exit 1
             fi
+
 
         - name: Upload test report
           if: always()
           uses: actions/upload-artifact@v3
           with:
-            name: build-log
-            path: build.log
+            name: test-report
+            path: result4.log
+
+
+
+        #        - name: Check if log file exists and has content
+#          run: |
+#            if [ ! -s build.log ]; then
+#              echo "Log file is empty or does not exist" >&2
+#              exit 1
+#            fi
+#
+#        - name: Upload test report
+#          if: always()
+#          uses: actions/upload-artifact@v3
+#          with:
+#            name: build-log
+#            path: build.log
 
 
         #        - name: Upload test reports
