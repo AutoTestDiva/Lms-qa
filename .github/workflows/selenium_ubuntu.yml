@@ -61,11 +61,11 @@
 #            fi
 
 
-        - name: Upload test report
-          if: always()
-          uses: actions/upload-artifact@v3
-          with:
-            name: test-report
+#        - name: Upload test report
+#          if: always()
+#          uses: actions/upload-artifact@v3
+#          with:
+#            name: test-report
 #            path: result4.log
 
 
