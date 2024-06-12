@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class LoginUITests extends TestBaseUI {
     @Test(groups = "positive")
     public void loginAsAdminPositiveTest() {
-        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().loginWithData("a01@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
         Assert.assertTrue(app.getGroupUI().isAdministrationInHeaderPresent());
     }
@@ -25,7 +25,7 @@ public class LoginUITests extends TestBaseUI {
         app.getUserUI().loginWithData("test@dev-lms.de", "LMS-dev-pass-2024");
         Assert.assertTrue(app.getUserUI().isErrorNotValidEmailOrPasswordMessageDisplayed());
         //1 part of aftermethod
-        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().loginWithData("a01@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
@@ -34,7 +34,7 @@ public class LoginUITests extends TestBaseUI {
         app.getUserUI().loginWithWrongData("s03.dev-lms.de", "LMS-dev-pass-2024");
         Assert.assertTrue(app.getUserUI().isErrorNotValidEmailFormatDisplayed());
         //1 part of aftermethod
-        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().loginWithData("a01@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
@@ -44,7 +44,7 @@ public class LoginUITests extends TestBaseUI {
         app.getUserUI().pause(500);
         Assert.assertTrue(app.getUserUI().isErrorNotValidEmailOrPasswordMessageDisplayed());
         //1 part of aftermethod
-        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().loginWithData("a01@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 

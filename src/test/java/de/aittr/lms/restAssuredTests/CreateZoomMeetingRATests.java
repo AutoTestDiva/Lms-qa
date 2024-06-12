@@ -36,7 +36,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA {
 
     @Test
     public void createZoomMeetingByTeacherPositiveTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomMeetingBuilder(
                 "Java lesson #23", "2024-07-17", "17:00", 300);
         zoom.createZoomMeeting(cookie, zoomMeeting).then().
@@ -45,7 +45,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA {
 
     @Test
     public void createZoomMeeting32MarchNegativeTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomMeetingBuilder(
                 "Java lesson #23", "2024-07-32", "17:00", 300);
         zoom.createZoomMeeting(cookie, zoomMeeting).then().
@@ -54,7 +54,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA {
 
     @Test
     public void createZoomMeetingDurationOminNegativeTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomMeetingBuilder(
                 "Java lesson #23", "2024-07-02", "17:00", 0);
         zoom.createZoomMeeting(cookie, zoomMeeting).then().
@@ -72,7 +72,7 @@ public class CreateZoomMeetingRATests extends TestBaseRA {
 
     @Test
     public void createZoomMeetingWithEmptyTopicNegativeTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomMeetingBuilder(
                 "", "2024-03-17", "17:00", 300);
         zoom.createZoomMeeting(cookie, zoomMeeting).then().

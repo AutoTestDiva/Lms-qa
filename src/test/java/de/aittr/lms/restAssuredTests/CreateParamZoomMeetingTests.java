@@ -40,7 +40,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void CreateParamZoomMeetingByTeacherPositiveTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "LECTURE", module, lessonNr,
                 lessonTopic, "new lesson 45", dateToStart, timeToStart, 140);
 
@@ -58,7 +58,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void CreateParamZoomMeetingByAdminPositiveTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024"); // пока указан логин тичера, т.к. у админа нет зумаккаунта
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024"); // пока указан логин тичера, т.к. у админа нет зумаккаунта
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "LECTURE", module, lessonNr,
                 lessonTopic, "Some info of lesson", "2024-09-20"
                 , "07:22", 240);
@@ -119,7 +119,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherNotExistLessonModuleNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "LECTURE", "Test", "22",
                 "Jenkins", "Some info of lesson", "2024-09-20",
                 "17:00", 240);
@@ -132,7 +132,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherNotExistTypeNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024"); // пока указан логин тичера, т.к. у админа нет зумаккаунта
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024"); // пока указан логин тичера, т.к. у админа нет зумаккаунта
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "Test", "BASIC_PROGRAMMING", "22",
                 "Jenkins", "Some info of lesson", "2024-09-20",
                 "17:00", 240);
@@ -154,7 +154,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherModuleNullNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "LECTURE", "", lessonNr,
                 lessonTopic, "Some info of lesson", "2024-09-20"
                 , "07:22", 240);
@@ -164,7 +164,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherCohortIDLetterNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         String body = "{\n" +
                 "  \"cohortIds\": \"[\"a\"]\",\n" +
                 "  \"lessonType\": \"LECTURE\",\n" +
@@ -183,7 +183,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherType22NegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         String body = "{\n" +
                 "  \"cohortIds\": \"[38]\",\n" +
                 "  \"lessonType\": 22,\n" +
@@ -202,7 +202,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherModuleCyrillicNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "LECTURE", "Тестирование", lessonNr,
                 lessonTopic, "Some info of lesson", "2024-09-20"
                 , "07:22", 240);
@@ -214,7 +214,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherLessonNumOneNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         String body = "{\n" +
                 "  \"cohortIds\": \"[38]\",\n" +
                 "  \"lessonType\": \"LECTURE\",\n" +
@@ -263,7 +263,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 //
     @Test
     public void zoomMeetingByTeacherDuration0TimeNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "LECTURE", module, lessonNr,
                 lessonTopic, "new lesson 45", dateToStart, timeToStart, 0);
         zoom.createParamZoomMeeting(cookie, zoomMeeting).then()
@@ -272,7 +272,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test
     public void zoomMeetingByTeacherNegativeCohortNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         String body = "{\n" +
                 "  \"cohortIds\": \"[-38]\",\n" +
                 "  \"lessonType\": \"LECTURE\",\n" +
@@ -291,7 +291,7 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
 
     @Test //тест повторяющийся. Возник в старой версии данных, где lessonNr было интеджер
     public void zoomMeetingByTeacherNegativeLessonNegTest() {
-        cookie = user.getLoginCookie("a04@dev-lms.de", "LMS-dev-pass-2024");
+        cookie = user.getLoginCookie("a01@dev-lms.de", "LMS-dev-pass-2024");
         String body = "{\n" +
                 "  \"cohortIds\": \"[38]\",\n" +
                 "  \"lessonType\": \"LECTURE\",\n" +

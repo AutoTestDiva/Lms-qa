@@ -13,7 +13,7 @@ import java.util.List;
 public class GroupInfoUITests extends TestBaseUI {
     @BeforeMethod
     public void precondition() {
-        app.getUserUI().loginWithData("a04@dev-lms.de", "LMS-dev-pass-2024");
+        app.getUserUI().loginWithData("a01@dev-lms.de", "LMS-dev-pass-2024");
         app.getUserUI().closeLoginMessage();
     }
 
