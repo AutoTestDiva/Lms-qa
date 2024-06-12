@@ -50,6 +50,7 @@ task qa(type:Test) {
         def suite3 = project.hasProperty("suite3")
         def suite4 = project.hasProperty("suite4")
         def suite5 = project.hasProperty("suite5")
+        def suite6 = project.hasProperty("suite6")
         if(suite1){
             suites 'src/test/resources/testSuites/regressionRA.xml'
         } else if(suite2){
@@ -59,9 +60,11 @@ task qa(type:Test) {
               suites 'src/test/resources/testSuites/smoke_RA_Tests.xml'
         } else if (suite4){
             suites 'src/test/resources/testSuites/smoke_UI_Tests.xml'
-        }else if (suite5){
+        }else if (suite5) {
             suites 'src/test/resources/testSuites/regressionRA_and_UI_Tests.xml'
-        }
+        }else if (suite6){
+                suites 'src/test/resources/testSuites/smoke_UI_and_RA_Tests.xml'
+            }
     }
     if(project.hasProperty('browser')){
         systemProperty 'browser', "${browser}"

@@ -18,6 +18,8 @@ public class LogOutRATests extends TestBaseRA{
                 "Germany", "+490571234567", "STUDENT");
         user.setPasswordByEmail("lilu@mail.com", "LMS-dev-pass-2024");
         cookie = user.getLoginCookie("lilu@mail.com", "LMS-dev-pass-2024");
+        System.out.println(cookie+"*************");
+
     }
 
     @Test

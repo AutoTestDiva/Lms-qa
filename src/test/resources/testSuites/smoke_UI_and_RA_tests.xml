@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Smoke_UI_and_RA_Tests" verbose="1" >
+
+    <test name="Smoke_UI_and_RA_Tests" >
+        <classes>
+            <class name="de.aittr.lms.UITests.AdminPageUITests" />
+            <class name="de.aittr.lms.UITests.LoginUITests" />
+            <class name="de.aittr.lms.UITests.LogOutUITests" />
+            <class name="de.aittr.lms.restAssuredTests.LoginRATests" />
+            <class name="de.aittr.lms.restAssuredTests.CreateNewUserByAdminRATest" />
+            <class name="de.aittr.lms.restAssuredTests.LogOutRATests" />
+        </classes>
+    </test>
+</suite>
