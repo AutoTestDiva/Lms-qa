@@ -61,6 +61,7 @@ public class UserHelperRA extends BaseHelperRA {
                 .post("/login");
 
         return response.getDetailedCookie("JSESSIONID");
+
     }
 
     public static Response loginUserRA(String email, String password) {

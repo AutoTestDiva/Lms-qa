@@ -123,7 +123,8 @@ public class CreateParamZoomMeetingTests extends TestBaseRA {
         zoomMeeting = zoom.ZoomParamMeetingBuilder(cohortIds, "LECTURE", "Test", "22",
                 "Jenkins", "Some info of lesson", "2024-09-20",
                 "17:00", 240);
-        uuidMeeting = zoom.createParamZoomMeeting(cookie, zoomMeeting).then().log().all()
+        uuidMeeting = zoom.createParamZoomMeeting(cookie, zoomMeeting)
+                .then().log().all()
                 .assertThat().statusCode(200)
                 .extract().response().jsonPath().getString("meeting.uuid");
         Assert.assertEquals(zoom.getLessonModule(uuidMeeting), "UNDEFINED");
