@@ -1,15 +1,14 @@
   name:  Java CI with Gradle [UBUNTU]
   on:
-    on:
-      schedule:
+     schedule:
         # Запуск каждый день в 7:00 утра
         - cron: '0 7 * * *'
-      workflow_dispatch:
+     workflow_dispatch:
       # Позволяет запускать workflow вручную
 
-    push:
+     push:
       branches: [ main ]
-    pull_request:
+     pull_request:
       branches: [ main ]
   jobs:
     build:
