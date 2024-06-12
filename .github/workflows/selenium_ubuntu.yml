@@ -1,5 +1,12 @@
   name:  Java CI with Gradle [UBUNTU]
   on:
+    on:
+      schedule:
+        # Запуск каждый день в 7:00 утра
+        - cron: '0 7 * * *'
+      workflow_dispatch:
+      # Позволяет запускать workflow вручную
+
     push:
       branches: [ main ]
     pull_request:
@@ -47,11 +54,31 @@
           env:
               DISPLAY: :99
 
-        - name: Upload test reports
+        - name: Archive test reports
+          if: always()
           uses: actions/upload-artifact@v2
           with:
             name: test-reports
-            path: /home/runner/work/Lms-qa/Lms-qa/build/reports/tests/qa
+            path: build/reports/tests/test
+
+        - name: Send email notification
+          if: always()
+          uses: dawidd6/action-send-mail@v3
+          with:
+                server_address: smtp.gmail.com
+                server_port: 587
+                username: ${{ secrets.EMAIL_USERNAME }}
+                password: ${{ secrets.EMAIL_PASSWORD }}
+                subject: GitHub Actions - Test Report
+                to: pnata1978@gmail.com
+                from: ${{ secrets.EMAIL_USERNAME }}
+          content_type: text/html
+          body: |
+            <h1>Test Results</h1>
+            <p>Here are the test results:</p>
+            <p>Status: ${{ job.status }}</p>
+            <p>Check the attached test reports for more details.</p>
+          attachments: build/reports/tests/test/index.html
 
         - name: Deploy
           run: echo 'Deploying...'
