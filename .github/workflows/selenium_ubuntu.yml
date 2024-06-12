@@ -71,13 +71,13 @@
                 subject: GitHub Actions - Test Report
                 to: pnata1978@gmail.com
                 from: ${{ secrets.EMAIL_USERNAME }}
-          content_type: text/html
-          body: |
-              <h1>Test Results</h1>
-              <p>Here are the test results:</p>
-              <p>Status: ${{ job.status }}</p>
-              <p>Check the attached test reports for more details.</p>
-          attachments: build/reports/tests/test/index.html
+                content_type: text/html
+                body: |
+                 <h1>Test Results</h1>
+                 <p>Here are the test results:</p>
+                 <p>Status: ${{ job.status }}</p>
+                 <p>Check the attached test reports for more details.</p>
+                attachments: build/reports/tests/test/index.html
 
         - name: Deploy
           run: echo 'Deploying...'
