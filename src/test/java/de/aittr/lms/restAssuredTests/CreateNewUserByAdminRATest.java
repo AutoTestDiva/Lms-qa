@@ -35,10 +35,12 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
                 .then().log().all().assertThat().statusCode(201);
     }
 
+
     @Test    public void createNewUserWithoutAdminNegativeTest() {
         given().contentType(ContentType.JSON).body(newUser).when().post("/users/create-user")
                 .then().log().all().assertThat().statusCode(401);
     }
+
     @Test
     public void createUserWithWrongRoleByAdminNegativeTest() {
         NewUserWithRoleDto notValidUser = user.userWithRoleBuilder("Cohort 99", mail, "Testerin", "Test",
@@ -93,4 +95,5 @@ public class CreateNewUserByAdminRATest extends  TestBaseRA{
         given().contentType(ContentType.JSON).body(newUser).cookie(cookie).when().post("/users/create-user")
                 .then().log().all().assertThat().statusCode(409);
     }
+
 }
