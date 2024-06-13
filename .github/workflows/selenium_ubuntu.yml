@@ -64,11 +64,11 @@ jobs:
       - name: Extract test results
         id: test-result
         run: |
-          total_tests=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Total Tests<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
-          total_failures=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Total Failures<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
-          total_ignored=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Total Ignored<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
-          duration=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Duration<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9.]\+s\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
-          success_rate=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Success Rate<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+%\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          total_tests=$(sed -n 's/.*<td style="border: 1px solid black; padding: 8px;">Total Tests<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          total_failures=$(sed -n 's/.*<td style="border: 1px solid black; padding: 8px;">Total Failures<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          total_ignored=$(sed -n 's/.*<td style="border: 1px solid black; padding: 8px;">Total Ignored<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          duration=$(sed -n 's/.*<td style="border: 1px solid black; padding: 8px;">Duration<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9.]\+s\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          success_rate=$(sed -n 's/.*<td style="border: 1px solid black; padding: 8px;">Success Rate<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+%\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
           
           echo "Total Tests: ${total_tests}"
           echo "Total Failures: ${total_failures}"
@@ -107,8 +107,8 @@ jobs:
                 <th style="border: 1px solid black; padding: 8px;">Result</th>
               </tr>
               ${{ steps.test-result.outputs.summary }}
-            </table>
-            <p>Check the attached test reports for more details.</p>
+            </table>            <p>Check the attached test reports for more details.</p>
+
 
       - name: Deploy
         run: echo 'Deploying...'
