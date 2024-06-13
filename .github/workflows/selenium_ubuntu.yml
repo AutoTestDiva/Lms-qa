@@ -62,7 +62,6 @@ jobs:
           fi
 
       - name: Extract test results
-        id: test-result
         run: |
           total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 1)
           total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 2 | tail -n 1)
@@ -76,6 +75,24 @@ jobs:
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Duration</td><td style=\"border: 1px solid black; padding: 8px;\">${duration}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Success Rate</td><td style=\"border: 1px solid black; padding: 8px;\">${success_rate}</td></tr>"
 
+          echo "$summary" > test-summary.html
+
+      - name: Upload test summary artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-summary
+          path: test-summary.html
+
+      - name: Download test summary artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: test-summary
+          path: .
+
+      - name: Read test summary
+        id: read-summary
+        run: |
+          summary=$(cat test-summary.html)
           echo "::set-output name=summary::$summary"
 
       - name: Send email notification
@@ -100,7 +117,7 @@ jobs:
                 <th style="border: 1px solid black; padding: 8px;">Test</th>
                 <th style="border: 1px solid black; padding: 8px;">Result</th>
               </tr>
-              ${{ steps.test-result.outputs.summary }}
+              ${{ steps.read-summary.outputs.summary }}
             </table>
             <p>Check the attached test reports for more details.</p>
 
