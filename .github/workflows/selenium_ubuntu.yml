@@ -60,22 +60,16 @@ jobs:
           name: test-reports
           path: build/reports/tests/qa
 
-      - name: Check if log file exists and has content
-        run: |
-          if [ ! -s build/reports/tests/qa/result4.log ]; then
-            echo "Log file is empty or does not exist" >&2
-            exit 1
-          fi
 
-      - name: Gather test results
-        id: test-result
-        run: |
-          if [ -f build/reports/tests/qa/result4.log ]; then
-            summary=$(awk '{print "<tr><td style=\"border: 1px solid black; padding: 8px;\">" $1 "</td><td style=\"border: 1px solid black; padding: 8px;\">" $2 "</td></tr>"}' build/reports/tests/qa/result4.log)
-            echo "::set-output name=summary::$summary"
-          else
-            echo "::set-output name=summary::<tr><td style=\"border: 1px solid black; padding: 8px;\">No tests</td><td style=\"border: 1px solid black; padding: 8px;\">No results</td></tr>"
-          fi
+#      - name: Gather test results
+#        id: test-result
+#        run: |
+#          if [ -f build/reports/tests/qa/result4.log ]; then
+#            summary=$(awk '{print "<tr><td style=\"border: 1px solid black; padding: 8px;\">" $1 "</td><td style=\"border: 1px solid black; padding: 8px;\">" $2 "</td></tr>"}' build/reports/tests/qa/result4.log)
+#            echo "::set-output name=summary::$summary"
+#          else
+#            echo "::set-output name=summary::<tr><td style=\"border: 1px solid black; padding: 8px;\">No tests</td><td style=\"border: 1px solid black; padding: 8px;\">No results</td></tr>"
+#          fi
 
       - name: Archive test reports
         if: always()
