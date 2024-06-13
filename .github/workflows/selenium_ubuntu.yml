@@ -90,27 +90,27 @@
           if: always()
           uses: dawidd6/action-send-mail@v3
           with:
-                  server_address: smtp.gmail.com
-                  server_port: 587
-                  username: ${{ secrets.EMAIL_USERNAME }}
-                  password: ${{ secrets.EMAIL_PASSWORD }}
-                  subject: GitHub Actions - Test Report
-                  to: pnata1978@gmail.com
-                  from: ${{ secrets.EMAIL_USERNAME }}
-                  content_type: text/html
-                  body: |
-                    <h1>Test Results</h1>
-                    <p>Here are the test results:</p>
-                    <p>Status: ${{ job.status }}</p>
-                    <h2>Test Summary:</h2>
-                    <table style="border: 1px solid black; border-collapse: collapse;">
-                      <tr>
-                        <th style="border: 1px solid black; padding: 8px;">Test</th>
-                        <th style="border: 1px solid black; padding: 8px;">Result</th>
-                      </tr>
-                      ${{ steps.test-result.outputs.summary }}
-                    </table>
-                    <p>Check the attached test reports for more details.</p>
+            server_address: smtp.gmail.com
+            server_port: 587
+            username: ${{ secrets.EMAIL_USERNAME }}
+            password: ${{ secrets.EMAIL_PASSWORD }}
+            subject: GitHub Actions - Test Report
+            to: pnata1978@gmail.com
+            from: ${{ secrets.EMAIL_USERNAME }}
+            content_type: text/html
+            body: |
+              <h1>Test Results</h1>
+              <p>Here are the test results:</p>
+              <p>Status: ${{ job.status }}</p>
+              <h2>Test Summary:</h2>
+              <table style="border: 1px solid black; border-collapse: collapse;">
+               <tr>
+                <th style="border: 1px solid black; padding: 8px;">Test</th>
+                <th style="border: 1px solid black; padding: 8px;">Result</th>
+               </tr>
+               ${{ steps.test-result.outputs.summary }}
+             </table>
+             <p>Check the attached test reports for more details.</p>
           attachments: build/reports/tests/qa/index.html
 
         - name: Deploy
