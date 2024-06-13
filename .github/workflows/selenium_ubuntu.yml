@@ -53,6 +53,16 @@
           env:
               DISPLAY: :99
 
+        - name: Check for summary.txt
+          run: |
+            if [ -f build/reports/tests/test/summary.txt ]; then
+                echo "summary.txt exists."
+                cat build/reports/tests/test/summary.txt
+            else
+                echo "summary.txt does not exist."
+            fi
+              
+
         - name: Gather test results
           id: test-result
           run: |
