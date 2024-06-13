@@ -1,12 +1,13 @@
 name: Java CI with Gradle [UBUNTU]
+
 on:
   schedule:
     - cron: '0 7 * * *'
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -42,9 +43,9 @@ jobs:
 
       - name: Get application.yml from secrets and decode it
         run: |
-          echo "${{ secrets.DB_URL }}"  >> ./src/test/resources/application.yml
-          echo "${{ secrets.DB_USER_NAME }}"  >> ./src/test/resources/application.yml
-          echo "${{ secrets.DB_PASSWORD }}"  >> ./src/test/resources/application.yml
+          echo "${{ secrets.DB_URL }}" >> ./src/test/resources/application.yml
+          echo "${{ secrets.DB_USER_NAME }}" >> ./src/test/resources/application.yml
+          echo "${{ secrets.DB_PASSWORD }}" >> ./src/test/resources/application.yml
 
       - name: Build with Gradle
         run: ./gradlew clean qa -Psuite4
@@ -62,27 +63,36 @@ jobs:
           fi
 
       - name: Extract test results
-        id: extract-results
+        id: test-result
         run: |
-          total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 1)
-          total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 2 | tail -n 1)
-          total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 3 | tail -n 1)
-          duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 4 | tail -n 1)
+          total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
+          total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
+          total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
+          duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
 
-          echo "Total Tests: ${total_tests}"
-          echo "Total Failures: ${total_failures}"
-          echo "Total Ignored: ${total_ignored}"
-          echo "Duration: ${duration}"
-          echo "Success Rate: ${success_rate}"
+          package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="success">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
+          class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="success">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
 
-          summary="<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Tests</td><td style=\"border: 1px solid black; padding: 8px;\">${total_tests}</td></tr>"
-          summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Failures</td><td style=\"border: 1px solid black; padding: 8px;\">${total_failures}</td></tr>"
-          summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Ignored</td><td style=\"border: 1px solid black; padding: 8px;\">${total_ignored}</td></tr>"
-          summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Duration</td><td style=\"border: 1px solid black; padding: 8px;\">${duration}</td></tr>"
-          summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Success Rate</td><td style=\"border: 1px solid black; padding: 8px;\">${success_rate}</td></tr>"
+          summary="<tr><td style='border: 1px solid black; padding: 8px;'>Total Tests</td><td style='border: 1px solid black; padding: 8px;'>${total_tests}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Total Failures</td><td style='border: 1px solid black; padding: 8px;'>${total_failures}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Total Ignored</td><td style='border: 1px solid black; padding: 8px;'>${total_ignored}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Duration</td><td style='border: 1px solid black; padding: 8px;'>${duration}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Success Rate</td><td style='border: 1px solid black; padding: 8px;'>${success_rate}</td></tr>"
+
+          package_summary=""
+          while IFS= read -r row; do
+            package_summary="${package_summary}<tr>${row}</tr>"
+          done <<< "$package_rows"
+
+          class_summary=""
+          while IFS= read -r row; do
+            class_summary="${class_summary}<tr>${row}</tr>"
+          done <<< "$class_rows"
 
           echo "::set-output name=summary::$summary"
+          echo "::set-output name=package_summary::$package_summary"
+          echo "::set-output name=class_summary::$class_summary"
 
       - name: Send email notification
         if: always()
@@ -97,19 +107,36 @@ jobs:
           from: ${{ secrets.EMAIL_USERNAME }}
           content_type: text/html
           body: |
-            <h1 style="color: #2e6c80;">Test Results</h1>
-            <p style="font-size: 14px;">Here are the test results:</p>
-            <p style="font-size: 14px;"><strong>Status: ${{ job.status }}</strong></p>
-            <h2 style="color: #2e6c80;">Test Summary:</h2>
+            <h1 style="color: #2e6c80;">Результаты тестирования</h1>
+            <p style="font-size: 14px;">Вот результаты тестирования:</p>
+            <p style="font-size: 14px;"><strong>Статус: ${{ job.status }}</strong></p>
+            <h2 style="color: #2e6c80;">Сводка тестов:</h2>
             <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
               <tr>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Test</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Result</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Тест</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Результат</th>
               </tr>
-              ${{ steps.extract-results.outputs.summary }}
+              ${{ steps.test-result.outputs.summary }}
             </table>
-            <p style="font-size: 14px;">Check the attached test reports for more details.</p>
-          attachments: build/reports/tests/qa/index.html
+            <h2 style="color: #2e6c80;">Сводка по пакетам:</h2>
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
+              <tr>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Пакет</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Тесты</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Неудачи</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Пропущенные</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Продолжительность</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Успешность</th>
+              </tr>
+              ${{ steps.test-result.outputs.package_summary }}
+            </table>
+            <h2 style="color: #2e6c80;">Сводка по классам:</h2>
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
+              <tr>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Класс</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Тесты</th>
+                <th style="border: 1px solid black; padding
+
 
       - name: Deploy
         run: echo 'Deploying...'
