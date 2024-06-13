@@ -70,11 +70,11 @@ jobs:
       - name: Extract test results
         id: test-result
         run: |
-          total_tests=$(grep -oP '(?<=<span class="tests">)[0-9]+' build/reports/tests/qa/index.html)
-          total_failures=$(grep -oP '(?<=<span class="failures">)[0-9]+' build/reports/tests/qa/index.html)
-          total_ignored=$(grep -oP '(?<=<span class="ignored">)[0-9]+' build/reports/tests/qa/index.html)
-          duration=$(grep -oP '(?<=<span class="duration">)[0-9.]+s' build/reports/tests/qa/index.html)
-          success_rate=$(grep -oP '(?<=<span class="success-rate">)[0-9]+%' build/reports/tests/qa/index.html)
+          total_tests=$(sed -n 's/.*<span class="tests">\([0-9]\+\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
+          total_failures=$(sed -n 's/.*<span class="failures">\([0-9]\+\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
+          total_ignored=$(sed -n 's/.*<span class="ignored">\([0-9]\+\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
+          duration=$(sed -n 's/.*<span class="duration">\([0-9.]\+s\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
+          success_rate=$(sed -n 's/.*<span class="success-rate">\([0-9]\+%\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
           
           summary="<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Tests</td><td style=\"border: 1px solid black; padding: 8px;\">${total_tests}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Failures</td><td style=\"border: 1px solid black; padding: 8px;\">${total_failures}</td></tr>"
@@ -109,7 +109,6 @@ jobs:
               ${{ steps.test-result.outputs.summary }}
             </table>
             <p>Check the attached test reports for more details.</p>
-
 
       - name: Deploy
         run: echo 'Deploying...'
