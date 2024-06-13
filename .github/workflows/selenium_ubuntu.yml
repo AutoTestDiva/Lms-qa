@@ -64,11 +64,11 @@ jobs:
       - name: Extract test results
         id: test-result
         run: |
-          total_tests=$(grep -oP '(?<=<td style="border: 1px solid black; padding: 8px;">Total Tests<\/td><td style="border: 1px solid black; padding: 8px;">)[^<]+' index.html)
-          total_failures=$(grep -oP '(?<=<td style="border: 1px solid black; padding: 8px;">Total Failures<\/td><td style="border: 1px solid black; padding: 8px;">)[^<]+' index.html)
-          total_ignored=$(grep -oP '(?<=<td style="border: 1px solid black; padding: 8px;">Total Ignored<\/td><td style="border: 1px solid black; padding: 8px;">)[^<]+' index.html)
-          duration=$(grep -oP '(?<=<td style="border: 1px solid black; padding: 8px;">Duration<\/td><td style="border: 1px solid black; padding: 8px;">)[^<]+' index.html)
-          success_rate=$(grep -oP '(?<=<td style="border: 1px solid black; padding: 8px;">Success Rate<\/td><td style="border: 1px solid black; padding: 8px;">)[^<]+' index.html)
+          total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 1)
+          total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 2 | tail -n 1)
+          total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 3 | tail -n 1)
+          duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 4 | tail -n 1)
+          success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
 
           summary="<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Tests</td><td style=\"border: 1px solid black; padding: 8px;\">${total_tests}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Failures</td><td style=\"border: 1px solid black; padding: 8px;\">${total_failures}</td></tr>"
