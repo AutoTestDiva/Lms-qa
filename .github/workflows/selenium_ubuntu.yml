@@ -2,7 +2,7 @@ name: Java CI with Gradle [UBUNTU]
 
 on:
   schedule:
-    - cron: '0 7 * * *'
+    - cron: '0 5 * * *'
   workflow_dispatch:
   push:
     branches: [main]
@@ -71,8 +71,8 @@ jobs:
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
 
-          package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="success">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
-          class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="success">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
+          package_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
+          class_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
 
           summary="<tr><td style='border: 1px solid black; padding: 8px;'>Total Tests</td><td style='border: 1px solid black; padding: 8px;'>${total_tests}</td></tr>"
           summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Total Failures</td><td style='border: 1px solid black; padding: 8px;'>${total_failures}</td></tr>"
@@ -82,12 +82,12 @@ jobs:
 
           package_summary=""
           while IFS= read -r row; do
-            package_summary="${package_summary}<tr>${row}</tr>"
+            package_summary="${package_summary}${row}"
           done <<< "$package_rows"
 
           class_summary=""
           while IFS= read -r row; do
-            class_summary="${class_summary}<tr>${row}</tr>"
+            class_summary="${class_summary}${row}"
           done <<< "$class_rows"
 
           echo "::set-output name=summary::$summary"
@@ -135,8 +135,8 @@ jobs:
               <tr>
                 <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Класс</th>
                 <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Тесты</th>
-                <th style="border: 1px solid black; padding
-
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Неудачи</th>
+                <th style="border: 1
 
       - name: Deploy
         run: echo 'Deploying...'
