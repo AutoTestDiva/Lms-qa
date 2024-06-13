@@ -53,6 +53,18 @@
           env:
               DISPLAY: :99
 
+        - name: Gather test results
+          id: test-result
+          run: |
+            # Убедитесь, что файл summary.txt существует и содержит данные в формате "TestName Result"
+            if [ -f build/reports/tests/test/summary.txt ]; then
+              summary=$(awk '{print "<tr><td style=\"border: 1px solid black; padding: 8px;\">" $1 "</td><td style=\"border: 1px solid black; padding: 8px;\">" $2 "</td></tr>"}' build/reports/tests/test/summary.txt)
+              echo "::set-output name=summary::$summary"
+            else
+              echo "::set-output name=summary::<tr><td style=\"border: 1px solid black; padding: 8px;\">No tests</td><td style=\"border: 1px solid black; padding: 8px;\">No results</td></tr>"
+            fi
+        
+
         - name: Archive test reports
           if: always()
           uses: actions/upload-artifact@v2
@@ -73,10 +85,18 @@
                 from: ${{ secrets.EMAIL_USERNAME }}
                 content_type: text/html
                 body: |
-                 <h1>Test Results</h1>
-                 <p>Here are the test results:</p>
-                 <p>Status: ${{ job.status }}</p>
-                 <p>Check the attached test reports for more details.</p>
+                  <h1>Test Results</h1>
+                  <p>Here are the test results:</p>
+                  <p>Status: ${{ job.status }}</p>
+                  <h2>Test Summary:</h2>
+                  <table style="border: 1px solid black; border-collapse: collapse;">
+                    <tr>
+                     <th style="border: 1px solid black; padding: 8px;">Test</th>
+                     <th style="border: 1px solid black; padding: 8px;">Result</th>
+                    </tr>
+                    ${{ steps.test-result.outputs.summary }}
+                  </table>
+                  <p>Check the attached test reports for more details.</p>
                 attachments: build/reports/tests/test/index.html
 
         - name: Deploy
