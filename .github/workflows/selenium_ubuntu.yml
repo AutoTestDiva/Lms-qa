@@ -54,12 +54,6 @@ jobs:
       - name: List files in test reports directory
         run: ls -la build/reports/tests/qa
 
-      - name: Upload test reports
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-reports
-          path: build/reports/tests/qa
-
       - name: Check if log file exists and has content
         run: |
           if [ ! -s build/reports/tests/qa/index.html ]; then
@@ -70,11 +64,17 @@ jobs:
       - name: Extract test results
         id: test-result
         run: |
-          total_tests=$(sed -n 's/.*<span class="tests">\([0-9]\+\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
-          total_failures=$(sed -n 's/.*<span class="failures">\([0-9]\+\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
-          total_ignored=$(sed -n 's/.*<span class="ignored">\([0-9]\+\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
-          duration=$(sed -n 's/.*<span class="duration">\([0-9.]\+s\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
-          success_rate=$(sed -n 's/.*<span class="success-rate">\([0-9]\+%\)<\/span>.*/\1/p' build/reports/tests/qa/index.html)
+          total_tests=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Total Tests<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          total_failures=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Total Failures<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          total_ignored=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Total Ignored<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          duration=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Duration<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9.]\+s\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          success_rate=$(sed -n 's/.*<tr><td style="border: 1px solid black; padding: 8px;">Success Rate<\/td><td style="border: 1px solid black; padding: 8px;">\([0-9]\+%\)<\/td><\/tr>.*/\1/p' build/reports/tests/qa/index.html)
+          
+          echo "Total Tests: ${total_tests}"
+          echo "Total Failures: ${total_failures}"
+          echo "Total Ignored: ${total_ignored}"
+          echo "Duration: ${duration}"
+          echo "Success Rate: ${success_rate}"
           
           summary="<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Tests</td><td style=\"border: 1px solid black; padding: 8px;\">${total_tests}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Failures</td><td style=\"border: 1px solid black; padding: 8px;\">${total_failures}</td></tr>"
