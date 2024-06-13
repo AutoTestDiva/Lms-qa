@@ -62,6 +62,7 @@ jobs:
           fi
 
       - name: Extract test results
+        id: extract-results
         run: |
           total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 1)
           total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 2 | tail -n 1)
@@ -69,30 +70,18 @@ jobs:
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | head -n 4 | tail -n 1)
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
 
+          echo "Total Tests: ${total_tests}"
+          echo "Total Failures: ${total_failures}"
+          echo "Total Ignored: ${total_ignored}"
+          echo "Duration: ${duration}"
+          echo "Success Rate: ${success_rate}"
+
           summary="<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Tests</td><td style=\"border: 1px solid black; padding: 8px;\">${total_tests}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Failures</td><td style=\"border: 1px solid black; padding: 8px;\">${total_failures}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Total Ignored</td><td style=\"border: 1px solid black; padding: 8px;\">${total_ignored}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Duration</td><td style=\"border: 1px solid black; padding: 8px;\">${duration}</td></tr>"
           summary="${summary}<tr><td style=\"border: 1px solid black; padding: 8px;\">Success Rate</td><td style=\"border: 1px solid black; padding: 8px;\">${success_rate}</td></tr>"
 
-          echo "$summary" > test-summary.html
-
-      - name: Upload test summary artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-summary
-          path: test-summary.html
-
-      - name: Download test summary artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: test-summary
-          path: .
-
-      - name: Read test summary
-        id: read-summary
-        run: |
-          summary=$(cat test-summary.html)
           echo "::set-output name=summary::$summary"
 
       - name: Send email notification
@@ -108,18 +97,19 @@ jobs:
           from: ${{ secrets.EMAIL_USERNAME }}
           content_type: text/html
           body: |
-            <h1>Test Results</h1>
-            <p>Here are the test results:</p>
-            <p>Status: ${{ job.status }}</p>
-            <h2>Test Summary:</h2>
-            <table style="border: 1px solid black; border-collapse: collapse;">
+            <h1 style="color: #2e6c80;">Test Results</h1>
+            <p style="font-size: 14px;">Here are the test results:</p>
+            <p style="font-size: 14px;"><strong>Status: ${{ job.status }}</strong></p>
+            <h2 style="color: #2e6c80;">Test Summary:</h2>
+            <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
               <tr>
-                <th style="border: 1px solid black; padding: 8px;">Test</th>
-                <th style="border: 1px solid black; padding: 8px;">Result</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Test</th>
+                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Result</th>
               </tr>
-              ${{ steps.read-summary.outputs.summary }}
+              ${{ steps.extract-results.outputs.summary }}
             </table>
-            <p>Check the attached test reports for more details.</p>
+            <p style="font-size: 14px;">Check the attached test reports for more details.</p>
+          attachments: build/reports/tests/qa/index.html
 
       - name: Deploy
         run: echo 'Deploying...'
