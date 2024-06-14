@@ -69,29 +69,35 @@ jobs:
           # Extracting values from the HTML report
           total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
           echo "Total tests: ${total_tests}"
-
+          
           total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
           echo "Total failures: ${total_failures}"
-
+          
           total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
           echo "Total ignored: ${total_ignored}"
-
+          
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
           echo "Duration: ${duration}"
-
+          
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
           echo "Success rate: ${success_rate}"
-
+          
           # Check if extracted values are empty
+          echo "Total tests: $total_tests"
+          echo "Total failures: $total_failures"
+          echo "Total ignored: $total_ignored"
+          echo "Duration: $duration"
+          echo "Success rate: $success_rate"
+
           if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
             echo "Error: One or more values could not be extracted."
             exit 1
           fi
-
+          
           # Extracting package and class rows
           package_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
           echo "Package rows extracted."
-
+          
           class_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
           echo "Class rows extracted."
 
@@ -108,18 +114,19 @@ jobs:
             package_summary="${package_summary}${row}"
           done <<< "$package_rows"
           echo "Package summary created."
-
+          
           # Forming the class summary
           class_summary=""
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
           echo "Class summary created."
-
+          
           # Setting outputs
           echo "summary=$summary" >> $GITHUB_ENV
           echo "package_summary=$package_summary" >> $GITHUB_ENV
           echo "class_summary=$class_summary" >> $GITHUB_ENV
+          
 
       - name: Send email notification
         if: always()
