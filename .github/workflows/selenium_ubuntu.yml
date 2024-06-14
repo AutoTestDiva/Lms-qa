@@ -70,7 +70,7 @@ jobs:
           total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
-
+  
           package_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
           class_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
 
