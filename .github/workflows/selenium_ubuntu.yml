@@ -89,9 +89,9 @@ jobs:
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
-      echo "::set-output name=summary::$summary"
-      echo "::set-output name=package_summary::$package_summary"
-      echo "::set-output name=class_summary::$class_summary"
+          echo "::set-output name=summary::$summary"
+          echo "::set-output name=package_summary::$package_summary"
+          echo "::set-output name=class_summary::$class_summary"
 
       - name: Send email notification
         if: always()
