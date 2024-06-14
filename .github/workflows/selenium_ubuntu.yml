@@ -67,20 +67,20 @@ jobs:
         id: test-result
         run: |
           #!/bin/bash
-
+          
           # Extracting values from the HTML report
           total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
           echo "Total tests: ${total_tests}"
-
+          
           total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
           echo "Total failures: ${total_failures}"
-
+          
           total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
           echo "Total ignored: ${total_ignored}"
-
+          
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
           echo "Duration: ${duration}"
-
+          
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
           echo "Success rate: ${success_rate}"
 
@@ -89,36 +89,53 @@ jobs:
             echo "Error: One or more values could not be extracted."
             exit 1
           fi
-
+          
           # Extracting package and class rows
           package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
           echo "Package rows extracted."
-
+          
           class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
           echo "Class rows extracted."
 
           # Forming the summary
           summary="<tr><td>${total_tests}</td><td class='success'>${total_failures}</td><td class='success'>${total_ignored}</td><td>${duration}</td><td class='success'>${success_rate}</td></tr>"
-
+          
           # Forming the package summary
           package_summary=""
           while IFS= read -r row; do
             package_summary="${package_summary}${row}"
           done <<< "$package_rows"
           echo "Package summary created."
-
+          
           # Forming the class summary
           class_summary=""
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
           echo "Class summary created."
-
+          
           # Setting outputs
-          echo "summary=$summary" >> $GITHUB_ENV
-          echo "package_summary=$package_summary" >> $GITHUB_ENV
-          echo "class_summary=$class_summary" >> $GITHUB_ENV
+          if echo "summary=$summary" >> $GITHUB_ENV; then
+            echo "Summary written to environment"
+          else
+            echo "Failed to write summary to environment" >&2
+            exit 1
+          fi
 
+          if echo "package_summary=$package_summary" >> $GITHUB_ENV; then
+            echo "Package summary written to environment"
+          else
+            echo "Failed to write package summary to environment" >&2
+            exit 1
+          fi
+
+          if echo "class_summary=$class_summary" >> $GITHUB_ENV; then
+            echo "Class summary written to environment"
+          else
+            echo "Failed to write class summary to environment" >&2
+            exit 1
+          fi
+          
           echo "Script completed successfully."
 
       - name: Send email notification
