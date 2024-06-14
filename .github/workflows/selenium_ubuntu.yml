@@ -68,59 +68,39 @@ jobs:
         run: |
           #!/bin/bash
 
-          # Extracting values from the HTML report
-          total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
-          echo "Total tests: ${total_tests}"
+          # Function to extract data using grep and awk
+          extract_value() {
+            echo "$1" | grep -oP "$2" | head -1
+          }
 
-          total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
-          echo "Total failures: ${total_failures}"
+          # Read the HTML content into a variable
+          html_content=$(cat build/reports/tests/qa/index.html)
 
-          total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
-          echo "Total ignored: ${total_ignored}"
-
-          duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
-          echo "Duration: ${duration}"
-
-          success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
-          echo "Success rate: ${success_rate}"
+          # Extracting values from the HTML content
+          total_tests=$(extract_value "$html_content" '(?<=<div class="counter">)\d+')
+          total_failures=$(extract_value "$html_content" '(?<=<div class="counter">)\d+(?=</div><p>failures</p>)')
+          total_ignored=$(extract_value "$html_content" '(?<=<div class="counter">)\d+(?=</div><p>ignored</p>)')
+          duration=$(extract_value "$html_content" '(?<=<div class="counter">)[\d.]+(?=s</div><p>duration</p>)')
+          success_rate=$(extract_value "$html_content" '(?<=<div class="percent">)\d+%')
 
           # Check if extracted values are empty
-              if [ -z "$total_tests" ] || [ -z "$total_failures" ] ||  [ -z "$total_ignored" ] || [ -z "$duration" ] ||  [ -z "$success_rate" ]; then
-              echo "Error: One or more values could not be extracted."
-              exit 1
-              fi
+          if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
+            echo "Error: One or more values could not be extracted."
+            exit 1
+          fi
 
-          # Extracting package and class rows
-          package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
-          echo "Package rows extracted."
-
-          class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
-          echo "Class rows extracted."
-
-          # Forming the summary
-          summary="<tr><td>${total_tests}</td><td class='success'>${total_failures}</td><td class='success'>${total_ignored}</td><td>${duration}</td><td class='success'>${success_rate}</td></tr>"
-          echo "Summary: $summary"
-
-          # Forming the package summary
-          package_summary=""
-          while IFS= read -r row; do
-            package_summary="${package_summary}${row}"
-          done <<< "$package_rows"
-          echo "Package summary: $package_summary"
-
-          # Forming the class summary
-          class_summary=""
-          while IFS= read -r row; do
-            class_summary="${class_summary}${row}"
-          done <<< "$class_rows"
-          echo "Class summary: $class_summary"
+          # Output the extracted data
+          echo "Total tests: $total_tests"
+          echo "Total failures: $total_failures"
+          echo "Total ignored: $total_ignored"
+          echo "Duration: $duration"
+          echo "Success rate: $success_rate"
 
           # Setting outputs
-          echo "summary=$summary" >> $GITHUB_ENV
-          echo "package_summary=$package_summary" >> $GITHUB_ENV
-          echo "class_summary=$class_summary" >> $GITHUB_ENV
+          echo "summary=Total Tests: $total_tests, Failures: $total_failures, Ignored: $total_ignored, Duration: $duration, Success Rate: $success_rate" >> $GITHUB_ENV
 
           echo "Script completed successfully."
+      
 
       - name: Send email notification
         if: always()
