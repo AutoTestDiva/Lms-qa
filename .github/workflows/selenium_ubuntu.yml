@@ -72,12 +72,12 @@ jobs:
           # Read the HTML content into a variable
           html_content=$(cat build/reports/tests/qa/index.html)
 
-          # Use grep and awk to parse the HTML content
-          total_tests=$(echo "$html_content" | grep -oP 'Tests</th>\\s*<td>\\K\\d+')
-          total_failures=$(echo "$html_content" | grep -oP 'Failures</th>\\s*<td>\\K\\d+')
-          total_ignored=$(echo "$html_content" | grep -oP 'Ignored</th>\\s*<td>\\K\\d+')
-          duration=$(echo "$html_content" | grep -oP 'Duration</th>\\s*<td>\\K[\\d.]+s')
-          success_rate=$(echo "$html_content" | grep -oP 'Success rate</th>\\s*<td class="success">\\K\\d+%')
+          # Use grep to parse the HTML content
+          total_tests=$(echo "$html_content" | grep -oP 'Total tests</div>\\s*<div class="counter">\\K\\d+')
+          total_failures=$(echo "$html_content" | grep -oP 'Failures</div>\\s*<div class="counter">\\K\\d+')
+          total_ignored=$(echo "$html_content" | grep -oP 'Ignored</div>\\s*<div class="counter">\\K\\d+')
+          duration=$(echo "$html_content" | grep -oP 'Duration</div>\\s*<div class="counter">\\K[\\d.]+s')
+          success_rate=$(echo "$html_content" | grep -oP 'Successful</div>\\s*<div class="percent">\\K\\d+%')
 
           # Check if extracted values are empty
           if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
@@ -93,11 +93,7 @@ jobs:
           echo "Success rate: $success_rate"
 
           # Setting outputs
-          echo "summary=Total Tests: $total_tests, Failures: $total_failures, Ignored: $total_ignored, Duration: $duration, Success Rate: $success_rate" >> $GITHUB_ENV
-
-          echo "Script completed successfully."
-      
-      
+          echo "::set-output name=summary::Total Tests: $total_tests, Failures: $total_failures, Ignored: $total_ignored, Duration: $duration, Success Rate: $success_rate"
 
       - name: Send email notification
         if: always()
@@ -110,88 +106,14 @@ jobs:
           subject: GitHub Actions - Test Report
           to: pnata1978@gmail.com
           from: ${{ secrets.EMAIL_USERNAME }}
-          content_type: text/html
+          content_type: text/plain
           body: |
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Test Results</title>
-              <style>
-                body {
-                  font-family: Arial, sans-serif;
-                  background-color: #f4f4f4;
-                  color: #333;
-                  margin: 0;
-                  padding: 20px;
-                }
-                .container {
-                  background-color: #fff;
-                  border-radius: 5px;
-                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                  padding: 20px;
-                  margin: 20px auto;
-                  max-width: 90%;
-                  box-sizing: border-box;
-                }
-                h1 {
-                  color: #0073e6;
-                }
-                table {
-                  width: 100%;
-                  border-collapse: collapse;
-                  margin-top: 20px;
-                }
-                th, td {
-                  padding: 10px;
-                  border: 1px solid #ddd;
-                  text-align: left;
-                  word-wrap: break-word;
-                }
-                th {
-                  background-color: #f4f4f4;
-                }
-                .success {
-                  color: green;
-                }
-                .failure {
-                  color: red;
-                }
-              </style>
-            </head>
-            <body>
-            <div class="container">
-              <h1>Test Summary</h1>
-              <table>
-                ${{ steps.test-result.outputs.summary }}
-              </table>
-              <h2>Package Results</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Package</th>
-                    <th>Tests</th>
-                    <th>Failures</th>
-                    <th>Ignored</th>
-                    <th>Duration</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${{ steps.test-result.outputs.package_summary }}
-                </tbody>
-              </table>
-              <h2>Class Results</h2>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Class</th>
-                    <th>Tests</th>
-                    <th>Failures</th>
-                    <th>Ignored</th>
-                    <th>Duration
-
-
+            Test Summary:
+            Total Tests: ${{ steps.test-result.outputs.total_tests }}
+            Total Failures: ${{ steps.test-result.outputs.total_failures }}
+            Total Ignored: ${{ steps.test-result.outputs.total_ignored }}
+            Duration: ${{ steps.test-result.outputs.duration }}
+            Success Rate: ${{ steps.test-result.outputs.success_rate }}
 #
 #    - name: Deploy
 #      run: echo 'Deploying...'
