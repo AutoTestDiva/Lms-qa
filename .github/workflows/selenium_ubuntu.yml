@@ -81,7 +81,7 @@ jobs:
             echo "--BOUNDARY"
             echo "Content-Type: text/plain; charset=UTF-8"
             echo ""
-            echo "Attached are the test results."
+            echo "В файле ниже весь отчёт о моей работе, наслаждайся)."
             echo ""
             echo "--BOUNDARY"
             echo "Content-Type: text/html; charset=UTF-8"
