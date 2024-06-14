@@ -67,49 +67,60 @@ jobs:
         id: test-result
         run: |
           #!/bin/bash
-          
-          # Извлечение значений из HTML отчета
-          total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
-          total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
-          total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
-          duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
-          success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
 
-          # Проверка, что извлеченные значения не пустые
-          if [ -z "$total_tests" ] || [ -з "$total_failures" ] || [ -з "$total_ignored" ] || [ -з "$duration" ] || [ -з "$success_rate" ]; then
-            echo "Ошибка: одно или несколько значений не удалось извлечь."
+          # Extracting values from the HTML report
+          total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
+          echo "Total tests: ${total_tests}"
+
+          total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
+          echo "Total failures: ${total_failures}"
+
+          total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
+          echo "Total ignored: ${total_ignored}"
+
+          duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
+          echo "Duration: ${duration}"
+
+          success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
+          echo "Success rate: ${success_rate}"
+
+          # Check if extracted values are empty
+          if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
+            echo "Error: One or more values could not be extracted."
             exit 1
           fi
 
-          # Формирование итогового отчета
-          summary="<tr><td style='border: 1px solid black; padding: 8px;'>Всего тестов</td><td style='border: 1px solid black; padding: 8px;'>${total_tests}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Всего неудач</td><td style='border: 1px solid black; padding: 8px;'>${total_failures}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Пропущенные тесты</td><td style='border: 1px solid black; padding: 8px;'>${total_ignored}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Длительность</td><td style='border: 1px solid black; padding: 8px;'>${duration}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Процент успешности</td><td style='border: 1px solid black; padding: 8px;'>${success_rate}</td></tr>"
-
-          # Извлечение строк пакетов и классов
+          # Extracting package and class rows
           package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
-          class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
+          echo "Package rows extracted."
 
-          # Формирование итогового отчета по пакетам
+          class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
+          echo "Class rows extracted."
+
+          # Forming the summary
+          summary="<tr><td>${total_tests}</td><td class='success'>${total_failures}</td><td class='success'>${total_ignored}</td><td>${duration}</td><td class='success'>${success_rate}</td></tr>"
+
+          # Forming the package summary
           package_summary=""
           while IFS= read -r row; do
             package_summary="${package_summary}${row}"
           done <<< "$package_rows"
+          echo "Package summary created."
 
-          # Формирование итогового отчета по классам
+          # Forming the class summary
           class_summary=""
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
+          echo "Class summary created."
 
-          # Установка выходных данных
+          # Setting outputs
           echo "summary=$summary" >> $GITHUB_ENV
           echo "package_summary=$package_summary" >> $GITHUB_ENV
           echo "class_summary=$class_summary" >> $GITHUB_ENV
-          
-          echo "Скрипт успешно завершен."
+
+          echo "Script completed successfully."
+      
 
       - name: Send email notification
         if: always()
