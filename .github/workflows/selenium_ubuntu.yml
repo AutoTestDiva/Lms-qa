@@ -137,18 +137,18 @@ jobs:
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: GitHub Actions - Test Report
-          to: pnata1978@gmail.com
-          from: ${{ secrets.EMAIL_USERNAME }}
-          content_type: text/html
-          body: |
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
+            server_address: smtp.gmail.com
+            server_port: 587
+            username: ${{ secrets.EMAIL_USERNAME }}
+            password: ${{ secrets.EMAIL_PASSWORD }}
+            subject: GitHub Actions - Test Report
+            to: pnata1978@gmail.com
+            from: ${{ secrets.EMAIL_USERNAME }}
+            content_type: text/html
+            body: |
+             <!DOCTYPE html>
+             <html lang="en">
+             <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <title>Test Results</title>
@@ -192,10 +192,10 @@ jobs:
                .failure {
                  color: red;
                }
-             </style>
-           </head>
-           <body>
-            <div class="container">
+              </style>
+             </head>
+             <body>
+             <div class="container">
               <h1>Test Summary</h1>
               <table>
                 <tr>
