@@ -65,23 +65,42 @@ jobs:
           fi
 
 
-      - name: Send email with HTML file content
-        if: always()
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: GitHub Actions - Test Report Content
-          to: pnata1978@gmail.com
-          from: ${{ secrets.EMAIL_USERNAME }}
-          content_type: text/plain
-          body: |
-            echo "Sending test report via email"
-            echo -e "Subject: Test Report\r\n\r\nAttached are the test results." > message.txt
-            echo -e "--BOUNDARY\r\nContent-Type: text/html\r\nContent-Disposition: attachment; filename=test_report.html\r\n\r\n$(cat build/reports/tests/index.html)\r\n\r\n--BOUNDARY--" > attachment.txt
-            cat message.txt attachment.txt | curl --url "smtps://$SMTP_SERVER:$SMTP_PORT" --ssl-reqd --mail-from "$FROM_EMAIL" --mail-rcpt "$TO_EMAIL" --user "$SMTP_USERNAME:$SMTP_PASSWORD" --insecure --upload-file -
-#
+      - name: Send test report via email
+        env:
+          SMTP_SERVER: smtp.gmail.com
+          SMTP_PORT: 587
+          SMTP_USERNAME: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail
+          SMTP_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Пароль от вашего Gmail аккаунта
+          TO_EMAIL: recipient@example.com  # Адрес получателя
+          FROM_EMAIL: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail, от имени которого будет отправлено письмо
+        run: |
+          echo "Sending test report via email"
+          (
+            echo "From: $FROM_EMAIL"
+            echo "To: $TO_EMAIL"
+            echo "Subject: Test Report"
+            echo "MIME-Version: 1.0"
+            echo 'Content-Type: multipart/mixed; boundary="BOUNDARY"'
+            echo ""
+            echo "--BOUNDARY"
+            echo "Content-Type: text/plain; charset=UTF-8"
+            echo ""
+            echo "Attached are the test results."
+            echo ""
+            echo "--BOUNDARY"
+            echo "Content-Type: text/html; charset=UTF-8"
+            echo "Content-Disposition: attachment; filename=test_report.html"
+            echo ""
+            cat build/reports/tests/index.html
+            echo ""
+            echo "--BOUNDARY--"
+          ) | curl -sS --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
+                     --ssl-reqd \
+                     --mail-from "$FROM_EMAIL" \
+                     --mail-rcpt "$TO_EMAIL" \
+                     --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
+                     --upload-file -
+          
+
 #    - name: Deploy
 #      run: echo 'Deploying...'
