@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -68,16 +69,16 @@ jobs:
           # Extracting values from the HTML report
           total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
           echo "Total tests: ${total_tests}"
-          
+
           total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
           echo "Total failures: ${total_failures}"
-          
+
           total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
           echo "Total ignored: ${total_ignored}"
-          
+
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
           echo "Duration: ${duration}"
-          
+
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
           echo "Success rate: ${success_rate}"
 
@@ -115,7 +116,7 @@ jobs:
           done <<< "$class_rows"
           echo "Class summary created."
 
-           # Setting outputs
+          # Setting outputs
           echo "summary=$summary" >> $GITHUB_ENV
           echo "package_summary=$package_summary" >> $GITHUB_ENV
           echo "class_summary=$class_summary" >> $GITHUB_ENV
@@ -136,74 +137,82 @@ jobs:
             <!DOCTYPE html>
             <html lang="en">
             <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Test Results</title>
-            <style>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Test Results</title>
+              <style>
                 body {
-                    font-family: Arial, sans-serif;
-                    background-color: #f4f4f4;
-                    color: #333;
-                    margin: 0;
-                    padding: 20px;
+                  font-family: Arial, sans-serif;
+                  background-color: #f4f4f4;
+                  color: #333;
+                  margin: 0;
+                  padding: 20px;
                 }
                 .container {
-                    background-color: #fff;
-                    border-radius: 5px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    padding: 20px;
-                    margin: 20px auto;
-                    max-width: 90%;
-                    box-sizing: border-box;
+                  background-color: #fff;
+                  border-radius: 5px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                  padding: 20px;
+                  margin: 20px auto;
+                  max-width: 90%;
+                  box-sizing: border-box;
                 }
                 h1 {
-                    color: #0073e6;
+                  color: #0073e6;
                 }
                 table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 20px;
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin-top: 20px;
                 }
                 th, td {
-                    padding: 10px;
-                    border: 1px solid #ddd;
-                    text-align: left;
-                    word-wrap: break-word;
+                  padding: 10px;
+                  border: 1px solid #ddd;
+                  text-align: left;
+                  word-wrap: break-word;
                 }
                 th {
-                    background-color: #f4f4f4;
+                  background-color: #f4f4f4;
                 }
                 .success {
-                    color: green;
+                  color: green;
                 }
                 .failure {
-                    color: red;
+                  color: red;
                 }
-            </style>
+              </style>
             </head>
             <body>
-            <div class="container">
+              <div class="container">
                 <h1>Test Summary</h1>
                 <table>
-                    <tr>
-                        <th>Total Tests</th>
-                        <th>Failures</th>
-                        <th>Ignored</th>
-                        <th>Duration</th>
-                        <th>Success Rate</th>
-                    </tr>
-                    ${{ steps.test-result.outputs.summary }}
+                  <tr>
+                    <th>Total Tests</th>
+                    <th>Failures</th>
+                    <th>Ignored</th>
+                    <th>Duration</th>
+                    <th>Success Rate</th>
+                  </tr>
+                  ${{ steps.test-result.outputs.summary }}
                 </table>
                 <h2>Package Results</h2>
                 <table>
-                    <thead>
-                        <tr>
-                            <th>Package</th>
-                            <th>Tests</th>
-                            <th>Failures</th>
-                            <th>Ignored</th>
-                            <th>Duration</th>
-                            <th>Success
+                  <thead>
+                    <tr>
+                      <th>Package</th>
+                      <th>Tests</th>
+                      <th>Failures</th>
+                      <th>Ignored</th>
+                      <th>Duration</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${{ steps.test-result.outputs.package_summary }}
+                  </tbody>
+                </table>
+                <h2>Class Results</h2>
+                <table>
+
 
 
       - name: Deploy
