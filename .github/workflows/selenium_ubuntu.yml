@@ -89,10 +89,9 @@ jobs:
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
-
-          echo "::set-output name=summary::$summary"
-          echo "::set-output name=package_summary::$package_summary"
-          echo "::set-output name=class_summary::$class_summary"
+      echo "::set-output name=summary::$summary"
+      echo "::set-output name=package_summary::$package_summary"
+      echo "::set-output name=class_summary::$class_summary"
 
       - name: Send email notification
         if: always()
@@ -107,36 +106,103 @@ jobs:
           from: ${{ secrets.EMAIL_USERNAME }}
           content_type: text/html
           body: |
-            <h1 style="color: #2e6c80;">Результаты тестирования</h1>
-            <p style="font-size: 14px;">Вот результаты тестирования:</p>
-            <p style="font-size: 14px;"><strong>Статус: ${{ job.status }}</strong></p>
-            <h2 style="color: #2e6c80;">Сводка тестов:</h2>
-            <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
-              <tr>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Тест</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Результат</th>
-              </tr>
-              ${{ steps.test-result.outputs.summary }}
-            </table>
-            <h2 style="color: #2e6c80;">Сводка по пакетам:</h2>
-            <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
-              <tr>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Пакет</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Тесты</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Неудачи</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Пропущенные</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Продолжительность</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Успешность</th>
-              </tr>
-              ${{ steps.test-result.outputs.package_summary }}
-            </table>
-            <h2 style="color: #2e6c80;">Сводка по классам:</h2>
-            <table style="border: 1px solid black; border-collapse: collapse; width: 100%;">
-              <tr>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Класс</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Тесты</th>
-                <th style="border: 1px solid black; padding: 8px; background-color: #f2f2f2;">Неудачи</th>
-                <th style="border: 1
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Test Results</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    color: #333;
+                    margin: 0;
+                    padding: 20px;
+                }
+                .container {
+                    background-color: #fff;
+                    border-radius: 5px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    padding: 20px;
+                    margin: 20px auto;
+                    max-width: 90%;
+                    box-sizing: border-box;
+                }
+                h1 {
+                    color: #0073e6;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+                th, td {
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    text-align: left;
+                    word-wrap: break-word;
+                }
+                th {
+                    background-color: #f4f4f4;
+                }
+                .success {
+                    color: green;
+                }
+                .failure {
+                    color: red;
+                }
+            </style>
+            </head>
+            <body>
+            <div class="container">
+                <h1>Test Summary</h1>
+                <table>
+                    <tr>
+                        <th>Total Tests</th>
+                        <th>Failures</th>
+                        <th>Ignored</th>
+                        <th>Duration</th>
+                        <th>Success Rate</th>
+                    </tr>
+                    ${{ steps.test-result.outputs.summary }}
+                </table>
+                <h2>Package Results</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Package</th>
+                            <th>Tests</th>
+                            <th>Failures</th>
+                            <th>Ignored</th>
+                            <th>Duration</th>
+                            <th>Success Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${{ steps.test-result.outputs.package_summary }}
+                    </tbody>
+                </table>
+                <h2>Class Results</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Tests</th>
+                            <th>Failures</th>
+                            <th>Ignored</th>
+                            <th>Duration</th>
+                            <th>Success Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${{ steps.test-result.outputs.class_summary }}
+                    </tbody>
+                </table>
+                <p>Generated by <a href="http://www.gradle.org">Gradle 8.3</a> at Jun 13, 2024, 9:39:51 PM</p>
+            </div>
+            </body>
+            </html>
 
       - name: Deploy
         run: echo 'Deploying...'
