@@ -31,6 +31,8 @@ jobs:
 
       - name: Install dependencies
         run: sudo apt-get install -y xvfb x11-utils
+             sudo apt-get install -y tidy libxml2-utils
+             sudo apt-get update
 
       - name: Start Xvfb
         run: Xvfb :99 -screen 0 1920x1080x24 &
