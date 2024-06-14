@@ -78,9 +78,10 @@ jobs:
           from: ${{ secrets.EMAIL_USERNAME }}
           content_type: text/plain
           body: |
-            В файле ниже есть отчёт о прохождении тестов:
-            
-            $(cat build/reports/tests/qa/index.html)
+            echo "Sending test report via email"
+            echo -e "Subject: Test Report\r\n\r\nAttached are the test results." > message.txt
+            echo -e "--BOUNDARY\r\nContent-Type: text/html\r\nContent-Disposition: attachment; filename=test_report.html\r\n\r\n$(cat build/reports/tests/index.html)\r\n\r\n--BOUNDARY--" > attachment.txt
+            cat message.txt attachment.txt | curl --url "smtps://$SMTP_SERVER:$SMTP_PORT" --ssl-reqd --mail-from "$FROM_EMAIL" --mail-rcpt "$TO_EMAIL" --user "$SMTP_USERNAME:$SMTP_PASSWORD" --insecure --upload-file -
 #
 #    - name: Deploy
 #      run: echo 'Deploying...'
