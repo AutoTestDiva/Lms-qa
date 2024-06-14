@@ -68,143 +68,114 @@ jobs:
         run: |
           #!/bin/bash
           
-          # Extracting values from the HTML report
+          # Извлечение значений из HTML отчета
           total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
-          echo "Total tests: ${total_tests}"
-          
           total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
-          
           total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
-          echo "Total ignored: ${total_ignored}"
-          
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
-          echo "Duration: ${duration}"
-          
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
-          echo "Success rate: ${success_rate}"
 
-          # Check if extracted values are empty
-          echo "Total tests: $total_tests"
-          echo "Total failures: $total_failures"
-          echo "Total ignored: $total_ignored"
-          echo "Duration: $duration"
-          echo "Success rate: $success_rate"
-          
-          if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
-            echo "Error: One or more values could not be extracted."
+          # Проверка, что извлеченные значения не пустые
+          if [ -z "$total_tests" ] || [ -з "$total_failures" ] || [ -з "$total_ignored" ] || [ -з "$duration" ] || [ -з "$success_rate" ]; then
+            echo "Ошибка: одно или несколько значений не удалось извлечь."
             exit 1
           fi
-          
-          # Extracting package and class rows
-          package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
-          echo "Package rows extracted."
-          
-          class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
-          echo "Class rows extracted."
 
-          # Forming the summary
-          summary="<tr><td style='border: 1px solid black; padding: 8px;'>Total Tests</td><td style='border: 1px solid black; padding: 8px;'>${total_tests}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Total Failures</td><td style='border: 1px solid black; padding: 8px;'>${total_failures}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Total Ignored</td><td style='border: 1px solid black; padding: 8px;'>${total_ignored}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Duration</td><td style='border: 1px solid black; padding: 8px;'>${duration}</td></tr>"
-          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Success Rate</td><td style='border: 1px solid black; padding: 8px;'>${success_rate}</td></tr>"
-          
-          # Forming the package summary
+          # Формирование итогового отчета
+          summary="<tr><td style='border: 1px solid black; padding: 8px;'>Всего тестов</td><td style='border: 1px solid black; padding: 8px;'>${total_tests}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Всего неудач</td><td style='border: 1px solid black; padding: 8px;'>${total_failures}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Пропущенные тесты</td><td style='border: 1px solid black; padding: 8px;'>${total_ignored}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Длительность</td><td style='border: 1px solid black; padding: 8px;'>${duration}</td></tr>"
+          summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Процент успешности</td><td style='border: 1px solid black; padding: 8px;'>${success_rate}</td></tr>"
+
+          # Извлечение строк пакетов и классов
+          package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
+          class_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
+
+          # Формирование итогового отчета по пакетам
           package_summary=""
           while IFS= read -r row; do
             package_summary="${package_summary}${row}"
           done <<< "$package_rows"
-          echo "Package summary created."
-          
-          # Forming the class summary
+
+          # Формирование итогового отчета по классам
           class_summary=""
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
-          echo "Class summary created."
-          
-          # Setting outputs
+
+          # Установка выходных данных
           echo "summary=$summary" >> $GITHUB_ENV
           echo "package_summary=$package_summary" >> $GITHUB_ENV
           echo "class_summary=$class_summary" >> $GITHUB_ENV
           
-          echo "Script completed successfully."
-
-
-
+          echo "Скрипт успешно завершен."
 
       - name: Send email notification
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-            server_address: smtp.gmail.com
-            server_port: 587
-            username: ${{ secrets.EMAIL_USERNAME }}
-            password: ${{ secrets.EMAIL_PASSWORD }}
-            subject: GitHub Actions - Test Report
-            to: pnata1978@gmail.com
-            from: ${{ secrets.EMAIL_USERNAME }}
-            content_type: text/html
-            body: |
-             <!DOCTYPE html>
-             <html lang="en">
-             <head>
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: GitHub Actions - Test Report
+          to: pnata1978@gmail.com
+          from: ${{ secrets.EMAIL_USERNAME }}
+          content_type: text/html
+          body: |
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
               <title>Test Results</title>
               <style>
-               body {
-                 font-family: Arial, sans-serif;
-                 background-color: #f4f4f4;
-                 color: #333;
-                 margin: 0;
-                 padding: 20px;
-               }
-               .container {
-                 background-color: #fff;
-                 border-radius: 5px;
-                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                 padding: 20px;
-                 margin: 20px auto;
-                 max-width: 90%;
-                 box-sizing: border-box;
-               }
-               h1 {
-                 color: #0073e6;
-               }
-               table {
-                 width: 100%;
-                 border-collapse: collapse;
-                 margin-top: 20px;
-               }
-               th, td {
-                 padding: 10px;
-                 border: 1px solid #ddd;
-                 text-align: left;
-                 word-wrap: break-word;
-               }
-               th {
-                 background-color: #f4f4f4;
-               }
-               .success {
-                 color: green;
-               }
-               .failure {
-                 color: red;
-               }
+                body {
+                  font-family: Arial, sans-serif;
+                  background-color: #f4f4f4;
+                  color: #333;
+                  margin: 0;
+                  padding: 20px;
+                }
+                .container {
+                  background-color: #fff;
+                  border-radius: 5px;
+                  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                  padding: 20px;
+                  margin: 20px auto;
+                  max-width: 90%;
+                  box-sizing: border-box;
+                }
+                h1 {
+                  color: #0073e6;
+                }
+                table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  margin-top: 20px;
+                }
+                th, td {
+                  padding: 10px;
+                  border: 1px solid #ddd;
+                  text-align: left;
+                  word-wrap: break-word;
+                }
+                th {
+                  background-color: #f4f4f4;
+                }
+                .success {
+                  color: green;
+                }
+                .failure {
+                  color: red;
+                }
               </style>
-             </head>
-             <body>
-             <div class="container">
+            </head>
+            <body>
+            <div class="container">
               <h1>Test Summary</h1>
               <table>
-                <tr>
-                  <th>Total Tests</th>
-                  <th>Failures</th>
-                  <th>Ignored</th>
-                  <th>Duration</th>
-                  <th>Success Rate</th>
-                </tr>
                 ${{ steps.test-result.outputs.summary }}
               </table>
               <h2>Package Results</h2>
@@ -224,6 +195,13 @@ jobs:
               </table>
               <h2>Class Results</h2>
               <table>
+                <thead>
+                  <tr>
+                    <th>Class</th>
+                    <th>Tests</th>
+                    <th>Failures</th>
+                    <th>Ignored</th>
+                    <th>Duration
 
 
 #
