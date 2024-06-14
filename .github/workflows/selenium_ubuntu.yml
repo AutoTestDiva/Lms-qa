@@ -18,9 +18,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up JDK 15
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
-          java-version: '15'
+            distribution: 'adopt'
+            java-version: '15'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -95,3 +96,6 @@ jobs:
                      --mail-rcpt "$TO_EMAIL" \
                      --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
                      --upload-file -
+
+#    - name: Deploy
+#      run: echo 'Deploying...'
