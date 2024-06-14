@@ -59,46 +59,47 @@ jobs:
 
       - name: Check if log file exists and has content
         run: |
-          if [ ! -s build/reports/tests/qa/index.html ]; then
-            echo "Log file is empty or does not exist" >&2
-            exit 1
-          fi
+        if: success()  # Сохраняем отчёт только в случае успешной сборки
+        uses: actions/upload-artifact@v2
+        with:
+                    name: test-report
+                    path: build/reports/tests/qa/index.html  # Укажите правильный путь к вашему отчёту
 
       - name: Send test report via email
+        if: success()  # Отправляем письмо только в случае успешного сохранения артефакта
         env:
-          SMTP_SERVER: smtp.gmail.com
-          SMTP_PORT: 587
-          SMTP_USERNAME: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail
-          SMTP_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Пароль от вашего Gmail аккаунта
-          TO_EMAIL: pnata1978@gmail.com  # Адрес получателя
-          FROM_EMAIL: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail, от имени которого будет отправлено письмо
+                        SMTP_SERVER: smtp.gmail.com
+                        SMTP_PORT: 587
+                        SMTP_USERNAME: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail
+                        SMTP_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Пароль от вашего Gmail аккаунта
+                        TO_EMAIL: pnata1978@gmail.com  # Адрес получателя
+                        FROM_EMAIL: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail, от имени которого будет отправлено письмо
         run: |
-          echo "Sending test report via email"
-          (
-            echo "From: $FROM_EMAIL"
-            echo "To: $TO_EMAIL"
-            echo "Subject: Test Report"
-            echo "MIME-Version: 1.0"
-            echo 'Content-Type: multipart/mixed; boundary="BOUNDARY"'
-            echo ""
-            echo "--BOUNDARY"
-            echo "Content-Type: text/plain; charset=UTF-8"
-            echo ""
-            echo "Attached are the test results."
-            echo ""
-            echo "--BOUNDARY"
-            echo "Content-Type: text/html; charset=UTF-8"
-            echo "Content-Disposition: attachment; filename=test_report.html"
-            echo ""
-            cat build/reports/tests/index.html  # Убедитесь, что путь к файлу правильный
-            echo ""
-            echo "--BOUNDARY--"
-          ) | curl -sS --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
-                     --ssl-reqd \
-                     --mail-from "$FROM_EMAIL" \
-                     --mail-rcpt "$TO_EMAIL" \
-                     --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
-                     --upload-file -
-
+                        echo "Sending test report via email"
+                        (
+                          echo "From: $FROM_EMAIL"
+                          echo "To: $TO_EMAIL"
+                          echo "Subject: Test Report"
+                          echo "MIME-Version: 1.0"
+                          echo 'Content-Type: multipart/mixed; boundary="BOUNDARY"'
+                          echo ""
+                          echo "--BOUNDARY"
+                          echo "Content-Type: text/plain; charset=UTF-8"
+                          echo ""
+                          echo "Attached are the test results."
+                          echo ""
+                          echo "--BOUNDARY"
+                          echo "Content-Type: text/html; charset=UTF-8"
+                          echo "Content-Disposition: attachment; filename=test_report.html"
+                          echo ""
+                          cat $GITHUB_WORKSPACE/build/reports/tests/qa/index.html  # Используем путь к артефакту
+                          echo ""
+                          echo "--BOUNDARY--"
+                        ) | curl -sS --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
+                                   --ssl-reqd \
+                                   --mail-from "$FROM_EMAIL" \
+                                   --mail-rcpt "$TO_EMAIL" \
+                                   --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
+                                   --upload-file -
 #    - name: Deploy
 #      run: echo 'Deploying...'
