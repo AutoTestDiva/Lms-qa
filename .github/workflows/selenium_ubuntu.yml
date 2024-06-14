@@ -43,9 +43,9 @@ jobs:
 
       - name: Get application.yml from secrets and decode it
         run: |
-          echo "${{ secrets.DB_URL }}" >> ./src/test/resources/application.yml
-          echo "${{ secrets.DB_USER_NAME }}" >> ./src/test/resources/application.yml
-          echo "${{ secrets.DB_PASSWORD }}" >> ./src/test/resources/application.yml
+          echo "DB_URL: ${{ secrets.DB_URL }}" > ./src/test/resources/application.yml
+          echo "DB_USER_NAME: ${{ secrets.DB_USER_NAME }}" >> ./src/test/resources/application.yml
+          echo "DB_PASSWORD: ${{ secrets.DB_PASSWORD }}" >> ./src/test/resources/application.yml
 
       - name: Build with Gradle
         run: ./gradlew clean qa -Psuite4
@@ -65,30 +65,57 @@ jobs:
       - name: Extract test results
         id: test-result
         run: |
+          # Extracting values from the HTML report
           total_tests=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '1p')
+          echo "Total tests: ${total_tests}"
+          
           total_failures=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '2p')
+          echo "Total failures: ${total_failures}"
+          
           total_ignored=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '3p')
+          echo "Total ignored: ${total_ignored}"
+          
           duration=$(grep -oP '(?<=<div class="counter">)[^<]+' build/reports/tests/qa/index.html | sed -n '4p')
+          echo "Duration: ${duration}"
+          
           success_rate=$(grep -oP '(?<=<div class="percent">)[^<]+' build/reports/tests/qa/index.html)
-  
-          package_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
-          class_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
+          echo "Success rate: ${success_rate}"
 
+          # Check if extracted values are empty
+          if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
+            echo "Error: One or more values could not be extracted."
+            exit 1
+          fi
+
+          # Extracting package and class rows
+          package_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
+          echo "Package rows extracted."
+
+          class_rows=$(grep -oP '<tr>\s*<td class="[^"]*">\s*<a[^>]+>([^<]+)</a>\s*</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>\s*<td class="[^"]*">([^<]+)</td>\s*</tr>' build/reports/tests/qa/index.html)
+          echo "Class rows extracted."
+
+          # Forming the summary
           summary="<tr><td style='border: 1px solid black; padding: 8px;'>Total Tests</td><td style='border: 1px solid black; padding: 8px;'>${total_tests}</td></tr>"
           summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Total Failures</td><td style='border: 1px solid black; padding: 8px;'>${total_failures}</td></tr>"
           summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Total Ignored</td><td style='border: 1px solid black; padding: 8px;'>${total_ignored}</td></tr>"
           summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Duration</td><td style='border: 1px solid black; padding: 8px;'>${duration}</td></tr>"
           summary="${summary}<tr><td style='border: 1px solid black; padding: 8px;'>Success Rate</td><td style='border: 1px solid black; padding: 8px;'>${success_rate}</td></tr>"
 
+          # Forming the package summary
           package_summary=""
           while IFS= read -r row; do
             package_summary="${package_summary}${row}"
           done <<< "$package_rows"
+          echo "Package summary created."
 
+          # Forming the class summary
           class_summary=""
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
+          echo "Class summary created."
+
+          # Setting outputs
           echo "::set-output name=summary::$summary"
           echo "::set-output name=package_summary::$package_summary"
           echo "::set-output name=class_summary::$class_summary"
@@ -176,33 +203,8 @@ jobs:
                             <th>Failures</th>
                             <th>Ignored</th>
                             <th>Duration</th>
-                            <th>Success Rate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${{ steps.test-result.outputs.package_summary }}
-                    </tbody>
-                </table>
-                <h2>Class Results</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Class</th>
-                            <th>Tests</th>
-                            <th>Failures</th>
-                            <th>Ignored</th>
-                            <th>Duration</th>
-                            <th>Success Rate</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${{ steps.test-result.outputs.class_summary }}
-                    </tbody>
-                </table>
-                <p>Generated by <a href="http://www.gradle.org">Gradle 8.3</a> at Jun 13, 2024, 9:39:51 PM</p>
-            </div>
-            </body>
-            </html>
+                            <th>Success
+
 
       - name: Deploy
         run: echo 'Deploying...'
