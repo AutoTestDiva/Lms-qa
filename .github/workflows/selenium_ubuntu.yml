@@ -87,34 +87,7 @@ jobs:
             echo "Content-Type: text/html; charset=UTF-8"
             echo "Content-Disposition: attachment; filename=test_report.html"
             echo ""
-            echo '<!DOCTYPE html>'
-            echo '<html>'
-            echo '<head>'
-            echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>'
-            echo '<meta http-equiv="x-ua-compatible" content="IE=edge"/>'
-            echo '<title>Test results - Test Summary</title>'
-            echo '<style type="text/css">'
-            echo '/* Ваши встроенные стили здесь */'
-            echo 'body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }'
-            echo 'table { width: 100%; border-collapse: collapse; }'
-            echo 'th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }'
-            echo 'h1, h2 { color: #333; }'
-            echo '.success { background-color: #dff0d8; }'
-            echo '.tabLinks { list-style-type: none; padding: 0; }'
-            echo '.tabLinks li { display: inline; margin-right: 10px; }'
-            echo '.tabLinks li a { text-decoration: none; padding: 5px 10px; border: 1px solid #ccc; background-color: #f0f0f0; color: #333; }'
-            echo '.tabLinks li a:hover { background-color: #ddd; }'
-            echo '</style>'
-            echo '</head>'
-            echo '<body>'
-            echo '<div id="content">'
-            echo '<h1>Test Summary</h1>'
-            echo '<div id="summary">'
-            # Вставьте сюда таблицы и содержимое вашего отчёта
-            echo '</div>'
-            echo '</div>'
-            echo '</body>'
-            echo '</html>'
+            cat build/reports/tests/qa/index.html
             echo ""
             echo "--BOUNDARY--"
           ) | curl -sS --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
@@ -123,5 +96,6 @@ jobs:
                      --mail-rcpt "$TO_EMAIL" \
                      --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
                      --upload-file -
+
 #    - name: Deploy
 #      run: echo 'Deploying...'
