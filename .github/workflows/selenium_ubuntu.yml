@@ -64,38 +64,8 @@ jobs:
             exit 1
           fi
 
-      - name: Extract test results
-        id: test-result
-        run: |
-          #!/bin/bash
 
-          # Read the HTML content into a variable
-          html_content=$(cat build/reports/tests/qa/index.html)
-
-          # Use grep to parse the HTML content
-          total_tests=$(echo "$html_content" | grep -oP 'Total tests</div>\\s*<div class="counter">\\K\\d+')
-          total_failures=$(echo "$html_content" | grep -oP 'Failures</div>\\s*<div class="counter">\\K\\d+')
-          total_ignored=$(echo "$html_content" | grep -oP 'Ignored</div>\\s*<div class="counter">\\K\\d+')
-          duration=$(echo "$html_content" | grep -oP 'Duration</div>\\s*<div class="counter">\\K[\\d.]+s')
-          success_rate=$(echo "$html_content" | grep -oP 'Successful</div>\\s*<div class="percent">\\K\\d+%')
-
-          # Check if extracted values are empty
-          if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
-            echo "Error: One or more values could not be extracted."
-            exit 1
-          fi
-
-          # Output the extracted data
-          echo "Total tests: $total_tests"
-          echo "Total failures: $total_failures"
-          echo "Total ignored: $total_ignored"
-          echo "Duration: $duration"
-          echo "Success rate: $success_rate"
-
-          # Setting outputs
-          echo "::set-output name=summary::Total Tests: $total_tests, Failures: $total_failures, Ignored: $total_ignored, Duration: $duration, Success Rate: $success_rate"
-
-      - name: Send email notification
+      - name: Send email with HTML file content
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
@@ -103,17 +73,14 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: GitHub Actions - Test Report
+          subject: GitHub Actions - Test Report Content
           to: pnata1978@gmail.com
           from: ${{ secrets.EMAIL_USERNAME }}
           content_type: text/plain
           body: |
-            Test Summary:
-            Total Tests: ${{ steps.test-result.outputs.total_tests }}
-            Total Failures: ${{ steps.test-result.outputs.total_failures }}
-            Total Ignored: ${{ steps.test-result.outputs.total_ignored }}
-            Duration: ${{ steps.test-result.outputs.duration }}
-            Success Rate: ${{ steps.test-result.outputs.success_rate }}
+            В файле ниже есть отчёт о прохождении тестов:
+            
+            $(cat build/reports/tests/qa/index.html)
 #
 #    - name: Deploy
 #      run: echo 'Deploying...'
