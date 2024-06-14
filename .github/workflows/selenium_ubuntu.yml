@@ -99,20 +99,21 @@ jobs:
 
           # Forming the summary
           summary="<tr><td>${total_tests}</td><td class='success'>${total_failures}</td><td class='success'>${total_ignored}</td><td>${duration}</td><td class='success'>${success_rate}</td></tr>"
+          echo "Summary: $summary"
           
           # Forming the package summary
           package_summary=""
           while IFS= read -r row; do
             package_summary="${package_summary}${row}"
           done <<< "$package_rows"
-          echo "Package summary created."
+          echo "Package summary: $package_summary"
           
           # Forming the class summary
           class_summary=""
           while IFS= read -r row; do
             class_summary="${class_summary}${row}"
           done <<< "$class_rows"
-          echo "Class summary created."
+          echo "Class summary: $class_summary"
           
           # Setting outputs
           if echo "summary=$summary" >> $GITHUB_ENV; then
@@ -137,6 +138,7 @@ jobs:
           fi
           
           echo "Script completed successfully."
+          
 
       - name: Send email notification
         if: always()
