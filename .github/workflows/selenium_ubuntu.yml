@@ -76,31 +76,30 @@ jobs:
         run: |
           echo "Sending test report via email"
           (
-            echo "From: $FROM_EMAIL"
-            echo "To: $TO_EMAIL"
-            echo "Subject: Test Report"
-            echo "MIME-Version: 1.0"
-            echo 'Content-Type: multipart/mixed; boundary="BOUNDARY"'
-            echo ""
-            echo "--BOUNDARY"
-            echo "Content-Type: text/plain; charset=UTF-8"
-            echo ""
-            echo "Attached are the test results."
-            echo ""
-            echo "--BOUNDARY"
-            echo "Content-Type: text/html; charset=UTF-8"
-            echo "Content-Disposition: attachment; filename=test_report.html"
-            echo ""
-            cat build/reports/tests/index.html
-            echo ""
-            echo "--BOUNDARY--"
-          ) | curl -sS --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
-                     --ssl-reqd \
-                     --mail-from "$FROM_EMAIL" \
-                     --mail-rcpt "$TO_EMAIL" \
-                     --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
-                     --upload-file -
-          
+         echo "From: $FROM_EMAIL"
+         echo "To: $TO_EMAIL"
+          echo "Subject: Test Report"
+         echo "MIME-Version: 1.0"
+          echo 'Content-Type: multipart/mixed; boundary="BOUNDARY"'
+         echo ""
+         echo "--BOUNDARY"
+         echo "Content-Type: text/plain; charset=UTF-8"
+         echo ""
+         echo "Attached are the test results."
+         echo ""
+         echo "--BOUNDARY"
+         echo "Content-Type: text/html; charset=UTF-8"
+         echo "Content-Disposition: attachment; filename=test_report.html"
+         echo ""
+         cat build/reports/tests/index.html  # Важно, чтобы содержимое HTML-файла было корректно передано
+         echo ""
+         echo "--BOUNDARY--"
+         ) | curl -sS --url "smtp://$SMTP_SERVER:$SMTP_PORT" \
+         --ssl-reqd \
+         --mail-from "$FROM_EMAIL" \
+         --mail-rcpt "$TO_EMAIL" \
+         --user "$SMTP_USERNAME:$SMTP_PASSWORD" \
+         --upload-file -
 
 #    - name: Deploy
 #      run: echo 'Deploying...'
