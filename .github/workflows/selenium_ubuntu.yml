@@ -31,8 +31,11 @@ jobs:
 
       - name: Install dependencies
         run: sudo apt-get install -y xvfb x11-utils
-             sudo apt-get install -y tidy libxml2-utils
- #            sudo apt-get update
+
+
+      - name: Install dependencies1
+        run: sudo apt-get install -y tidy libxml2-utils
+             sudo apt-get update
 
       - name: Start Xvfb
         run: Xvfb :99 -screen 0 1920x1080x24 &
@@ -64,6 +67,9 @@ jobs:
             echo "Log file is empty or does not exist" >&2
             exit 1
           fi
+      - name: Install dependencies1
+        run: sudo apt-get install -y tidy libxml2-utils
+             sudo apt-get update
 
       - name: Extract test results
         id: test-result
