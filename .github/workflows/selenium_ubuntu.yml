@@ -67,24 +67,21 @@ jobs:
             echo "Log file is empty or does not exist" >&2
             exit 1
           fi
-      - name: Install dependencies1
-        run: sudo apt-get install -y tidy libxml2-utils
-             sudo apt-get update
 
       - name: Extract test results
         id: test-result
         run: |
           #!/bin/bash
 
-          # Convert HTML to XHTML
-          xhtml_content=$(tidy -quiet -asxhtml build/reports/tests/qa/index.html 2>/dev/null)
+          # Read the HTML content into a variable
+          html_content=$(cat build/reports/tests/qa/index.html)
 
-          # Use xmllint to parse the XHTML content
-          total_tests=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="tests"]/div)' -)
-          total_failures=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="failures"]/div)' -)
-          total_ignored=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="ignored"]/div)' -)
-          duration=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="duration"]/div)' -)
-          success_rate=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="successRate"]/div)' -)
+          # Use grep and awk to parse the HTML content
+          total_tests=$(echo "$html_content" | grep -oP 'Tests</th>\\s*<td>\\K\\d+')
+          total_failures=$(echo "$html_content" | grep -oP 'Failures</th>\\s*<td>\\K\\d+')
+          total_ignored=$(echo "$html_content" | grep -oP 'Ignored</th>\\s*<td>\\K\\d+')
+          duration=$(echo "$html_content" | grep -oP 'Duration</th>\\s*<td>\\K[\\d.]+s')
+          success_rate=$(echo "$html_content" | grep -oP 'Success rate</th>\\s*<td class="success">\\K\\d+%')
 
           # Check if extracted values are empty
           if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
