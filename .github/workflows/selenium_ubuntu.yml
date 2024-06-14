@@ -71,7 +71,7 @@ jobs:
           SMTP_PORT: 587
           SMTP_USERNAME: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail
           SMTP_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}  # Пароль от вашего Gmail аккаунта
-          TO_EMAIL: recipient@example.com  # Адрес получателя
+          TO_EMAIL: pnata1978@gmail.com  # Адрес получателя
           FROM_EMAIL: ${{ secrets.EMAIL_USERNAME }}  # Ваш адрес Gmail, от имени которого будет отправлено письмо
         run: |
           echo "Sending test report via email"
