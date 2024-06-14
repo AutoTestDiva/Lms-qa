@@ -85,10 +85,10 @@ jobs:
           echo "Success rate: ${success_rate}"
 
           # Check if extracted values are empty
-          if [ -z "$total_tests" ]  [ -z "$total_failures" ]  [ -z "$total_ignored" ]  [ -z "$duration" ]  [ -z "$success_rate" ]; then
-            echo "Error: One or more values could not be extracted."
-            exit 1
-          fi
+              if [ -z "$total_tests" ]  [ -z "$total_failures" ]  [ -z "$total_ignored" ]  [ -z "$duration" ]  [ -z "$success_rate" ]; then
+              echo "Error: One or more values could not be extracted."
+              exit 1
+              fi
 
           # Extracting package and class rows
           package_rows=$(grep -oP '<tr>\s*<td class="success">\s*<a[^>]+>[^<]+</a>\s*</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td>[^<]+</td>\s*<td class="success">[^<]+</td>\s*</tr>' build/reports/tests/qa/index.html)
