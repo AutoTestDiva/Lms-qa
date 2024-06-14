@@ -68,15 +68,15 @@ jobs:
         run: |
           #!/bin/bash
 
-          # Read the HTML content into a variable
-          html_content=$(cat build/reports/tests/qa/index.html)
+          # Convert HTML to XHTML
+          xhtml_content=$(tidy -quiet -asxhtml build/reports/tests/qa/index.html 2>/dev/null)
 
-          # Use awk to parse the HTML content
-          total_tests=$(echo "$html_content" | awk -F'[<>]' '/<div class="counter">/{print $3; exit}')
-          total_failures=$(echo "$html_content" | awk -F'[<>]' '/<div class="counter">/{getline; getline; print $3; exit}')
-          total_ignored=$(echo "$html_content" | awk -F'[<>]' '/<div class="counter">/{getline; getline; getline; getline; print $3; exit}')
-          duration=$(echo "$html_content" | awk -F'[<>]' '/<div class="counter">/{getline; getline; getline; getline; getline; getline; print $3; exit}')
-          success_rate=$(echo "$html_content" | awk -F'[<>]' '/<div class="percent">/{print $3; exit}')
+          # Use xmllint to parse the XHTML content
+          total_tests=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="tests"]/div)' -)
+          total_failures=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="failures"]/div)' -)
+          total_ignored=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="ignored"]/div)' -)
+          duration=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="duration"]/div)' -)
+          success_rate=$(echo "$xhtml_content" | xmllint --xpath 'string(//div[@id="successRate"]/div)' -)
 
           # Check if extracted values are empty
           if [ -z "$total_tests" ] || [ -z "$total_failures" ] || [ -z "$total_ignored" ] || [ -z "$duration" ] || [ -z "$success_rate" ]; then
@@ -95,6 +95,7 @@ jobs:
           echo "summary=Total Tests: $total_tests, Failures: $total_failures, Ignored: $total_ignored, Duration: $duration, Success Rate: $success_rate" >> $GITHUB_ENV
 
           echo "Script completed successfully."
+      
       
 
       - name: Send email notification
