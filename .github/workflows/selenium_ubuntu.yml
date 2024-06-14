@@ -126,7 +126,7 @@ jobs:
           echo "summary=$summary" >> $GITHUB_ENV
           echo "package_summary=$package_summary" >> $GITHUB_ENV
           echo "class_summary=$class_summary" >> $GITHUB_ENV
-          
+
 
       - name: Send email notification
         if: always()
