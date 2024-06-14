@@ -85,7 +85,7 @@ jobs:
           echo "Success rate: ${success_rate}"
 
           # Check if extracted values are empty
-              if [ -z "$total_tests" ]  [ -z "$total_failures" ]  [ -z "$total_ignored" ]  [ -z "$duration" ]  [ -z "$success_rate" ]; then
+              if [ -z "$total_tests" ] || [ -z "$total_failures" ] ||  [ -z "$total_ignored" ] || [ -z "$duration" ] ||  [ -z "$success_rate" ]; then
               echo "Error: One or more values could not be extracted."
               exit 1
               fi
